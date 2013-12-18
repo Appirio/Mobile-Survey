@@ -14,7 +14,7 @@ import com.appirio.diageo.geolocation.HaversineCalculator;
 
 public class AccountDBManager extends DBManager {
 
-	private static final int ACCOUNT_LOCATION_LIMIT = Integer.parseInt(System.getenv("ACCOUNT_LOCATION_LIMIT"));
+	private static final int ACCOUNT_LOCATION_LIMIT = 50;//Integer.parseInt(System.getenv("ACCOUNT_LOCATION_LIMIT"));
 	private static String LATITUDE_FIELD_NAME = "latitude__c";
 	private static String LONGITUDE_FIELD_NAME = "longitude__c";
 	
