@@ -51,7 +51,10 @@ public class SurveyDBManager extends DBManager {
 			"DIAGEO_SEGMENT__C",
 			"DMS_SURVEY__C",
 			"BUSINESS_ENTRPS_HIGH__C",
-			"CONTACT__C");
+			"CONTACT__C",
+			"POSSIBLE_ANSWERS__C",
+			"SELECTED_ANSWERS__C"
+			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
 		super();
@@ -164,6 +167,14 @@ public class SurveyDBManager extends DBManager {
 						newSurvey.remove("id");
 					}
 				
+					if(newSurvey.has("answer_text__c") && newSurvey.get("answer_text__c").asText().length() > 0) {
+						newSurvey.put("selected_answers__c", newSurvey.get("answer_text__c").asText().replaceAll("[^,]","").length() + 1);
+					}
+					
+					if(newSurvey.has("answer_options__c") && newSurvey.get("answer_options__c").asText().length() > 0) {
+						newSurvey.put("possible_answers__c", newSurvey.get("answer_options__c").asText().replaceAll("[^;]","").length() + 1);
+					}
+
 					clearTransientFields(newSurvey, surveyResultFields);
 					
 					insert((ObjectNode)newSurvey, "dms_survey_result__c");
