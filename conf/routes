@@ -78,9 +78,9 @@ GET		/1.4/account/:lat/:long/:radius		controllers.AccountServices.getAccounts(la
 
 # Surveys
 
-GET		/1.4/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount13(accountId)
+GET		/1.4/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount14(accountId)
 POST	/1.4/survey							controllers.SurveyServices.saveSurvey()
-GET		/1.4/survey/universal				controllers.SurveyServices.getUniversalSurveys13()
+GET		/1.4/survey/universal				controllers.SurveyServices.getUniversalSurveys14()
 
 # Contact
 

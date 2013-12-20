@@ -13,6 +13,7 @@ import com.appirio.diageo.db.manager.AccountDBManager;
 import com.appirio.diageo.db.manager.SurveyDBManager;
 import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
 import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
+import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 
 public class SurveyServices extends Controller {
 
@@ -110,6 +111,40 @@ public class SurveyServices extends Controller {
 	}
 
 	@With(SecureAction.class)
+	public static Result getSurveysByAccount14(String accountId) {
+		try {
+			SurveyDBManager13 manager = new SurveyDBManager14();
+			AccountDBManager accountManager = new AccountDBManager();
+			Result result = null;
+			
+			try {
+				ObjectNode account = accountManager.getAccount(accountId);
+				
+				if(account != null) {
+					ArrayNode surveys = manager.getSurveys(account);
+					result = ok(surveys);
+				} else {
+					result = badRequest(ControllerUtils.messageToJson("Invalid account ID"));
+				}
+				
+			} finally {
+				manager.close();
+				accountManager.close();
+			}
+			
+			return result;
+    	} catch (DiageoServicesException e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}
+	}
+	
+	@With(SecureAction.class)
 	public static Result getUniversalSurveys() {
 		try {
 			SurveyDBManager manager = new SurveyDBManager();
@@ -184,6 +219,30 @@ public class SurveyServices extends Controller {
     	}
 	}
 
+	@With(SecureAction.class)
+	public static Result getUniversalSurveys14() {
+		try {
+			SurveyDBManager13 manager = new SurveyDBManager14();
+			ArrayNode result = null;
+			
+			try {
+				result = manager.getUniversalSurveys();
+			} finally {
+				manager.close();
+				
+			}
+			
+			return ok(result);
+    	} catch (DiageoServicesException e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}
+	}
 	@With(SecureAction.class)
 	public static Result saveSurvey() {
 		try {
