@@ -275,4 +275,23 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
+	/* This is a data update function designed to run locally, not to be deployed to heroku
+    public static Result updateSurveyAnalyticsFields() {
+		try {
+			SurveyDBManager manager = new SurveyDBManager();
+			
+			try {
+				manager.updateAnalyticsFields();
+			} finally {
+				manager.close();
+				
+			}
+			
+			return ok();
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}    
+	}*/
 }
