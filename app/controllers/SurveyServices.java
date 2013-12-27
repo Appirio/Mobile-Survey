@@ -222,7 +222,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys14() {
 		try {
-			SurveyDBManager13 manager = new SurveyDBManager14();
+			SurveyDBManager14 manager = new SurveyDBManager14();
 			ArrayNode result = null;
 			
 			try {
