@@ -74,7 +74,8 @@ GET     /1.4/assets/*file               controllers.Assets.at(path="/public", fi
 GET		/1.4/product/:id				controllers.ProductServices.getProduct(id)
 
 # Accounts
-GET		/1.4/account/:lat/:long/:radius		controllers.AccountServices.getAccounts(lat, long, radius)
+GET		/1.4/account/:lat/:long/:radius			controllers.AccountServices.getAccounts(lat, long, radius)
+GET		/1.4/account/:lat/:long/:radius/:limit	controllers.AccountServices.getAccountsLimited(lat, long, radius, limit)
 
 # Surveys
 
