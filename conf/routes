@@ -72,6 +72,7 @@ GET     /1.4/assets/*file               controllers.Assets.at(path="/public", fi
 
 # Products
 GET		/1.4/product/:id				controllers.ProductServices.getProduct(id)
+GET		/1.4/products					controllers.ProductServices.getProducts()
 
 # Accounts
 GET		/1.4/account/:lat/:long/:radius			controllers.AccountServices.getAccounts(lat, long, radius)
