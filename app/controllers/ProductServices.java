@@ -36,7 +36,7 @@ public class ProductServices extends Controller {
     	}
 	}
 	
-	//@With(SecureAction.class)
+	@With(SecureAction.class)
 	public static Result getProducts() {
 		try {
 			ProductDBManager14 manager = new ProductDBManager14();
