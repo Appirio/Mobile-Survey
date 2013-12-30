@@ -12,8 +12,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  # license_key: '<%= license_key %>'
-  license_key: 'd44a2a9a099a7527c13208fde9f820216a6a3130'
+  license_key: '<%= ENV["NEW_RELIC_LICENSE_KEY"] %>'
 
   # Agent Enabled
   # Use this setting to disable the agent instead of removing it from the startup command.
@@ -28,7 +27,7 @@ common: &default_settings
   # For example, to report data to "My Application" and "My Application 2" use this:
   # app_name: My Application;My Application 2
   # This setting is required.
-  app_name: My Application
+  app_name: '<%= ENV["NEW_RELIC_APP_NAME"] %>'
 
   # Set to true to enable support for auto app naming.
   # The name of each web app is detected automatically
@@ -254,15 +253,15 @@ common: &default_settings
 
 development:
   <<: *default_settings
-  app_name: My Application (Development)
+  app_name: '<%= ENV["NEW_RELIC_APP_NAME"] (Development) %>'
 
 test:
   <<: *default_settings
-  app_name: My Application (Test)
+  app_name: '<%= ENV["NEW_RELIC_APP_NAME"] (Test) %>'
 
 production:
   <<: *default_settings
 
 staging:
   <<: *default_settings
-  app_name: My Application (Staging)
+  app_name: '<%= ENV["NEW_RELIC_APP_NAME"] (Staging) %>'
