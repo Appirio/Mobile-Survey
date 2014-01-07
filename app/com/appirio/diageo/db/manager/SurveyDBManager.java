@@ -51,9 +51,9 @@ public class SurveyDBManager extends DBManager {
 			"DIAGEO_SEGMENT__C",
 			"DMS_SURVEY__C",
 			"BUSINESS_ENTRPS_HIGH__C",
-			"CONTACT__C",
+			"CONTACT__C"/*,
 			"POSSIBLE_ANSWERS__C",
-			"SELECTED_ANSWERS__C"
+			"SELECTED_ANSWERS__C"*/
 			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
@@ -167,13 +167,14 @@ public class SurveyDBManager extends DBManager {
 						newSurvey.remove("id");
 					}
 				
+					/*
 					if(newSurvey.has("answer_text__c") && newSurvey.get("answer_text__c").asText().length() > 0) {
 						newSurvey.put("selected_answers__c", newSurvey.get("answer_text__c").asText().replaceAll("[^;]","").length() + 1);
 					}
 					
 					if(newSurvey.has("answer_options__c") && newSurvey.get("answer_options__c").asText().length() > 0) {
 						newSurvey.put("possible_answers__c", newSurvey.get("answer_options__c").asText().replaceAll("[^,]","").length() + 1);
-					}
+					}*/
 
 					clearTransientFields(newSurvey, surveyResultFields);
 					
@@ -252,6 +253,7 @@ public class SurveyDBManager extends DBManager {
 		return result;
 	}
 	
+	/*
 	public void updateAnalyticsFields() throws DiageoServicesException {
 		ArrayNode surveyResults = queryToJson("select sr.id id, selected_answers__c, possible_answers__c, answer_options__c,  answer_text__c from dms_survey_result__c sr inner join dms_question__c q on sr.question__c = q.sfid;");
 		
@@ -268,6 +270,6 @@ public class SurveyDBManager extends DBManager {
 			
 			executeStatement("update dms_survey_result__c set selected_answers__c = " + selectedAnswers + ", possible_answers__c = " + possibleAnswers + " where id = " + node.get("id").asText());
 		}
-	}
+	}*/
 	
 }
