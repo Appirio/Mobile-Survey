@@ -18,9 +18,7 @@ public class ContactServices extends Controller {
 				if(body.has("email") && body.has("authorizationCode")) {
 					ContactDBManager manager = new ContactDBManager();
 					try {
-						String email = body.get("email").asText().toLowerCase();
-						
-						String userId = manager.approveContact(email, Long.parseLong(body.get("authorizationCode").asText()));
+						String userId = manager.approveContact(body.get("email").asText(), Long.parseLong(body.get("authorizationCode").asText()));
 						
 						if(userId != null) {
 							return ok(new ObjectMapper().readTree("{\"contact\": {\"id\": \"" + userId + "\"}}"));
