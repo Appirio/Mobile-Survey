@@ -176,7 +176,22 @@ public class SurveyDBManager extends DBManager {
 					}
 					
 					if(newSurvey.has("answer_options__c") && newSurvey.get("answer_options__c").asText().length() > 0) {
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
+						System.out.println(newSurvey.get("answer_options__c").asText());
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
 						newSurvey.put("possible_answers__c", newSurvey.get("answer_options__c").asText().replaceAll("[^,]","").length() + 1);
+					} else {
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
+						System.out.println("No answer options found!!!");
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
+						System.out.println("=== DEBUG ===");
 					}
 
 					clearTransientFields(newSurvey, surveyResultFields);
