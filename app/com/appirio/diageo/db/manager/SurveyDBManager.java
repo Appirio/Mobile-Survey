@@ -175,7 +175,7 @@ public class SurveyDBManager extends DBManager {
 						}
 					}
 					
-					if(newSurvey.has("original_answer_options__c") && newSurvey.get("original_answer_options__c").asText().length() > 0) {
+					if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("original_answer_options__c") && newSurvey.get("original_answer_options__c").asText().length() > 0) {
 						newSurvey.put("possible_answers__c", newSurvey.get("original_answer_options__c").asText().replaceAll("[^,]","").length() + 1);
 					}
 
