@@ -5,6 +5,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode; 
@@ -23,8 +26,11 @@ public class SurveyDBManager extends DBManager {
     
     private static List<String> surveySubmissionFields = Arrays.asList("CONNECTIONRECEIVEDID",
             "CONNECTIONSENTID",
+            "CONTACT__C",
             "CREATEDBYID",
             "CREATEDDATE",
+            "DD_SURVEY__C",
+            "EXTERNAL_ID__C",
             "GRADE__C",
             "ID",
             "ISDELETED",
@@ -33,7 +39,6 @@ public class SurveyDBManager extends DBManager {
 			"NAME",
 			"OWNERID",
 			"SCORE__C", 
-			"SURVEY__C",
 			"SYSTEMMODSTAMP"
 			);
 			
@@ -81,7 +86,8 @@ public class SurveyDBManager extends DBManager {
 			"PERCENT_ANSWERS_SELECTED__C",
 			"QUESTION_NUMBER__C",
 			"SCORE__C",
-			"SURVEY_SUBMISSION__C"
+			"SURVEY_SUBMISSION__C",
+			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C"
 			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
@@ -159,11 +165,39 @@ public class SurveyDBManager extends DBManager {
 		return processSurveys(surveys, questions, false);
 	}
 	
+	public static String md5Java(String message) { 
+	    String digest = null; 
+	    try { 
+	        MessageDigest md = MessageDigest.getInstance("MD5"); 
+	        byte[] hash = md.digest(message.getBytes("UTF-8")); 
+	        
+	        //converting byte array to Hexadecimal String 
+	        StringBuilder sb = new StringBuilder(2*hash.length); 
+	        
+	        for(byte b : hash) { 
+	            sb.append(String.format("%02x", b&0xff)); 
+	        } 
+	        
+	        digest = sb.toString(); 
+	    } 
+	    catch (UnsupportedEncodingException ex) { 
+	        System.out.println("Error: "+ ex);
+	    } 
+	    catch (NoSuchAlgorithmException ex) { 
+	        System.out.println("Error: "+ ex);
+	    } 
+	    
+	    return digest; 
+	}
+	
 	public void createSurvey15(JsonNode survey) throws DiageoServicesException {
 	    if(survey.isArray()) {
 			for(JsonNode node : survey) {
 				createSurvey(node);
 			}
+		}
+		else if(survey.isObject()) {
+		    createSurvey(survey);
 		}
 		else {
 			throw new DiageoServicesException("Json object or array expected");
@@ -171,145 +205,158 @@ public class SurveyDBManager extends DBManager {
 	}
 	
 	public void createSurvey(JsonNode survey) throws DiageoServicesException {
-		if(survey.isObject()) {
-			Boolean grading = false;
-			int scoreTot = 0;
-			int scorePotential = 0;
+		Boolean grading = false;
+		int scoreTot = 0;
+		int scorePotential = 0;
+		String gradingScaleID = null;
 			
-			if(survey.has("questions")) {
-				ArrayNode questions = (ArrayNode) survey.get("questions");
-				// Check if grading_scale exist
-				if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
-				    grading = true;
-				}
-
-				for(JsonNode question : questions) {
-					ObjectNode newSurvey = mapper.createObjectNode();
-
-					ObjectNode questionObj = (ObjectNode) question;
-					
-					if(questionObj.has("sfid")) {
-						questionObj.put("question__c", questionObj.get("sfid").asText());
-						questionObj.remove("sfid");
-					}
-					
-					if(questionObj.has("parent_question__c")) {
-						questionObj.remove("parent_question__c");
-					}
-					
-					newSurvey.putAll((ObjectNode)survey);
-					
-					if(newSurvey.has("sfid")) {
-						newSurvey.remove("sfid");
-					}
-					
-					newSurvey.remove("questions");
-					
-					newSurvey.putAll(questionObj);
-					// Grading Survey Evals
-					if (grading) {
-					    // Bool to see if answer needs to match
-					    boolean needMatch = false;
-					    // Get grading scale ID
-					    String gradingScaleID = survey.get("grading_scale__c").asText();
-					    // Get answer Value
-					    String answerValue = newSurvey.get("answer_value__c").asText();
-					    // Check for answerText value if answer_value is null
-					    if (answerValue.equals("null")) {
-					        answerValue = newSurvey.get("answer_text__c").asText();
-					        needMatch = true;
-					    }
-					    if (answerValue.equals("null")) {
-					        scoreTot += 0;
-					    }
-					    // Get Answer Options
-					    String answerOptionsText = newSurvey.get("original_answer_options__c").asText();
-					    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
-					    // temp Int
-					    int tempHigh = 0;
-					    for(int i=0;i < answerOptions.size();i++) {
-					        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
-					        // Potential Score:
-    					    // 1. Add up all scores for one that has Multi-Select
-    					    if (newSurvey.get("question_type__c").asText().equals("Multi-Select")) {
-    					        StringTokenizer multiSelectValues = new StringTokenizer(answerValue, ";");
-    					        while(multiSelectValues.hasMoreTokens()) {
-            						String msv = multiSelectValues.nextToken();
-            						if (msv.equals(answerOptions.get(i).value)) {
-            						    // Total score: Total only scores where value matches
-            						    scoreTot += answerOptionScore;
-            						}
-            					}
-    					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
-    					    }
-    					    // 2. For others, take the highest/only score
-    					    else {
-    					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
-    					            // Total score: Total only scores where value matches
-    					            scoreTot += answerOptionScore;
-    					        }
-    					        // Text/Price/QTY as long as there is some value to this, you get the full score
-    					        else if (!needMatch && !answerValue.equals("null")) {
-    					            scoreTot += answerOptionScore;
-    					        }
-    					        
-    					        if (answerOptionScore > tempHigh) {
-    					            tempHigh = answerOptionScore;
-    					        }
-    					    }
-				        }
-				        
-				        if (tempHigh > 0) {
-				            scorePotential += tempHigh;
-				        }
-					    
-					    newSurvey.put("score__c", Integer.toString(scoreTot));
-					}
-					
-					newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis())));
-					
-					if(newSurvey.has("id")) {
-						newSurvey.remove("id");
-					}
+		if(survey.has("questions")) {
+			ArrayNode questions = (ArrayNode) survey.get("questions");
+			// Survey Submissions DB
+			String salted = survey.get("sfid").asText() + dateToPostgresString(new Date(System.currentTimeMillis()), true);
+			//System.out.println("Salted:"+ salted);
+			String externalId = md5Java(salted);
+			//System.out.println("externalID = " + externalId);
 				
-					if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("answer_text__c") && newSurvey.get("answer_text__c").asText().length() > 0) {
-						if(newSurvey.get("answer_text__c").asText().equals("None of the Above")) {
-							newSurvey.put("selected_answers__c", 0);
-						} else {
-							newSurvey.put("selected_answers__c", newSurvey.get("answer_text__c").asText().replaceAll("[^;]","").length() + 1);
-						}
-					}
-					
-					if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("original_answer_options__c") && newSurvey.get("original_answer_options__c").asText().length() > 0) {
-						newSurvey.put("possible_answers__c", newSurvey.get("original_answer_options__c").asText().replaceAll("[^,]","").length() + 1);
-					}
-					
-					// Some kind of increment?
-					//newSurvey.put("question_number__c", );
-					// Survey Submission sfid
-					//newSurvey.put("survey_submission__c", );
-
-					clearTransientFields(newSurvey, surveyResultFields);
-					
-					insert((ObjectNode)newSurvey, "dms_survey_result__c");
-				}
-				
-				// Survey has Grading
-				if (scoreTot > 0) {
-				    // Percentage is based on Total Score/Potential Score off of what has been submitted
-    			    int percentage = scoreTot / scorePotential;
-    			    // Lookup Grade
-    			    String query = "select grade__c, low_range__c from dd_grading_range__c where dd_grading_scale__c='"+ gradingScaleID +"' and "+ Integer.toString(percentage) +" >= low_range__c order by low_range__c desc";
-    			    ArrayNode grades = queryToJson(query);
-
-    			    String finalGrade = (ObjectNode) grades.get(0).get("grade__c");
-				}
-				
-			} else {
-				throw new DiageoServicesException("questions field is required to save survey");
+			ObjectNode newSurveySubmission = mapper.createObjectNode();
+    	    newSurveySubmission.put("external_id__c", externalId);
+    	    // Inserting to Survey Submission DB
+    	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
+    	    
+			// Check if grading_scale exist
+			if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
+			    // Get grading scale ID
+                gradingScaleID = survey.get("grading_scale__c").asText();
+			    // Grading=true
+			    grading = true;
 			}
-		} 
-	}
+			
+			for(JsonNode question : questions) {
+				ObjectNode newSurvey = mapper.createObjectNode();
+				ObjectNode questionObj = (ObjectNode) question;
+				
+				if(questionObj.has("sfid")) {
+					questionObj.put("question__c", questionObj.get("sfid").asText());
+					questionObj.remove("sfid");
+				}
+				
+				if(questionObj.has("parent_question__c")) {
+					questionObj.remove("parent_question__c");
+				}
+				
+				newSurvey.putAll((ObjectNode)survey);
+				
+				if(newSurvey.has("sfid")) {
+					newSurvey.remove("sfid");
+				}
+				
+				newSurvey.remove("questions");
+				
+				newSurvey.putAll(questionObj);
+				// Grading Survey Evals
+				if (grading) {
+				    // Bool to see if answer needs to match
+				    boolean needMatch = false;
+				    // Get answer Value
+				    String answerValue = newSurvey.get("answer_value__c").asText();
+				    // Check for answerText value if answer_value is null
+				    if (answerValue.equals("null")) {
+				        answerValue = newSurvey.get("answer_text__c").asText();
+				        needMatch = true;
+				    }
+				    if (answerValue.equals("null")) {
+				        scoreTot += 0;
+				    }
+				    // Get Answer Options
+				    String answerOptionsText = newSurvey.get("original_answer_options__c").asText();
+				    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
+				    // temp Int
+				    int tempHigh = 0;
+				    for(int i=0;i < answerOptions.size();i++) {
+				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
+				        // Potential Score:
+					    // 1. Add up all scores for one that has Multi-Select
+					    if (newSurvey.get("question_type__c").asText().equals("Multi-Select")) {
+					        StringTokenizer multiSelectValues = new StringTokenizer(answerValue, ";");
+					        while(multiSelectValues.hasMoreTokens()) {
+        						String msv = multiSelectValues.nextToken();
+        						if (msv.equals(answerOptions.get(i).value)) {
+        						    // Total score: Total only scores where value matches
+        						    scoreTot += answerOptionScore;
+        						}
+        					}
+					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
+					    }
+					    // 2. For others, take the highest/only score
+					    else {
+					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
+					            // Total score: Total only scores where value matches
+					            scoreTot += answerOptionScore;
+					        }
+					        // Text/Price/QTY as long as there is some value to this, you get the full score
+					        else if (!needMatch && !answerValue.equals("null")) {
+					            scoreTot += answerOptionScore;
+					        }
+					        
+					        if (answerOptionScore > tempHigh) {
+					            tempHigh = answerOptionScore;
+					        }
+					    }
+			        }
+			        
+			        if (tempHigh > 0) {
+			            scorePotential += tempHigh;
+			        }
+				    
+				    newSurvey.put("score__c", Integer.toString(scoreTot));
+				}
+				
+				newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
+				
+				if(newSurvey.has("id")) {
+					newSurvey.remove("id");
+				}
+			
+				if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("answer_text__c") && newSurvey.get("answer_text__c").asText().length() > 0) {
+					if(newSurvey.get("answer_text__c").asText().equals("None of the Above")) {
+						newSurvey.put("selected_answers__c", 0);
+					} else {
+						newSurvey.put("selected_answers__c", newSurvey.get("answer_text__c").asText().replaceAll("[^;]","").length() + 1);
+					}
+				}
+				
+				if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("original_answer_options__c") && newSurvey.get("original_answer_options__c").asText().length() > 0) {
+					newSurvey.put("possible_answers__c", newSurvey.get("original_answer_options__c").asText().replaceAll("[^,]","").length() + 1);
+				}
+				
+				// Some kind of increment?
+				//newSurvey.put("question_number__c", );
+				// Survey Submission sfid
+				newSurvey.put("DD_Survey_Submission__c__External_Id__c", externalId);
+				
+				clearTransientFields(newSurvey, surveyResultFields);
+				
+				insert((ObjectNode)newSurvey, "dms_survey_result__c");
+			}
+			
+			// Survey has Grading
+			if (scoreTot > 0) {
+			    // Percentage is based on Total Score/Potential Score off of what has been submitted
+			    int percentage = scoreTot / scorePotential;
+			    // Lookup Grade
+			    System.out.println(gradingScaleID);
+			    String query = "select grade__c, low_range__c from dd_grading_range__c where dd_grading_scale__c='"+ gradingScaleID +"' and "+ Integer.toString(percentage) +" >= low_range__c order by low_range__c desc";
+			    ArrayNode grades = queryToJson(query);
+			    
+			    System.out.println(grades);
+    		    //String finalGrade = (ObjectNode) grades.get(0).get("grade__c").asText();
+			}
+			
+		} else {
+			throw new DiageoServicesException("questions field is required to save survey");
+		}
+	} 
+
 
 	public ArrayNode getSurveys() throws DiageoServicesException {
 		ArrayNode result = mapper.createArrayNode();

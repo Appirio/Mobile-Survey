@@ -25,6 +25,7 @@ public class DBManager {
 	protected Connection db;
 	protected ObjectMapper mapper;
 	private static SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
+	private static SimpleDateFormat formatDetail =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
 	public DBManager() throws DiageoServicesException {
 		try {
@@ -51,7 +52,7 @@ public class DBManager {
 		try {
 			Statement s = db.createStatement();
 			
-			//System.out.println(query);
+			System.out.println(query);
 			
 			return resultSetToJson(s.executeQuery(query));
 		} catch (Exception e) {
@@ -90,7 +91,7 @@ public class DBManager {
 			
 			System.out.println(statement);
 			
-			return s.executeQuery(statement);
+			return s.execute(statement);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -130,8 +131,13 @@ public class DBManager {
         this.executeStatement(insertStatement.toString());
 	}
 	
-	protected String dateToPostgresString(Date date) {
-		return format.format(date);
+	protected String dateToPostgresString(Date date, Boolean detailed) {
+	    if (detailed) {
+	        return formatDetail.format(date);
+	    }
+	    else {
+	        return format.format(date);
+	    }
 	}
 	
 	protected void clearTransientFields(JsonNode data, List<String> fieldNames) {
