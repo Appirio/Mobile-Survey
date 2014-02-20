@@ -1,4 +1,4 @@
-package com.appirio.diageo.db.manager.api14;
+package com.appirio.diageo.db.manager.api15;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class SurveyDBManager14 extends SurveyDBManager13 {
+public class SurveyDBManager15 extends SurveyDBManager13 {
 
-	public SurveyDBManager14() throws DiageoServicesException {
+	public SurveyDBManager15() throws DiageoServicesException {
 		super();
 	}
 
@@ -16,7 +16,7 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 		ArrayNode surveys = queryToJson("select name, sfid, survey_type__c, first_question__c, grading_scale__c from dms_survey__c order by sfid");
 		ArrayNode questions = queryToJson("select include_none_of_the_above__c, conditional_answer__c, next_question__c, label_for_add_l_comments__c, answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c order by dms_survey__c");
 
-		return processSurveys(surveys, questions, false);
+		return processSurveys(surveys, questions, true);
 	}
 
 	public ArrayNode getSurveys(ObjectNode account) throws DiageoServicesException {
@@ -55,6 +55,6 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 		
 		ArrayNode questions = queryToJson("select include_none_of_the_above__c, conditional_answer__c, next_question__c, label_for_add_l_comments__c, answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (" + surveyIds.toString() + ") order by dms_survey__c");
 		
-		return processSurveys(surveys, questions, false);
+		return processSurveys(surveys, questions, true);
 	}	
 }

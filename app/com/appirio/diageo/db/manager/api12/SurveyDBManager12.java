@@ -12,9 +12,9 @@ public class SurveyDBManager12 extends SurveyDBManager {
 	}
 	
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
-		ArrayNode surveys = queryToJson("select name, sfid from dms_survey__c order by sfid");
+		ArrayNode surveys = queryToJson("select name, sfid, grading_scale__c from dms_survey__c order by sfid");
 		ArrayNode questions = queryToJson("select answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c order by dms_survey__c");
 
-		return processSurveys(surveys, questions);
+		return processSurveys(surveys, questions, false);
 	}
 }

@@ -88,4 +88,28 @@ GET		/1.4/survey/universal				controllers.SurveyServices.getUniversalSurveys14()
 
 POST	/1.4/contact/authorize				controllers.ContactServices.authorizeUser()
 
+############# API Version 1.5 #############
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /1.5/assets/*file               controllers.Assets.at(path="/public", file)
+
+# Products
+GET		/1.5/product/:id				controllers.ProductServices.getProduct(id)
+GET		/1.5/products					controllers.ProductServices.getProducts()
+
+# Accounts
+GET		/1.5/account/:lat/:long/:radius			controllers.AccountServices.getAccounts(lat, long, radius)
+GET		/1.5/account/:lat/:long/:radius/:limit	controllers.AccountServices.getAccountsLimited(lat, long, radius, limit)
+
+# Surveys
+
+GET		/1.5/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount15(accountId)
+POST	/1.5/survey							controllers.SurveyServices.saveSurvey15()
+GET		/1.5/survey/universal				controllers.SurveyServices.getUniversalSurveys15()
+
+# Contact
+
+POST	/1.5/contact/authorize				controllers.ContactServices.authorizeUser()
+
+
 

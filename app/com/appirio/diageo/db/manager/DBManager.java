@@ -51,7 +51,7 @@ public class DBManager {
 		try {
 			Statement s = db.createStatement();
 			
-			System.out.println(query);
+			//System.out.println(query);
 			
 			return resultSetToJson(s.executeQuery(query));
 		} catch (Exception e) {
@@ -90,7 +90,7 @@ public class DBManager {
 			
 			System.out.println(statement);
 			
-			return s.execute(statement);
+			return s.executeQuery(statement);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
@@ -127,7 +127,7 @@ public class DBManager {
 
 		insertStatement.append(")");
 
-		this.executeStatement(insertStatement.toString());
+        this.executeStatement(insertStatement.toString());
 	}
 	
 	protected String dateToPostgresString(Date date) {
