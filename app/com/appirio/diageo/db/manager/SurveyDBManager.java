@@ -216,6 +216,7 @@ public class SurveyDBManager extends DBManager {
 			
 		if(survey.has("questions")) {
 			ArrayNode questions = (ArrayNode) survey.get("questions");
+			List<ObjectNode> surveyResultsList = new ArrayList<ObjectNode>();
 			
 			// Check if grading_scale exist
 			if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
@@ -336,7 +337,7 @@ public class SurveyDBManager extends DBManager {
 				
 				clearTransientFields(newSurvey, surveyResultFields);
 				
-				insert((ObjectNode)newSurvey, "dms_survey_result__c");
+				surveyResultsList.add((ObjectNode)newSurvey);
 			}
 			
 			// Survey Submissions DB
@@ -358,7 +359,8 @@ public class SurveyDBManager extends DBManager {
 			    
 			    newSurveySubmission.put("grade__c", grade.get("grade__c").asText());
 			    newSurveySubmission.put("score__c", Integer.toString(percentage));
-			    String message = "None";
+			    
+			    String message = null;
 			    try {
 			        message = grade.get("message__c").asText();
 			    }
@@ -372,11 +374,20 @@ public class SurveyDBManager extends DBManager {
 			// Inserting to Survey Submission DB
 			System.out.println("Inserting into Survey Submission Table");
     	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
+    	    
+    	    // Insert Survey Results
+    	    insertSurveyResults(surveyResultsList);
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
 	} 
 
+    public void insertSurveyResults(List<ObjectNode> surveyResults) {
+        for (ObjectNode surveyR : surveyResults) {
+            insert(surveyR, "dms_survey_result__c");
+        }
+    }
+    
     public ArrayNode getSS(String query) throws DiageoServicesException {
         return queryToJson(query);
     }
