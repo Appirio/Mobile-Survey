@@ -363,6 +363,10 @@ public class SurveyServices extends Controller {
 				    percentage = ss.get(0).get("score__c").asText();
 				    message = ss.get(0).get("message__c").asText();
 				    
+				    if (grade.equalsIgnoreCase("null") && percentage.equalsIgnoreCase("null")) {
+				        return ok();
+				    }
+				    
 				    manager.close();
 				}
 				

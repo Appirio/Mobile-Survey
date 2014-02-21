@@ -19,6 +19,10 @@ public class ControllerUtils {
 	
 	public static JsonNode gradeScoreToJson(String grade, String percentage, String message) {
 	    String output = "{\"grade\": \"" + grade + "\", \"percentage\": \"" + percentage + "\", \"message\": \""+ message + "\"}";
+	    // If message is null, just send back grade and percentage
+	    if (message.equalsIgnoreCase("null")) {
+	        output = "{\"grade\": \"" + grade + "\", \"percentage\": \"" + percentage + "\"}";
+	    }
 	    
 	    try {
 			return mapper.readTree(output);
