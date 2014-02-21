@@ -204,7 +204,7 @@ public class SurveyDBManager extends DBManager {
 		}
 	}
 	
-	public static String createSurvey(JsonNode survey) throws DiageoServicesException {
+	public void createSurvey(JsonNode survey) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
 		int scorePotential = 0;
@@ -353,16 +353,12 @@ public class SurveyDBManager extends DBManager {
 			    ArrayNode grades = queryToJson(query);
 			    ObjectNode grade = (ObjectNode) grades.get(0);
 			    
-			    String updSS = "Update dd_survey_submission__c SET grade__c='"+ grade.get("grade__c").asText() +"', score__c='"+ Integer.toString(percentage) +"' WHERE external_id__c='"+ externalId +"'";
+			    String updSS = "Update dd_survey_submission__c SET grade__c='"+ grade.get("grade__c").asText() +"', score__c='"+ Integer.toString(percentage) +"', message__c='"+ grade.get("message__c") +"' WHERE external_id__c='"+ externalId +"'";
 			    executeStatement(updSS);
-			    
-			    return grade.get("grade__c").asText() +"|"+ Integer.toString(percentage) +"|"+ grade.get("message__c");
 			}
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
-		// Default
-		return "null";
 	} 
 
 

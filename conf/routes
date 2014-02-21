@@ -104,7 +104,7 @@ GET		/1.5/account/:lat/:long/:radius/:limit	controllers.AccountServices.getAccou
 # Surveys
 
 GET		/1.5/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount15(accountId)
-POST	/1.5/survey							controllers.SurveyServices.saveSurvey15()
+POST	/1.5/survey							controllers.SurveyServices.saveSurvey()
 GET		/1.5/survey/universal				controllers.SurveyServices.getUniversalSurveys15()
 
 # Contact

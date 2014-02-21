@@ -305,7 +305,7 @@ public class SurveyServices extends Controller {
 	}
 	
 	@With(SecureAction.class)
-	public static Result saveSurvey() {
+	public static Result saveSurveyOld() {
 	    try {
 			JsonNode body = request().body().asJson();
 			
@@ -333,28 +333,20 @@ public class SurveyServices extends Controller {
 	}
 	
 	//@With(SecureAction.class)
-	public static Result saveSurvey15() {
+	public static Result saveSurvey() {
 	    try {
 			JsonNode body = request().body().asJson();
 			
 			if(body != null) {
 			    SurveyDBManager manager = new SurveyDBManager();
-			    String gp = "null";
-				String grade = "";
-				String percentage = "";
-				String message = "";
+			    String grade = null;
+				String percentage = null;
+				String message = null;
 				
 				try {
-					gp = manager.createSurvey15(body);
+					manager.createSurvey15(body);
 				} finally {
-					manager.close();
-				}
-				
-				if (!gp.equals("null")) {
-				    String[] gdata = gp.split("|");
-    				grade = gdata[0];
-    				percentage = gdata[1];
-    				message = gdata[2];
+				    manager.close();
 				}
 				
 				return ok(ControllerUtils.gradeScoreToJson(grade, percentage, message));
