@@ -337,6 +337,8 @@ public class SurveyServices extends Controller {
 	    try {
 			JsonNode body = request().body().asJson();
 			
+			System.out.println(body);
+			
 			if(body != null) {
 			    SurveyDBManager manager = new SurveyDBManager();
 			    String grade = null;

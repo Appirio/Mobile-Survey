@@ -192,11 +192,13 @@ public class SurveyDBManager extends DBManager {
 	
 	public void createSurvey15(JsonNode survey) throws DiageoServicesException {
 	    if(survey.isArray()) {
+	        System.out.println("Survey is array");
 			for(JsonNode node : survey) {
 				createSurvey(node);
 			}
 		}
 		else if(survey.isObject()) {
+		    System.out.println("Survey is object");
 		    createSurvey(survey);
 		}
 		else {
