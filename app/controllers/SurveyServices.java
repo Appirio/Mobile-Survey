@@ -254,7 +254,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 
-	//@With(SecureAction.class)
+	@With(SecureAction.class)
 	public static Result getUniversalSurveys14() {
 		try {
 			SurveyDBManager14 manager = new SurveyDBManager14();
@@ -279,7 +279,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
-	//@With(SecureAction.class)
+	@With(SecureAction.class)
 	public static Result getUniversalSurveys15() {
 		try {
 			SurveyDBManager15 manager = new SurveyDBManager15();
@@ -339,15 +339,25 @@ public class SurveyServices extends Controller {
 			
 			if(body != null) {
 			    SurveyDBManager manager = new SurveyDBManager();
+			    String gp = "null";
+				String grade = null;
+				String percentage = null;
 				
 				try {
-					manager.createSurvey15(body);
+					gp = manager.createSurvey15(body);
 				} finally {
 					manager.close();
 				}
-				// TO-DO: Some evaluations of scores to evaluate percentage
-				// TO_DO: Get Grade letter based on percentage value
-				return ok(ControllerUtils.gradeScoreToJson("A", "93"));
+				
+				if (gq.equals("null")) {
+				    return ok();
+				}
+				
+				gp = gp.split("|");
+				grade = gp[0];
+				percentage = gp[1];
+				
+				return ok(ControllerUtils.gradeScoreToJson(grade, percentage));
 			} else {
 				return badRequest(ControllerUtils.messageToJson("json body expected"));
 			}

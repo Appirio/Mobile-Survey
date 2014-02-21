@@ -204,7 +204,7 @@ public class SurveyDBManager extends DBManager {
 		}
 	}
 	
-	public void createSurvey(JsonNode survey) throws DiageoServicesException {
+	public static String createSurvey(JsonNode survey) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
 		int scorePotential = 0;
@@ -220,6 +220,9 @@ public class SurveyDBManager extends DBManager {
 				
 			ObjectNode newSurveySubmission = mapper.createObjectNode();
     	    newSurveySubmission.put("external_id__c", externalId);
+    	    newSurveySubmission.put("contact__c", survey.get("contact__c").asText());
+    	    newSurveySubmission.put("dd_survey__c", survey.get("sfid").asText());
+    	    
     	    // Inserting to Survey Submission DB
     	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
     	    
@@ -308,7 +311,7 @@ public class SurveyDBManager extends DBManager {
 			            scorePotential += tempHigh;
 			        }
 				    
-				    newSurvey.put("score__c", Integer.toString(scoreTot));
+				    newSurvey.put("score__c", Integer.toString(answerOptionScore));
 				}
 				
 				newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
@@ -342,22 +345,24 @@ public class SurveyDBManager extends DBManager {
 			// Survey has Grading
 			if (scoreTot > 0) {
 			    // Percentage is based on Total Score/Potential Score off of what has been submitted
-			    int percentage = scoreTot / scorePotential;
+			    System.out.println("Score Total: "+ Integer.toString(scoreTot) + ", Score Potential: "+ Integer.toString(scorePotential));
+			    int percentage = (scoreTot * 100) / scorePotential;
 			    // Lookup Grade
-			    System.out.println(gradingScaleID);
+			    //System.out.println(gradingScaleID);
 			    String query = "select grade__c, low_range__c from dd_grading_range__c where dd_grading_scale__c='"+ gradingScaleID +"' and "+ Integer.toString(percentage) +" >= low_range__c order by low_range__c desc";
 			    ArrayNode grades = queryToJson(query);
 			    ObjectNode grade = (ObjectNode) grades.get(0);
 			    
 			    String updSS = "Update dd_survey_submission__c SET grade__c='"+ grade.get("grade__c").asText() +"', score__c='"+ Integer.toString(percentage) +"' WHERE external_id__c='"+ externalId +"'";
 			    executeStatement(updSS);
-			    //System.out.println(grades);
-    		    //String finalGrade = (ObjectNode) grades.get(0).get("grade__c").asText();
+			    
+			    return grade.get("grade__c").asText() +"|"+ Integer.toString(percentage);
 			}
-			
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
+		// Default
+		return "null";
 	} 
 
 
@@ -399,13 +404,13 @@ public class SurveyDBManager extends DBManager {
 	        return mapper.readValue(answerOptions, new TypeReference<List<AnswerOptions>>() {});
 	    }
 	    catch(UnrecognizedPropertyException e) {
-	        System.out.println("Unrecognized: "+ e);
+	        System.out.println("Unrecognized: "+ answerOptions +" Error: "+ e);
 	    }
 	    catch (JsonMappingException e) {
-            System.out.println("JSON Mapping: "+ e);
+            System.out.println("JSON Mapping: "+ answerOptions +" Error: "+ e);
         }
 	    catch (IOException e) {
-            System.out.println("ERROR Reading Answers: "+ e);
+	        System.out.println("ERROR Reading Answers: "+ answerOptions +" Error: "+ e);
 	    }
 	    return null;
 	}
