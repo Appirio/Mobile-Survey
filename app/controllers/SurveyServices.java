@@ -340,8 +340,9 @@ public class SurveyServices extends Controller {
 			if(body != null) {
 			    SurveyDBManager manager = new SurveyDBManager();
 			    String gp = "null";
-				String grade = null;
-				String percentage = null;
+				String grade = "";
+				String percentage = "";
+				String message = "";
 				
 				try {
 					gp = manager.createSurvey15(body);
@@ -349,15 +350,14 @@ public class SurveyServices extends Controller {
 					manager.close();
 				}
 				
-				if (gp.equals("null")) {
-				    return ok();
+				if (!gp.equals("null")) {
+				    String[] gdata = gp.split("|");
+    				grade = gdata[0];
+    				percentage = gdata[1];
+    				message = gdata[2];
 				}
 				
-				gp = gp.split("|");
-				grade = gp[0];
-				percentage = gp[1];
-				
-				return ok(ControllerUtils.gradeScoreToJson(grade, percentage));
+				return ok(ControllerUtils.gradeScoreToJson(grade, percentage, message));
 			} else {
 				return badRequest(ControllerUtils.messageToJson("json body expected"));
 			}

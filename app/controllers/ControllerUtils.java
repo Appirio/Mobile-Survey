@@ -17,8 +17,8 @@ public class ControllerUtils {
 		}
 	}
 	
-	public static JsonNode gradeScoreToJson(String grade, String percentage) {
-	    String output = "{\"grade\": \"" + grade + "\", \"percentage\": \"" + percentage + "\"}";
+	public static JsonNode gradeScoreToJson(String grade, String percentage, String message) {
+	    String output = "{\"grade\": \"" + grade + "\", \"percentage\": \"" + percentage + "\", \"message\": \""+ message + "\"}";
 	    
 	    try {
 			return mapper.readTree(output);

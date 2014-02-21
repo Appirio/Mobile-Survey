@@ -356,7 +356,7 @@ public class SurveyDBManager extends DBManager {
 			    String updSS = "Update dd_survey_submission__c SET grade__c='"+ grade.get("grade__c").asText() +"', score__c='"+ Integer.toString(percentage) +"' WHERE external_id__c='"+ externalId +"'";
 			    executeStatement(updSS);
 			    
-			    return grade.get("grade__c").asText() +"|"+ Integer.toString(percentage);
+			    return grade.get("grade__c").asText() +"|"+ Integer.toString(percentage) +"|"+ grade.get("message__c");
 			}
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
