@@ -229,7 +229,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 
-	//@With(SecureAction.class)
+	@With(SecureAction.class)
 	public static Result getUniversalSurveys13() {
 		try {
 			SurveyDBManager13 manager = new SurveyDBManager13();
@@ -254,7 +254,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 
-	@With(SecureAction.class)
+	//@With(SecureAction.class)
 	public static Result getUniversalSurveys14() {
 		try {
 			SurveyDBManager14 manager = new SurveyDBManager14();

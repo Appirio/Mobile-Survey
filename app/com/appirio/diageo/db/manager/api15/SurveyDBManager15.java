@@ -1,12 +1,12 @@
 package com.appirio.diageo.db.manager.api15;
 
 import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
+import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class SurveyDBManager15 extends SurveyDBManager13 {
+public class SurveyDBManager15 extends SurveyDBManager14 {
 
 	public SurveyDBManager15() throws DiageoServicesException {
 		super();

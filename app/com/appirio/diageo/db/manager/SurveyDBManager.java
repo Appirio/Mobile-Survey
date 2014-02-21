@@ -347,8 +347,11 @@ public class SurveyDBManager extends DBManager {
 			    System.out.println(gradingScaleID);
 			    String query = "select grade__c, low_range__c from dd_grading_range__c where dd_grading_scale__c='"+ gradingScaleID +"' and "+ Integer.toString(percentage) +" >= low_range__c order by low_range__c desc";
 			    ArrayNode grades = queryToJson(query);
+			    ObjectNode grade = (ObjectNode) grades.get(0);
 			    
-			    System.out.println(grades);
+			    String updSS = "Update dd_survey_submission__c SET grade__c='"+ grade.get("grade__c").asText() +"', score__c='"+ Integer.toString(percentage) +"' WHERE external_id__c='"+ externalId +"'";
+			    executeStatement(updSS);
+			    //System.out.println(grades);
     		    //String finalGrade = (ObjectNode) grades.get(0).get("grade__c").asText();
 			}
 			
@@ -407,7 +410,7 @@ public class SurveyDBManager extends DBManager {
 	    return null;
 	}
 
-	protected ArrayNode processSurveys(ArrayNode surveys, ArrayNode questions, Boolean graded) {
+	protected ArrayNode processSurveys(ArrayNode surveys, ArrayNode questions, boolean graded) {
 	    ArrayNode result = mapper.createArrayNode();
         
 		int questionCt = 0; 
@@ -416,18 +419,24 @@ public class SurveyDBManager extends DBManager {
 			ObjectNode survey = (ObjectNode) surveys.get(surveyCt); 
             ArrayNode surveyQuestions = mapper.createArrayNode();
             Boolean grademe = false;
+            Boolean skipQs = false;
             
             // If it came from API < 1.5, and grading_scale is NOT NULL, skip this new survey
-            if (!graded && !survey.get("grading_scale__c").asText().equals("null")) {
+            if (!graded && !survey.get("grading_scale__c").asText().equalsIgnoreCase("null")) {
                 System.out.println("Skipping survey: "+ survey.get("name").asText());
-			    continue;
+                skipQs = true;
 			}
 			// If it came from API 1.5 and grading scale is NOT null
-			if (graded && !survey.get("grading_scale__c").asText().equals("null")) {
+			if (graded && !survey.get("grading_scale__c").asText().equalsIgnoreCase("null")) {
 			    grademe = true;
 			}
 			
+			//System.out.println("Survey: "+ survey.get("name").asText() +", Survey ID: "+ survey.get("sfid").asText());
+			//System.out.println("Survey Questions num: "+ Integer.toString(questions.size()));
+			//System.out.println("Survey Questions Count: "+ Integer.toString(questionCt));
+			
 			while(questionCt < questions.size() && (questions.get(questionCt).get("dms_survey__c").asText().equals(survey.get("sfid").asText()))) {
+				//System.out.println("Survey Question SFID Ref: "+ questions.get(questionCt).get("dms_survey__c").asText());
 				ObjectNode question = (ObjectNode) questions.get(questionCt); 
 				
 				if(question.has("answer_options__c") && !question.get("answer_options__c").asText().equalsIgnoreCase("null")) {
@@ -463,9 +472,12 @@ public class SurveyDBManager extends DBManager {
 				questionCt++;
 			}
 			
-			survey.put("questions", surveyQuestions);
-			
-			result.add(survey);
+			// If Questions are to be skipped, not add survey
+			if (!skipQs) {
+			    survey.put("questions", surveyQuestions);
+
+    			result.add(survey);
+			}
 		}
 		
 		return result;
