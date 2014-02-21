@@ -247,8 +247,11 @@ public class SurveyDBManager extends DBManager {
 				newSurvey.remove("questions");
 				
 				newSurvey.putAll(questionObj);
+				
+				// Get Answer Options
+			    String answerOptionsText = newSurvey.get("original_answer_options__c").asText();
 				// Grading Survey Evals
-				if (grading) {
+				if (grading && answerOptionsText.matches("\\[\\{(.*)")) {
 				    // Bool to see if answer needs to match
 				    boolean needMatch = false;
 				    // Get answer Value
@@ -261,8 +264,7 @@ public class SurveyDBManager extends DBManager {
 				    if (answerValue.equals("null")) {
 				        scoreTot += 0;
 				    }
-				    // Get Answer Options
-				    String answerOptionsText = newSurvey.get("original_answer_options__c").asText();
+				    
 				    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
 				    // temp Int
 				    int tempHigh = 0;
@@ -360,6 +362,7 @@ public class SurveyDBManager extends DBManager {
 			}
 			
 			// Inserting to Survey Submission DB
+			System.out.println("Inserting into Survey Submission Table");
     	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
