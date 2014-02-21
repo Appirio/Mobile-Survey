@@ -359,11 +359,15 @@ public class SurveyDBManager extends DBManager {
 			    newSurveySubmission.put("grade__c", grade.get("grade__c").asText());
 			    newSurveySubmission.put("score__c", Integer.toString(percentage));
 			    newSurveySubmission.put("message__c", grade.get("message__c").asText());
+			    
+			    // Inserting to Survey Submission DB
+    			System.out.println("Inserting into Survey Submission Table w/ ScoreTot");
+        	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
 			}
-			
-			// Inserting to Survey Submission DB
-			System.out.println("Inserting into Survey Submission Table");
-    	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
+			else {
+			    System.out.println("Inserting into Survey Submission Table");
+        	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
+			}
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
