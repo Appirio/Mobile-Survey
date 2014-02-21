@@ -349,7 +349,7 @@ public class SurveyServices extends Controller {
 					manager.close();
 				}
 				
-				if (gq.equals("null")) {
+				if (gp.equals("null")) {
 				    return ok();
 				}
 				
