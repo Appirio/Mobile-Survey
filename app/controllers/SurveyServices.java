@@ -13,6 +13,7 @@ import play.mvc.With;
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.AccountDBManager;
 import com.appirio.diageo.db.manager.SurveyDBManager;
+import com.appirio.diageo.db.manager.DBManager;
 import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
 import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
@@ -281,7 +282,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
-	@With(SecureAction.class)
+	//@With(SecureAction.class)
 	public static Result getUniversalSurveys15() {
 		try {
 			SurveyDBManager15 manager = new SurveyDBManager15();
@@ -306,6 +307,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
+	/*
 	@With(SecureAction.class)
 	public static Result saveSurveyOld() {
 	    try {
@@ -315,7 +317,7 @@ public class SurveyServices extends Controller {
 			    SurveyDBManager manager = new SurveyDBManager();
 				
 				try {
-					manager.createSurvey15(body);
+					manager.createSurvey(body);
 				} finally {
 					manager.close();
 				}
@@ -333,15 +335,15 @@ public class SurveyServices extends Controller {
     		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
     	}
 	}
+	*/
 	
 	//@With(SecureAction.class)
 	public static Result saveSurvey() {
 	    try {
 			JsonNode body = request().body().asJson();
 			SurveyDBManager manager = new SurveyDBManager();
-			
-			String salted = dateToPostgresString(new Date(System.currentTimeMillis()), true);
-			String externalId = manager.md5Java(salted);
+			// Auto generate random externalId that will be unique
+			String externalId = manager.md5Java();
 			
 			System.out.println(body);
 			
@@ -355,7 +357,7 @@ public class SurveyServices extends Controller {
 					manager.createSurvey15(body, externalId);
 				} finally {
 				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
-				    ArrayNode ss = manager.queryToJson(query);
+				    ArrayNode ss = manager.getSS(query);
 				    
 				    grade = ss.get(0).get("grade__c").asText();
 				    percentage = ss.get(0).get("score__c").asText();

@@ -165,8 +165,10 @@ public class SurveyDBManager extends DBManager {
 		return processSurveys(surveys, questions, false);
 	}
 	
-	public static String md5Java(String message) { 
+	public String md5Java() { 
 	    String digest = null; 
+	    String message = dateToPostgresString(new Date(System.currentTimeMillis()), true);
+	    
 	    try { 
 	        MessageDigest md = MessageDigest.getInstance("MD5"); 
 	        byte[] hash = md.digest(message.getBytes("UTF-8")); 
@@ -367,7 +369,10 @@ public class SurveyDBManager extends DBManager {
 		}
 	} 
 
-
+    public ArrayNode getSS(String query) throws DiageoServicesException {
+        return queryToJson(query);
+    }
+    
 	public ArrayNode getSurveys() throws DiageoServicesException {
 		ArrayNode result = mapper.createArrayNode();
 		
