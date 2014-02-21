@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -336,14 +338,15 @@ public class SurveyServices extends Controller {
 	public static Result saveSurvey() {
 	    try {
 			JsonNode body = request().body().asJson();
-			SurveyDBManager sdbm = new SurveyDBManager();
+			SurveyDBManager manager = new SurveyDBManager();
+			
 			String salted = dateToPostgresString(new Date(System.currentTimeMillis()), true);
-			String externalId = sdbm.md5Java(salted);
+			String externalId = manager.md5Java(salted);
 			
 			System.out.println(body);
 			
 			if(body != null) {
-			    SurveyDBManager manager = new SurveyDBManager();
+			    
 			    String grade = null;
 				String percentage = null;
 				String message = null;
@@ -351,13 +354,14 @@ public class SurveyServices extends Controller {
 				try {
 					manager.createSurvey15(body, externalId);
 				} finally {
-				    manager.close();
 				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
-				    ArrayNode ss = sdbm.queryToJson(query);
+				    ArrayNode ss = manager.queryToJson(query);
 				    
-				    grade = ss.get(0).get("grade__c");
+				    grade = ss.get(0).get("grade__c").asText();
 				    percentage = ss.get(0).get("score__c").asText();
-				    message = ss.get(0).get("message__c");
+				    message = ss.get(0).get("message__c").asText();
+				    
+				    manager.close();
 				}
 				
 				return ok(ControllerUtils.gradeScoreToJson(grade, percentage, message));
