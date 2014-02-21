@@ -275,6 +275,7 @@ public class SurveyDBManager extends DBManager {
 				    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
 				    // temp Int
 				    int tempHigh = 0;
+				    int scoredSurveyResult = 0;
 				    for(int i=0;i < answerOptions.size();i++) {
 				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
 				        // Potential Score:
@@ -286,6 +287,7 @@ public class SurveyDBManager extends DBManager {
         						if (msv.equals(answerOptions.get(i).value)) {
         						    // Total score: Total only scores where value matches
         						    scoreTot += answerOptionScore;
+        						    scoredSurveyResult += answerOptionScore;
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
@@ -295,10 +297,12 @@ public class SurveyDBManager extends DBManager {
 					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
 					            // Total score: Total only scores where value matches
 					            scoreTot += answerOptionScore;
+					            scoredSurveyResult += answerOptionScore;
 					        }
 					        // Text/Price/QTY as long as there is some value to this, you get the full score
 					        else if (!needMatch && !answerValue.equals("null")) {
 					            scoreTot += answerOptionScore;
+					            scoredSurveyResult += answerOptionScore;
 					        }
 					        
 					        if (answerOptionScore > tempHigh) {
@@ -311,7 +315,7 @@ public class SurveyDBManager extends DBManager {
 			            scorePotential += tempHigh;
 			        }
 				    
-				    newSurvey.put("score__c", Integer.toString(answerOptionScore));
+				    newSurvey.put("score__c", Integer.toString(scoredSurveyResult));
 				}
 				
 				newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
