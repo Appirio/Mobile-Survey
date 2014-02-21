@@ -336,6 +336,9 @@ public class SurveyServices extends Controller {
 	public static Result saveSurvey() {
 	    try {
 			JsonNode body = request().body().asJson();
+			SurveyDBManager sdbm = new SurveyDBManager();
+			String salted = dateToPostgresString(new Date(System.currentTimeMillis()), true);
+			String externalId = sdbm.md5Java(salted);
 			
 			System.out.println(body);
 			
@@ -346,9 +349,15 @@ public class SurveyServices extends Controller {
 				String message = null;
 				
 				try {
-					manager.createSurvey15(body);
+					manager.createSurvey15(body, externalId);
 				} finally {
 				    manager.close();
+				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
+				    ArrayNode ss = sdbm.queryToJson(query);
+				    
+				    grade = ss.get(0).get("grade__c");
+				    percentage = ss.get(0).get("score__c").asText();
+				    message = ss.get(0).get("message__c");
 				}
 				
 				return ok(ControllerUtils.gradeScoreToJson(grade, percentage, message));

@@ -190,23 +190,23 @@ public class SurveyDBManager extends DBManager {
 	    return digest; 
 	}
 	
-	public void createSurvey15(JsonNode survey) throws DiageoServicesException {
+	public void createSurvey15(JsonNode survey, String externalId) throws DiageoServicesException {
 	    if(survey.isArray()) {
 	        System.out.println("Survey is array");
 			for(JsonNode node : survey) {
-				createSurvey(node);
+				createSurvey(node, externalId);
 			}
 		}
 		else if(survey.isObject()) {
 		    System.out.println("Survey is object");
-		    createSurvey(survey);
+		    createSurvey(survey, externalId);
 		}
 		else {
 			throw new DiageoServicesException("Json object or array expected");
 		}
 	}
 	
-	public void createSurvey(JsonNode survey) throws DiageoServicesException {
+	public void createSurvey(JsonNode survey, String externalId) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
 		int scorePotential = 0;
@@ -215,9 +215,9 @@ public class SurveyDBManager extends DBManager {
 		if(survey.has("questions")) {
 			ArrayNode questions = (ArrayNode) survey.get("questions");
 			// Survey Submissions DB
-			String salted = survey.get("sfid").asText() + dateToPostgresString(new Date(System.currentTimeMillis()), true);
+			//String salted = survey.get("sfid").asText() + dateToPostgresString(new Date(System.currentTimeMillis()), true);
 			//System.out.println("Salted:"+ salted);
-			String externalId = md5Java(salted);
+			//String externalId = md5Java(salted);
 			//System.out.println("externalID = " + externalId);
 				
 			ObjectNode newSurveySubmission = mapper.createObjectNode();
@@ -452,7 +452,7 @@ public class SurveyDBManager extends DBManager {
 					ArrayNode options = mapper.createArrayNode();
 					String answerOptionsText = question.get("answer_options__c").asText();
 					
-					if (grademe) {
+					if (grademe && answerOptionsText.matches("\[\{(.*)\}\]")) {
 					    //System.out.println("AnswerOptions TEXT: "+ answerOptionsText);
 					    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
 					    if (answerOptions != null) {
