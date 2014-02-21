@@ -360,7 +360,7 @@ public class SurveyDBManager extends DBManager {
 			    newSurveySubmission.put("score__c", Integer.toString(percentage));
 			    String message = "None";
 			    try {
-			        String message = grade.get("message__c").asText();
+			        message = grade.get("message__c").asText();
 			    }
 			    catch(Exception e) {
 			        System.out.println("Message is null: "+ e);
