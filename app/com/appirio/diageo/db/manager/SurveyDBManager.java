@@ -452,7 +452,7 @@ public class SurveyDBManager extends DBManager {
 					ArrayNode options = mapper.createArrayNode();
 					String answerOptionsText = question.get("answer_options__c").asText();
 					
-					if (grademe && answerOptionsText.matches("\[\{(.*)\}\]")) {
+					if (grademe && answerOptionsText.matches("\\[\\{(.*)")) {
 					    //System.out.println("AnswerOptions TEXT: "+ answerOptionsText);
 					    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
 					    if (answerOptions != null) {
