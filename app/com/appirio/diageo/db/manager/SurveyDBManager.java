@@ -216,20 +216,7 @@ public class SurveyDBManager extends DBManager {
 			
 		if(survey.has("questions")) {
 			ArrayNode questions = (ArrayNode) survey.get("questions");
-			// Survey Submissions DB
-			//String salted = survey.get("sfid").asText() + dateToPostgresString(new Date(System.currentTimeMillis()), true);
-			//System.out.println("Salted:"+ salted);
-			//String externalId = md5Java(salted);
-			//System.out.println("externalID = " + externalId);
-				
-			ObjectNode newSurveySubmission = mapper.createObjectNode();
-    	    newSurveySubmission.put("external_id__c", externalId);
-    	    newSurveySubmission.put("contact__c", survey.get("contact__c").asText());
-    	    newSurveySubmission.put("dd_survey__c", survey.get("sfid").asText());
-    	    
-    	    // Inserting to Survey Submission DB
-    	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
-    	    
+			
 			// Check if grading_scale exist
 			if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
 			    // Get grading scale ID
@@ -350,7 +337,13 @@ public class SurveyDBManager extends DBManager {
 				insert((ObjectNode)newSurvey, "dms_survey_result__c");
 			}
 			
-			// Survey has Grading
+			// Survey Submissions DB
+			ObjectNode newSurveySubmission = mapper.createObjectNode();
+    	    newSurveySubmission.put("external_id__c", externalId);
+    	    newSurveySubmission.put("contact__c", survey.get("contact__c").asText());
+    	    newSurveySubmission.put("dd_survey__c", survey.get("sfid").asText());
+    	    
+    	    // Survey has Grading
 			if (scoreTot > 0) {
 			    // Percentage is based on Total Score/Potential Score off of what has been submitted
 			    System.out.println("Score Total: "+ Integer.toString(scoreTot) + ", Score Potential: "+ Integer.toString(scorePotential));
@@ -361,9 +354,13 @@ public class SurveyDBManager extends DBManager {
 			    ArrayNode grades = queryToJson(query);
 			    ObjectNode grade = (ObjectNode) grades.get(0);
 			    
-			    String updSS = "Update dd_survey_submission__c SET grade__c='"+ grade.get("grade__c").asText() +"', score__c='"+ Integer.toString(percentage) +"', message__c='"+ grade.get("message__c") +"' WHERE external_id__c='"+ externalId +"'";
-			    executeStatement(updSS);
+			    newSurveySubmission.put("grade__c", grade.get("grade__c").asText());
+			    newSurveySubmission.put("score__c", Integer.toString(percentage));
+			    newSurveySubmission.put("message__c", grade.get("message__c").asText());
 			}
+			
+			// Inserting to Survey Submission DB
+    	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
