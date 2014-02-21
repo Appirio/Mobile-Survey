@@ -3,6 +3,7 @@ package com.appirio.diageo.db.manager;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -336,7 +337,7 @@ public class SurveyDBManager extends DBManager {
 				newSurvey.put("DD_Survey_Submission__c__External_Id__c", externalId);
 				
 				clearTransientFields(newSurvey, surveyResultFields);
-				
+				// Add it to an arrayList
 				surveyResultsList.add((ObjectNode)newSurvey);
 			}
 			
@@ -382,7 +383,7 @@ public class SurveyDBManager extends DBManager {
 		}
 	} 
 
-    public void insertSurveyResults(List<ObjectNode> surveyResults) {
+    public void insertSurveyResults(List<ObjectNode> surveyResults) throws DiageoServicesException {
         for (ObjectNode surveyR : surveyResults) {
             insert(surveyR, "dms_survey_result__c");
         }
