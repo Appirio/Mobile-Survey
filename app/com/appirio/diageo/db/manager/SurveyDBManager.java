@@ -260,7 +260,8 @@ public class SurveyDBManager extends DBManager {
 				}
 				
 				// Grading Survey Evals
-				if (grading && answerOptionsText.matches("\\[\\{(.*)")) {
+				if (answerOptionsText.matches("\\[\\{(.*)")) {
+				    grading = true;
 				    // Bool to see if answer needs to match
 				    boolean needMatch = false;
 				    // Get answer Value
@@ -355,7 +356,7 @@ public class SurveyDBManager extends DBManager {
     	    newSurveySubmission.put("dd_survey__c", survey.get("sfid").asText());
     	    
     	    // Survey has Grading
-			if (scoreTot > 0) {
+			if (scoreTot > 0 && gradingScaleID != null && !gradingScaleID.isEmpty()) {
 			    // Percentage is based on Total Score/Potential Score off of what has been submitted
 			    System.out.println("Score Total: "+ Integer.toString(scoreTot) + ", Score Potential: "+ Integer.toString(scorePotential));
 			    int percentage = (scoreTot * 100) / scorePotential;
@@ -484,8 +485,10 @@ public class SurveyDBManager extends DBManager {
 					ArrayNode options = mapper.createArrayNode();
 					String answerOptionsText = question.get("answer_options__c").asText();
 					
-					if (grademe && answerOptionsText.matches("\\[\\{(.*)")) {
+					if (answerOptionsText.matches("\\[\\{(.*)")) {
 					    System.out.println("AnswerOptions TEXT: "+ answerOptionsText);
+					    grademe = true;
+                        
 					    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
 					    if (answerOptions != null) {
 					        for(int i=0;i < answerOptions.size();i++) {
