@@ -251,7 +251,14 @@ public class SurveyDBManager extends DBManager {
 				newSurvey.putAll(questionObj);
 				
 				// Get Answer Options
-			    String answerOptionsText = newSurvey.get("original_answer_options__c").asText();
+				String answerOptionsText = "";
+				try {
+				    answerOptionsText = newSurvey.get("original_answer_options__c").asText();
+				}
+				catch(Exception e) {
+				    System.out.println("WARN: No original_answer_options__c: "+ e);
+				}
+				
 				// Grading Survey Evals
 				if (grading && answerOptionsText.matches("\\[\\{(.*)")) {
 				    // Bool to see if answer needs to match
