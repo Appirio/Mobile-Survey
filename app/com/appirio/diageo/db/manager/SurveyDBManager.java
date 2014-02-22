@@ -486,7 +486,7 @@ public class SurveyDBManager extends DBManager {
 					String answerOptionsText = question.get("answer_options__c").asText();
 					
 					if (answerOptionsText.matches("\\[\\{(.*)")) {
-					    System.out.println("AnswerOptions TEXT: "+ answerOptionsText);
+					    //System.out.println("AnswerOptions TEXT: "+ answerOptionsText);
 					    grademe = true;
                         
 					    List<AnswerOptions> answerOptions = getAnswerOptions(answerOptionsText);
