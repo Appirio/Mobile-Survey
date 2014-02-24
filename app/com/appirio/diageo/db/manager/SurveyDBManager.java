@@ -362,7 +362,7 @@ public class SurveyDBManager extends DBManager {
 			    int percentage = (scoreTot * 100) / scorePotential;
 			    // Lookup Grade
 			    //System.out.println(gradingScaleID);
-			    String query = "select grade__c, low_range__c from dd_grading_range__c where dd_grading_scale__c='"+ gradingScaleID +"' and "+ Integer.toString(percentage) +" >= low_range__c order by low_range__c desc";
+			    String query = "select grade__c, low_range__c, message__c from dd_grading_range__c where dd_grading_scale__c='"+ gradingScaleID +"' and "+ Integer.toString(percentage) +" >= low_range__c order by low_range__c desc";
 			    ArrayNode grades = queryToJson(query);
 			    ObjectNode grade = (ObjectNode) grades.get(0);
 			    
