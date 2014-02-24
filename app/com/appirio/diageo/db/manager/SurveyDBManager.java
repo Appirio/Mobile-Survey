@@ -356,7 +356,7 @@ public class SurveyDBManager extends DBManager {
     	    newSurveySubmission.put("dd_survey__c", survey.get("sfid").asText());
     	    
     	    // Survey has Grading
-			if (scoreTot > 0 && gradingScaleID != null && !gradingScaleID.isEmpty()) {
+			if (scoreTot >= 0 && gradingScaleID != null && !gradingScaleID.isEmpty()) {
 			    // Percentage is based on Total Score/Potential Score off of what has been submitted
 			    System.out.println("Score Total: "+ Integer.toString(scoreTot) + ", Score Potential: "+ Integer.toString(scorePotential));
 			    int percentage = (scoreTot * 100) / scorePotential;
