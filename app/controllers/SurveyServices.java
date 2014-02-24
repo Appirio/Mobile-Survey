@@ -282,7 +282,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
-	//@With(SecureAction.class)
+	@With(SecureAction.class)
 	public static Result getUniversalSurveys15() {
 		try {
 			SurveyDBManager15 manager = new SurveyDBManager15();
