@@ -368,6 +368,8 @@ public class SurveyDBManager extends DBManager {
 			    
 			    newSurveySubmission.put("grade__c", grade.get("grade__c").asText());
 			    newSurveySubmission.put("score__c", Integer.toString(percentage));
+				newSurveySubmission.put("Total_Actual_Score__c", scoreTot);
+				newSurveySubmission.put("Total_Possible_Score__c", scorePotential);
 			    
 			    String message = null;
 			    try {
