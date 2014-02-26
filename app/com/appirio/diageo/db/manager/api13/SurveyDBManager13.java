@@ -14,7 +14,7 @@ public class SurveyDBManager13 extends SurveyDBManager12 {
 	}
 
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
-		ArrayNode surveys = queryToJson("select name, sfid, survey_type__c, first_question__c, grading_scale__c from dms_survey__c order by sfid");
+		ArrayNode surveys = queryToJson("select name, sfid, survey_type__c, first_question__c, grading_scale__c, total_possible_score__c from dms_survey__c order by sfid");
 		ArrayNode questions = queryToJson("select conditional_answer__c, next_question__c, label_for_add_l_comments__c, answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c order by dms_survey__c");
         
 		return processSurveys(surveys, questions, false);
@@ -27,7 +27,7 @@ public class SurveyDBManager13 extends SurveyDBManager12 {
 			zip = zip.substring(0, 5);
 		}
 		ArrayNode surveys = queryToJson("select " +
-											"name, sfid, survey_type__c, first_question__c, grading_scale__c " +
+											"name, sfid, survey_type__c, first_question__c, grading_scale__c, total_possible_score__c " +
 										"from " +
 											"dms_survey__c " +
 										"where " +

@@ -99,7 +99,7 @@ public class SurveyDBManager extends DBManager {
 		ArrayNode result = mapper.createArrayNode();
 		
 		// queryToJson("select * from dms_survey__c where sfid in (select dms_survey__c from dms_survey_to_account__c where account__c = '" + accountId + "')");
-		ArrayNode surveys = queryToJson("select name, sfid, grading_scale__c from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product' order by sfid");
+		ArrayNode surveys = queryToJson("select name, sfid, grading_scale__c, total_possible_score__c from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product' order by sfid");
 		ArrayNode questions = queryToJson("select sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (select sfid from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product') order by dms_survey__c");
 		
 		int questionCt = 0; 
@@ -134,7 +134,7 @@ public class SurveyDBManager extends DBManager {
 			zip = zip.substring(0, 5);
 		}
 		ArrayNode surveys = queryToJson("select " +
-											"name, sfid, grading_scale__c " +
+											"name, sfid, grading_scale__c, total_possible_score__c " +
 										"from " +
 											"dms_survey__c " +
 										"where " +
