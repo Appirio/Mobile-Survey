@@ -14,12 +14,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode; 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
-
 import com.appirio.diageo.db.manager.api15.AnswerOptions;
 import com.appirio.diageo.db.DiageoServicesException;
 
@@ -88,7 +88,9 @@ public class SurveyDBManager extends DBManager {
 			"QUESTION_NUMBER__C",
 			"SCORE__C",
 			"SURVEY_SUBMISSION__C",
-			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C"
+			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C",
+			"SCORE_ROLLUP__C",
+			"SCORE_ROLLUP_TOTAL_POSSIBLE__C"
 			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
@@ -489,6 +491,25 @@ public class SurveyDBManager extends DBManager {
 					String answerOptionsText = question.get("answer_options__c").asText();
 					
 					if (answerOptionsText.matches("\\[\\{(.*)")) {
+						// Evaluate the original answer options field 
+						try {
+							JsonNode answerOptions = (ArrayNode)new ObjectMapper().readTree(answerOptionsText);
+							String originalAnswerOptions = "";
+							String separator = "";
+							
+							if(answerOptions.isArray()) {
+								for(JsonNode answer : answerOptions) {
+									originalAnswerOptions += separator + answer.get("value").asText();
+									separator = ",";
+								}
+							}
+							
+							question.put("original_answer_options__c", originalAnswerOptions);
+						} catch (Exception e) {
+							// If this fails it is not critical
+							e.printStackTrace();
+						} 
+						
 					    //System.out.println("AnswerOptions TEXT: "+ answerOptionsText);
 					    grademe = true;
                         
