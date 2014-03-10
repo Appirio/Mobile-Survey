@@ -245,7 +245,7 @@ public class SurveyDBManager extends DBManager {
 				newSurvey.putAll((ObjectNode)survey);
 				
 				if(newSurvey.has("sfid")) {
-					newSurvey.remove("sfid");
+					newSurvey.remove("sfid"); 
 				}
 				
 				newSurvey.remove("questions");
@@ -337,8 +337,8 @@ public class SurveyDBManager extends DBManager {
 					}
 				}
 				
-				if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("original_answer_options__c") && newSurvey.get("original_answer_options__c").asText().length() > 0) {
-					newSurvey.put("possible_answers__c", newSurvey.get("original_answer_options__c").asText().replaceAll("[^,]","").length() + 1);
+				if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("delimitedAnswerOptions") && newSurvey.get("delimitedAnswerOptions").asText().length() > 0) {
+					newSurvey.put("possible_answers__c", newSurvey.get("delimitedAnswerOptions").asText().replaceAll("[^,]","").length() + 1);
 				}
 				
 				// Some kind of increment?
@@ -494,17 +494,17 @@ public class SurveyDBManager extends DBManager {
 						// Evaluate the original answer options field 
 						try {
 							JsonNode answerOptions = (ArrayNode)new ObjectMapper().readTree(answerOptionsText);
-							String originalAnswerOptions = "";
+							String delimitedAnswerOptions = "";
 							String separator = "";
 							
 							if(answerOptions.isArray()) {
 								for(JsonNode answer : answerOptions) {
-									originalAnswerOptions += separator + answer.get("value").asText();
+									delimitedAnswerOptions += separator + answer.get("value").asText();
 									separator = ",";
 								}
 							}
 							
-							question.put("original_answer_options__c", originalAnswerOptions);
+							question.put("delimitedAnswerOptions", delimitedAnswerOptions);
 						} catch (Exception e) {
 							// If this fails it is not critical
 							e.printStackTrace();
