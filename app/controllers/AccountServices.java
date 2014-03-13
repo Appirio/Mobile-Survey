@@ -12,7 +12,7 @@ import com.appirio.diageo.db.manager.api14.AccountDBManager14;
 
 public class AccountServices extends Controller {
 	
-	//@With(SecureAction.class)
+	@With(SecureAction.class)
     public static Result getAccounts(String latitude, String longitude, String radius) {
     	try {
     		AccountDBManager manager = new AccountDBManager();
