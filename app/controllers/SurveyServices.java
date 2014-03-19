@@ -1,6 +1,7 @@
 package controllers;
 
 import java.util.Date;
+import java.util.UUID;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -343,7 +344,8 @@ public class SurveyServices extends Controller {
 			JsonNode body = request().body().asJson();
 			SurveyDBManager manager = new SurveyDBManager();
 			// Auto generate random externalId that will be unique
-			String externalId = manager.md5Java();
+			//String externalId = manager.md5Java();
+			String externalId = UUID.randomUUID().toString();
 			
 			System.out.println(body);
 			
