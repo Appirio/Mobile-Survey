@@ -395,6 +395,7 @@ public class SurveyDBManager extends DBManager {
 	} 
 
     public void insertSurveyResults(List<ObjectNode> surveyResults) throws DiageoServicesException {
+    	// TODO: clear the name field that is being copied from question
         for (ObjectNode surveyR : surveyResults) {
             insert(surveyR, "dms_survey_result__c");
         }
