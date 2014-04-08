@@ -6,6 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -122,6 +124,41 @@ public class SurveyDBManager extends DBManager {
 			survey.put("account__c", accountId);
 			
 			result.add(survey);
+		}
+		
+		return sortSurveysByName(result);
+	}
+	
+	private class SurveyNameComparator implements Comparator<JsonNode> {
+
+		@Override
+		public int compare(JsonNode o1, JsonNode o2) {
+			if(o1 == null || !o1.has("name")) {
+				return -1;
+			}
+
+			if(o2 == null || !o2.has("name")) {
+				return 1;
+			}
+			
+			return o1.get("name").asText().compareTo(o2.get("name").asText());			
+		}
+		
+	}
+	
+	public ArrayNode sortSurveysByName(ArrayNode surveys) {
+		ArrayList<JsonNode> nodes = new ArrayList<JsonNode>();
+		
+		for(JsonNode node : surveys) {
+			nodes.add(node);
+		}
+		
+		Collections.sort(nodes, new SurveyNameComparator());
+		
+		ArrayNode result = mapper.createArrayNode();
+		
+		for(JsonNode node : nodes) {
+			result.add(node);
 		}
 		
 		return result;
@@ -432,7 +469,7 @@ public class SurveyDBManager extends DBManager {
 			result.add(survey);
 		}
 		
-		return result;
+		return sortSurveysByName(result);
 	}
 	
 	public List<AnswerOptions> getAnswerOptions(String answerOptions) {
@@ -545,26 +582,7 @@ public class SurveyDBManager extends DBManager {
 			}
 		}
 		
-		return result;
+		return sortSurveysByName(result);
 	}
-	
-	/*
-	public void updateAnalyticsFields() throws DiageoServicesException {
-		ArrayNode surveyResults = queryToJson("select sr.id id, selected_answers__c, possible_answers__c, answer_options__c,  answer_text__c from dms_survey_result__c sr inner join dms_question__c q on sr.question__c = q.sfid;");
-		
-		for(JsonNode node : surveyResults) {
-			int selectedAnswers = 0, possibleAnswers = 0;
-			
-			if(node.has("answer_text__c") && node.get("answer_text__c").asText().length() > 0) {
-				selectedAnswers = node.get("answer_text__c").asText().replaceAll("[^;]","").length() + 1;
-			}
-			
-			if(node.has("answer_options__c") && node.get("answer_options__c").asText().length() > 0) {
-				possibleAnswers = node.get("answer_options__c").asText().replaceAll("[^,]","").length() + 1;
-			}
-			
-			executeStatement("update dms_survey_result__c set selected_answers__c = " + selectedAnswers + ", possible_answers__c = " + possibleAnswers + " where id = " + node.get("id").asText());
-		}
-	}*/
 	
 }

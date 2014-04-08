@@ -283,7 +283,7 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
-	@With(SecureAction.class)
+	//@With(SecureAction.class)
 	public static Result getUniversalSurveys15() {
 		try {
 			SurveyDBManager15 manager = new SurveyDBManager15();
@@ -307,36 +307,6 @@ public class SurveyServices extends Controller {
     		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
     	}
 	}
-	
-	/*
-	@With(SecureAction.class)
-	public static Result saveSurveyOld() {
-	    try {
-			JsonNode body = request().body().asJson();
-			
-			if(body != null) {
-			    SurveyDBManager manager = new SurveyDBManager();
-				
-				try {
-					manager.createSurvey(body);
-				} finally {
-					manager.close();
-				}
-				return ok();
-			} else {
-				return badRequest(ControllerUtils.messageToJson("json body expected"));
-			}
-    	} catch (DiageoServicesException e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(e.getMessage());
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
-    	}
-	}
-	*/
 	
 	@With(SecureAction.class)
 	public static Result saveSurvey() {
@@ -387,23 +357,4 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
-	/* This is a data update function designed to run locally, not to be deployed to heroku
-    public static Result updateSurveyAnalyticsFields() {
-		try {
-			SurveyDBManager manager = new SurveyDBManager();
-			
-			try {
-				manager.updateAnalyticsFields();
-			} finally {
-				manager.close();
-				
-			}
-			
-			return ok();
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
-    	}    
-	}*/
 }
