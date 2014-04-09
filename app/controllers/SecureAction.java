@@ -19,9 +19,14 @@ import com.appirio.diageo.db.manager.SecurityDBManager;
 public class SecureAction extends Simple {
 
 	private static final String SIGNATURE_KEY = "dFtYHa1875DgHbBHyraVs3sFdcaeDerDkLMno9";
+	private static final boolean SECURITY_ENABLED = true;
 
 	@Override
 	public Promise<SimpleResult> call(Context ctx) throws Throwable {
+		if(!SECURITY_ENABLED) {
+			return delegate.call(ctx);
+		}
+		
 		String salt = ctx.request().getHeader("Salt");
 		String signature = ctx.request().getHeader("Signature");
 		String userId = ctx.request().getHeader("uid");
