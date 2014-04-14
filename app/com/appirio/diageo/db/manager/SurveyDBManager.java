@@ -145,7 +145,7 @@ public class SurveyDBManager extends DBManager {
 				return 1;
 			}
 			
-			return o1.get("name").asText().compareTo(o2.get("name").asText());			
+			return o1.get("name").asText().toUpperCase().compareTo(o2.get("name").asText().toUpperCase());			
 		}
 		
 	}
