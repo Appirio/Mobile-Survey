@@ -6,8 +6,7 @@ libraryDependencies ++= Seq(
   javaJdbc,
   javaEbean,
   cache,
-  "postgresql" % "postgresql" % "9.1-901.jdbc4",
-  "com.newrelic.agent.java" % "newrelic-agent" % "3.5.1"
+  "postgresql" % "postgresql" % "9.1-901.jdbc4"
 )     
 
 play.Project.playJavaSettings
