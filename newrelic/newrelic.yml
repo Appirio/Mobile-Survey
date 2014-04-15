@@ -12,7 +12,7 @@ common: &default_settings
   # You must specify the license key associated with your New Relic
   # account.  This key binds your Agent's data to your account in the
   # New Relic service.
-  license_key: 'd44a2a9a099a7527c13208fde9f820216a6a3130'
+  license_key: '<%= license_key %>'
 
   # Agent Enabled
   # Use this setting to disable the agent instead of removing it from the startup command.
@@ -109,6 +109,17 @@ common: &default_settings
   # specific http request parameters. 
   #ignored_params: credit_card, ssn, password
 
+  # Similar to capture_params but for message handling.
+  # When processing a message through a MessageListener, if enabled,
+  # custom parameters set on the message will be captured subject to
+  # the filters on ignored_messaging_params.
+  # Default is false.
+  capture_messaging_params: false
+
+  # Tells transaction tracer and error collector to not to collect
+  # specific message properties. 
+  #ignored_messaging_params: userid, authtoken
+
   # Transaction tracer captures deep information about slow
   # transactions and sends this to the New Relic service once a
   # minute. Included in the transaction is the exact call sequence of
@@ -135,10 +146,6 @@ common: &default_settings
     # and "obfuscated", which strips out numeric and string literals.
     # Default is obfuscated.
     record_sql: obfuscated
-
-    # Obfuscate only occurrences of specific SQL fields names.
-    # This setting only applies if "record_sql" is set to "raw".
-    #obfuscated_sql_fields: credit_card, ssn, password
 
     # Set this to true to log SQL statements instead of recording them.
     # SQL is logged using the record_sql mode.
@@ -232,11 +239,6 @@ common: &default_settings
     # for instructions to add these manually to your pages.
     # Set this attribute to false to turn off this behavior.
     auto_instrument: true
-
-    # Set this attribute to false to prevent injection of the monitoring JavaScript.
-    # This must be enabled for both manual and auto instrumented pages to report.
-    # Default is true.
-    enabled: true
 
 
 # Application Environments
