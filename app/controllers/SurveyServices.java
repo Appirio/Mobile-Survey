@@ -13,7 +13,7 @@ import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
 import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
-import com.appirio.diageo.db.manager.api16.SurveyDBManager17;
+import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;

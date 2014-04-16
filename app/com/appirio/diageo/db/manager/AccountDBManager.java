@@ -1,5 +1,9 @@
 package com.appirio.diageo.db.manager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeSet;
@@ -7,7 +11,6 @@ import java.util.TreeSet;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import com.appirio.diageo.DistanceComparator;
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.geolocation.HaversineCalculator;
@@ -80,11 +83,19 @@ public class AccountDBManager extends DBManager {
 		}
 	}
 	
-	public ArrayNode findAccounts(Double latitude, Double longitude, Double radius) throws DiageoServicesException {
+	public JsonNode findAccounts(Double latitude, Double longitude, Double radius) throws DiageoServicesException {
 		double degrees = radius / 50;
 		
 		ArrayNode result = queryToJson("select latitude__c, longitude__c, tdlinx_outlet_city__c,  tdlinx_outlet_zip_code__c,  tdlinx_outlet_state__c,  tdlinx_outlet_addr__c,  billingstate,  billingcountry,  billingpostalcode, billingcity,  billingstreet,  sfid,  TDLinx_Outlet_Desc__c,  Name,  TDLinx_Outlet_State__c,  (|/( power(Latitude__c - " + latitude.toString() + ", 2) + power(Longitude__c - " + longitude.toString() + ", 2))) as distance from account where Latitude__c between " + Double.toString(latitude - degrees) + " and " + Double.toString(latitude + degrees) + " and Longitude__c between " + Double.toString(longitude - degrees) + " and " + Double.toString(longitude + degrees) + " order by distance limit " + Integer.toString(ACCOUNT_LOCATION_LIMIT) + ";");
 		
+		return processAccounts(result, latitude, longitude);
+	}
+	
+	public ObjectNode getAccount(String id) throws DiageoServicesException {
+		return queryToJsonObject("SELECT national_account_group__c, marketing_group__c, tdlinx_account_level_e__c, tdlinx_sector__c, tdlinx_trade_channel__c, tdlinx_sub_channel__c, tdlinx_outlet_state__c, tdlinx_outlet_zip_code__c FROM account WHERE sfid = '" + id + "';");
+	}
+	
+	protected ArrayNode processAccounts(ArrayNode result, Double latitude, Double longitude) {
 		for(JsonNode item : result) {
 			ObjectNode obj = (ObjectNode) item;
 			
@@ -99,7 +110,4 @@ public class AccountDBManager extends DBManager {
 		return result;
 	}
 	
-	public ObjectNode getAccount(String id) throws DiageoServicesException {
-		return queryToJsonObject("SELECT national_account_group__c, marketing_group__c, tdlinx_account_level_e__c, tdlinx_sector__c, tdlinx_trade_channel__c, tdlinx_sub_channel__c, tdlinx_outlet_state__c, tdlinx_outlet_zip_code__c FROM account WHERE sfid = '" + id + "';");
-	}
 }

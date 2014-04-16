@@ -145,8 +145,8 @@ GET		/1.7/product/:id				controllers.ProductServices.getProduct(id)
 GET		/1.7/products					controllers.ProductServices.getProducts()
 
 # Accounts
-GET		/1.7/account/:lat/:long/:radius			controllers.AccountServices.getAccounts(lat, long, radius)
-GET		/1.7/account/:lat/:long/:radius/:limit	controllers.AccountServices.getAccountsLimited(lat, long, radius, limit)
+GET		/1.7/account/:lat/:long/:radius			controllers.AccountServices.getAccounts17(lat, long, radius)
+GET		/1.7/account/:lat/:long/:radius/:limit	controllers.AccountServices.getAccountsLimited17(lat, long, radius, limit)
 
 # Surveys
 

@@ -1,15 +1,23 @@
 package com.appirio.diageo.db.manager;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,15 +35,55 @@ public class DBManager {
 	private static SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd");
 	private static SimpleDateFormat formatDetail =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	public static final boolean IS_TEST = System.getenv("IS_TEST") != null && System.getenv("IS_TEST").equalsIgnoreCase("true"); 
+	
+	private static Map<String, String> sqlMap = new HashMap<String, String>();
+	
 	public DBManager() throws DiageoServicesException {
 		try {
-			db = DB.getConnection();
+			if(IS_TEST) {
+				Class.forName("org.postgresql.Driver");
+				db = DriverManager.getConnection("jdbc:postgresql://ec2-54-204-40-140.compute-1.amazonaws.com:5432/dfqm1m48t59q0b?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory",
+						"zxzkfdezaucilp",
+						"sN8-fSJnyXtOuudA53r4pbIx8o");
+			} else {
+				db = DB.getConnection();
+			}
+			
 			mapper = new ObjectMapper();
 		} catch (Exception e) {
 			e.printStackTrace();
 			
 			throw new DiageoServicesException();
 		}
+	}
+	
+	private void loadSQLStatement(String name) throws DiageoServicesException {
+		try {
+			InputStream in = AccountDBManager.class.getClassLoader()
+			        .getResourceAsStream(name + ".sql");
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+			
+			String line;
+			StringBuilder result = new StringBuilder();
+			
+			while((line = reader.readLine()) != null) {
+				result.append(line);
+			}
+			
+			DBManager.sqlMap.put(name, result.toString()); 
+		} catch (IOException e) {
+			throw new DiageoServicesException(e);
+		}
+	}
+	
+	public String getSQLStatement(String name) throws DiageoServicesException {
+		if(DBManager.sqlMap.get(name) == null) {
+			loadSQLStatement(name);
+		}
+		
+		return DBManager.sqlMap.get(name);
 	}
 	
 	public void close() throws DiageoServicesException {
