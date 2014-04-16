@@ -92,9 +92,7 @@ public class SurveyDBManager extends DBManager {
 			"SURVEY_SUBMISSION__C",
 			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C",
 			"SCORE_ROLLUP__C",
-			"SCORE_ROLLUP_TOTAL_POSSIBLE__C",
-			"ISPARENT__C",
-			"PARENT_SURVEY__C"
+			"SCORE_ROLLUP_TOTAL_POSSIBLE__C"
 			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
