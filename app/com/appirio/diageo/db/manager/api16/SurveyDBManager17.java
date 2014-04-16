@@ -6,9 +6,9 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
-public class SurveyDBManager16 extends SurveyDBManager15 {
+public class SurveyDBManager17 extends SurveyDBManager15 {
 
-	public SurveyDBManager16() throws DiageoServicesException {
+	public SurveyDBManager17() throws DiageoServicesException {
 		super();
 	}
 

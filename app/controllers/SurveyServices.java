@@ -13,7 +13,7 @@ import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
 import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
-import com.appirio.diageo.db.manager.api16.SurveyDBManager16;
+import com.appirio.diageo.db.manager.api16.SurveyDBManager17;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -182,9 +182,9 @@ public class SurveyServices extends Controller {
 	}
 	
 	@With(SecureAction.class)
-	public static Result getSurveysByAccount16(String accountId) {
+	public static Result getSurveysByAccount17(String accountId) {
 		try {
-			SurveyDBManager16 manager = new SurveyDBManager16();
+			SurveyDBManager17 manager = new SurveyDBManager17();
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -341,9 +341,9 @@ public class SurveyServices extends Controller {
 	}
 	
 	@With(SecureAction.class)
-	public static Result getUniversalSurveys16() {
+	public static Result getUniversalSurveys17() {
 		try {
-			SurveyDBManager16 manager = new SurveyDBManager16();
+			SurveyDBManager17 manager = new SurveyDBManager17();
 			ArrayNode result = null;
 			
 			try {
