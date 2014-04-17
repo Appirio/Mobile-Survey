@@ -45,6 +45,8 @@ public class AccountDBManager17 extends AccountDBManager15 {
 		result.put("proximityAccounts", proximityAccounts);
 		result.put("myAccounts", myAccounts);
 		
+		System.out.println(result);
+		
 		return result;
 	}
 
@@ -59,6 +61,8 @@ public class AccountDBManager17 extends AccountDBManager15 {
 		result.put("proximityAccounts", proximityAccounts);
 		result.put("myAccounts", myAccounts);
 		
+		System.out.println(result);
+
 		return result;
 	}
 
