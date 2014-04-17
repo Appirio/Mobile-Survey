@@ -55,7 +55,11 @@ public class TestAccountServices {
         	
         	JsonNode result = mgr.findAccounts(10.0, 10.0, 200.0);
         	
-        	System.out.print(result);
+        	Assert.assertTrue(result.isArray());
+        	
+        	Assert.assertTrue(result.size() == 1);
+        	
+        	result = result.get(0);
         	
         	Assert.assertTrue(result.isObject());
         	Assert.assertTrue(result.has("proximityAccounts"));
@@ -77,7 +81,11 @@ public class TestAccountServices {
         	
         	JsonNode result = mgr.findAccounts(10.0, 10.0, 200.0);
         	
-        	System.out.print(result);
+        	Assert.assertTrue(result.isArray());
+        	
+        	Assert.assertTrue(result.size() == 1);
+        	
+        	result = result.get(0);
         	
         	Assert.assertTrue(result.isObject());
         	Assert.assertTrue(result.has("proximityAccounts"));

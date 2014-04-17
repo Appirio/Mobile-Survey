@@ -40,12 +40,13 @@ public class AccountDBManager17 extends AccountDBManager15 {
 		JsonNode proximityAccounts = (ArrayNode) super.findAccounts(latitude, longitude, radius);
 		JsonNode myAccounts = getMyAccounts(latitude, longitude);
 		
-		ObjectNode result = mapper.createObjectNode();
+		ObjectNode resultObject = mapper.createObjectNode();
 		
-		result.put("proximityAccounts", proximityAccounts);
-		result.put("myAccounts", myAccounts);
+		resultObject.put("proximityAccounts", proximityAccounts);
+		resultObject.put("myAccounts", myAccounts);
 		
-		System.out.println(result);
+		ArrayNode result = mapper.createArrayNode();
+		result.add(resultObject);
 		
 		return result;
 	}
@@ -56,13 +57,14 @@ public class AccountDBManager17 extends AccountDBManager15 {
 		JsonNode proximityAccounts = (ArrayNode) super.findAccounts(latitude, longitude, radius, limit);;
 		JsonNode myAccounts = getMyAccounts(latitude, longitude);
 		
-		ObjectNode result = mapper.createObjectNode();
+		ObjectNode resultObject = mapper.createObjectNode();
 		
-		result.put("proximityAccounts", proximityAccounts);
-		result.put("myAccounts", myAccounts);
+		resultObject.put("proximityAccounts", proximityAccounts);
+		resultObject.put("myAccounts", myAccounts);
 		
-		System.out.println(result);
-
+		ArrayNode result = mapper.createArrayNode();
+		result.add(resultObject);
+		
 		return result;
 	}
 
