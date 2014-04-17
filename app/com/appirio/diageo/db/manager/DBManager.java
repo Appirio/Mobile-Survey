@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URLClassLoader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -61,8 +62,8 @@ public class DBManager {
 	private void loadSQLStatement(String name) throws DiageoServicesException {
 		try {
 			InputStream in = AccountDBManager.class.getClassLoader()
-			        .getResourceAsStream("sql/" + name + ".sql");
-			
+			        .getResourceAsStream(name + ".sql");
+
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			
 			String line;
