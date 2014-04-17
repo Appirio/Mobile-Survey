@@ -61,7 +61,7 @@ public class DBManager {
 	private void loadSQLStatement(String name) throws DiageoServicesException {
 		try {
 			InputStream in = AccountDBManager.class.getClassLoader()
-			        .getResourceAsStream(name + ".sql");
+			        .getResourceAsStream("sql/" + name + ".sql");
 			
 			BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 			

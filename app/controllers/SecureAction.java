@@ -19,7 +19,7 @@ import com.appirio.diageo.db.manager.SecurityDBManager;
 public class SecureAction extends Simple {
 
 	private static final String SIGNATURE_KEY = "dFtYHa1875DgHbBHyraVs3sFdcaeDerDkLMno9";
-	private static final boolean SECURITY_ENABLED = false; 
+	private static final boolean SECURITY_ENABLED = !(System.getenv("SECURITY_DISABLED") != null && System.getenv("SECURITY_DISABLED").equalsIgnoreCase("true")); 
 
 	@Override
 	public Promise<SimpleResult> call(Context ctx) throws Throwable {
