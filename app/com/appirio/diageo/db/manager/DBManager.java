@@ -71,6 +71,7 @@ public class DBManager {
 			
 			while((line = reader.readLine()) != null) {
 				result.append(line);
+				result.append(" ");
 			}
 			
 			DBManager.sqlMap.put(name, result.toString()); 

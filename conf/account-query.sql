@@ -1,6 +1,4 @@
 SELECT 
-	latitude__c, 
-	longitude__c, 
 	tdlinx_outlet_city__c,  
 	tdlinx_outlet_zip_code__c,  
 	tdlinx_outlet_state__c,  
@@ -13,7 +11,13 @@ SELECT
 	sfid,  
 	TDLinx_Outlet_Desc__c,  
 	Name,  
-	TDLinx_Outlet_State__c  
+	TDLinx_Outlet_State__c,
+	tdlinx_sector__c,
+	tdlinx_trade_channel__c,
+	tdlinx_sub_channel__c,
+	national_account_group__c,
+	marketing_group__c,
+	tdlinx_account_level_e__c
 FROM 
 	account 
 WHERE 
