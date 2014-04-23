@@ -1,8 +1,13 @@
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Test;
 
 import com.appirio.diageo.db.DiageoServicesException;
+import com.appirio.diageo.db.manager.AccountDBManager;
+import com.appirio.diageo.db.manager.SurveyDBManager;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 
 public class TestSurveyServices {
@@ -17,7 +22,7 @@ public class TestSurveyServices {
 			
 			// delete data
 			testDBManager.clearDB();
-			testDBManager.populateTestAccounts();
+			testDBManager.populateTestSurveys();
 			
 			// create test data
 		} catch (DiageoServicesException e) {
@@ -37,4 +42,40 @@ public class TestSurveyServices {
 		}
 	}
 
+	@Test
+	public void testGetSurveysByAccountId() {
+		try {
+			SurveyDBManager manager = new SurveyDBManager();
+			
+			JsonNode result = manager.getSurveys("1");
+			
+			Assert.assertTrue(result.isArray());
+			Assert.assertEquals(1, result.size());
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail(ex.getMessage());
+		}
+	}
+
+	@Test
+	public void testGetSurveysByAccountObject() {
+		try {
+			SurveyDBManager manager = new SurveyDBManager();
+			AccountDBManager accountManager = new AccountDBManager();
+			
+			ObjectNode account = accountManager.getAccount("1");
+			
+			JsonNode result = manager.getSurveys(account);
+			
+			Assert.assertTrue(result.isArray());
+			Assert.assertEquals(1, result.size());
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail(ex.getMessage());
+		}
+	}
+	
+	// TODO: finish testing other survey manager methods
 }

@@ -44,7 +44,7 @@ public class TestAccountServices {
 	}
 	
     @Test
-    public void testGetAccounts17() {
+    public void testFindAccounts17() {
     	
     	try {
     		AccountDBManager17 mgr = new AccountDBManager17("1");
@@ -70,7 +70,7 @@ public class TestAccountServices {
     }
     
     @Test
-    public void testGetAccountsLimited17() {
+    public void testFindAccountsLimited17() {
     	
     	try {
     		AccountDBManager17 mgr = new AccountDBManager17("1");
@@ -96,7 +96,7 @@ public class TestAccountServices {
     }
     
     @Test
-    public void testGetAccounts15() {
+    public void testFindAccounts15() {
     	
     	try {
     		AccountDBManager15 mgr = new AccountDBManager15();
@@ -113,7 +113,7 @@ public class TestAccountServices {
     }    
 
     @Test
-    public void testGetAccounts14() {
+    public void testFindAccounts14() {
     	
     	try {
     		AccountDBManager14 mgr = new AccountDBManager14();

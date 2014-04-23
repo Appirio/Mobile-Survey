@@ -20,4 +20,8 @@ public class TestDBManager extends DBManager {
 		executeStatement(getSQLStatement("populate-test-accounts"));
 	}
 
+	public void populateTestSurveys() throws DiageoServicesException {
+		executeStatement(getSQLStatement("populate-test-surveys-and-questions"));
+	}
+
 }

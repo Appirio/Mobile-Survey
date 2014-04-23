@@ -205,33 +205,6 @@ public class SurveyDBManager extends DBManager {
 		return processSurveys(surveys, questions, false);
 	}
 	
-	public String md5Java() { 
-	    String digest = null; 
-	    String message = dateToPostgresString(new Date(System.currentTimeMillis()), true);
-	    
-	    try { 
-	        MessageDigest md = MessageDigest.getInstance("MD5"); 
-	        byte[] hash = md.digest(message.getBytes("UTF-8")); 
-	        
-	        //converting byte array to Hexadecimal String 
-	        StringBuilder sb = new StringBuilder(2*hash.length); 
-	        
-	        for(byte b : hash) { 
-	            sb.append(String.format("%02x", b&0xff)); 
-	        } 
-	        
-	        digest = sb.toString(); 
-	    } 
-	    catch (UnsupportedEncodingException ex) { 
-	        System.out.println("Error: "+ ex);
-	    } 
-	    catch (NoSuchAlgorithmException ex) { 
-	        System.out.println("Error: "+ ex);
-	    } 
-	    
-	    return digest; 
-	}
-	
 	public void createSurvey15(JsonNode survey, String externalId) throws DiageoServicesException {
 	    if(survey.isArray()) {
 	        System.out.println("Survey is array");
