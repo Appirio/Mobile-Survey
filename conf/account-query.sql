@@ -1,0 +1,20 @@
+SELECT 
+	latitude__c, 
+	longitude__c, 
+	tdlinx_outlet_city__c,  
+	tdlinx_outlet_zip_code__c,  
+	tdlinx_outlet_state__c,  
+	tdlinx_outlet_addr__c,  
+	billingstate,  
+	billingcountry,  
+	billingpostalcode, 
+	billingcity,  
+	billingstreet,  
+	sfid,  
+	TDLinx_Outlet_Desc__c,  
+	Name,  
+	TDLinx_Outlet_State__c  
+FROM 
+	account 
+WHERE 
+	sfid = ''{0}''; 

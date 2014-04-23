@@ -25,6 +25,6 @@ where
 			dd_my_accounts__c
 		WHERE
 			contact__c = ''{2}''
-	)
+	) and Active__c = ''Yes''
 order by 
 	distance 

@@ -3,16 +3,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import play.api.libs.iteratee.Enumerator;
-import play.mvc.Result;
-import play.mvc.Results.Status;
-import play.mvc.SimpleResult;
-
 import com.appirio.diageo.db.DiageoServicesException;
+import com.appirio.diageo.db.manager.AccountDBManager;
+import com.appirio.diageo.db.manager.api14.AccountDBManager14;
+import com.appirio.diageo.db.manager.api15.AccountDBManager15;
 import com.appirio.diageo.db.manager.api17.AccountDBManager17;
 import com.fasterxml.jackson.databind.JsonNode;
-
-import controllers.AccountServices;
 
 
 public class TestAccountServices {
@@ -65,8 +61,8 @@ public class TestAccountServices {
         	Assert.assertTrue(result.has("proximityAccounts"));
         	Assert.assertTrue(result.has("myAccounts"));
         	
-        	Assert.assertEquals(result.get("proximityAccounts").size(), 2);
-        	Assert.assertEquals(result.get("myAccounts").size(), 2);
+        	Assert.assertEquals(2, result.get("proximityAccounts").size());
+        	Assert.assertEquals(2, result.get("myAccounts").size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -91,12 +87,79 @@ public class TestAccountServices {
         	Assert.assertTrue(result.has("proximityAccounts"));
         	Assert.assertTrue(result.has("myAccounts"));
         	
-        	Assert.assertEquals(result.get("proximityAccounts").size(), 2);
-        	Assert.assertEquals(result.get("myAccounts").size(), 2);
+        	Assert.assertEquals(2, result.get("proximityAccounts").size());
+        	Assert.assertEquals(2, result.get("myAccounts").size());
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
     }
     
+    @Test
+    public void testGetAccounts15() {
+    	
+    	try {
+    		AccountDBManager15 mgr = new AccountDBManager15();
+        	
+        	JsonNode result = mgr.findAccounts(10.0, 10.0, 200.0, 100);
+        	
+        	Assert.assertTrue(result.isArray());
+        	
+        	Assert.assertEquals(2, result.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+    }    
+
+    @Test
+    public void testGetAccounts14() {
+    	
+    	try {
+    		AccountDBManager14 mgr = new AccountDBManager14();
+        	
+        	JsonNode result = mgr.findAccounts(10.0, 10.0, 200.0, 100);
+        	
+        	Assert.assertTrue(result.isArray());
+        	
+        	Assert.assertEquals(2, result.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+    }
+    
+    @Test
+    public void testFindAccounts() {
+    	
+    	try {
+    		AccountDBManager mgr = new AccountDBManager();
+        	
+        	JsonNode result = mgr.findAccounts(10.0, 10.0, 200.0);
+        	
+        	Assert.assertTrue(result.isArray());
+        	
+        	Assert.assertEquals(2, result.size());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+    }    
+    
+    @Test
+    public void testGetAccount() {
+    	
+    	try {
+    		AccountDBManager mgr = new AccountDBManager();
+        	
+        	JsonNode result = mgr.getAccount("1");
+        	
+        	Assert.assertTrue(result.isObject());
+        	
+        	Assert.assertEquals("My Favorite Liquor Store", result.get("name").asText());
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+    }    
 }
