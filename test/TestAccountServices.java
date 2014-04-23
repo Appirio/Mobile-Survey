@@ -37,6 +37,8 @@ public class TestAccountServices {
 		try {
 			// delete data
 			testDBManager.clearDB();
+			
+			testDBManager.close();
 		} catch (DiageoServicesException e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -63,6 +65,8 @@ public class TestAccountServices {
         	
         	Assert.assertEquals(2, result.get("proximityAccounts").size());
         	Assert.assertEquals(2, result.get("myAccounts").size());
+        	
+        	mgr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -89,6 +93,8 @@ public class TestAccountServices {
         	
         	Assert.assertEquals(2, result.get("proximityAccounts").size());
         	Assert.assertEquals(2, result.get("myAccounts").size());
+        	
+        	mgr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -106,6 +112,8 @@ public class TestAccountServices {
         	Assert.assertTrue(result.isArray());
         	
         	Assert.assertEquals(2, result.size());
+        	
+        	mgr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -123,6 +131,8 @@ public class TestAccountServices {
         	Assert.assertTrue(result.isArray());
         	
         	Assert.assertEquals(2, result.size());
+        	
+        	mgr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -140,6 +150,8 @@ public class TestAccountServices {
         	Assert.assertTrue(result.isArray());
         	
         	Assert.assertEquals(2, result.size());
+        	
+        	mgr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -157,6 +169,8 @@ public class TestAccountServices {
         	Assert.assertTrue(result.isObject());
         	
         	Assert.assertEquals("My Favorite Liquor Store", result.get("name").asText());
+        	
+        	mgr.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail();

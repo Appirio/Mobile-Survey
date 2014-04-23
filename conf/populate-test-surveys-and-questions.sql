@@ -74,6 +74,47 @@ INSERT INTO dms_survey__c (
 	'ON PREMISE',
 	'Product'
 );
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	universal_survey__c,
+	survey_type__c
+) VALUES (
+	'test survey 2',
+	'4',
+	'10',
+	't',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c,
+	isparent__c
+) VALUES (
+	'parent survey',
+	'5',
+	'10',
+	'Product',
+	't'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c,
+	isparent__c,
+	parent_survey__c
+) VALUES (
+	'child survey',
+	'6',
+	'10',
+	'Product',
+	'f',
+	'5'	 
+);
 INSERT INTO dms_question__c (
 	sfid, 
 	question_text__c, 
@@ -163,4 +204,34 @@ INSERT INTO dms_question__c (
 	'question 6',
 	'Count',
 	'3'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'7',
+	'the question text',
+	null,
+	'question 7',
+	'Count',
+	'4'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'8',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'6'
 );
