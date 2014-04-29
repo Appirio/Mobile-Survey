@@ -369,7 +369,6 @@ public class SurveyServices extends Controller {
 	public static Result saveSurvey() {
 	    try {
 			JsonNode body = request().body().asJson();
-			SurveyDBManager manager = new SurveyDBManager();
 			// Auto generate random externalId that will be unique
 			//String externalId = manager.md5Java();
 			String externalId = UUID.randomUUID().toString();
@@ -378,13 +377,14 @@ public class SurveyServices extends Controller {
 			
 			if(body != null) {
 			    
-			    String grade = null;
+				SurveyDBManager manager = new SurveyDBManager();
+
+				String grade = null;
 				String percentage = null;
 				String message = null;
 				
 				try {
 					manager.createSurvey15(body, externalId);
-				} finally {
 				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
 				    ArrayNode ss = manager.getSS(query);
 				    
@@ -395,7 +395,7 @@ public class SurveyServices extends Controller {
 				    if (grade.equalsIgnoreCase("null") && percentage.equalsIgnoreCase("null")) {
 				        return ok();
 				    }
-				    
+				} finally {
 				    manager.close();
 				}
 				
