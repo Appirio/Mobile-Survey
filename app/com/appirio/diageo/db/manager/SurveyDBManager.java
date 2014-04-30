@@ -599,8 +599,12 @@ public class SurveyDBManager extends DBManager {
 			} 
 		}
 		
-		// add parent surveys to result array node
+		// sort child surveys and add parent surveys to result array node
 		for(ObjectNode survey : parentSurveys.values()) {
+			if(survey.has("childSurveys")) {
+				survey.put("childSurveys", sortSurveysByName((ArrayNode)survey.get("childSurveys")));
+			}
+			
 			result.add(survey);
 		}
 		

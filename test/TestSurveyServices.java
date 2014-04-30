@@ -279,7 +279,8 @@ public class TestSurveyServices {
 					parentSurveyCount++;
 					Assert.assertTrue(survey.has("childSurveys"));
 					
-					Assert.assertEquals("child survey", ((ArrayNode)survey.get("childSurveys")).get(0).get("name").asText());
+					Assert.assertEquals("child survey 1", ((ArrayNode)survey.get("childSurveys")).get(0).get("name").asText());
+					Assert.assertEquals("child survey 2", ((ArrayNode)survey.get("childSurveys")).get(1).get("name").asText());
 				}
 			}
 			
@@ -312,7 +313,8 @@ public class TestSurveyServices {
 					parentSurveyCount++;
 					Assert.assertTrue(survey.has("childSurveys"));
 					
-					Assert.assertEquals("child survey", ((ArrayNode)survey.get("childSurveys")).get(0).get("name").asText());
+					Assert.assertEquals("child survey 1", ((ArrayNode)survey.get("childSurveys")).get(0).get("name").asText());
+					Assert.assertEquals("child survey 2", ((ArrayNode)survey.get("childSurveys")).get(1).get("name").asText());
 				}
 			}
 			

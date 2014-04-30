@@ -108,8 +108,23 @@ INSERT INTO dms_survey__c (
 	isparent__c,
 	parent_survey__c
 ) VALUES (
-	'child survey',
+	'child survey 2',
 	'6',
+	'10',
+	'Product',
+	'f',
+	'5'	 
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c,
+	isparent__c,
+	parent_survey__c
+) VALUES (
+	'child survey 1',
+	'7',
 	'10',
 	'Product',
 	'f',
