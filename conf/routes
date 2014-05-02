@@ -135,7 +135,7 @@ GET		/1.6/survey/universal				controllers.SurveyServices.getUniversalSurveys15()
 POST	/1.6/contact/authorize				controllers.ContactServices.authorizeUser()
 
 
-############# API Version 1.6 #############
+############# API Version 1.7 #############
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /1.7/assets/*file               controllers.Assets.at(path="/public", file)
