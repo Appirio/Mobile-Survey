@@ -1,0 +1,20 @@
+SELECT
+ 	score__c, 
+ 	ownerid, 
+ 	sfid, 
+ 	total_actual_score__c, 
+ 	lastmodifieddate,
+ 	dd_survey__c, 
+ 	external_id__c, 
+ 	total_possible_score__c, 
+ 	id,
+ 	grade__c, 
+	name, 
+ 	createdbyid, 
+ 	createddate, 
+ 	message__c, 
+ 	contact__c
+FROM
+	dd_survey_submission__c
+WHERE
+	external_id__c = ''{0}''

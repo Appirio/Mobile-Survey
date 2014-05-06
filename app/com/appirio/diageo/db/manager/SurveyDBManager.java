@@ -1,6 +1,7 @@
 package com.appirio.diageo.db.manager;
 
 import java.io.IOException;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -163,6 +164,12 @@ public class SurveyDBManager extends DBManager {
 		return result;
 	}
 	
+	public ArrayNode getSurveySubmissions(String externalId) throws DiageoServicesException {
+		String query = MessageFormat.format(getSQLStatement("survey-submission-by-external-id-query"), externalId);
+		
+		return queryToJson(query);
+	}
+	
 	public ArrayNode getSurveys(ObjectNode account) throws DiageoServicesException {
 		String zip = account.get("tdlinx_outlet_zip_code__c").asText();
 		
@@ -202,23 +209,34 @@ public class SurveyDBManager extends DBManager {
 		return processSurveys(surveys, questions, false);
 	}
 	
+	// TODO: Offline - The existing Heroku "saveResult()" service assumes that ONE logical survey is submitted.  The JSON data structure actually looks like multiple surveys if a 
+	//       PRODUCT survey includes multiple scans/products, but we ASSUME that a single submission to saveResult() is a single dd_survey_submission__c record with many related dms_survey_result 
+	//       records.  This logic will need to be updated if/when we can submit results from multiple surveys in the same saveResult() invocation.  
 	public void createSurvey15(JsonNode survey, String externalId) throws DiageoServicesException {
+		ObjectNode surveySubmission = null;
+		
 	    if(survey.isArray()) {
 	        System.out.println("Survey is array");
 			for(JsonNode node : survey) {
-				createSurvey(node, externalId);
+				surveySubmission = createSurvey(node, externalId, surveySubmission);
 			}
 		}
 		else if(survey.isObject()) {
 		    System.out.println("Survey is object");
-		    createSurvey(survey, externalId);
+		    surveySubmission = createSurvey(survey, externalId, surveySubmission);
 		}
 		else {
 			throw new DiageoServicesException("Json object or array expected");
 		}
+	    
+	    if(surveySubmission != null) {
+		    // Inserting to Survey Submission DB
+			System.out.println("Inserting into Survey Submission Table");
+		    insert((ObjectNode)surveySubmission, "dd_survey_submission__c");
+	    }
 	}
 	
-	public void createSurvey(JsonNode survey, String externalId) throws DiageoServicesException {
+	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
 		int scorePotential = 0;
@@ -359,14 +377,18 @@ public class SurveyDBManager extends DBManager {
 			}
 			
 			// Survey Submissions DB
-			ObjectNode newSurveySubmission = mapper.createObjectNode();
-    	    newSurveySubmission.put("external_id__c", externalId);
-    	    newSurveySubmission.put("contact__c", survey.get("contact__c").asText());
-    	    newSurveySubmission.put("dd_survey__c", survey.get("sfid").asText());
+			if(surveySubmission == null) {
+				surveySubmission = mapper.createObjectNode();
+	    	    surveySubmission.put("external_id__c", externalId);
+	    	    surveySubmission.put("contact__c", survey.get("contact__c").asText());
+	    	    surveySubmission.put("dd_survey__c", survey.get("sfid").asText());
+	    	    surveySubmission.put("Total_Possible_Score__c", 0);
+	    	    surveySubmission.put("Total_Actual_Score__c", 0);
+			}
     	    
     	    // Survey has Grading
 			if (scoreTot >= 0 && gradingScaleID != null && !gradingScaleID.isEmpty()) {
-				scorePotential = Integer.parseInt(survey.get("total_possible_score__c").asText());
+				scorePotential = surveySubmission.get("Total_Possible_Score__c").asInt() + Integer.parseInt(survey.get("total_possible_score__c").asText());
 			    // Percentage is based on Total Score/Potential Score off of what has been submitted
 			    System.out.println("Score Total: "+ Integer.toString(scoreTot) + ", Score Potential: "+ Integer.toString(scorePotential));
 			    int percentage = (scoreTot * 100) / scorePotential;
@@ -376,10 +398,10 @@ public class SurveyDBManager extends DBManager {
 			    ArrayNode grades = queryToJson(query);
 			    ObjectNode grade = (ObjectNode) grades.get(0);
 			    
-			    newSurveySubmission.put("grade__c", grade.get("grade__c").asText());
-			    newSurveySubmission.put("score__c", Integer.toString(percentage));
-				newSurveySubmission.put("Total_Actual_Score__c", scoreTot);
-				newSurveySubmission.put("Total_Possible_Score__c", scorePotential);
+			    surveySubmission.put("grade__c", grade.get("grade__c").asText());
+			    surveySubmission.put("score__c", Integer.toString(percentage));
+				surveySubmission.put("Total_Actual_Score__c", scoreTot + surveySubmission.get("Total_Actual_Score__c").asInt());
+				surveySubmission.put("Total_Possible_Score__c", scorePotential + surveySubmission.get("Total_Possible_Score__c").asInt());
 			    
 			    String message = null;
 			    try {
@@ -389,18 +411,16 @@ public class SurveyDBManager extends DBManager {
 			        System.out.println("Message is null: "+ e);
 			    }
 			    
-			    newSurveySubmission.put("message__c", message);
+			    surveySubmission.put("message__c", message);
 			}
 			
-			// Inserting to Survey Submission DB
-			System.out.println("Inserting into Survey Submission Table");
-    	    insert((ObjectNode)newSurveySubmission, "dd_survey_submission__c");
-    	    
     	    // Insert Survey Results
     	    insertSurveyResults(surveyResultsList);
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
+		
+		return surveySubmission;
 	} 
 
     public void insertSurveyResults(List<ObjectNode> surveyResults) throws DiageoServicesException {
