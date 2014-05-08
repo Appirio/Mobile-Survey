@@ -390,6 +390,7 @@ public class SurveyDBManager extends DBManager {
 			if (scoreTot >= 0 && gradingScaleID != null && !gradingScaleID.isEmpty()) {
 				scorePotential = surveySubmission.get("Total_Possible_Score__c").asInt() + Integer.parseInt(survey.get("total_possible_score__c").asText());
 			    // Percentage is based on Total Score/Potential Score off of what has been submitted
+				scoreTot += surveySubmission.get("Total_Actual_Score__c").asInt();
 			    System.out.println("Score Total: "+ Integer.toString(scoreTot) + ", Score Potential: "+ Integer.toString(scorePotential));
 			    int percentage = (scoreTot * 100) / scorePotential;
 			    // Lookup Grade
@@ -400,8 +401,8 @@ public class SurveyDBManager extends DBManager {
 			    
 			    surveySubmission.put("grade__c", grade.get("grade__c").asText());
 			    surveySubmission.put("score__c", Integer.toString(percentage));
-				surveySubmission.put("Total_Actual_Score__c", scoreTot + surveySubmission.get("Total_Actual_Score__c").asInt());
-				surveySubmission.put("Total_Possible_Score__c", scorePotential + surveySubmission.get("Total_Possible_Score__c").asInt());
+				surveySubmission.put("Total_Actual_Score__c", scoreTot);
+				surveySubmission.put("Total_Possible_Score__c", scorePotential);
 			    
 			    String message = null;
 			    try {
