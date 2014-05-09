@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/diageo-services -Dhttp.port=${PORT} -DapplyEvolutions.default=true  -J-javaagent:/app/newrelic/newrelic.jar -J-Dnewrelic.config.file=/app/newrelic/newrelic.yml ${JAVA_OPTS}  
+web: target/universal/stage/bin/diageo-services -Dhttp.port=${PORT} -DapplyEvolutions.default=true  -J-javaagent:/app/newrelic/newrelic.jar -J-Dnewrelic.config.file=/app/newrelic/newrelic.yml ${java_opts}  
