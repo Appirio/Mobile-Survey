@@ -15,7 +15,7 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 	@Override
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
 		ArrayNode surveys = queryToJson(getSQLStatement("survey-query-17"));
-		ArrayNode questions = queryToJson("select include_none_of_the_above__c, conditional_answer__c, next_question__c, label_for_add_l_comments__c, answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c order by dms_survey__c");
+		ArrayNode questions = queryToJson(getSQLStatement("question-query-17"));
 
 		return processSurveys(surveys, questions, true, true);
 	}
@@ -33,7 +33,7 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 										"from " +
 											"dms_survey__c " +
 										"where " +
-										"universal_survey__c " +
+										"(universal_survey__c " +
 											"or ((sector__c is null or sector__c = 'ALL' or sector__c = '' or sector__c like '%" + account.get("tdlinx_sector__c").asText() + "%')" +
 												"and (trade_channel__c is null or trade_channel__c = 'ALL' or trade_channel__c = '' or trade_channel__c like '%" + account.get("tdlinx_trade_channel__c").asText() + "%')" +
 												"and (sub_channel__c is null or sub_channel__c = 'ALL' or sub_channel__c = '' or sub_channel__c like '%" + account.get("tdlinx_sub_channel__c").asText() + "%')" +
@@ -42,7 +42,7 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 												"and (national_account__c is null or national_account__c = ''or national_account__c = '" + account.get("national_account_group__c").asText() + "')" +
 												"and (marketing_group__c is null or marketing_group__c = ''or marketing_group__c = '" + account.get("marketing_group__c").asText() + "')" +
 												"and (tdlinx_acct_level_e__c is null or tdlinx_acct_level_e__c = '' or tdlinx_acct_level_e__c = '" + account.get("tdlinx_account_level_e__c").asText() + "')" +
-														")" +
+														")) AND (Active__c is null or Active__c = true)" +
 										"order by sfid"); 
 		
 		StringBuilder surveyIds = new StringBuilder();

@@ -101,8 +101,8 @@ public class SurveyDBManager extends DBManager {
 		ArrayNode result = mapper.createArrayNode();
 		
 		// queryToJson("select * from dms_survey__c where sfid in (select dms_survey__c from dms_survey_to_account__c where account__c = '" + accountId + "')");
-		ArrayNode surveys = queryToJson("select name, sfid, grading_scale__c, total_possible_score__c from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product' and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null order by sfid");
-		ArrayNode questions = queryToJson("select sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (select sfid from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product' and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null ) order by dms_survey__c");
+		ArrayNode surveys = queryToJson("select name, sfid, grading_scale__c, total_possible_score__c from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product' and (Active__c is null or Active__c = true) and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null order by sfid");
+		ArrayNode questions = queryToJson("select sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (select sfid from dms_survey__c where universal_survey__c and survey_type__c != 'Non Product' and (Active__c is null or Active__c = true) and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null ) order by dms_survey__c");
 		
 		int questionCt = 0; 
 
@@ -181,7 +181,7 @@ public class SurveyDBManager extends DBManager {
 										"from " +
 											"dms_survey__c " +
 										"where " +
-											"survey_type__c != 'Non Product' and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null and (universal_survey__c " +
+											"survey_type__c != 'Non Product' and (Active__c is null or Active__c = true) and  (IsParent__c is null or IsParent__c = false) and parent_survey__c is null and (universal_survey__c " +
 											"or ((sector__c is null or sector__c = 'ALL' or sector__c = '' or sector__c like '%" + account.get("tdlinx_sector__c").asText() + "%')" +
 												"and (trade_channel__c is null or trade_channel__c = 'ALL' or trade_channel__c = '' or trade_channel__c like '%" + account.get("tdlinx_trade_channel__c").asText() + "%')" +
 												"and (sub_channel__c is null or sub_channel__c = 'ALL' or sub_channel__c = '' or sub_channel__c like '%" + account.get("tdlinx_sub_channel__c").asText() + "%')" +
@@ -438,8 +438,8 @@ public class SurveyDBManager extends DBManager {
 	public ArrayNode getSurveys() throws DiageoServicesException {
 		ArrayNode result = mapper.createArrayNode();
 		
-		ArrayNode surveys = queryToJson("select name, sfid, survey_type__c, grading_scale__c from dms_survey__c where survey_type__c != 'Non Product' and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null order by sfid");
-		ArrayNode questions = queryToJson("select sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where question_type__c != 'Select' and dms_survey__c in (select sfid from dms_survey__c where survey_type__c != 'Non Product' and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null) order by dms_survey__c");
+		ArrayNode surveys = queryToJson("select name, sfid, survey_type__c, grading_scale__c from dms_survey__c where survey_type__c != 'Non Product' and (Active__c is null or Active__c = true) and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null order by sfid");
+		ArrayNode questions = queryToJson("select sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where question_type__c != 'Select' and dms_survey__c in (select sfid from dms_survey__c where survey_type__c != 'Non Product' and (Active__c is null or Active__c = true) and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null) order by dms_survey__c");
 		
 		int questionCt = 0; 
 

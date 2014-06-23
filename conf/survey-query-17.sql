@@ -10,5 +10,7 @@ SELECT
 	total_possible_score__c 
 FROM 
 	dms_survey__c 
+WHERE
+    (Active__c is null or Active__c = true)
 ORDER BY
 	sfid

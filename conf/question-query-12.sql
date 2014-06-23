@@ -1,0 +1,1 @@
+select answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (select sfid from dms_survey__c where (Active__c is null or Active__c = true) and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null) order by dms_survey__c

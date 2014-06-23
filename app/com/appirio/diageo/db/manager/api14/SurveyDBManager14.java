@@ -13,8 +13,8 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 	}
 
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
-		ArrayNode surveys = queryToJson("select name, sfid, survey_type__c, first_question__c, grading_scale__c, total_possible_score__c from dms_survey__c where (IsParent__c is null or IsParent__c = false) and parent_survey__c is null order by sfid");
-		ArrayNode questions = queryToJson("select include_none_of_the_above__c, conditional_answer__c, next_question__c, label_for_add_l_comments__c, answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (select sfid from dms_survey__c where (IsParent__c is null or IsParent__c = false) and parent_survey__c is null) order by dms_survey__c");
+		ArrayNode surveys = queryToJson(getSQLStatement("survey-universal-query-14"));
+		ArrayNode questions = queryToJson(getSQLStatement("question-universal-query-14"));
 
 		return processSurveys(surveys, questions, false);
 	}
@@ -30,7 +30,7 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 										"from " +
 											"dms_survey__c " +
 										"where " +
-											"(IsParent__c is null or IsParent__c = false) and parent_survey__c is null and (universal_survey__c " +
+											"(Active__c is null or Active__c = true) and (IsParent__c is null or IsParent__c = false) and parent_survey__c is null and (universal_survey__c " +
 											"or ((sector__c is null or sector__c = 'ALL' or sector__c = '' or sector__c like '%" + account.get("tdlinx_sector__c").asText() + "%')" +
 												"and (trade_channel__c is null or trade_channel__c = 'ALL' or trade_channel__c = '' or trade_channel__c like '%" + account.get("tdlinx_trade_channel__c").asText() + "%')" +
 												"and (sub_channel__c is null or sub_channel__c = 'ALL' or sub_channel__c = '' or sub_channel__c like '%" + account.get("tdlinx_sub_channel__c").asText() + "%')" +

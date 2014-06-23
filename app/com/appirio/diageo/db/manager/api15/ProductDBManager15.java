@@ -11,6 +11,6 @@ public class ProductDBManager15 extends ProductDBManager {
 	}
 
 	public JsonNode getProducts() throws DiageoServicesException {
-		return queryToJson("select Nielsen_Brand__c, Nielsen_Brand_Variant__c, sfid, Nielsen_Size__c, upc_code__c from dms_nielson_product__c;");
+		return queryToJson(getSQLStatement("product-query-15"));
 	}
 }
