@@ -1,9 +1,4 @@
 SELECT 
-    include_none_of_the_above__c,
-    conditional_answer__c,
-    next_question__c,
-    label_for_add_l_comments__c,
-    answer_options__c,
     sfid,
     question_text__c,
     parent_question__c,
@@ -11,17 +6,20 @@ SELECT
     sfid,
     question_type__c,
     dms_survey__c
-FROM
+FROM 
     dms_question__c
-WHERE
+WHERE 
     dms_survey__c in 
         (SELECT
             sfid 
-         FROM 
+         FROM
             dms_survey__c 
          WHERE 
-            (Active__c is null or Active__c = true) 
+            universal_survey__c 
+            and survey_type__c != ''Non Product'' 
+            and (Active__c is null or Active__c = true) 
             and (IsParent__c is null or IsParent__c = false) 
-            and parent_survey__c is null
-        )
-ORDER BY dms_survey__c
+            and parent_survey__c is null 
+        ) 
+ORDER BY
+    dms_survey__c
