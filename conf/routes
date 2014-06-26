@@ -180,3 +180,7 @@ GET		/2.0/survey/universal				controllers.SurveyServices.getUniversalSurveys17()
 # Contact
 
 POST	/2.0/contact/authorize				controllers.ContactServices.authorizeUser()
+
+# Goals
+
+GET		/2.0/goal/:startDate/:endDate		controllers.GoalServices.getGoals(startDate, endDate)
