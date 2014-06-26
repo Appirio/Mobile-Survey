@@ -375,8 +375,8 @@ public class TestSurveyServices {
 			Assert.assertEquals("seriously?", submission.get("grade__c").asText());
 			Assert.assertEquals("003K000000hWUvGIAW", submission.get("contact__c").asText());
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 	}
 	
@@ -406,8 +406,8 @@ public class TestSurveyServices {
 			Assert.assertEquals("003K000000hWUvGIAW", submission.get("contact__c").asText());
 			*/
 		} catch (Exception e) {
-			Assert.fail(e.getMessage());
 			e.printStackTrace();
+			Assert.fail(e.getMessage());
 		}
 	}
 	

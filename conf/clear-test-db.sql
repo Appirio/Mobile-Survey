@@ -5,3 +5,5 @@ delete from dms_survey__c;
 delete from _trigger_log;
 delete from dd_survey_submission__c;
 delete from dms_survey_result__c;
+delete from contact;
+delete from dd_assigned_goal__c;

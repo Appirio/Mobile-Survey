@@ -1,3 +1,8 @@
+INSERT INTO contact (
+	sfid
+) VALUES (
+	'1'
+);
 INSERT INTO	account (
 	latitude__c, 
 	longitude__c, 
@@ -38,13 +43,15 @@ INSERT INTO dms_survey__c (
 	sfid, 
 	total_possible_score__c,
 	universal_survey__c,
-	survey_type__c
+	survey_type__c,
+	active__c
 ) VALUES (
 	'test survey 1',
 	'1',
 	'10',
 	't',
-	'Product'
+	'Product',
+	true
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -136,13 +143,34 @@ INSERT INTO dms_question__c (
 	parent_question__c, 
 	name, 
 	question_type__c, 
-	dms_survey__c
+	dms_survey__c,
+	max_goal_score__c,
+	goal_type__c,
+	goal_end_date__c,
+	goal_name__c,
+	is_goal__c,
+	goal_start_date__c,
+	max_score__c
 ) VALUES (
 	'1',
 	'the question text',
 	null,
 	'question 1',
 	'Count',
+	'1',
+	10,
+	'type',
+	'2014-06-25',
+	'the goal name',
+	true,
+	'2014-05-25',
+	200
+);
+INSERT INTO dd_assigned_goal__c (
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'1',
 	'1'
 );
 INSERT INTO dms_question__c (
@@ -249,4 +277,21 @@ INSERT INTO dms_question__c (
 	'question 8',
 	'Count',
 	'6'
+);
+
+
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	universal_survey__c,
+	survey_type__c,
+	active__c
+) VALUES (
+	'test survey inactive',
+	'10',
+	'10',
+	't',
+	'Product',
+	false
 );
