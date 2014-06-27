@@ -14,6 +14,7 @@ import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
+import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -216,6 +217,40 @@ public class SurveyServices extends Controller {
 	}
 
 	@With(SecureAction.class)
+	public static Result getSurveysByAccount20(String accountId) {
+		try {
+			SurveyDBManager20 manager = new SurveyDBManager20();
+			AccountDBManager accountManager = new AccountDBManager();
+			Result result = null;
+			
+			try {
+				ObjectNode account = accountManager.getAccount(accountId);
+				
+				if(account != null) {
+					ArrayNode surveys = manager.getSurveys(account);
+					result = ok(surveys);
+				} else {
+					result = badRequest(ControllerUtils.messageToJson("Invalid account ID"));
+				}
+				
+			} finally {
+				manager.close();
+				accountManager.close();
+			}
+			
+			return result;
+    	} catch (DiageoServicesException e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}
+	}
+	
+	@With(SecureAction.class)
 	public static Result getUniversalSurveys() {
 		try {
 			SurveyDBManager manager = new SurveyDBManager();
@@ -344,6 +379,31 @@ public class SurveyServices extends Controller {
 	public static Result getUniversalSurveys17() {
 		try {
 			SurveyDBManager17 manager = new SurveyDBManager17();
+			ArrayNode result = null;
+			
+			try {
+				result = manager.getUniversalSurveys();
+			} finally {
+				manager.close();
+				
+			}
+			
+			return ok(result);
+    	} catch (DiageoServicesException e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}
+	}
+
+	@With(SecureAction.class)
+	public static Result getUniversalSurveys20() {
+		try {
+			SurveyDBManager20 manager = new SurveyDBManager20();
 			ArrayNode result = null;
 			
 			try {

@@ -14,6 +14,7 @@ import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
+import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -411,5 +412,70 @@ public class TestSurveyServices {
 		}
 	}
 	
+	@Test
+	public void testGetSurveysByAccountObject20() {
+		try {
+			SurveyDBManager20 manager = new SurveyDBManager20();
+			AccountDBManager accountManager = new AccountDBManager();
+			
+			ObjectNode account = accountManager.getAccount("1");
+			
+			JsonNode result = manager.getSurveys(account);
+			
+			Assert.assertTrue(result.isArray());
+			Assert.assertEquals(5, result.size());
+			Assert.assertTrue(isAlphabeticalOrder(result));
+			
+			int parentSurveyCount = 0;
+			for(JsonNode survey : result) {
+				if(survey.get("name").asText().equals("parent survey")) {
+					parentSurveyCount++;
+					Assert.assertTrue(survey.has("childSurveys"));
+					
+					Assert.assertEquals("child survey 1", ((ArrayNode)survey.get("childSurveys")).get(0).get("name").asText());
+					Assert.assertEquals("child survey 2", ((ArrayNode)survey.get("childSurveys")).get(1).get("name").asText());
+				}
+			}
+			
+			Assert.assertEquals(1, parentSurveyCount);
+
+			manager.close();
+			accountManager.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail(ex.getMessage());
+		}
+	}
+	
+	@Test
+	public void testGetUniversalSurveys20() {
+		try {
+			SurveyDBManager20 manager = new SurveyDBManager20();
+			
+			JsonNode result = manager.getUniversalSurveys();
+			
+			Assert.assertTrue(result.isArray());
+			Assert.assertEquals(5, result.size());
+			Assert.assertTrue(isAlphabeticalOrder(result));
+			
+			int parentSurveyCount = 0;
+			for(JsonNode survey : result) {
+				if(survey.get("name").asText().equals("parent survey")) {
+					parentSurveyCount++;
+					Assert.assertTrue(survey.has("childSurveys"));
+					
+					Assert.assertEquals("child survey 1", ((ArrayNode)survey.get("childSurveys")).get(0).get("name").asText());
+					Assert.assertEquals("child survey 2", ((ArrayNode)survey.get("childSurveys")).get(1).get("name").asText());
+				}
+			}
+			
+			Assert.assertEquals(1, parentSurveyCount);
+
+			manager.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail(ex.getMessage());
+		}
+	}
 	
 }

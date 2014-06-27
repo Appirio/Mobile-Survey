@@ -5,7 +5,8 @@ SELECT
     name,
     sfid,
     question_type__c,
-    dms_survey__c
+    dms_survey__c,
+    Include_Photos__c
 FROM 
     dms_question__c
 WHERE 
@@ -16,7 +17,7 @@ WHERE
             dms_survey__c 
          WHERE 
             universal_survey__c 
-            and survey_type__c != ''Non Product'' 
+            and survey_type__c != 'Non Product' 
             and (Active__c is null or Active__c = true) 
             and (IsParent__c is null or IsParent__c = false) 
             and parent_survey__c is null 
