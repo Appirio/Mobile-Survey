@@ -444,7 +444,7 @@ public class SurveyServices extends Controller {
 				String message = null;
 				
 				try {
-					manager.createSurvey15(body, externalId);
+					manager.createSurvey(body, externalId);
 				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
 				    ArrayNode ss = manager.getSS(query);
 				    
@@ -474,4 +474,52 @@ public class SurveyServices extends Controller {
     	}
 	}
 	
+	@With(SecureAction.class)
+	public static Result saveSurvey20() {
+	    try {
+			JsonNode body = request().body().asJson();
+			// Auto generate random externalId that will be unique
+			//String externalId = manager.md5Java();
+			String externalId = UUID.randomUUID().toString();
+			
+			System.out.println(body);
+			
+			if(body != null) {
+			    
+				SurveyDBManager manager = new SurveyDBManager();
+
+				String grade = null;
+				String percentage = null;
+				String message = null;
+				
+				try {
+					manager.createSurvey(body, externalId);
+				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
+				    ArrayNode ss = manager.getSS(query);
+				    
+				    grade = ss.get(0).get("grade__c").asText();
+				    percentage = ss.get(0).get("score__c").asText();
+				    message = ss.get(0).get("message__c").asText();
+				    
+				    if (grade.equalsIgnoreCase("null") && percentage.equalsIgnoreCase("null")) {
+				        return ok();
+				    }
+				} finally {
+				    manager.close();
+				}
+				
+				return ok(ControllerUtils.gradeScoreToJson(grade, percentage, message));
+			} else {
+				return badRequest(ControllerUtils.messageToJson("json body expected"));
+			}
+    	} catch (DiageoServicesException e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(e.getMessage());
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}
+	}	
 }

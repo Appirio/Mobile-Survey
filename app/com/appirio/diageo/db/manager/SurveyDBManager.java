@@ -90,7 +90,8 @@ public class SurveyDBManager extends DBManager {
 			"SURVEY_SUBMISSION__C",
 			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C",
 			"SCORE_ROLLUP__C",
-			"SCORE_ROLLUP_TOTAL_POSSIBLE__C"
+			"SCORE_ROLLUP_TOTAL_POSSIBLE__C",
+			"GOAL_ACHIEVEMENT__C"
 			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
@@ -170,6 +171,12 @@ public class SurveyDBManager extends DBManager {
 		return queryToJson(query);
 	}
 	
+	public ArrayNode getSurveyResults(String submissionExternalId) throws DiageoServicesException {
+		String query = MessageFormat.format(getSQLStatement("survey-results-by-external-id-query"), submissionExternalId);
+		
+		return queryToJson(query);
+	}
+
 	public ArrayNode getSurveys(ObjectNode account) throws DiageoServicesException {
 		String zip = account.get("tdlinx_outlet_zip_code__c").asText();
 		
@@ -212,7 +219,7 @@ public class SurveyDBManager extends DBManager {
 	// TODO: Offline - The existing Heroku "saveResult()" service assumes that ONE logical survey is submitted.  The JSON data structure actually looks like multiple surveys if a 
 	//       PRODUCT survey includes multiple scans/products, but we ASSUME that a single submission to saveResult() is a single dd_survey_submission__c record with many related dms_survey_result 
 	//       records.  This logic will need to be updated if/when we can submit results from multiple surveys in the same saveResult() invocation.  
-	public void createSurvey15(JsonNode survey, String externalId) throws DiageoServicesException {
+	public void createSurvey(JsonNode survey, String externalId) throws DiageoServicesException {
 		ObjectNode surveySubmission = null;
 		
 	    if(survey.isArray()) {
@@ -239,6 +246,7 @@ public class SurveyDBManager extends DBManager {
 	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
+		int goalScore = 0;
 		int scorePotential = 0;
 		String gradingScaleID = null;
 			
@@ -308,6 +316,7 @@ public class SurveyDBManager extends DBManager {
 				    int scoredSurveyResult = 0;
 				    for(int i=0;i < answerOptions.size();i++) {
 				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
+				        int answerGoalScore = Integer.parseInt(answerOptions.get(i).goalScore);
 				        // Potential Score:
 					    // 1. Add up all scores for one that has Multi-Select
 					    if (newSurvey.get("question_type__c").asText().equals("Multi-Select")) {
@@ -318,6 +327,7 @@ public class SurveyDBManager extends DBManager {
         						    // Total score: Total only scores where value matches
         						    scoreTot += answerOptionScore;
         						    scoredSurveyResult += answerOptionScore;
+        						    goalScore += answerGoalScore;
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
@@ -338,6 +348,13 @@ public class SurveyDBManager extends DBManager {
 					        if (answerOptionScore > tempHigh) {
 					            tempHigh = answerOptionScore;
 					        }
+					        
+					        if(answerValue != null && 
+					        		answerOptions != null && 
+					        		answerOptions.size() > i && 
+					        		answerValue.equals(answerOptions.get(i).value)) {
+					        	goalScore += answerGoalScore;
+					        }
 					    }
 			        }
 			        
@@ -346,6 +363,7 @@ public class SurveyDBManager extends DBManager {
 			        }
 				    
 				    newSurvey.put("score__c", Integer.toString(scoredSurveyResult));
+				    newSurvey.put("goal_achievement__c", Integer.toString(goalScore));
 				}
 				
 				newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
