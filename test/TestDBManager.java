@@ -24,4 +24,7 @@ public class TestDBManager extends DBManager {
 		executeStatement(getSQLStatement("populate-test-surveys-and-questions"));
 	}
 
+	public void populateGoalDbManagerTestData() throws DiageoServicesException {
+		executeStatement(getSQLStatement("populate-goal-dbmanager-test-data"));
+	}
 }
