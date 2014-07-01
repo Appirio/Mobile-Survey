@@ -14,6 +14,8 @@ import java.util.StringTokenizer;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api15.AnswerOptions;
+import com.appirio.diageo.db.manager.goals.GoalCalculator;
+import com.appirio.diageo.db.manager.goals.GoalCalculatorFactory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -636,5 +638,48 @@ public class SurveyDBManager extends DBManager {
 		
 		// return the result
 		return result;
+	}
+	
+	public void calculateGoals(String surveySubmissionExternalId) throws DiageoServicesException {
+		// Fetch all goals that need to be processed for the identified survey submission
+		ArrayNode goalsForProcessing = queryToJson(MessageFormat.format(getSQLStatement("query-goals-for-processing"), surveySubmissionExternalId));
+	
+		// If there are goals to process
+		if(goalsForProcessing.size() > 0) {
+			// Group the survey results together by question
+			ObjectNode currentObject = (ObjectNode) goalsForProcessing.get(0);
+			ArrayNode currentGroup = mapper.createArrayNode();
+			ArrayNode groupedQuestions = mapper.createArrayNode();
+
+			currentGroup.add(currentObject);
+			groupedQuestions.add(currentGroup);
+			
+			for(int i = 1; i < goalsForProcessing.size(); i++) {
+				ObjectNode nextObject = (ObjectNode) goalsForProcessing.get(i);
+				
+				if(nextObject.get("question__c").asText().equals(currentObject.get("question__c").asText())) {
+					currentGroup.add(nextObject);
+				} else {
+					currentGroup = mapper.createArrayNode();
+					groupedQuestions.add(currentGroup);
+					currentGroup.add(nextObject);
+				}
+			}
+			
+			// For each question instantiate the appropriate goal calculator depending on the question type
+			for(int i = 0; i < groupedQuestions.size(); i++) {
+				ArrayNode questionGroup = (ArrayNode) groupedQuestions.get(i);
+				
+				if(questionGroup.size() > 0) {
+					ObjectNode firstQuestion = (ObjectNode) questionGroup.get(0);
+					
+					GoalCalculator calc = GoalCalculatorFactory.getInstance().getGoalCalculator(firstQuestion);
+					
+					int goalAchievement = calc.calculateGoalAchievement(questionGroup);
+					
+					executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), goalAchievement, firstQuestion.get("assigned_goal__c").asText()));
+				}
+			}
+		}
 	}
 }

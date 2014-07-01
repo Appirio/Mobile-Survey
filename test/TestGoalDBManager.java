@@ -43,40 +43,6 @@ public class TestGoalDBManager {
 	}
 
 	@Test
-	public void testGetGoals() {
-    	try {
-    		GoalDBManager mgr = new GoalDBManager();
-        	
-    		/*Calendar c = Calendar.getInstance();
-    		
-    		c.set(2014, 5, 1);*/
-    		
-        	JsonNode result = mgr.getGoals("1", "2014-06-01", "2014-06-01");
-        	
-        	Assert.assertTrue(result.isArray());
-
-        	Assert.assertTrue(result.size() == 1);
-        	
-        	/*
-        	result = result.get(0);
-        	
-        	Assert.assertTrue(result.isObject());
-        	Assert.assertTrue(result.has("proximityAccounts"));
-        	Assert.assertTrue(result.has("myAccounts"));
-        	
-        	Assert.assertEquals(2, result.get("proximityAccounts").size());
-        	Assert.assertEquals(2, result.get("myAccounts").size());
-        	*/
-        	
-        	
-        	mgr.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-			Assert.fail();
-		}		
-	}
-	
-	@Test
 	public void testGetGoalAchievements() {
 		try {
 			GoalDBManager manager = new GoalDBManager();
