@@ -15,10 +15,6 @@ public class GoalDBManager extends DBManager {
 		super();
 	}
 
-	public ArrayNode getGoals(String contactId, String startDate, String endDate) throws DiageoServicesException {
-		return this.queryToJson(MessageFormat.format(getSQLStatement("goals-query-20"), contactId, startDate, endDate));
-	}
-	
 	/**
 	 * 
 	 **/

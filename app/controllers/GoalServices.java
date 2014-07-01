@@ -12,36 +12,10 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 public class GoalServices extends Controller {
 
 	@With(SecureAction.class)
-    public static Result getGoals(String startDate, String endDate) {
-    	try {
-    		GoalDBManager manager = new GoalDBManager();
-    		JsonNode result = null;
-    		
-    		try {
-    			String contactId = request().getHeader("uid");
-    			result = manager.getGoals(contactId, startDate, endDate);
-    		} finally {
-    			manager.close();
-    		}
-    		
-    		return ok(result);
-    		
-    	} catch (DiageoServicesException e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
-    	}
-    }
-	
-	@With(SecureAction.class)
 	public static Result getGoalAchievements() {
 		
 		JsonNode body = request().body().asJson();
-		String contactId = request().getHeader("uId");
+		String contactId = request().getHeader("uid");
 		
 		if(body != null && body.has("startdate") && body.has("enddate") && body.has("includeDetails")) {
 			

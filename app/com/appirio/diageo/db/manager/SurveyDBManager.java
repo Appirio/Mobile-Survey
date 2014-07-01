@@ -246,7 +246,6 @@ public class SurveyDBManager extends DBManager {
 	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
-		int goalScore = 0;
 		int scorePotential = 0;
 		String gradingScaleID = null;
 			
@@ -327,7 +326,6 @@ public class SurveyDBManager extends DBManager {
         						    // Total score: Total only scores where value matches
         						    scoreTot += answerOptionScore;
         						    scoredSurveyResult += answerOptionScore;
-        						    goalScore += answerGoalScore;
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
@@ -348,13 +346,6 @@ public class SurveyDBManager extends DBManager {
 					        if (answerOptionScore > tempHigh) {
 					            tempHigh = answerOptionScore;
 					        }
-					        
-					        if(answerValue != null && 
-					        		answerOptions != null && 
-					        		answerOptions.size() > i && 
-					        		answerValue.equals(answerOptions.get(i).value)) {
-					        	goalScore += answerGoalScore;
-					        }
 					    }
 			        }
 			        
@@ -363,7 +354,6 @@ public class SurveyDBManager extends DBManager {
 			        }
 				    
 				    newSurvey.put("score__c", Integer.toString(scoredSurveyResult));
-				    newSurvey.put("goal_achievement__c", Integer.toString(goalScore));
 				}
 				
 				newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
