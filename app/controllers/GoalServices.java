@@ -12,23 +12,19 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 public class GoalServices extends Controller {
 
 	@With(SecureAction.class)
-	public static Result getGoalAchievements() {
+	public static Result getGoalAchievements(String startDate, String endDate, String includeDetails) {
 		
 		JsonNode body = request().body().asJson();
 		String contactId = request().getHeader("uid");
 		
 		if(body != null && body.has("startdate") && body.has("enddate") && body.has("includeDetails")) {
 			
-			String startDate = body.get("startdate").asText();
-			String endDate = body.get("enddate").asText();
-			Boolean includeDetails = body.get("includeDetails").asBoolean(false);	
-
 			try {
 				GoalDBManager manager = new GoalDBManager();
 				ArrayNode result = null;
 				
 				try {
-					result = manager.getGoalAchievements(contactId, startDate, endDate, includeDetails);
+					result = manager.getGoalAchievements(contactId, startDate, endDate, Boolean.parseBoolean(includeDetails));
 				} finally {
 					manager.close();
 				}
