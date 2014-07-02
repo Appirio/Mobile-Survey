@@ -410,7 +410,9 @@ public class TestSurveyServices {
 	@Test
 	public void testGetSurveysByAccountObject20() {
 		try {
-			SurveyDBManager20 manager = new SurveyDBManager20();
+			// TODO populate goal related information on data creation scripts and put a valid
+			// contact id here, also need to check for goal related fields to be returned
+			SurveyDBManager20 manager = new SurveyDBManager20("CONTACTID");
 			AccountDBManager accountManager = new AccountDBManager();
 			
 			ObjectNode account = accountManager.getAccount("1");
@@ -445,9 +447,13 @@ public class TestSurveyServices {
 	@Test
 	public void testGetUniversalSurveys20() {
 		try {
-			SurveyDBManager20 manager = new SurveyDBManager20();
+			// TODO populate goal related information on data creation scripts and put a valid
+			// contact id here, also need to check for goal related fields to be returned
+			SurveyDBManager20 manager = new SurveyDBManager20("CONTACTID");
 			
 			JsonNode result = manager.getUniversalSurveys();
+			
+			System.out.println(result);
 			
 			Assert.assertTrue(result.isArray());
 			Assert.assertEquals(5, result.size());

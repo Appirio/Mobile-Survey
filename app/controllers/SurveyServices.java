@@ -219,7 +219,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount20(String accountId) {
 		try {
-			SurveyDBManager20 manager = new SurveyDBManager20();
+			SurveyDBManager20 manager = new SurveyDBManager20(request().getHeader("uid"));
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -403,7 +403,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys20() {
 		try {
-			SurveyDBManager20 manager = new SurveyDBManager20();
+			SurveyDBManager20 manager = new SurveyDBManager20(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {

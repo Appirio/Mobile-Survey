@@ -10,10 +10,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SurveyDBManager20 extends SurveyDBManager17 {
 
+	private String contactId;
+	
+	public SurveyDBManager20(String contactId) throws DiageoServicesException {
+		super();
+		
+		this.contactId = contactId;
+	}
+	
 	@Override
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
 		ArrayNode surveys = queryToJson(getSQLStatement("survey-query-17"));
-		ArrayNode questions = queryToJson(getSQLStatement("question-query-20"));
+		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-20"), contactId));
 
 		return processSurveys(surveys, questions, true, true);
 	}
@@ -42,14 +50,14 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 			separator = ",";
 		}
 		
-		String questionQuery = MessageFormat.format(getSQLStatement("question-query-with-filter-20"), surveyIds.toString());
+		String questionQuery = MessageFormat.format(getSQLStatement("question-query-with-filter-20"), surveyIds.toString(), contactId);
 		
 		ArrayNode questions = queryToJson(questionQuery);
 		
 		return processSurveys(surveys, questions, true, true);	
 	}
 	
-	public SurveyDBManager20() throws DiageoServicesException {
+	private SurveyDBManager20() throws DiageoServicesException {
 		super();
 	}
 
