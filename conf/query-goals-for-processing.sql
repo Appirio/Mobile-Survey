@@ -1,9 +1,12 @@
 SELECT
+	r.sfid sfid
 	r.answer_text__c answer_text__c,
 	q.answer_options__c answer_options__c,
 	q.question_type__c question_type__c,
 	q.sfid question__c,
-	ag.sfid assigned_goal__c
+	ag.sfid assigned_goal__c,
+	r.account__c account__c,
+	r.goal_achievement__c goal_achievement__c
 FROM
 	dms_survey_result__c r
 	INNER JOIN dms_question__c     q  ON r.question__c = q.sfid

@@ -1,4 +1,3 @@
-import java.io.IOException;
 import java.util.UUID;
 
 import org.junit.After;
@@ -15,7 +14,6 @@ import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
 import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -505,5 +503,21 @@ public class TestSurveyServices {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
 		}
-	}	
+	}
+	
+	@Test
+	public void testCreateSurveyWithPhoto20() {
+	        try {
+	                String externalId = UUID.randomUUID().toString();
+	                JsonNode body = new ObjectMapper().readTree("[{\"isparent__c\":\"f\",\"parent_survey__c\":null,\"enable_edit_on_review_screen__c\":\"t\",\"name\":\"June Goals\",\"sfid\":\"a2iJ0000000NyZ6IAK\",\"survey_type__c\":\"Non Product\",\"first_question__c\":\"a2gJ0000000aQxTIAU\",\"grading_scale__c\":\"a30J00000008MoeIAE\",\"total_possible_score__c\":\"105\",\"questions\":[{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":\"a2gJ0000000aQxYIAU\",\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":true},{\"text\":\"No\",\"checked\":false}],\"sfid\":\"a2gJ0000000aQxTIAU\",\"question_text__c\":\"Is Captain Morgan on Display?\",\"parent_question__c\":null,\"name\":\"Q-1513\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000NyZ6IAK\",\"include_photos__c\":\"t\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"50\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"Yes\",\"answer_value__c\":null,\"photos\":[{\"localPath\":\"file:///var/mobile/Applications/08ABDA44-52E8-443B-A826-61946F80F04C/tmp/cdv_photo_001.jpg\",\"uploading\":false,\"externalPath\":\"https://diageo-images.s3.amazonaws.com/1404228400789.jpg\"},{\"localPath\":\"file:///var/mobile/Applications/08ABDA44-52E8-443B-A826-61946F80F04C/tmp/cdv_photo_002.jpg\",\"uploading\":false,\"externalPath\":\"https://diageo-images.s3.amazonaws.com/1404228400798.jpg\"},{\"localPath\":\"file:///var/mobile/Applications/08ABDA44-52E8-443B-A826-61946F80F04C/tmp/cdv_photo_003.jpg\",\"uploading\":false,\"externalPath\":\"https://diageo-images.s3.amazonaws.com/1404228400800.jpg\"}],\"uploadingPhotos\":false},{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":null,\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":true},{\"text\":\"No\",\"checked\":false}],\"sfid\":\"a2gJ0000000aQxYIAU\",\"question_text__c\":\"Is Smirnoff in Distribution?\",\"parent_question__c\":null,\"name\":\"Q-1514\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000NyZ6IAK\",\"include_photos__c\":\"f\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"55\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"Yes\",\"answer_value__c\":null,\"photos\":[]}],\"count\":2,\"display\":\"t\",\"location\":{\"tdlinx_outlet_city__c\":\"Flat Lick\",\"tdlinx_outlet_zip_code__c\":\"40935\",\"tdlinx_outlet_state__c\":\"KY\",\"tdlinx_outlet_addr__c\":\"6825 S Us Highway 25e\",\"billingstate\":\"KY\",\"billingcountry\":null,\"billingpostalcode\":\"40935\",\"billingcity\":\"Flat Lick\",\"billingstreet\":\"6825 S Us Highway 25e\",\"sfid\":\"001J000001NIHSLIA5\",\"tdlinx_outlet_desc__c\":\"Dollar General\",\"name\":\"Dollar General 13888\",\"distance\":19.494443384960014},\"contact__c\":\"003J000000xCmGVIA0\",\"account__c\":\"001J000001NIHSLIA5\",\"survey_id\":0}]");
+	                
+	                SurveyDBManager manager = new SurveyDBManager();
+	                manager.createSurvey(body, externalId);
+	                
+	        } catch (Exception e) {
+	                e.printStackTrace();
+	                Assert.fail(e.getMessage());
+	        }
+	}
+	
 }

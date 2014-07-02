@@ -25,6 +25,8 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+import java.util.UUID;
+
 public class SurveyDBManager extends DBManager {
     
     private static List<String> surveySubmissionFields = Arrays.asList("CONNECTIONRECEIVEDID",
@@ -93,7 +95,8 @@ public class SurveyDBManager extends DBManager {
 			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C",
 			"SCORE_ROLLUP__C",
 			"SCORE_ROLLUP_TOTAL_POSSIBLE__C",
-			"GOAL_ACHIEVEMENT__C"
+			"GOAL_ACHIEVEMENT__C",
+			"RESULT_EXT_ID__C"
 			);
 	
 	public SurveyDBManager() throws DiageoServicesException {
@@ -254,7 +257,8 @@ public class SurveyDBManager extends DBManager {
 		if(survey.has("questions")) {
 			ArrayNode questions = (ArrayNode) survey.get("questions");
 			List<ObjectNode> surveyResultsList = new ArrayList<ObjectNode>();
-			
+			List<ObjectNode> photosList = new ArrayList<ObjectNode>();
+
 			// Check if grading_scale exist
 			if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
 			    // Get grading scale ID
@@ -381,6 +385,20 @@ public class SurveyDBManager extends DBManager {
 				// Survey Submission sfid
 				newSurvey.put("DD_Survey_Submission__c__External_Id__c", externalId);
 				
+				// creating photo records 
+				if(question.has("photos")){
+					String photoExternalId = UUID.randomUUID().toString();
+					newSurvey.put("Result_Ext_ID__c", photoExternalId);
+
+					ArrayNode questionPhotos= (ArrayNode) question.get("photos");
+					for (JsonNode jsonNode : questionPhotos) {
+						ObjectNode newPhoto = mapper.createObjectNode();
+						newPhoto.put("DMS_Survey_Result__c__Result_Ext_ID__c", photoExternalId);
+						newPhoto.put("Photo_URL__c", jsonNode.get("externalPath"));
+						photosList.add(newPhoto);
+					}
+				}
+				
 				clearTransientFields(newSurvey, surveyResultFields);
 				// Add it to an arrayList
 				surveyResultsList.add((ObjectNode)newSurvey);
@@ -439,6 +457,12 @@ public class SurveyDBManager extends DBManager {
         for (ObjectNode surveyR : surveyResults) {
             insert(surveyR, "dms_survey_result__c");
         }
+    }
+    
+    public void insertSurveyResultsPhotos(List<ObjectNode> photosList) throws DiageoServicesException {
+    	for (ObjectNode photoR : photosList) {
+    		insert(photoR, "DD_Survey_Result_Photos__c");
+    	}
     }
     
     public ArrayNode getSS(String query) throws DiageoServicesException {

@@ -12,4 +12,17 @@ public interface GoalCalculator {
 	 * @return
 	 */
 	public int calculateGoalAchievement(ArrayNode results);
+	
+	/**
+	 * 
+	*/
+	class SurveyResults{
+		String sfId;
+		String questionId;
+		String accountId;
+		String question; 
+		String answer; 
+		Integer goalAchievement;
+	}
+	
 }
