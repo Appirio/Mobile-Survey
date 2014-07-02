@@ -17,6 +17,9 @@ public class GoalCalculatorFactory {
 	public static GoalCalculatorFactory getInstance() {
 		if(instance == null) {
 			instance = new GoalCalculatorFactory();
+			
+			instance.singleSelectGoalCalculator = new SingleSelectGoalCalculator();
+			instance.multiSelectGoalCalculator = new MultiSelectGoalCalculator();
 		}
 		
 		return instance;
@@ -33,10 +36,10 @@ public class GoalCalculatorFactory {
 	public GoalCalculator getGoalCalculator(ObjectNode question) throws DiageoServicesException {
 		if(question.get("question_type__c").asText().equalsIgnoreCase("Multi-Select")) {
 			return multiSelectGoalCalculator;
-		} else if (question.get("question_type__c").asText().equalsIgnoreCase("Multi-Select")) {
+		} else if (question.get("question_type__c").asText().equalsIgnoreCase("Select")) {
 			return singleSelectGoalCalculator;
 		}
 		
-		throw new DiageoServicesException("Question type not supported for goal calculation");
+		return null;
 	}
 }

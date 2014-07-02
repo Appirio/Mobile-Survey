@@ -1,61 +1,51 @@
 package com.appirio.diageo.db.manager.goals;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
+import java.util.HashSet;
+import java.util.Set;
 
+import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class SingleSelectGoalCalculator implements GoalCalculator {
 
+	private static ObjectMapper mapper = new ObjectMapper();
+	
 	@Override
-	public int calculateGoalAchievement(ArrayNode questionGroup) {
-		// TODO Ajay - the results object will contain all survey results of a particular 
-		//             question of type single select. Below please write the algorithm to 
-		// 			   calculate the goal for single selects as defined in the google doc	
-		
-		// TODO NOT TESTED
-		HashMap<String,ArrayList<SurveyResults>> data = new HashMap<String, ArrayList<SurveyResults>>();
-		int overallAchievement = 0;
+	public int calculateGoalAchievement(ArrayNode questionGroup) throws DiageoServicesException {
+		try {
+			Set<String> accountIdsWithScore = new HashSet<String>();
 
-		// Creating List of results grouped by account 
-		for (JsonNode questionNode : questionGroup) {
-		        
-		        String key = questionNode.get("account__c").asText();
-		        
-		        SurveyResults resultObj = new SurveyResults();
-		        resultObj.sfId = questionNode.get("sfid").asText() ;
-		        resultObj.accountId = questionNode.get("account__c").asText() ;
-		        resultObj.answer = questionNode.get("answer_text__c").asText();
-		        resultObj.questionId =  questionNode.get("question__c").asText();
-		        resultObj.goalAchievement = questionNode.get("goal_achievement__c").asInt(0);
-		        
-		        ArrayList<SurveyResults> accountResults = data.get(key);
-		        if(accountResults == null){
-		                accountResults = new ArrayList<SurveyResults>();
-		        }
-		        accountResults.add(resultObj);
-		        data.put(key, accountResults);
+			if(questionGroup.size() > 0) {
+				JsonNode firstQuestion = questionGroup.get(0);
+				
+				// For the answers received, we need to count the score once for each account, for that we use a set
+				Set<String> positiveAnswers = new HashSet<String>();
+
+				// need to parse the answer options to determine which answers are goals
+				ArrayNode answerOptions = (ArrayNode) mapper.readTree(firstQuestion.get("answer_options__c").asText());
+				for(JsonNode option : answerOptions) {
+					if(option.has("goalScore") && option.get("goalScore").asInt() > 0) {
+						positiveAnswers.add(option.get("value").asText());
+					}
+				}
+				
+				for(JsonNode question : questionGroup) {
+					// if the answer value matches a value with score add account to the resulting list
+					if(positiveAnswers.contains(question.get("answer_text__c").asText())) {
+						accountIdsWithScore.add(question.get("account__c").asText());
+					}
+				}
+			}
+
+			// Return how for how many accounts the question was answered positively
+			return accountIdsWithScore.size();
+		} catch (Exception e) {
+			e.printStackTrace();
+			
+			throw new DiageoServicesException(e);
 		}
-		
-		// calculating overall achievement for all account 
-		for (Entry<String, ArrayList<SurveyResults>> entry : data.entrySet()) {
-		        String key = entry.getKey();
-		        
-		        // calculate account achievement for single account.
-		        ArrayList<SurveyResults> resultList = entry.getValue();
-		        Integer accountAchievement = 0;
-		        for (SurveyResults resultObj : resultList) {
-		                
-		                if(accountAchievement < resultObj.goalAchievement){
-		                        accountAchievement = resultObj.goalAchievement;
-		                }
-		        }
-		        
-		        overallAchievement += accountAchievement; 
-		}
-		return overallAchievement;
 	}
 
 }

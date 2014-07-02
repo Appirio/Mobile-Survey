@@ -690,7 +690,11 @@ public class SurveyDBManager extends DBManager {
 					groupedQuestions.add(currentGroup);
 					currentGroup.add(nextObject);
 				}
+				
+				currentObject = nextObject;
 			}
+			
+			System.out.println(groupedQuestions);
 			
 			// For each question instantiate the appropriate goal calculator depending on the question type
 			for(int i = 0; i < groupedQuestions.size(); i++) {
@@ -701,9 +705,9 @@ public class SurveyDBManager extends DBManager {
 					
 					GoalCalculator calc = GoalCalculatorFactory.getInstance().getGoalCalculator(firstQuestion);
 					
-					int goalAchievement = calc.calculateGoalAchievement(questionGroup);
-					
-					executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), goalAchievement, firstQuestion.get("assigned_goal__c").asText()));
+					if(calc != null) {
+						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), calc.calculateGoalAchievement(questionGroup), firstQuestion.get("assigned_goal__c").asText()));
+					}
 				}
 			}
 		}

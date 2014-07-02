@@ -1,5 +1,6 @@
 package com.appirio.diageo.db.manager.goals;
 
+import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public interface GoalCalculator {
@@ -10,8 +11,9 @@ public interface GoalCalculator {
 	 * 
 	 * @param results
 	 * @return
+	 * @throws DiageoServicesException 
 	 */
-	public int calculateGoalAchievement(ArrayNode results);
+	public int calculateGoalAchievement(ArrayNode results) throws DiageoServicesException;
 	
 	/**
 	 * 
