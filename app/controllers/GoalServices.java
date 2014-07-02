@@ -14,22 +14,19 @@ public class GoalServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getGoalAchievements(String startDate, String endDate, String includeDetails) {
 		
-		JsonNode body = request().body().asJson();
 		String contactId = request().getHeader("uid");
 		
-		if(body != null && body.has("startdate") && body.has("enddate") && body.has("includeDetails")) {
-			
-			try {
-				GoalDBManager manager = new GoalDBManager();
-				ArrayNode result = null;
+		try {
+			GoalDBManager manager = new GoalDBManager();
+			ArrayNode result = null;
 				
-				try {
-					result = manager.getGoalAchievements(contactId, startDate, endDate, Boolean.parseBoolean(includeDetails));
-				} finally {
-					manager.close();
-				}
+			try {
+				result = manager.getGoalAchievements(contactId, startDate, endDate, Boolean.parseBoolean(includeDetails));
+			} finally {
+				manager.close();
+			}
 
-				return ok(result);
+			return ok(result);
 	    	} catch (DiageoServicesException e) {
 	    		e.printStackTrace();
 	    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -38,9 +35,6 @@ public class GoalServices extends Controller {
 	    		
 	    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
 	    	}
-		}else {
-			return badRequest(ControllerUtils.messageToJson("json body expected, \'startdate\', \'enddate\' and \'includeDetails\' fields are required to fetch goals."));
-		}
 		
 	}
 }
