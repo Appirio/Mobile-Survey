@@ -52,4 +52,8 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		
 		return processSurveys(surveys, questions, true, true);	
 	}
+	
+	public ArrayNode getPhotosByExternalId(String surveySubmissionExternalId) throws DiageoServicesException {
+		return queryToJson(MessageFormat.format(getSQLStatement("query-survey-photos-by-ext-id"), surveySubmissionExternalId));
+	}
 }

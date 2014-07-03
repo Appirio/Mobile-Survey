@@ -450,6 +450,8 @@ public class SurveyDBManager extends DBManager {
     	    // Insert Survey Results
     	    insertSurveyResults(surveyResultsList);
     	    
+    	    insertSurveyResultsPhotos(photosList);
+    	    
     	    calculateGoals(externalId);
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
