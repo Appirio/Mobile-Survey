@@ -719,7 +719,7 @@ public class SurveyDBManager extends DBManager {
 
 					// Update survey results
 					for(Integer id : surveyResultAchievemetns.keySet()) {
-						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement-on-survey-result"), surveyResultAchievemetns.get(id), id));
+						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement-on-survey-result"), String.valueOf(surveyResultAchievemetns.get(id)), String.valueOf(id)));
 					}
 				}
 			}

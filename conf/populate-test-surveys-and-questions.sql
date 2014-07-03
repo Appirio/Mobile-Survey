@@ -220,6 +220,15 @@ INSERT INTO dd_assigned_goal__c (
 	'1',
 	'a2gJ0000000aRrAIAU'
 );
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'7',
+	'1',
+	'a2gJ0000000aRjpIAE'
+);
 INSERT INTO dms_question__c (
 	sfid, 
 	question_text__c, 
