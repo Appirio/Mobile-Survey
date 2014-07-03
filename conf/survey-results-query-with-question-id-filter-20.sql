@@ -50,4 +50,6 @@ FROM
     DMS_Survey_Result__c 
 WHERE 
     Contact__c = ''{0}''
-    AND Question__c in ({1});
+    AND Question__c in ({1})
+ORDER BY
+	Question__c;
