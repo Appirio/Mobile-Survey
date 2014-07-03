@@ -10,8 +10,7 @@ SELECT
 FROM
 	dms_survey_result__c r
 	INNER JOIN dms_question__c     q  ON r.question__c = q.sfid
-	INNER JOIN contact         	   c  ON c.sfid = r.contact__c
-	INNER JOIN dd_assigned_goal__c ag ON ag.contact__c = c.sfid AND ag.dd_survey_question__c = q.sfid
+	INNER JOIN dd_assigned_goal__c ag ON ag.contact__c = ''{1}'' AND ag.dd_survey_question__c = q.sfid
 WHERE
 	(q.is_goal__c is not null AND q.is_goal__c = true) AND
     q.sfid IN (SELECT question__c from dms_survey_result__c where dd_survey_submission__c__external_id__c = ''{0}'')

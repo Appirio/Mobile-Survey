@@ -10,8 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SurveyDBManager15 extends SurveyDBManager14 {
 
-	public SurveyDBManager15() throws DiageoServicesException {
-		super();
+	public SurveyDBManager15(String contactId) throws DiageoServicesException {
+		super(contactId);
 	}
 
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {

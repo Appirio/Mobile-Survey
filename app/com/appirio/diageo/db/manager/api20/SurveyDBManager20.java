@@ -10,12 +10,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SurveyDBManager20 extends SurveyDBManager17 {
 
-	private String contactId;
-	
 	public SurveyDBManager20(String contactId) throws DiageoServicesException {
-		super();
-		
-		this.contactId = contactId;
+		super(contactId);
 	}
 	
 	@Override
@@ -56,10 +52,4 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		
 		return processSurveys(surveys, questions, true, true);	
 	}
-	
-	private SurveyDBManager20() throws DiageoServicesException {
-		super();
-	}
-
-	
 }

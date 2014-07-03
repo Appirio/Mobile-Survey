@@ -24,7 +24,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount(String accountId) {
 		try {
-			SurveyDBManager manager = new SurveyDBManager();
+			SurveyDBManager manager = new SurveyDBManager(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -49,7 +49,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount12(String accountId) {
 		try {
-			SurveyDBManager12 manager = new SurveyDBManager12();
+			SurveyDBManager12 manager = new SurveyDBManager12(request().getHeader("uid"));
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -83,7 +83,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount13(String accountId) {
 		try {
-			SurveyDBManager13 manager = new SurveyDBManager13();
+			SurveyDBManager13 manager = new SurveyDBManager13(request().getHeader("uid"));
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -117,7 +117,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount14(String accountId) {
 		try {
-			SurveyDBManager13 manager = new SurveyDBManager14();
+			SurveyDBManager13 manager = new SurveyDBManager14(request().getHeader("uid"));
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -151,7 +151,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount15(String accountId) {
 		try {
-			SurveyDBManager13 manager = new SurveyDBManager15();
+			SurveyDBManager13 manager = new SurveyDBManager15(request().getHeader("uid"));
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -185,7 +185,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getSurveysByAccount17(String accountId) {
 		try {
-			SurveyDBManager17 manager = new SurveyDBManager17();
+			SurveyDBManager17 manager = new SurveyDBManager17(request().getHeader("uid"));
 			AccountDBManager accountManager = new AccountDBManager();
 			Result result = null;
 			
@@ -253,7 +253,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys() {
 		try {
-			SurveyDBManager manager = new SurveyDBManager();
+			SurveyDBManager manager = new SurveyDBManager(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -278,7 +278,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys12() {
 		try {
-			SurveyDBManager12 manager = new SurveyDBManager12();
+			SurveyDBManager12 manager = new SurveyDBManager12(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -303,7 +303,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys13() {
 		try {
-			SurveyDBManager13 manager = new SurveyDBManager13();
+			SurveyDBManager13 manager = new SurveyDBManager13(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -328,7 +328,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys14() {
 		try {
-			SurveyDBManager14 manager = new SurveyDBManager14();
+			SurveyDBManager14 manager = new SurveyDBManager14(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -353,7 +353,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys15() {
 		try {
-			SurveyDBManager15 manager = new SurveyDBManager15();
+			SurveyDBManager15 manager = new SurveyDBManager15(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -378,7 +378,7 @@ public class SurveyServices extends Controller {
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys17() {
 		try {
-			SurveyDBManager17 manager = new SurveyDBManager17();
+			SurveyDBManager17 manager = new SurveyDBManager17(request().getHeader("uid"));
 			ArrayNode result = null;
 			
 			try {
@@ -437,7 +437,7 @@ public class SurveyServices extends Controller {
 			
 			if(body != null) {
 			    
-				SurveyDBManager manager = new SurveyDBManager();
+				SurveyDBManager manager = new SurveyDBManager(request().getHeader("uid"));
 
 				String grade = null;
 				String percentage = null;
@@ -486,7 +486,7 @@ public class SurveyServices extends Controller {
 			
 			if(body != null) {
 			    
-				SurveyDBManager manager = new SurveyDBManager();
+				SurveyDBManager manager = new SurveyDBManager(request().getHeader("uid"));
 
 				String grade = null;
 				String percentage = null;

@@ -11,8 +11,8 @@ import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
 
 public class SurveyDBManager13 extends SurveyDBManager12 {
 
-	public SurveyDBManager13() throws DiageoServicesException {
-		super();
+	public SurveyDBManager13(String contactId) throws DiageoServicesException {
+		super(contactId);
 	}
 
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {

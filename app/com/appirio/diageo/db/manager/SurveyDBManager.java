@@ -29,6 +29,8 @@ import java.util.UUID;
 
 public class SurveyDBManager extends DBManager {
     
+	protected String contactId;
+	
     private static List<String> surveySubmissionFields = Arrays.asList("CONNECTIONRECEIVEDID",
             "CONNECTIONSENTID",
             "CONTACT__C",
@@ -99,8 +101,10 @@ public class SurveyDBManager extends DBManager {
 			"RESULT_EXT_ID__C"
 			);
 	
-	public SurveyDBManager() throws DiageoServicesException {
+	public SurveyDBManager(String contactId) throws DiageoServicesException {
 		super();
+		
+		this.contactId = contactId;
 	}
 	
 	public ArrayNode getSurveys(String accountId) throws DiageoServicesException {
@@ -668,7 +672,7 @@ public class SurveyDBManager extends DBManager {
 	
 	public void calculateGoals(String surveySubmissionExternalId) throws DiageoServicesException {
 		// Fetch all goals that need to be processed for the identified survey submission
-		ArrayNode goalsForProcessing = queryToJson(MessageFormat.format(getSQLStatement("query-goals-for-processing"), surveySubmissionExternalId));
+		ArrayNode goalsForProcessing = queryToJson(MessageFormat.format(getSQLStatement("query-goals-for-processing"), surveySubmissionExternalId, contactId));
 	
 		// If there are goals to process
 		if(goalsForProcessing.size() > 0) {

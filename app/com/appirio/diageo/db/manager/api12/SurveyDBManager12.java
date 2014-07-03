@@ -7,8 +7,8 @@ import com.appirio.diageo.db.manager.SurveyDBManager;
 
 public class SurveyDBManager12 extends SurveyDBManager {
 
-	public SurveyDBManager12() throws DiageoServicesException {
-		super();
+	public SurveyDBManager12(String contactId) throws DiageoServicesException {
+		super(contactId);
 	}
 	
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
