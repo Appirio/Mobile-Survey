@@ -22,3 +22,5 @@ WHERE
 	        Start_Date__c <= ''{2}'' and End_Date__c >= ''{2}''
 	    ) 
     )
+ORDER BY 
+	ag.DD_Survey_Question__c;
