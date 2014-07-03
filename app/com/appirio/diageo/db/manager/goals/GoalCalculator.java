@@ -1,5 +1,7 @@
 package com.appirio.diageo.db.manager.goals;
 
+import java.util.Map;
+
 import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
@@ -10,10 +12,14 @@ public interface GoalCalculator {
 	 *  answer_text__c representing the answer provided by the user
 	 * 
 	 * @param results
+	 * @param surveyResultAchievement survey result level achievement to update
 	 * @return
-	 * @throws DiageoServicesException 
+	 * @throws DiageoServicesException
+	 *  
 	 */
-	public int calculateGoalAchievement(ArrayNode results) throws DiageoServicesException;
+	int calculateGoalAchievement(ArrayNode questionGroup,
+			Map<Integer, Integer> surveyResultAchievement)
+			throws DiageoServicesException;
 	
 	/**
 	 * 

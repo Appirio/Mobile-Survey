@@ -707,12 +707,19 @@ public class SurveyDBManager extends DBManager {
 				ArrayNode questionGroup = (ArrayNode) groupedQuestions.get(i);
 				
 				if(questionGroup.size() > 0) {
+					Map<Integer, Integer> surveyResultAchievemetns = new HashMap<Integer, Integer>();
+					
 					ObjectNode firstQuestion = (ObjectNode) questionGroup.get(0);
 					
 					GoalCalculator calc = GoalCalculatorFactory.getInstance().getGoalCalculator(firstQuestion);
 					
 					if(calc != null) {
-						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), calc.calculateGoalAchievement(questionGroup), firstQuestion.get("assigned_goal__c").asText()));
+						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), calc.calculateGoalAchievement(questionGroup, surveyResultAchievemetns), firstQuestion.get("assigned_goal__c").asText()));
+					}
+
+					// Update survey results
+					for(Integer id : surveyResultAchievemetns.keySet()) {
+						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement-on-survey-result"), surveyResultAchievemetns.get(id), id));
 					}
 				}
 			}

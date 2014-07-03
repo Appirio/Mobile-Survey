@@ -15,7 +15,7 @@ public class SingleSelectGoalCalculator implements GoalCalculator {
 	private static ObjectMapper mapper = new ObjectMapper();
 	
 	@Override
-	public int calculateGoalAchievement(ArrayNode questionGroup) throws DiageoServicesException {
+	public int calculateGoalAchievement(ArrayNode questionGroup, Map<Integer, Integer> surveyResultAchievement) throws DiageoServicesException {
 		try {
 			Set<String> countedAccountIds = new HashSet<String>();
 			int result = 0;
@@ -41,7 +41,12 @@ public class SingleSelectGoalCalculator implements GoalCalculator {
 						if(positiveAnswers.keySet().contains(question.get("answer_text__c").asText())) {
 							countedAccountIds.add(question.get("account__c").asText());
 							result += positiveAnswers.get(question.get("answer_text__c").asText());
+							surveyResultAchievement.put(question.get("id").asInt(), positiveAnswers.get(question.get("answer_text__c").asText()));
+						} else {
+							surveyResultAchievement.put(question.get("id").asInt(), 0);
 						}
+					} else {
+						surveyResultAchievement.put(question.get("id").asInt(), 0);
 					}
 				}
 			}
