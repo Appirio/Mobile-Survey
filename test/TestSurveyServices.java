@@ -1,3 +1,5 @@
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import org.junit.After;
@@ -13,6 +15,7 @@ import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
+import com.appirio.diageo.db.manager.api20.GoalDBManager;
 import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -569,7 +572,17 @@ public class TestSurveyServices {
 	public void testCreateSurveyWithGoal20() {
 		try {
 			SurveyDBManager20 manager = new SurveyDBManager20("1");
-
+			GoalDBManager goalManager = new GoalDBManager();
+			
+			Map<String, Integer> expectedAchievements = new HashMap<String, Integer>(); 
+			
+			expectedAchievements.put("1", 2);
+			expectedAchievements.put("2", 0);
+			expectedAchievements.put("3", 2);
+			expectedAchievements.put("4", 2);
+			expectedAchievements.put("5", 0);
+			expectedAchievements.put("6", 0);
+			
 			JsonNode body;
 			
 			body = new ObjectMapper()
@@ -579,6 +592,14 @@ public class TestSurveyServices {
 			body = new ObjectMapper()
 				.readTree("[{\"isparent__c\":\"f\",\"parent_survey__c\":null,\"enable_edit_on_review_screen__c\":\"t\",\"name\":\"Display - June 2014 - Off\",\"sfid\":\"a2iJ0000000O2IJIA0\",\"survey_type__c\":\"Non Product\",\"first_question__c\":\"a2gJ0000000aRqlIAE\",\"grading_scale__c\":null,\"total_possible_score__c\":\"0\",\"questions\":[{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":\"a2gJ0000000aRqqIAE\",\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":true},{\"text\":\"No\",\"checked\":false}],\"sfid\":\"a2gJ0000000aRqlIAE\",\"question_text__c\":\"Is Acacia Vineyard on display?\",\"parent_question__c\":null,\"name\":\"Q-1556\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000O2IJIA0\",\"include_photos__c\":\"t\",\"goal_type\":\"Display\",\"target__c\":null,\"achieved__c\":null,\"start_date__c\":null,\"end_date__c\":null,\"goal_name__c\":null,\"assigned_goal__c\":null,\"sector__c\":\"OFF PREMISE\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"Yes\",\"answer_value__c\":null,\"photos\":[]},{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":\"a2gJ0000000aRqvIAE\",\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":false},{\"text\":\"No\",\"checked\":true}],\"sfid\":\"a2gJ0000000aRqqIAE\",\"question_text__c\":\"Is Buchanan's on display?\",\"parent_question__c\":null,\"name\":\"Q-1557\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000O2IJIA0\",\"include_photos__c\":\"t\",\"goal_type\":\"Display\",\"target__c\":null,\"achieved__c\":null,\"start_date__c\":null,\"end_date__c\":null,\"goal_name__c\":null,\"assigned_goal__c\":null,\"sector__c\":\"OFF PREMISE\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"No\",\"answer_value__c\":null,\"photos\":[]},{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":\"a2gJ0000000aRr0IAE\",\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":true},{\"text\":\"No\",\"checked\":false}],\"sfid\":\"a2gJ0000000aRqvIAE\",\"question_text__c\":\"Is Ciroc on display?\",\"parent_question__c\":null,\"name\":\"Q-1558\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000O2IJIA0\",\"include_photos__c\":\"t\",\"goal_type\":\"Display\",\"target__c\":null,\"achieved__c\":null,\"start_date__c\":null,\"end_date__c\":null,\"goal_name__c\":null,\"assigned_goal__c\":null,\"sector__c\":\"OFF PREMISE\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"Yes\",\"answer_value__c\":null,\"photos\":[]},{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":\"a2gJ0000000aRr5IAE\",\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":true},{\"text\":\"No\",\"checked\":false}],\"sfid\":\"a2gJ0000000aRr0IAE\",\"question_text__c\":\"Is Crown Royal on display?\",\"parent_question__c\":null,\"name\":\"Q-1559\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000O2IJIA0\",\"include_photos__c\":\"t\",\"goal_type\":\"Display\",\"target__c\":null,\"achieved__c\":null,\"start_date__c\":null,\"end_date__c\":null,\"goal_name__c\":null,\"assigned_goal__c\":null,\"sector__c\":\"OFF PREMISE\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"Yes\",\"answer_value__c\":null,\"photos\":[]},{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":\"a2gJ0000000aRrAIAU\",\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":false},{\"text\":\"No\",\"checked\":true}],\"sfid\":\"a2gJ0000000aRr5IAE\",\"question_text__c\":\"Is Captain Morgan Caribbean White Rum on display?\",\"parent_question__c\":null,\"name\":\"Q-1560\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000O2IJIA0\",\"include_photos__c\":\"t\",\"goal_type\":\"Display\",\"target__c\":null,\"achieved__c\":null,\"start_date__c\":null,\"end_date__c\":null,\"goal_name__c\":null,\"assigned_goal__c\":null,\"sector__c\":\"OFF PREMISE\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"No\",\"answer_value__c\":null,\"photos\":[]},{\"include_none_of_the_above__c\":\"f\",\"conditional_answer__c\":null,\"next_question__c\":null,\"label_for_add_l_comments__c\":null,\"answer_options__c\":[{\"text\":\"Yes\",\"checked\":false},{\"text\":\"No\",\"checked\":true}],\"sfid\":\"a2gJ0000000aRrAIAU\",\"question_text__c\":\"Is Captain Morgan Original Spiced Rum on display?\",\"parent_question__c\":null,\"name\":\"Q-1561\",\"question_type__c\":\"Select\",\"dms_survey__c\":\"a2iJ0000000O2IJIA0\",\"include_photos__c\":\"t\",\"goal_type\":\"Display\",\"target__c\":null,\"achieved__c\":null,\"start_date__c\":null,\"end_date__c\":null,\"goal_name__c\":null,\"assigned_goal__c\":null,\"sector__c\":\"OFF PREMISE\",\"original_answer_options__c\":\"[{\\\"value\\\":\\\"Yes\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"1\\\"},{\\\"value\\\":\\\"No\\\",\\\"score\\\":\\\"0\\\",\\\"goalScore\\\":\\\"0\\\"}]\",\"delimitedAnswerOptions\":\"Yes,No\",\"answer_text__c\":\"No\",\"answer_value__c\":null,\"photos\":[]}],\"count\":6,\"display\":\"t\",\"location\":{\"tdlinx_outlet_city__c\":\"Chicago\",\"tdlinx_outlet_zip_code__c\":\"60623\",\"tdlinx_outlet_state__c\":\"IL\",\"tdlinx_outlet_addr__c\":\"3555 W 26th St\",\"billingstate\":\"India\",\"billingcountry\":null,\"billingpostalcode\":\"60623\",\"billingcity\":\"Jaipur\",\"billingstreet\":\"3555 W 26th St\",\"sfid\":\"2\",\"tdlinx_outlet_desc__c\":\"La Chiquita Supermarket Inc\",\"name\":\"La Chiquita Supermarket Inc\",\"distance\":0},\"contact__c\":\"1\",\"account__c\":\"2\",\"survey_id\":0}]");
 			manager.createSurvey(body, UUID.randomUUID().toString());
+			
+			ArrayNode achievements = goalManager.getContactGoals("1");
+			
+			for(JsonNode achievement : achievements) {
+				Assert.assertEquals((Integer)expectedAchievements.get(achievement.get("sfid").asText()), (Integer)achievement.get("achieved__c").asInt());
+			}
+			
+			System.out.println(achievements);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -79,4 +79,8 @@ public class GoalDBManager extends DBManager {
 		}
 		return result;
 	}
+	
+	public ArrayNode getContactGoals(String contactId) throws DiageoServicesException {
+		return queryToJson(MessageFormat.format(getSQLStatement("query-goals-for-contact"), contactId));
+	}
 }

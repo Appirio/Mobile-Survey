@@ -191,7 +191,7 @@ INSERT INTO dd_assigned_goal__c (
 ) VALUES (
 	'3',
 	'1',
-	'a2gJ0000000aRqlIAE'
+	'a2gJ0000000aRqvIAE'
 );
 INSERT INTO dd_assigned_goal__c (
 	sfid,
@@ -200,7 +200,7 @@ INSERT INTO dd_assigned_goal__c (
 ) VALUES (
 	'4',
 	'1',
-	'a2gJ0000000aRqvIAE'
+	'a2gJ0000000aRr0IAE'
 );
 INSERT INTO dd_assigned_goal__c (
 	sfid,
@@ -209,24 +209,6 @@ INSERT INTO dd_assigned_goal__c (
 ) VALUES (
 	'5',
 	'1',
-	'a2gJ0000000aRqqIAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'6',
-	'1',
-	'a2gJ0000000aRr0IAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'7',
-	'1',
 	'a2gJ0000000aRr5IAE'
 );
 INSERT INTO dd_assigned_goal__c (
@@ -234,16 +216,7 @@ INSERT INTO dd_assigned_goal__c (
 	contact__c, 
 	dd_survey_question__c 
 ) VALUES (
-	'8',
-	'1',
-	'a2gJ0000000aRr0IAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'9',
+	'6',
 	'1',
 	'a2gJ0000000aRrAIAU'
 );
