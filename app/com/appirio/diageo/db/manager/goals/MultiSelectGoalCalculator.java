@@ -67,7 +67,7 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 						}
 					}
 					
-					surveyResultAchievement.put(question.get("id").asInt(), resultAchievement);
+					surveyResultAchievement.put(question.get("id").asInt(), resultAchievement); 
 				}
 				
 				// sum the result achievement values for each survey submissions
