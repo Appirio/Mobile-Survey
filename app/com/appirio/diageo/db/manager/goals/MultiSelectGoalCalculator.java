@@ -28,17 +28,21 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 				// For the answers received, we need to count the score once for each account, for that we use a set
 				Map<String, Integer> answerScoreMap = new HashMap<String, Integer>();
 
-				// need to parse the answer options to determine which answers are goals
+				// need to parse the answer options and create a data structure to retrieve answer / goal score easily 
 				ArrayNode answerOptions = (ArrayNode) mapper.readTree(firstQuestion.get("answer_options__c").asText());
 				
 				for(JsonNode option : answerOptions) {
 					answerScoreMap.put(option.get("value").asText(), option.get("goalScore").asInt());
 				}
 				
+				// For survey result
 				for(JsonNode question : questionGroup) {
+					
+					// Get the account id, we should only count a response for a particular account once
 					String accountId = question.get("account__c").asText();
 					Set<String> accountAnswers = positiveAnswersPerAccount.get(accountId);
 
+					// Store answers per account in a data structure to count later
 					if(accountAnswers == null) {
 						positiveAnswersPerAccount.put(accountId, new HashSet<String>());
 						accountAnswers = positiveAnswersPerAccount.get(accountId);
@@ -46,6 +50,9 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 					
 					String answer = question.get("answer_text__c").asText();
 					
+					// Need to calculate how the achievement will be counted for this particular survey result
+					// and add to data structure that will later be used by the invoking function to update the
+					// survey results with the result level achievement calculated achievement
 					Integer resultAchievement = surveyResultAchievement.get(question.get("id").asInt());
 					
 					if(resultAchievement == null) {
@@ -63,13 +70,9 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 					surveyResultAchievement.put(question.get("id").asInt(), resultAchievement);
 				}
 				
-				for(String key : positiveAnswersPerAccount.keySet()) {
-					Set<String> answers = positiveAnswersPerAccount.get(key);
-					for(String answer: answers) {
-						if(answerScoreMap.containsKey(answer)) {
-							result += answerScoreMap.get(answer);
-						}
-					}
+				// sum the result achievement values for each survey submissions
+				for(Integer key : surveyResultAchievement.keySet()) {
+					result += surveyResultAchievement.get(key);
 				}
 			}
 
