@@ -46,9 +46,21 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 					
 					String answer = question.get("answer_text__c").asText();
 					
-					for(String s : answer.split(";")) {
-						accountAnswers.add(s);
+					Integer resultAchievement = surveyResultAchievement.get(question.get("id").asInt());
+					
+					if(resultAchievement == null) {
+						resultAchievement = 0;
 					}
+
+					for(String s : answer.split(";")) {
+						if(!accountAnswers.contains(s)) {
+							accountAnswers.add(s);
+							
+							resultAchievement += answerScoreMap.get(s);
+						}
+					}
+					
+					surveyResultAchievement.put(question.get("id").asInt(), resultAchievement);
 				}
 				
 				for(String key : positiveAnswersPerAccount.keySet()) {
