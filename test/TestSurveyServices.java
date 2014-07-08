@@ -82,6 +82,11 @@ public class TestSurveyServices {
 			Assert.assertTrue(result.isArray());
 			Assert.assertEquals(2, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+			
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions"));
+				System.out.println(survey.get("questions"));
+			}
 
 			manager.close();
 		} catch (Exception ex) {
