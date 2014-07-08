@@ -63,7 +63,7 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 						if(!accountAnswers.contains(s)) {
 							accountAnswers.add(s);
 							
-							resultAchievement += answerScoreMap.get(s);
+							resultAchievement += answerScoreMap.get(s) != null ? answerScoreMap.get(s) : 0;
 						}
 					}
 					
