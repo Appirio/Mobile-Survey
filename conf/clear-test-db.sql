@@ -8,3 +8,6 @@ delete from dms_survey_result__c;
 delete from contact;
 delete from dd_assigned_goal__c;
 delete from DD_Survey_Result_Photos__c;
+delete from dd_survey_group__c;
+delete from dd_survey_member__c;
+delete from dd_group_member__c;

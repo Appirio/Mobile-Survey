@@ -137,6 +137,69 @@ INSERT INTO dms_survey__c (
 	'f',
 	'5'	 
 );
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'group test in user group',
+	'8',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'group not in user group',
+	'9',
+	'10',
+	'Product'
+);
+INSERT INTO dd_survey_group__c (
+	name, 
+	sfid
+) VALUES (
+	'survey group 1',
+	'1'
+);
+INSERT INTO dd_survey_group__c (
+	name, 
+	sfid
+) VALUES (
+	'survey group 2',
+	'2'
+);
+INSERT INTO dd_group_member__c (
+	sfid,
+	dd_survey_group__c,
+	contact__c
+) VALUES (
+	'1',
+	'1',
+	'1'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'1',
+	'1',
+	'8'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'2',
+	'2',
+	'9'
+);
 INSERT INTO dms_question__c (
 	sfid, 
 	question_text__c, 

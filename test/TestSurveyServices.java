@@ -120,7 +120,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			manager.close();
@@ -138,10 +138,10 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(2, result.size());
+			Assert.assertEquals(3, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			manager.close();
+			manager.close();  
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			Assert.fail(ex.getMessage());
