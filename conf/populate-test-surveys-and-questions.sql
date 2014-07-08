@@ -154,7 +154,7 @@ INSERT INTO dms_survey__c (
 	total_possible_score__c,
 	survey_type__c
 ) VALUES (
-	'group not in user group',
+	'in a group not associated with the',
 	'9',
 	'10',
 	'Product'

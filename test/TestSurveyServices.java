@@ -85,7 +85,6 @@ public class TestSurveyServices {
 			
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions"));
-				System.out.println(survey.get("questions"));
 			}
 
 			manager.close();
@@ -96,9 +95,9 @@ public class TestSurveyServices {
 	}
 
 	@Test
-	public void testGetSurveysByAccountObject() {
+	public void testGetSurveysByAccountObject12() {
 		try {
-			SurveyDBManager manager = new SurveyDBManager("1");
+			SurveyDBManager12 manager = new SurveyDBManager12("1");
 			AccountDBManager accountManager = new AccountDBManager();
 
 			ObjectNode account = accountManager.getAccount("1");
@@ -106,7 +105,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(2, result.size());
+			Assert.assertEquals(3, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			manager.close();
@@ -125,8 +124,12 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(6, result.size());
+			Assert.assertEquals(5, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions"));
+			}
 
 			manager.close();
 		} catch (Exception ex) {
@@ -145,6 +148,10 @@ public class TestSurveyServices {
 			Assert.assertTrue(result.isArray());
 			Assert.assertEquals(3, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions"));
+			}
 
 			manager.close();  
 		} catch (Exception ex) {
