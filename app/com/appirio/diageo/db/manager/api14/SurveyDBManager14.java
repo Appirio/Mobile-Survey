@@ -28,8 +28,16 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 			zip = zip.substring(0, 5);
 		}
 		
-		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-14"),account.get("tdlinx_sector__c").asText(), account.get("tdlinx_trade_channel__c").asText(), account.get("tdlinx_sub_channel__c").asText(),
-				account.get("tdlinx_outlet_state__c").asText(), zip, account.get("national_account_group__c").asText(), account.get("marketing_group__c").asText(), account.get("tdlinx_account_level_e__c").asText());
+		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-14"),
+				account.get("tdlinx_sector__c").asText(), 
+				account.get("tdlinx_trade_channel__c").asText(), 
+				account.get("tdlinx_sub_channel__c").asText(),
+				account.get("tdlinx_outlet_state__c").asText(), 
+				zip, 
+				account.get("national_account_group__c").asText(), 
+				account.get("marketing_group__c").asText(), 
+				account.get("tdlinx_account_level_e__c").asText(),
+				this.contactId);
 		
 		ArrayNode surveys = queryToJson(surveyQuery);
 		

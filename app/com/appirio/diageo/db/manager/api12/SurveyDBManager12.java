@@ -49,7 +49,7 @@ public class SurveyDBManager12 extends SurveyDBManager {
 			separator = ",";
 		}
 		
-		ArrayNode questions = queryToJson("select answer_options__c, sfid, question_text__c, parent_question__c, name, sfid, question_type__c, dms_survey__c from dms_question__c where dms_survey__c in (" + surveyIds.toString() + ") order by dms_survey__c");
+		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-12"), surveyIds.toString()));
 		
 		return processSurveys(surveys, questions, false);
 	}

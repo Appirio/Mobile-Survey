@@ -143,8 +143,8 @@ INSERT INTO dms_survey__c (
 	total_possible_score__c,
 	survey_type__c
 ) VALUES (
-	'group test in user group',
-	'8',
+	'UGI',
+	'g1',
 	'10',
 	'Product'
 );
@@ -154,51 +154,168 @@ INSERT INTO dms_survey__c (
 	total_possible_score__c,
 	survey_type__c
 ) VALUES (
-	'in a group not associated with the',
-	'9',
+	'UGI UGX',
+	'g2',
 	'10',
 	'Product'
 );
-INSERT INTO dd_survey_group__c (
+INSERT INTO dms_survey__c (
 	name, 
-	sfid
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
 ) VALUES (
-	'survey group 1',
-	'1'
+	'UGI NUGI',
+	'g3',
+	'10',
+	'Product'
 );
-INSERT INTO dd_survey_group__c (
+INSERT INTO dms_survey__c (
 	name, 
-	sfid
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
 ) VALUES (
-	'survey group 2',
-	'2'
+	'UGI NUGX',
+	'g4',
+	'10',
+	'Product'
 );
-INSERT INTO dd_group_member__c (
-	sfid,
-	dd_survey_group__c,
-	contact__c
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
 ) VALUES (
-	'1',
-	'1',
-	'1'
+	'UGI UGX NUGI',
+	'g5',
+	'10',
+	'Product'
 );
-INSERT INTO dd_survey_member__c (
-	sfid,
-	dd_survey_group__c,
-	dd_survey__c
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
 ) VALUES (
-	'1',
-	'1',
-	'8'
+	'UGI UGX NUGX',
+	'g6',
+	'10',
+	'Product'
 );
-INSERT INTO dd_survey_member__c (
-	sfid,
-	dd_survey_group__c,
-	dd_survey__c
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
 ) VALUES (
-	'2',
-	'2',
-	'9'
+	'UGI NUGI NUGX',
+	'g7',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'UGI UGX NUGI NUGX',
+	'g8',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'UGX',
+	'g9',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'UGX NUGI',
+	'g10',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'UGX NUGX',
+	'g11',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'UGX NUGI NUGX',
+	'g12',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'NUGI',
+	'g13',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'NUGI NUGX',
+	'g14',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	survey_type__c
+) VALUES (
+	'NUGX',
+	'g15',
+	'10',
+	'Product'
+);
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	universal_survey__c,
+	survey_type__c,
+	active__c
+) VALUES (
+	'test survey inactive',
+	'10',
+	'10',
+	't',
+	'Product',
+	false
 );
 INSERT INTO dms_question__c (
 	sfid, 
@@ -228,69 +345,6 @@ INSERT INTO dms_question__c (
 	true,
 	'2014-05-25',
 	200
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'1',
-	'1',
-	'a2gJ0000000aRqlIAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'2',
-	'1',
-	'a2gJ0000000aRqqIAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'3',
-	'1',
-	'a2gJ0000000aRqvIAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'4',
-	'1',
-	'a2gJ0000000aRr0IAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'5',
-	'1',
-	'a2gJ0000000aRr5IAE'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'6',
-	'1',
-	'a2gJ0000000aRrAIAU'
-);
-INSERT INTO dd_assigned_goal__c (
-	sfid,
-	contact__c, 
-	dd_survey_question__c 
-) VALUES (
-	'7',
-	'1',
-	'a2gJ0000000aRjpIAE'
 );
 INSERT INTO dms_question__c (
 	sfid, 
@@ -397,20 +451,245 @@ INSERT INTO dms_question__c (
 	'Count',
 	'6'
 );
-INSERT INTO dms_survey__c (
-	name, 
+INSERT INTO dms_question__c (
 	sfid, 
-	total_possible_score__c,
-	universal_survey__c,
-	survey_type__c,
-	active__c
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
 ) VALUES (
-	'test survey inactive',
-	'10',
-	'10',
-	't',
-	'Product',
-	false
+	'11',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'5'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g1',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g1'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g2',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g2'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g3',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g3'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g4',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g4'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g5',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g5'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g6',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g6'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g7',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g7'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g8',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g8'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g9',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g9'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g10',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g10'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g11',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g11'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g12',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g12'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g13',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g13'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g14',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g14'
+);
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'g15',
+	'the question text',
+	null,
+	'question 8',
+	'Count',
+	'g15'
 );
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005J0000001qAuwIAE', '005J0000001qAuwIAE', NULL, 'a2gJ0000000aQxYIAU', '[{"value":"Yes","score":"55","goalScore":"1"},{"value":"No","score":"0","goalScore":"0"}]', '2014-06-24 13:24:41', NULL, '2014-06-26 12:09:22', NULL, NULL, false, NULL, NULL, 'Select', 'Is Smirnoff in Distribution?', NULL, false, NULL, '2014-06-26 12:09:22', 'Q-1514', 6, 'a2iJ0000000NyZ6IAK', 1, 'Distribution', 55, false, '2014-06-01', true, 'Smirnoff distribution', '2014-06-30', false);
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005J0000001q3z6IAA', '005J0000001q3z6IAA', NULL, 'a2gJ0000000aRjkIAE', '[{"value":"Yes","score":"0","goalScore":"0"},{"value":"No","score":"0","goalScore":"0"}]', '2014-07-01 10:39:34', 'No', '2014-07-01 10:39:45', NULL, NULL, false, NULL, NULL, 'Select', 'What is question two NO ?', NULL, false, 'a2gJ0000000aRjaIAE', '2014-07-01 10:39:45', 'Q-1537', 24, 'a2iJ0000000O1VPIA0', NULL, NULL, 0, false, NULL, false, NULL, NULL, false);
@@ -453,3 +732,400 @@ INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sf
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005A0000002cSuMIAU', '005A0000002cSuMIAU', NULL, 'a2gJ0000000aRr0IAE', '[{"value":"Yes","score":"0","goalScore":"1"},{"value":"No","score":"0","goalScore":"0"}]', '2014-07-02 17:22:06', NULL, '2014-07-02 17:42:00', NULL, NULL, false, NULL, NULL, 'Select', 'Is Crown Royal on display?', 'a2gJ0000000aRr5IAE', false, NULL, '2014-07-02 17:42:00', 'Q-1559', 49, 'a2iJ0000000O2IJIA0', 1, 'Display', 0, true, '2014-06-01', true, 'Display - Crown Royal', '2014-09-30', false);
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005A0000002cSuMIAU', '005A0000002cSuMIAU', NULL, 'a2gJ0000000aRr5IAE', '[{"value":"Yes","score":"0","goalScore":"1"},{"value":"No","score":"0","goalScore":"0"}]', '2014-07-02 17:22:17', NULL, '2014-07-02 17:42:03', NULL, NULL, false, NULL, NULL, 'Select', 'Is Captain Morgan Caribbean White Rum on display?', 'a2gJ0000000aRrAIAU', false, NULL, '2014-07-02 17:42:03', 'Q-1560', 50, 'a2iJ0000000O2IJIA0', 1, 'Display', 0, true, '2014-06-01', true, 'Display - Captain Morgan Caribbean White Rum', '2014-09-30', false);
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005A0000002cSuMIAU', '005A0000002cSuMIAU', NULL, 'a2gJ0000000aRrAIAU', '[{"value":"Yes","score":"0","goalScore":"1"},{"value":"No","score":"0","goalScore":"0"}]', '2014-07-02 17:23:21', NULL, '2014-07-02 17:42:06', NULL, NULL, false, NULL, NULL, 'Select', 'Is Captain Morgan Original Spiced Rum on display?', NULL, false, NULL, '2014-07-02 17:42:06', 'Q-1561', 51, 'a2iJ0000000O2IJIA0', 1, 'Display', 0, true, '2014-06-01', true, 'Display - Captain Morgan Original Spiced Rum', '2014-09-30', false);
+INSERT INTO dd_survey_group__c (
+	name, 
+	sfid
+) VALUES (
+	'UGI',
+	'UGI'
+);
+INSERT INTO dd_survey_group__c (
+	name, 
+	sfid
+) VALUES (
+	'UGX',
+	'UGX'
+);
+INSERT INTO dd_survey_group__c (
+	name, 
+	sfid
+) VALUES (
+	'NUGI',
+	'NUGI'
+);
+INSERT INTO dd_survey_group__c (
+	name, 
+	sfid
+) VALUES (
+	'NUGX',
+	'NUGX'
+);
+INSERT INTO dd_group_member__c (
+	sfid,
+	dd_survey_group__c,
+	contact__c
+) VALUES (
+	'1',
+	'NUGI',
+	'1'
+);
+INSERT INTO dd_group_member__c (
+	sfid,
+	dd_survey_group__c,
+	contact__c
+) VALUES (
+	'2',
+	'NUGX',
+	'1'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'1',
+	'UGI',
+	'g1'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'2',
+	'UGI',
+	'g2'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'3',
+	'UGX',
+	'g2'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'4',
+	'UGI',
+	'g3'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'5',
+	'NUGI',
+	'g3'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'6',
+	'UGI',
+	'g4'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'7',
+	'NUGX',
+	'g4'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'8',
+	'g5',
+	'UGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'9',
+	'g5',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'10',
+	'g5',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'11',
+	'g6',
+	'UGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'12',
+	'g6',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'13',
+	'g6',
+	'NUGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'14',
+	'g7',
+	'UGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'15',
+	'g7',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'16',
+	'g7',
+	'NUGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'17',
+	'g8',
+	'UGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'18',
+	'g8',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'19',
+	'g8',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'20',
+	'g8',
+	'NUGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'21',
+	'g9',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'22',
+	'g10',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'23',
+	'g10',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'24',
+	'g11',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'25',
+	'g11',
+	'NUGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'26',
+	'g12',
+	'UGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'27',
+	'g12',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'28',
+	'g12',
+	'NUGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'29',
+	'g13',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'30',
+	'g14',
+	'NUGI'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'31',
+	'g14',
+	'NUGX'
+);
+INSERT INTO dd_survey_member__c (
+	sfid,
+	dd_survey_group__c,
+	dd_survey__c
+) VALUES (
+	'32',
+	'g15',
+	'NUGX'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'1',
+	'1',
+	'a2gJ0000000aRqlIAE'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'2',
+	'1',
+	'a2gJ0000000aRqqIAE'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'3',
+	'1',
+	'a2gJ0000000aRqvIAE'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'4',
+	'1',
+	'a2gJ0000000aRr0IAE'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'5',
+	'1',
+	'a2gJ0000000aRr5IAE'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'6',
+	'1',
+	'a2gJ0000000aRrAIAU'
+);
+INSERT INTO dd_assigned_goal__c (
+	sfid,
+	contact__c, 
+	dd_survey_question__c 
+) VALUES (
+	'7',
+	'1',
+	'a2gJ0000000aRjpIAE'
+);
