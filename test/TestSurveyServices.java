@@ -97,6 +97,8 @@ public class TestSurveyServices {
 	@Test
 	public void testGetSurveysByAccountObject12() {
 		try {
+			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+			
 			SurveyDBManager12 manager = new SurveyDBManager12("1");
 			AccountDBManager accountManager = new AccountDBManager();
 
@@ -105,12 +107,27 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(3, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
-
+			
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG3 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g7")) {
+					containsG7 = true;
+				}
 			}
+			
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG7);
 
 			manager.close();
 			accountManager.close();
@@ -197,8 +214,29 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(3, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG3 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g7")) {
+					containsG7 = true;
+				}
+			}
+			
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG7);
 
 			manager.close();
 			accountManager.close();
@@ -237,12 +275,29 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(3, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG3 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g7")) {
+					containsG7 = true;
+				}
 			}
+
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG7);
 
 			manager.close();
 			accountManager.close();
@@ -285,8 +340,29 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(5, result.size());
+			Assert.assertEquals(8, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG3 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g7")) {
+					containsG7 = true;
+				}
+			}
+
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG7);
 
 			manager.close();
 			accountManager.close();
@@ -342,12 +418,29 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(6, result.size());
+			Assert.assertEquals(9, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG3 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g7")) {
+					containsG7 = true;
+				}
 			}
+
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG7);
 
 			int parentSurveyCount = 0;
 			for (JsonNode survey : result) {
@@ -467,20 +560,36 @@ public class TestSurveyServices {
 			// and put a valid
 			// contact id here, also need to check for goal related fields to be
 			// returned
-			SurveyDBManager20 manager = new SurveyDBManager20("CONTACTID");
+			SurveyDBManager20 manager = new SurveyDBManager20("1");
 			AccountDBManager accountManager = new AccountDBManager();
 
 			ObjectNode account = accountManager.getAccount("1");
 
 			JsonNode result = manager.getSurveys(account);
 
+			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+
 			for(JsonNode survey : result) {
-				System.out.println(survey.get("sfid").asText());
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG3 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g7")) {
+					containsG7 = true;
+				}
 			}
 
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG7);
+
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(5, result.size());
+			Assert.assertEquals(9, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			int parentSurveyCount = 0;
@@ -515,7 +624,7 @@ public class TestSurveyServices {
 			// and put a valid
 			// contact id here, also need to check for goal related fields to be
 			// returned
-			SurveyDBManager20 manager = new SurveyDBManager20("CONTACTID");
+			SurveyDBManager20 manager = new SurveyDBManager20("1");
 
 			JsonNode result = manager.getUniversalSurveys();
 

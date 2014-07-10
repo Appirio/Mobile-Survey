@@ -53,30 +53,42 @@ where
 	) and (
 		universal_survey__c 
 		or sfid in (
-			SELECT
-				dd_survey__c
-			FROM
-				dd_survey_member__c
-			WHERE
-				dd_survey_group__c IN (
-					SELECT
-						sm.dd_survey_group__c
-					FROM
-						dd_group_member__c gm
-						INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.sfid
-					WHERE
-						gm.contact__c = ''{8}'' 
-						and (sm.exclude__c = false or sm.exclude__c is null)
-				) and not dd_survey_group__c in (
-					SELECT
-						sm.dd_survey_group__c
-					FROM
-						dd_group_member__c gm
-						INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.sfid
-					WHERE
-						gm.contact__c = ''{8}'' 
-						and sm.exclude__c
-				)
+                SELECT
+                    DISTINCT dd_survey__c
+                FROM
+                    dd_survey_member__c
+                WHERE
+                    dd_survey_group__c IN (
+                        SELECT
+                            sm.dd_survey_group__c
+                        FROM
+                            dd_group_member__c gm
+                            INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c
+                        WHERE
+                            gm.contact__c = ''{8}''
+                            and (
+                                sm.exclude__c = false 
+                                or sm.exclude__c is null
+                            )
+                    ) 
+                
+                EXCEPT 
+
+                SELECT
+                    DISTINCT dd_survey__c
+                FROM
+                    dd_survey_member__c
+                WHERE
+                    dd_survey_group__c IN (
+                        SELECT
+                            sm.dd_survey_group__c
+                        FROM
+                            dd_group_member__c gm
+                            INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c
+                        WHERE
+                            gm.contact__c = ''{8}''
+                            and sm.exclude__c
+                    )
 		) or (
 			SELECT
 				count(*)
@@ -85,5 +97,6 @@ where
 			WHERE
 				dd_survey__c = s.sfid
 		) = 0
-	)order by 
+	)
+order by 
 	sfid

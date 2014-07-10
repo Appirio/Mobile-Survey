@@ -139,7 +139,7 @@ INSERT INTO dms_survey__c (
 );
 INSERT INTO dms_survey__c (
 	name, 
-	sfid, 
+	sfid,
 	total_possible_score__c,
 	survey_type__c
 ) VALUES (
@@ -766,7 +766,7 @@ INSERT INTO dd_group_member__c (
 	contact__c
 ) VALUES (
 	'1',
-	'NUGI',
+	'UGI',
 	'1'
 );
 INSERT INTO dd_group_member__c (
@@ -775,296 +775,360 @@ INSERT INTO dd_group_member__c (
 	contact__c
 ) VALUES (
 	'2',
-	'NUGX',
+	'UGX',
 	'1'
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'1',
 	'UGI',
-	'g1'
+	'g1',
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'2',
 	'UGI',
-	'g2'
+	'g2',
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'3',
 	'UGX',
-	'g2'
+	'g2',
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'4',
 	'UGI',
-	'g3'
+	'g3',
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'5',
 	'NUGI',
-	'g3'
+	'g3',
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'6',
 	'UGI',
-	'g4'
+	'g4',
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'7',
 	'NUGX',
-	'g4'
+	'g4',
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'8',
+	'UGI',
 	'g5',
-	'UGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'9',
+	'UGX',
 	'g5',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'10',
+	'NUGI',
 	'g5',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'11',
+	'UGI',
 	'g6',
-	'UGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'12',
+	'UGX',
 	'g6',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'13',
+	'NUGX',
 	'g6',
-	'NUGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'14',
+	'UGI',
 	'g7',
-	'UGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'15',
+	'NUGI',
 	'g7',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'16',
+	'NUGX',
 	'g7',
-	'NUGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'17',
+	'UGI',
 	'g8',
-	'UGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'18',
+	'UGX',
 	'g8',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'19',
+	'NUGI',
 	'g8',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'20',
+	'NUGX',
 	'g8',
-	'NUGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'21',
+	'UGX',
 	'g9',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'22',
+	'UGX',
 	'g10',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'23',
+	'NUGI',
 	'g10',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'24',
+	'UGX',
 	'g11',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'25',
+	'NUGX',
 	'g11',
-	'NUGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'26',
+	'UGX',
 	'g12',
-	'UGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'27',
+	'NUGI',
 	'g12',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'28',
+	'NUGX',
 	'g12',
-	'NUGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'29',
+	'NUGI',
 	'g13',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'30',
+	'NUGI',
 	'g14',
-	'NUGI'
+	false
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'31',
+	'NUGX',
 	'g14',
-	'NUGX'
+	true
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c
+	dd_survey__c,
+	exclude__c
 ) VALUES (
 	'32',
+	'NUGX',
 	'g15',
-	'NUGX'
+	true
 );
 INSERT INTO dd_assigned_goal__c (
 	sfid,
