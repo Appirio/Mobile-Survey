@@ -14,14 +14,5 @@ SELECT
 FROM 
     dms_question__c
 WHERE 
-    dms_survey__c in 
-            (SELECT 
-                sfid 
-             FROM 
-                dms_survey__c
-             WHERE 
-                (Active__c is null or Active__c = true) 
-                and (IsParent__c is null or IsParent__c = false) 
-                and parent_survey__c is null
-            ) 
+    dms_survey__c in ({0}) 
 ORDER BY dms_survey__c

@@ -80,12 +80,32 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys("1");
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(2, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 			
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
+
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 		} catch (Exception ex) {
@@ -97,8 +117,6 @@ public class TestSurveyServices {
 	@Test
 	public void testGetSurveysByAccountObject12() {
 		try {
-			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
-			
 			SurveyDBManager12 manager = new SurveyDBManager12("1");
 			AccountDBManager accountManager = new AccountDBManager();
 
@@ -110,24 +128,29 @@ public class TestSurveyServices {
 			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 			
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
+
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				
 				if(survey.get("sfid").asText().equals("g1")) {
 					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG3 = true;
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
-				} else if(survey.get("sfid").asText().equals("g7")) {
-					containsG7 = true;
-				}
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
 			
 			Assert.assertTrue(containsG1);
-			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG2);
+			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
-			Assert.assertTrue(containsG7);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 			accountManager.close();
@@ -145,12 +168,32 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(5, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 		} catch (Exception ex) {
@@ -167,12 +210,32 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(3, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();  
 		} catch (Exception ex) {
@@ -189,12 +252,32 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(2, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 		} catch (Exception ex) {
@@ -217,26 +300,29 @@ public class TestSurveyServices {
 			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				
 				if(survey.get("sfid").asText().equals("g1")) {
 					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG3 = true;
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
-				} else if(survey.get("sfid").asText().equals("g7")) {
-					containsG7 = true;
-				}
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
 			
 			Assert.assertTrue(containsG1);
-			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG2);
+			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
-			Assert.assertTrue(containsG7);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 			accountManager.close();
@@ -254,8 +340,32 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(2, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
+
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
+
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
+			}
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 		} catch (Exception ex) {
@@ -278,26 +388,29 @@ public class TestSurveyServices {
 			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				
 				if(survey.get("sfid").asText().equals("g1")) {
 					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG3 = true;
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
-				} else if(survey.get("sfid").asText().equals("g7")) {
-					containsG7 = true;
-				}
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
-
+			
 			Assert.assertTrue(containsG1);
-			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG2);
+			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
-			Assert.assertTrue(containsG7);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 			accountManager.close();
@@ -318,9 +431,29 @@ public class TestSurveyServices {
 			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
+
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 			
 			manager.close();
 		} catch (Exception ex) {
@@ -343,26 +476,29 @@ public class TestSurveyServices {
 			Assert.assertEquals(8, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				
 				if(survey.get("sfid").asText().equals("g1")) {
 					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG3 = true;
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
-				} else if(survey.get("sfid").asText().equals("g7")) {
-					containsG7 = true;
-				}
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
-
+			
 			Assert.assertTrue(containsG1);
-			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG2);
+			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
-			Assert.assertTrue(containsG7);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 			accountManager.close();
@@ -380,25 +516,32 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(5, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			int parentSurveyCount = 0;
-			for (JsonNode survey : result) {
-				if (survey.get("name").asText().equals("parent survey")) {
-					parentSurveyCount++;
-					Assert.assertTrue(survey.has("childSurveys"));
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
-					Assert.assertEquals("child survey 1",
-							((ArrayNode) survey.get("childSurveys")).get(0)
-									.get("name").asText());
-					Assert.assertEquals("child survey 2",
-							((ArrayNode) survey.get("childSurveys")).get(1)
-									.get("name").asText());
-				}
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
-
-			Assert.assertEquals(1, parentSurveyCount);
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 		} catch (Exception ex) {
@@ -421,26 +564,29 @@ public class TestSurveyServices {
 			Assert.assertEquals(9, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				
 				if(survey.get("sfid").asText().equals("g1")) {
 					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG3 = true;
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
-				} else if(survey.get("sfid").asText().equals("g7")) {
-					containsG7 = true;
-				}
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
-
+			
 			Assert.assertTrue(containsG1);
-			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG2);
+			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
-			Assert.assertTrue(containsG7);
+			Assert.assertTrue(containsG5);
 
 			int parentSurveyCount = 0;
 			for (JsonNode survey : result) {
@@ -567,26 +713,29 @@ public class TestSurveyServices {
 
 			JsonNode result = manager.getSurveys(account);
 
-			boolean containsG1 = false, containsG3 = false, containsG4 = false, containsG7 = false;
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				
 				if(survey.get("sfid").asText().equals("g1")) {
 					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG3 = true;
+					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
-				} else if(survey.get("sfid").asText().equals("g7")) {
-					containsG7 = true;
-				}
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
-
+			
 			Assert.assertTrue(containsG1);
-			Assert.assertTrue(containsG3);
+			Assert.assertTrue(containsG2);
+			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
-			Assert.assertTrue(containsG7);
+			Assert.assertTrue(containsG5);
 
 			Assert.assertTrue(result.isArray());
 			Assert.assertEquals(9, result.size());
@@ -631,25 +780,32 @@ public class TestSurveyServices {
 			System.out.println(result);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(5, result.size());
+			Assert.assertEquals(4, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
-			int parentSurveyCount = 0;
-			for (JsonNode survey : result) {
-				if (survey.get("name").asText().equals("parent survey")) {
-					parentSurveyCount++;
-					Assert.assertTrue(survey.has("childSurveys"));
+			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
 
-					Assert.assertEquals("child survey 1",
-							((ArrayNode) survey.get("childSurveys")).get(0)
-									.get("name").asText());
-					Assert.assertEquals("child survey 2",
-							((ArrayNode) survey.get("childSurveys")).get(1)
-									.get("name").asText());
-				}
+			for(JsonNode survey : result) {
+				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
+				
+				if(survey.get("sfid").asText().equals("g1")) {
+					containsG1 = true;
+				} else if(survey.get("sfid").asText().equals("g2")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g3")) {
+					containsG2 = true;
+				} else if(survey.get("sfid").asText().equals("g4")) {
+					containsG4 = true;
+				} else if(survey.get("sfid").asText().equals("g5")) {
+					containsG5 = true;
+				} 
 			}
-
-			Assert.assertEquals(1, parentSurveyCount);
+			
+			Assert.assertTrue(!containsG1);
+			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(!containsG3);
+			Assert.assertTrue(containsG4);
+			Assert.assertTrue(containsG5);
 
 			manager.close();
 		} catch (Exception ex) {

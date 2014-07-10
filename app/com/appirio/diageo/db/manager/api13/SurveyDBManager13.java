@@ -5,7 +5,6 @@ import java.text.MessageFormat;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
 
@@ -16,8 +15,20 @@ public class SurveyDBManager13 extends SurveyDBManager12 {
 	}
 
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
-		ArrayNode surveys = queryToJson(getSQLStatement("survey-query-13"));
-		ArrayNode questions = queryToJson(getSQLStatement("question-query-13"));
+		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-13"), this.contactId));
+		
+		StringBuilder surveyIds = new StringBuilder();
+		String separator = "";
+		
+		for(JsonNode survey : surveys) {
+			surveyIds.append(separator);
+			surveyIds.append("'");
+			surveyIds.append(survey.get("sfid").asText());
+			surveyIds.append("'");
+			separator = ",";
+		}
+		
+		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-13"), surveyIds.toString()));
 
 		return processSurveys(surveys, questions, false);
 	}

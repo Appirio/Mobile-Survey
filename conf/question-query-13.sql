@@ -12,10 +12,7 @@ SELECT
     dms_survey__c
 FROM 
     dms_question__c
-WHERE dms_survey__c IN (SELECT sfid
-            FROM dms_survey__c
-            WHERE (Active__c IS NULL OR Active__c = true)
-            AND (IsParent__c IS NULL OR IsParent__c = false)
-            AND parent_survey__c IS NULL)
+WHERE 
+	dms_survey__c IN ({0})
 ORDER BY 
     dms_survey__c

@@ -16,7 +16,19 @@ public class SurveyDBManager12 extends SurveyDBManager {
 	
 	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-12"), this.contactId));
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-12"), this.contactId));
+		
+		StringBuilder surveyIds = new StringBuilder();
+		String separator = "";
+		
+		for(JsonNode survey : surveys) {
+			surveyIds.append(separator);
+			surveyIds.append("'");
+			surveyIds.append(survey.get("sfid").asText());
+			surveyIds.append("'");
+			separator = ",";
+		}
+		
+		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-12"), surveyIds.toString()));
 
 		return processSurveys(surveys, questions, false);
 	}

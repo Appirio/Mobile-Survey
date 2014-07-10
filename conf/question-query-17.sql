@@ -13,5 +13,7 @@ SELECT
     dms_survey__c
 FROM 
     dms_question__c 
+WHERE
+	dms_survey__c in ({0})
 ORDER BY
     dms_survey__c

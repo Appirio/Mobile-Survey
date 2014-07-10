@@ -15,12 +15,12 @@ FROM
 WHERE 
     Contact__c=''{0}''
     AND 
-    (
-	    (
-	        Start_Date__c <= ''{1}'' and End_Date__c >= ''{1}''
-	    ) or (
-	        Start_Date__c <= ''{2}'' and End_Date__c >= ''{2}''
-	    ) 
-    )
+	(
+		(
+			start_date__c <= ''{2}''
+		) or (
+			end_date__c >= ''{1}''
+		) 
+	)
 ORDER BY 
 	ag.DD_Survey_Question__c;

@@ -24,17 +24,6 @@ FROM
     INNER JOIN dms_survey__c s ON s.sfid = q.dms_survey__c
     LEFT OUTER JOIN dd_assigned_goal__c ag on (ag.dd_survey_question__c = q.sfid and ag.contact__c = ''{0}'') 
 WHERE 
-    dms_survey__c in 
-        (SELECT
-            sfid 
-         FROM
-            dms_survey__c 
-         WHERE 
-            universal_survey__c 
-            and survey_type__c != ''Non Product'' 
-            and (Active__c is null or Active__c = true) 
-            and (IsParent__c is null or IsParent__c = false) 
-            and parent_survey__c is null 
-        ) 
+    dms_survey__c in ({1}) 
 ORDER BY
     dms_survey__c
