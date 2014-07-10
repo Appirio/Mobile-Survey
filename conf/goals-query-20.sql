@@ -17,8 +17,8 @@ WHERE
 	ag.contact__c = ''{0}'' and
 	(
 		(
-			q.goal_start_date__c <= ''{1}'' and q.goal_end_date__c >= ''{1}''
+			q.goal_start_date__c <= ''{2}''
 		) or (
-			q.goal_start_date__c <= ''{2}'' and q.goal_end_date__c >= ''{2}''
+			q.goal_end_date__c >= ''{1}''
 		) 
 	)
