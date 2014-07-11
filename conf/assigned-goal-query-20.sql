@@ -18,7 +18,7 @@ WHERE
 	(
 		(
 			start_date__c <= ''{2}''
-		) or (
+		) and (
 			end_date__c >= ''{1}''
 		) 
 	)
