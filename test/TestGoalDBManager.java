@@ -57,16 +57,16 @@ public class TestGoalDBManager {
 			
 			// Test for goal achievement when records available for contact (when no records fall between start and end dates)
 			JsonNode result2 = manager.getGoalAchievements("2","2014-05-16","2014-06-20", false);
-			Assert.assertEquals(4, result2.size());
+			Assert.assertEquals(0, result2.size());
 			
 			// Test for goal achievement when records available for contact (when only one record fall between start and end dates)
 			JsonNode result3 = manager.getGoalAchievements("2","2014-11-16","2014-11-20", false);
-			Assert.assertEquals(4, result3.size());
+			Assert.assertEquals(1, result3.size());
 			
 			// Test for goal achievement when records available for contact (when three record fall between start and end dates)
 			// passing true in includeDetail param, returned result should have survey results associated with questions.
 			JsonNode result4 = manager.getGoalAchievements("2","2014-12-10","2014-12-26", true);
-			Assert.assertEquals(4, result4.size());
+			Assert.assertEquals(3, result4.size());
 			for (JsonNode jsonNode : result4) {
 				JsonNode surveyQuestionNode = jsonNode.get("surveyQuestion");
 				JsonNode surveyResults = surveyQuestionNode.get("surveyResults");
@@ -76,7 +76,7 @@ public class TestGoalDBManager {
 			// Test for goal achievement when records available for contact (when three record fall between start and end dates)\
 			// passing false in includeDetail param, returned result should not have survey results associated with questions.
 			JsonNode result5 = manager.getGoalAchievements("2","2014-12-10","2014-12-26", false);
-			Assert.assertEquals(4, result5.size());
+			Assert.assertEquals(3, result5.size());
 			for (JsonNode jsonNode : result5) {
 				JsonNode surveyQuestionNode = jsonNode.get("surveyQuestion");
 				JsonNode surveyResults = surveyQuestionNode.get("surveyResults");
