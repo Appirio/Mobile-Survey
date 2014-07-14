@@ -17,7 +17,8 @@ SELECT
 	tdlinx_sub_channel__c,
 	national_account_group__c,
 	marketing_group__c,
-	tdlinx_account_level_e__c
+	tdlinx_account_level_e__c,
+	account_segmentatiobn__c
 FROM 
 	account 
 WHERE 

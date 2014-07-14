@@ -52,6 +52,7 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 				account.get("national_account_group__c").asText(),
 				account.get("marketing_group__c").asText(),
 				account.get("tdlinx_account_level_e__c").asText(),
+				account.get("account_segmentatiobn__c").asText(),
 				this.contactId);
 		
 		ArrayNode surveys = queryToJson(surveyQuery);

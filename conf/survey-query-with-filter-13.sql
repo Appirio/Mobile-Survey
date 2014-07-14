@@ -48,6 +48,10 @@ WHERE
             	tdlinx_acct_level_e__c is null 
             	or tdlinx_acct_level_e__c = '''' 
             	or tdlinx_acct_level_e__c = ''{7}''
+			) and (
+				account_segmentation__c is null
+				or account_segmentation__c = '''' 
+				or account_segmentation__c = ''{8}''
             )
     	)
 	) and (
@@ -65,7 +69,7 @@ WHERE
                         dd_group_member__c gm
                         INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c
                     WHERE
-                        gm.contact__c = ''{8}''
+                        gm.contact__c = ''{9}''
                 ) 
 		) or (
 			SELECT
