@@ -4,6 +4,7 @@ SELECT
 	q.answer_options__c answer_options__c,
 	q.question_type__c question_type__c,
 	q.sfid question__c,
+	q.goal_type__c goal_type__c,
 	ag.sfid assigned_goal__c,
 	r.account__c account__c,
 	r.goal_achievement__c goal_achievement__c

@@ -9,6 +9,7 @@ public class GoalCalculatorFactory {
 	
 	private SingleSelectGoalCalculator singleSelectGoalCalculator;
 	private MultiSelectGoalCalculator multiSelectGoalCalculator;
+	private MultiSelectDisplayGoalCalculator multiSelectDisplayGoalCalculator;
 	
 	private GoalCalculatorFactory() {
 		
@@ -20,6 +21,7 @@ public class GoalCalculatorFactory {
 			
 			instance.singleSelectGoalCalculator = new SingleSelectGoalCalculator();
 			instance.multiSelectGoalCalculator = new MultiSelectGoalCalculator();
+			instance.multiSelectDisplayGoalCalculator = new MultiSelectDisplayGoalCalculator();
 		}
 		
 		return instance;
@@ -35,7 +37,11 @@ public class GoalCalculatorFactory {
 	 */
 	public GoalCalculator getGoalCalculator(ObjectNode question) throws DiageoServicesException {
 		if(question.get("question_type__c").asText().equalsIgnoreCase("Multi-Select")) {
-			return multiSelectGoalCalculator;
+			if(question.get("goal_type__c").asText().equalsIgnoreCase("display")) {
+				return multiSelectDisplayGoalCalculator;
+			} else {
+				return multiSelectGoalCalculator;
+			}
 		} else if (question.get("question_type__c").asText().equalsIgnoreCase("Select")) {
 			return singleSelectGoalCalculator;
 		}
