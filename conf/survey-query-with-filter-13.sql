@@ -52,7 +52,19 @@ WHERE
 				account_segmentation__c is null
 				or account_segmentation__c = '''' 
 				or account_segmentation__c = ''{8}''
-            )
+            ) and ( 
+				category__c is NULL 
+                or category__c = '''' 
+                or category__c like ''%{9}%'' 
+			) and ( 
+				category__c is NULL 
+                or category__c = '''' 
+                or category__c like ''%{10}%'' 
+            ) and ( 
+            	category__c is NULL 
+                or category__c = '''' 
+                or category__c like ''%{11}%''
+			)
     	)
 	) and (
 		universal_survey__c 
@@ -69,7 +81,7 @@ WHERE
                         dd_group_member__c gm
                         INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c
                     WHERE
-                        gm.contact__c = ''{9}''
+                        gm.contact__c = ''{12}''
                 ) 
 		) or (
 			SELECT

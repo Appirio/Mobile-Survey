@@ -39,6 +39,13 @@ public class SurveyDBManager13 extends SurveyDBManager12 {
 		if(zip.length() > 5) {
 			zip = zip.substring(0, 5);
 		}
+		String[] category;
+		String rawCategory = account.get("category__c").asText();
+		if(rawCategory!=null && rawCategory!=""){
+			category = rawCategory.split(";");
+		}else{
+			category = new String[] {"","",""};
+		}
 		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-13"),
 				account.get("tdlinx_sector__c").asText(),
 				account.get("tdlinx_trade_channel__c").asText(),
@@ -49,6 +56,9 @@ public class SurveyDBManager13 extends SurveyDBManager12 {
 				account.get("marketing_group__c").asText(),
 				account.get("tdlinx_account_level_e__c").asText(),
 				account.get("account_segmentatiobn__c").asText(),
+				category[0],
+				category[1],
+				category[2],
 				this.contactId);
 		
 		ArrayNode surveys = queryToJson(surveyQuery);

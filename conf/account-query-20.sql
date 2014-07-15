@@ -19,7 +19,7 @@ SELECT
 	marketing_group__c,
 	tdlinx_account_level_e__c,
 	account_segmentatiobn__c,
-	Category__c
+	category__c
 FROM 
 	account 
 WHERE 
