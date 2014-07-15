@@ -6,7 +6,6 @@ import play.mvc.With;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api20.GoalDBManager;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class GoalServices extends Controller {

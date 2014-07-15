@@ -14,7 +14,8 @@ SELECT
 	TDLinx_Outlet_Desc__c,  
 	Name,  
 	TDLinx_Outlet_State__c,  
-	(|/( power(Latitude__c - {0}, 2) + power(Longitude__c - {1}, 2))) as distance 
+	(|/( power(Latitude__c - {0}, 2) + power(Longitude__c - {1}, 2))) as distance,
+	Category__c
 FROM
 	account 
 WHERE 

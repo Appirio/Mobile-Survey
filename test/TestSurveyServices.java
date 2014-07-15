@@ -5,7 +5,9 @@ import java.util.UUID;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.AccountDBManager;
@@ -15,6 +17,7 @@ import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
+import com.appirio.diageo.db.manager.api20.AccountDBManager20;
 import com.appirio.diageo.db.manager.api20.GoalDBManager;
 import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -25,7 +28,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class TestSurveyServices {
 
 	private TestDBManager testDBManager;
-
+	
 	@Before
 	public void setup() {
 		try {
@@ -34,7 +37,7 @@ public class TestSurveyServices {
 			// delete data
 			testDBManager.clearDB();
 			testDBManager.populateTestSurveys();
-
+			
 			// create test data
 		} catch (DiageoServicesException e) {
 			e.printStackTrace();
@@ -707,7 +710,7 @@ public class TestSurveyServices {
 			// contact id here, also need to check for goal related fields to be
 			// returned
 			SurveyDBManager20 manager = new SurveyDBManager20("1");
-			AccountDBManager accountManager = new AccountDBManager();
+			AccountDBManager20 accountManager = new AccountDBManager20();
 
 			ObjectNode account = accountManager.getAccount("1");
 
@@ -738,7 +741,7 @@ public class TestSurveyServices {
 			Assert.assertTrue(containsG5);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(9, result.size());
+			Assert.assertEquals(7, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			int parentSurveyCount = 0;
@@ -766,6 +769,26 @@ public class TestSurveyServices {
 		}
 	}
 
+	@Test
+	public void testGetSurveysByAccountObjectWithCategoryFilter20() {
+		try {
+			// TODO create data for testcase and cover following usecases in testing.
+			SurveyDBManager20 manager = new SurveyDBManager20("1");
+			AccountDBManager20 accountManager = new AccountDBManager20();
+			ObjectNode account = accountManager.getAccount("1");
+			JsonNode result = manager.getSurveys(account);
+
+			Assert.assertTrue(result.isArray());
+			Assert.assertEquals(7, result.size());
+
+			manager.close();
+			accountManager.close();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			Assert.fail(ex.getMessage());
+		}
+	}
+	
 	@Test
 	public void testGetUniversalSurveys20() {
 		try {
