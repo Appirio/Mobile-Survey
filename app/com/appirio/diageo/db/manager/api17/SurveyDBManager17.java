@@ -48,6 +48,7 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 			String[] tArray = rawCategory.split(";");
 			for (int i = 0; i < tArray.length; i++) {
 				category[i] = tArray[i];
+				if(i==2) break; // query don't support more then 3 values.
 			}
 		}
 		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-17"),

@@ -45,6 +45,7 @@ public class SurveyDBManager12 extends SurveyDBManager {
 			String[] tArray = rawCategory.split(";");
 			for (int i = 0; i < tArray.length; i++) {
 				category[i] = tArray[i];
+				if(i==2) break; // query don't support more then 3 values.
 			}
 		}
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-with-filter-12"), 
