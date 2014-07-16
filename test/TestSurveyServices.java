@@ -28,6 +28,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 public class TestSurveyServices {
 
 	private TestDBManager testDBManager;
+	@Rule public TestName name = new TestName();
 	
 	@Before
 	public void setup() {
@@ -36,8 +37,12 @@ public class TestSurveyServices {
 
 			// delete data
 			testDBManager.clearDB();
-			testDBManager.populateTestSurveys();
 			
+			if("testGetSurveysByAccountObjectWithCategoryFilter20".equalsIgnoreCase(name.getMethodName())){
+				testDBManager.populateTestSurveysCategoryFilterData();
+			}else{
+				testDBManager.populateTestSurveys();
+			}
 			// create test data
 		} catch (DiageoServicesException e) {
 			e.printStackTrace();
@@ -741,7 +746,7 @@ public class TestSurveyServices {
 			Assert.assertTrue(containsG5);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(7, result.size());
+			Assert.assertEquals(9, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			int parentSurveyCount = 0;
@@ -771,19 +776,89 @@ public class TestSurveyServices {
 
 	@Test
 	public void testGetSurveysByAccountObjectWithCategoryFilter20() {
-		try {
-			// TODO create data for testcase and cover following usecases in testing.
-			SurveyDBManager20 manager = new SurveyDBManager20("1");
-			AccountDBManager20 accountManager = new AccountDBManager20();
-			ObjectNode account = accountManager.getAccount("1");
-			JsonNode result = manager.getSurveys(account);
-
-			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(7, result.size());
-
+		try{
+			SurveyDBManager20 manager = null;
+			AccountDBManager20 accountManager = null;
+			
+			try {
+				// Usecase 1 : Account and survey category is null or blank and other criteria matches  
+				manager = new SurveyDBManager20("1");
+				accountManager = new AccountDBManager20();
+				ObjectNode account = accountManager.getAccount("1");
+				JsonNode result = manager.getSurveys(account);
+	
+				Assert.assertTrue(result.isArray());
+				for (JsonNode jsonNode : result) {
+					System.out.println("Usecase1: "+jsonNode.get("sfid"));
+					Assert.assertTrue("g6,g7".contains(jsonNode.get("sfid").asText()));
+				}
+				
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				Assert.fail(ex.getMessage());
+			}
+			
+			try {	
+				// USecase 2 Account and Survey have same category combination and other criteria dont match
+				manager = new SurveyDBManager20("2");
+				accountManager = new AccountDBManager20();
+				ObjectNode account1 = accountManager.getAccount("2");
+				JsonNode result1 = manager.getSurveys(account1);
+	
+				Assert.assertTrue(result1.isArray());
+				for (JsonNode jsonNode : result1) {
+					System.out.println("Usecase2: "+jsonNode.get("sfid"));
+					Assert.assertTrue("g1,g2,g3,g5".contains(jsonNode.get("sfid").asText()));
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				Assert.fail(ex.getMessage());
+			}	
+			
+			try {
+				// USecase 3 Account and Survey have different(non matching) category combination and other criteria dont match
+				manager = new SurveyDBManager20("3");
+				accountManager = new AccountDBManager20();
+				ObjectNode account3 = accountManager.getAccount("3");
+				JsonNode result3 = manager.getSurveys(account3);
+	
+				Assert.fail("Should thorw exception");
+			} catch (Exception ex) {
+				Assert.assertTrue("Usecase3: if category defined and do not match with account then exception occure.",true);
+			}
+			
+			try {	
+				// USecase 4 Account and Survey have different(non matching) category combination and other criteria matches
+				manager = new SurveyDBManager20("4");
+				accountManager = new AccountDBManager20();
+				ObjectNode account4 = accountManager.getAccount("4");
+				JsonNode result4 = manager.getSurveys(account4);
+	
+				Assert.fail("Should thorw exception");
+			}  catch (Exception ex) {
+				Assert.assertTrue("Usecase4: if category defined and do not match with account then exception occure.",true);
+			}
+			
+			try {	
+				// USecase 5 category is null in account and other criteria match
+				manager = new SurveyDBManager20("5");
+				accountManager = new AccountDBManager20();
+				ObjectNode account5 = accountManager.getAccount("5");
+				JsonNode result5 = manager.getSurveys(account5);
+	
+				Assert.assertTrue(result5.isArray());
+				for (JsonNode jsonNode : result5) {
+					System.out.println("Usecase5: "+jsonNode.get("sfid"));
+					Assert.assertTrue("g10,g11".contains(jsonNode.get("sfid").asText()));
+				}
+			} catch (Exception ex) {
+				ex.printStackTrace();
+				Assert.fail(ex.getMessage());
+			}
+			
 			manager.close();
 			accountManager.close();
-		} catch (Exception ex) {
+		}catch (Exception ex) {
 			ex.printStackTrace();
 			Assert.fail(ex.getMessage());
 		}

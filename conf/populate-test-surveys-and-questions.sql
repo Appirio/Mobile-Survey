@@ -3,7 +3,6 @@ INSERT INTO contact (
 ) VALUES (
 	'1'
 );
-
 INSERT INTO	account (
 	latitude__c, 
 	longitude__c, 
@@ -20,8 +19,7 @@ INSERT INTO	account (
 	TDLinx_Outlet_Desc__c,  
 	Name,
 	Active__c,
-	tdlinx_sector__c,
-	Category__c
+	tdlinx_sector__c
 ) values (
 	 10.0001,
 	 10.0001,
@@ -38,41 +36,35 @@ INSERT INTO	account (
 	 'My Favorite Liquor Store',
 	 'My Favorite Liquor Store',
 	 'Yes',
-	 'ON PREMISE',
-	 'Value1;Value2;Value3'
+	 'ON PREMISE'
 );
-
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
 	universal_survey__c,
 	survey_type__c,
-	active__c,
-	Category__c
+	active__c
 ) VALUES (
 	'universal survey 1',
 	'1',
 	'10',
 	't',
 	'Product',
-	true,
-	'Value1;Value2;Value3'
+	true
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	grading_scale__c, 
 	total_possible_score__c,
-	survey_type__c,
-	Category__c
+	survey_type__c
 ) VALUES (
 	'test survey 2',
 	'2',
 	'1',
 	'10',
-	'Product',
-	'Value1;Value2'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -80,46 +72,40 @@ INSERT INTO dms_survey__c (
 	grading_scale__c, 
 	total_possible_score__c,
 	sector__c,
-	survey_type__c,
-	Category__c
+	survey_type__c
 ) VALUES (
 	'test survey 31',
 	'3',
 	'1',
 	'10',
 	'ON PREMISE',
-	'Product',
-	'Value4'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
 	universal_survey__c,
-	survey_type__c,
-	Category__c
+	survey_type__c
 ) VALUES (
 	'universal survey 2',
 	'4',
 	'10',
 	't',
-	'Product',
-	null
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
 	survey_type__c,
-	isparent__c,
-	Category__c
+	isparent__c
 ) VALUES (
 	'parent survey',
 	'5',
 	'10',
 	'Product',
-	't',
-	'Value1;Value2;Value3'
+	't'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -127,16 +113,14 @@ INSERT INTO dms_survey__c (
 	total_possible_score__c,
 	survey_type__c,
 	isparent__c,
-	parent_survey__c,
-	Category__c
+	parent_survey__c
 ) VALUES (
 	'child survey 2',
 	'6',
 	'10',
 	'Product',
 	'f',
-	'5',
-	'Value1;Value2;Value3'
+	'5'	 
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -144,85 +128,73 @@ INSERT INTO dms_survey__c (
 	total_possible_score__c,
 	survey_type__c,
 	isparent__c,
-	parent_survey__c,
-	Category__c
+	parent_survey__c
 ) VALUES (
 	'child survey 1',
 	'7',
 	'10',
 	'Product',
 	'f',
-	'5',
-	'Value1;Value2;Value3'
+	'5'	 
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid,
 	total_possible_score__c,
-	survey_type__c,
-	Category__c
+	survey_type__c
 ) VALUES (
 	'UGI',
 	'g1',
 	'10',
-	'Product',
-	'Value1;Value2;Value3'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
-	survey_type__c,
-	Category__c
+	survey_type__c
 ) VALUES (
 	'UGI NUGI',
 	'g2',
 	'10',
-	'Product',
-	'Value1;Value2;Value3'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
-	survey_type__c,
-	Category__c
+	survey_type__c
 ) VALUES (
 	'NUGI',
 	'g3',
 	'10',
-	'Product',
-	'Value1;Value2;Value3'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
 	survey_type__c,
-	universal_survey__c,
-	Category__c
+	universal_survey__c
 ) VALUES (
 	'UGI Universal',
 	'g4',
 	'10',
 	'Product',
-	true,
-	'Value1;Value2;Value3'
+	true
 );
 INSERT INTO dms_survey__c (
 	name, 
 	sfid, 
 	total_possible_score__c,
 	survey_type__c,
-	universal_survey__c,
-	Category__c
+	universal_survey__c
 ) VALUES (
 	'NUGI Universal',
 	'g5',
 	'10',
 	'Product',
-	true,
-	'Value1;Value2;Value3'
+	true
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -230,16 +202,14 @@ INSERT INTO dms_survey__c (
 	total_possible_score__c,
 	universal_survey__c,
 	survey_type__c,
-	active__c,
-	Category__c
+	active__c
 ) VALUES (
 	'test survey inactive',
 	'10',
 	'10',
 	't',
 	'Product',
-	false,
-	'Value1;Value2;Value3'
+	false
 );
 INSERT INTO dms_question__c (
 	sfid, 
@@ -667,4 +637,3 @@ INSERT INTO dd_assigned_goal__c (
 	'1',
 	'a2gJ0000000aRkxIAE'
 );
-

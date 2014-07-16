@@ -39,12 +39,13 @@ public class SurveyDBManager13 extends SurveyDBManager12 {
 		if(zip.length() > 5) {
 			zip = zip.substring(0, 5);
 		}
-		String[] category;
+		String[] category = new String[3];
 		String rawCategory = account.get("category__c").asText();
 		if(rawCategory!=null && rawCategory!=""){
-			category = rawCategory.split(";");
-		}else{
-			category = new String[] {"","",""};
+			String[] tArray = rawCategory.split(";");
+			for (int i = 0; i < tArray.length; i++) {
+				category[i] = tArray[i];
+			}
 		}
 		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-13"),
 				account.get("tdlinx_sector__c").asText(),

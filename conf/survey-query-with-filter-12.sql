@@ -54,15 +54,9 @@ where
 				or account_segmentation__c = ''{8}''
 			) and ( 
 				category__c is NULL 
-                or category__c = '''' 
-                or category__c like ''%{9}%'' 
-			) and ( 
-				category__c is NULL 
-                or category__c = '''' 
-                or category__c like ''%{10}%'' 
-            ) and ( 
-            	category__c is NULL 
-                or category__c = '''' 
+                or category__c = ''''
+                or category__c like ''%{9}%''
+                or category__c like ''%{10}%''
                 or category__c like ''%{11}%''
 			)
 		)

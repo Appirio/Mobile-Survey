@@ -42,12 +42,14 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		if(zip.length() > 5) {
 			zip = zip.substring(0, 5);
 		}
-		String[] category;
+		String[] category = new String[3];
 		String rawCategory = account.get("category__c").asText();
 		if(rawCategory!=null && rawCategory!=""){
-			category = rawCategory.split(";");
-		}else{
-			category = new String[] {"","",""};
+			String[] tArray = rawCategory.split(";");
+			for (int i = 0; i < tArray.length; i++) {
+				category[i] = tArray[i];
+				if(i==2) break; // query don't support more then 3 values.
+			}
 		}
 		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-20"),
 				account.get("tdlinx_sector__c").asText(),

@@ -23,6 +23,11 @@ public class TestDBManager extends DBManager {
 	public void populateTestSurveys() throws DiageoServicesException {
 		executeStatement(getSQLStatement("populate-test-surveys-and-questions"));
 	}
+	
+	public void populateTestSurveysCategoryFilterData() throws DiageoServicesException {
+		executeStatement(getSQLStatement("populate-test-surveys-category-filter"));
+	}
+	
 
 	public void populateGoalDbManagerTestData() throws DiageoServicesException {
 		executeStatement(getSQLStatement("populate-goal-dbmanager-test-data"));
