@@ -55,9 +55,7 @@ where
 			) and ( 
 				category__c is NULL 
                 or category__c = ''''
-                or category__c like ''%{9}%''
-                or category__c like ''%{10}%''
-                or category__c like ''%{11}%''
+                {9}
 			)
 		)
 	) and (
@@ -75,7 +73,7 @@ where
                         dd_group_member__c gm
                         INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c
                     WHERE
-                        gm.contact__c = ''{12}''
+                        gm.contact__c = ''{10}''
                 ) 
 		) or (
 			SELECT

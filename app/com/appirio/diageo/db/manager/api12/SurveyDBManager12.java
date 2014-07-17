@@ -39,13 +39,18 @@ public class SurveyDBManager12 extends SurveyDBManager {
 		if(zip.length() > 5) {
 			zip = zip.substring(0, 5);
 		}
-		String[] category = new String[3];
+		
+		String conditionTemplate = new String(" or category__c like ''%{0}%'' ");
+		StringBuffer categoryCondition = new StringBuffer();
+		
 		String rawCategory = account.get("category__c").asText();
 		if(rawCategory!=null && rawCategory!=""){
-			String[] tArray = rawCategory.split(";");
+			String[] tArray = null;
+			tArray = rawCategory.split(";");
 			for (int i = 0; i < tArray.length; i++) {
-				category[i] = tArray[i];
-				if(i==2) break; // query don't support more then 3 values.
+				if(!tArray[i].equalsIgnoreCase("null")){
+					categoryCondition.append(MessageFormat.format(conditionTemplate, tArray[i]));
+				}
 			}
 		}
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-with-filter-12"), 
@@ -58,9 +63,7 @@ public class SurveyDBManager12 extends SurveyDBManager {
 				account.get("marketing_group__c").asText(),
 				account.get("tdlinx_account_level_e__c").asText(),
 				account.get("account_segmentatiobn__c").asText(),
-				category[0],
-				category[1],
-				category[2],
+				categoryCondition.toString(),
 				this.contactId)); 
 		
 		StringBuilder surveyIds = new StringBuilder();

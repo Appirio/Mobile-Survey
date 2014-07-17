@@ -1,6 +1,7 @@
 package com.appirio.diageo.db.manager.api20;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
@@ -42,13 +43,18 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		if(zip.length() > 5) {
 			zip = zip.substring(0, 5);
 		}
-		String[] category = new String[3];
+		
+		String conditionTemplate = new String(" or category__c like ''%{0}%'' ");
+		StringBuffer categoryCondition = new StringBuffer();
+		
 		String rawCategory = account.get("category__c").asText();
 		if(rawCategory!=null && rawCategory!=""){
-			String[] tArray = rawCategory.split(";");
+			String[] tArray = null;
+			tArray = rawCategory.split(";");
 			for (int i = 0; i < tArray.length; i++) {
-				category[i] = tArray[i];
-				if(i==2) break; // query don't support more then 3 values.
+				if(!tArray[i].equalsIgnoreCase("null")){
+					categoryCondition.append(MessageFormat.format(conditionTemplate, tArray[i]));
+				}
 			}
 		}
 		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-20"),
@@ -61,9 +67,7 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 				account.get("marketing_group__c").asText(),
 				account.get("tdlinx_account_level_e__c").asText(),
 				account.get("account_segmentatiobn__c").asText(),
-				category[0],
-				category[1],
-				category[2],
+				categoryCondition.toString(),
 				this.contactId);
 		
 		ArrayNode surveys = queryToJson(surveyQuery);
