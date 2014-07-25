@@ -1,7 +1,6 @@
 package com.appirio.diageo.db.manager.api20;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
