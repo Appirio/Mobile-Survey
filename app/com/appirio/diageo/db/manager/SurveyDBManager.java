@@ -234,6 +234,7 @@ public class SurveyDBManager extends DBManager {
 			ArrayNode questions = (ArrayNode) survey.get("questions");
 			List<ObjectNode> surveyResultsList = new ArrayList<ObjectNode>();
 			List<ObjectNode> photosList = new ArrayList<ObjectNode>();
+			List<ObjectNode> surveyResultBrandList = new ArrayList<ObjectNode>();
 
 			// Check if grading_scale exist
 			if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
@@ -295,9 +296,14 @@ public class SurveyDBManager extends DBManager {
 				    // temp Int
 				    int tempHigh = 0;
 				    int scoredSurveyResult = 0;
+				    
+				    String resultBrandExternalId = UUID.randomUUID().toString();
+					newSurvey.put("Result_Brand_Ext_ID__c", resultBrandExternalId);
+					
 				    for(int i=0;i < answerOptions.size();i++) {
 				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
 				        int answerGoalScore = Integer.parseInt(answerOptions.get(i).goalScore);
+				        String valueBrandId = answerOptions.get(i).valueBrandId;
 				        // Potential Score:
 					    // 1. Add up all scores for one that has Multi-Select
 					    if (newSurvey.get("question_type__c").asText().equals("Multi-Select")) {
@@ -308,16 +314,24 @@ public class SurveyDBManager extends DBManager {
         						    // Total score: Total only scores where value matches
         						    scoreTot += answerOptionScore;
         						    scoredSurveyResult += answerOptionScore;
+        						    if(valueBrandId!=null && valueBrandId!=""){
+        						    	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
+        						    }
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
 					    }
 					    // 2. For others, take the highest/only score
 					    else {
+					    	
+					    	
 					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
 					            // Total score: Total only scores where value matches
 					            scoreTot += answerOptionScore;
 					            scoredSurveyResult += answerOptionScore;
+					            if(valueBrandId!=null && valueBrandId!=""){
+					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
+					            }
 					        }
 					        // Text/Price/QTY as long as there is some value to this, you get the full score
 					        else if (!needMatch && !answerValue.equals("null")) {
@@ -330,7 +344,7 @@ public class SurveyDBManager extends DBManager {
 					        }
 					    }
 			        }
-			        
+				    
 			        if (tempHigh > 0) {
 			            scorePotential += tempHigh;
 			        }
@@ -374,6 +388,7 @@ public class SurveyDBManager extends DBManager {
 						photosList.add(newPhoto);
 					}
 				}
+				
 				
 				clearTransientFields(newSurvey, surveyResultFields);
 				// Add it to an arrayList
@@ -424,6 +439,8 @@ public class SurveyDBManager extends DBManager {
     	    
     	    insertSurveyResultsPhotos(photosList);
     	    
+    	    insertSurveyResultsBrands(surveyResultBrandList);
+    	    
     	    calculateGoals(externalId);
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
@@ -432,14 +449,27 @@ public class SurveyDBManager extends DBManager {
 		return surveySubmission;
 	} 
 
-    public void insertSurveyResults(List<ObjectNode> surveyResults) throws DiageoServicesException {
+    private ObjectNode createSurveyResultBrand(String externalId, String brandId ) {
+    	ObjectNode newResultBrand = mapper.createObjectNode();
+	    newResultBrand.put("DMS_Survey_Result__c__Result_Brand_Ext_ID__c", externalId);
+	    newResultBrand.put("Brand__c", brandId);
+		return newResultBrand;
+	}
+
+    private void insertSurveyResults(List<ObjectNode> surveyResults) throws DiageoServicesException {
     	// TODO: clear the name field that is being copied from question
         for (ObjectNode surveyR : surveyResults) {
             insert(surveyR, "dms_survey_result__c");
         }
     }
-    
-    public void insertSurveyResultsPhotos(List<ObjectNode> photosList) throws DiageoServicesException {
+	
+    private void insertSurveyResultsBrands(List<ObjectNode> surveyResultsBrandList) throws DiageoServicesException {
+    	for (ObjectNode srBrand : surveyResultsBrandList) {
+    		insert(srBrand, "DD_Survey_Result_Brands__c");
+    	}
+    }
+	
+    private void insertSurveyResultsPhotos(List<ObjectNode> photosList) throws DiageoServicesException {
     	for (ObjectNode photoR : photosList) {
     		insert(photoR, "DD_Survey_Result_Photos__c");
     	}
