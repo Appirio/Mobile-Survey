@@ -220,7 +220,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -262,7 +262,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -350,7 +350,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -438,7 +438,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -526,7 +526,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -880,7 +880,7 @@ public class TestSurveyServices {
 			System.out.println(result);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
