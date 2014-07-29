@@ -203,15 +203,21 @@ public class SurveyDBManager extends DBManager {
 	public void createSurvey(JsonNode survey, String externalId) throws DiageoServicesException {
 		ObjectNode surveySubmission = null;
 		
+		Map<String, List<List<ObjectNode>>> data = new HashMap<String, List<List<ObjectNode>>>();
+		
+		data.put("results", new ArrayList<List<ObjectNode>>());
+		data.put("photos", new ArrayList<List<ObjectNode>>());
+		data.put("brands", new ArrayList<List<ObjectNode>>());
+		
 	    if(survey.isArray()) {
 	        System.out.println("Survey is array");
 			for(JsonNode node : survey) {
-				surveySubmission = createSurvey(node, externalId, surveySubmission);
+				surveySubmission = createSurvey(node, externalId, surveySubmission, data);
 			}
 		}
 		else if(survey.isObject()) {
 		    System.out.println("Survey is object");
-		    surveySubmission = createSurvey(survey, externalId, surveySubmission);
+		    surveySubmission = createSurvey(survey, externalId, surveySubmission, data);
 		}
 		else {
 			throw new DiageoServicesException("Json object or array expected");
@@ -221,10 +227,31 @@ public class SurveyDBManager extends DBManager {
 		    // Inserting to Survey Submission DB
 			System.out.println("Inserting into Survey Submission Table");
 		    insert((ObjectNode)surveySubmission, "dd_survey_submission__c");
+		    
 	    }
+	    
+	    if(data.get("results").size() > 0) {
+	    	for(List<ObjectNode> results : data.get("results")) {
+			    insertSurveyResults(results);
+	    	}
+	    }
+	    
+	    if(data.get("photos").size() > 0) {
+	    	for(List<ObjectNode> results : data.get("photos")) {
+	    		insertSurveyResultsPhotos(results);
+	    	}
+	    }
+	    
+	    if(data.get("brands").size() > 0) {
+	    	for(List<ObjectNode> results : data.get("brands")) {
+	    		insertSurveyResultsBrands(results);
+	    	}
+	    }
+	    
+	    calculateGoals(externalId);
 	}
 	
-	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission) throws DiageoServicesException {
+	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission, Map<String, List<List<ObjectNode>>> data) throws DiageoServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
 		int scorePotential = 0;
@@ -236,6 +263,10 @@ public class SurveyDBManager extends DBManager {
 			List<ObjectNode> photosList = new ArrayList<ObjectNode>();
 			List<ObjectNode> surveyResultBrandList = new ArrayList<ObjectNode>();
 
+			data.get("results").add(surveyResultsList);
+			data.get("photos").add(photosList);
+			data.get("brands").add(surveyResultBrandList);
+			
 			// Check if grading_scale exist
 			if(survey.has("grading_scale__c") && !survey.get("grading_scale__c").asText().equals("null")) {
 			    // Get grading scale ID
@@ -434,14 +465,6 @@ public class SurveyDBManager extends DBManager {
 			    surveySubmission.put("message__c", message);
 			}
 			
-    	    // Insert Survey Results
-    	    insertSurveyResults(surveyResultsList);
-    	    
-    	    insertSurveyResultsPhotos(photosList);
-    	    
-    	    insertSurveyResultsBrands(surveyResultBrandList);
-    	    
-    	    calculateGoals(externalId);
 		} else {
 			throw new DiageoServicesException("questions field is required to save survey");
 		}
