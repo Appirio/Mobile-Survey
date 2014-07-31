@@ -17,7 +17,8 @@ INSERT INTO dms_question__c (
     goal_name__c,
     is_goal__c,
     goal_start_date__c,
-    max_score__c
+    max_score__c,
+    isActive__c
 ) VALUES (
     '1',
     'the question text',
@@ -31,7 +32,8 @@ INSERT INTO dms_question__c (
     'the goal name',
     true,
     '2014-05-25',
-    200
+    200,
+    true
 );
 INSERT INTO dd_assigned_goal__c (
     contact__c, 

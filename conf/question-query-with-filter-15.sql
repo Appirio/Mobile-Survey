@@ -14,6 +14,6 @@ SELECT
 FROM
     dms_question__c
 WHERE
-    dms_survey__c in ( {0} ) 
+    dms_survey__c in ( {0} ) and IsActive__c = true 
 ORDER BY 
     dms_survey__c
