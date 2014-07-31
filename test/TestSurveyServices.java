@@ -103,7 +103,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -148,7 +148,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -178,7 +178,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(6, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -191,7 +191,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -233,7 +233,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -275,7 +275,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -320,7 +320,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -363,7 +363,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -408,7 +408,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -451,7 +451,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -496,7 +496,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -539,7 +539,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -584,7 +584,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -733,7 +733,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
@@ -893,7 +893,7 @@ public class TestSurveyServices {
 				} else if(survey.get("sfid").asText().equals("g2")) {
 					containsG2 = true;
 				} else if(survey.get("sfid").asText().equals("g3")) {
-					containsG2 = true;
+					containsG3 = true;
 				} else if(survey.get("sfid").asText().equals("g4")) {
 					containsG4 = true;
 				} else if(survey.get("sfid").asText().equals("g5")) {
