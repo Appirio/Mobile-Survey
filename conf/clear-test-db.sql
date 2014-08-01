@@ -14,3 +14,5 @@ delete from dd_group_member__c;
 
 delete from Brand__c;
 delete from DD_Survey_Result_Brands__c;
+delete from DD_Grading_Scale__c;
+delete from dd_grading_range__c;

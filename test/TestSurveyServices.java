@@ -90,7 +90,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys("1");
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(4, result.size());
+			Assert.assertEquals(5, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 			
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -178,7 +178,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(6, result.size());
+			Assert.assertEquals(7, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -199,8 +199,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);
@@ -241,8 +241,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);
@@ -283,8 +283,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);
@@ -371,8 +371,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);
@@ -438,7 +438,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(6, result.size());
+			Assert.assertEquals(7, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -459,8 +459,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);
@@ -483,7 +483,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(8, result.size());
+			Assert.assertEquals(9, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -526,7 +526,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(6, result.size());
+			Assert.assertEquals(7, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -547,8 +547,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);
@@ -571,7 +571,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(9, result.size());
+			Assert.assertEquals(10, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -700,7 +700,7 @@ public class TestSurveyServices {
 					.asText());
 			Assert.assertEquals(70, submission.get("total_possible_score__c")
 					.asInt());
-			Assert.assertEquals("C", submission.get("grade__c").asText());
+			Assert.assertEquals("F", submission.get("grade__c").asText());
 			Assert.assertEquals("003K000000hWUvGIAW",
 					submission.get("contact__c").asText());
 		} catch (Exception e) {
@@ -748,7 +748,7 @@ public class TestSurveyServices {
 			Assert.assertTrue(containsG5);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(9, result.size());
+			Assert.assertEquals(10, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			int parentSurveyCount = 0;
@@ -880,7 +880,7 @@ public class TestSurveyServices {
 			System.out.println(result);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(6, result.size());
+			Assert.assertEquals(7, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -901,8 +901,8 @@ public class TestSurveyServices {
 				} 
 			}
 			
-			Assert.assertTrue(!containsG1);
-			Assert.assertTrue(!containsG2);
+			Assert.assertTrue(containsG1);
+			Assert.assertTrue(containsG2);
 			Assert.assertTrue(!containsG3);
 			Assert.assertTrue(containsG4);
 			Assert.assertTrue(containsG5);

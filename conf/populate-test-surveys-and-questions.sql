@@ -211,6 +211,28 @@ INSERT INTO dms_survey__c (
 	'Product',
 	false
 );
+
+INSERT INTO dms_survey__c (
+	name, 
+	sfid, 
+	total_possible_score__c,
+	universal_survey__c,
+	survey_type__c,
+	Grading_Scale__c,
+	active__c
+) VALUES (
+	'test survey',
+	'a2iJ0000000NyZ6IAK',
+	'10',
+	't',
+	'Product',
+	'a30J00000008MoeIAE',
+	true
+);
+
+INSERT INTO DD_Grading_Scale__c(sfid,Name) VALUES('a30J00000008MoeIAE','Standard Grading - sfadev');
+INSERT INTO dd_grading_range__c(sfid,Name, DD_Grading_Scale__c,message__c, grade__c, low_range__c) VALUES('a2zJ0000000KPz9', 'TEST Range', 'a30J00000008MoeIAE','test geade message', 'F',10);
+
 INSERT INTO dms_question__c (
 	sfid, 
 	question_text__c, 
@@ -463,6 +485,9 @@ INSERT INTO dms_question__c (
 	'g5',
 	true
 );
+
+
+
  
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005J0000001qAuwIAE', '005J0000001qAuwIAE', NULL, 'a2gJ0000000aQxYIAU', '[{"value":"Brand 1","valueBrandId":"100","score":"55","goalScore":"1"},{"value":"Brand 2","valueBrandId":"101","score":"0","goalScore":"0"}]', '2014-06-24 13:24:41', NULL, '2014-06-26 12:09:22', NULL, NULL, false, NULL, NULL, 'Select', 'Is Smirnoff in Distribution?', NULL, false, NULL, '2014-06-26 12:09:22', 'Q-1514', 6, 'a2iJ0000000NyZ6IAK', 1, 'Distribution', 55, false, '2014-06-01', true, 'Smirnoff distribution', '2014-06-30', true);
 INSERT INTO dms_question__c (createdbyid, lastmodifiedbyid, connectionsentid, sfid, answer_options__c, createddate, conditional_answer__c, systemmodstamp, question_number__c, connectionreceivedid, include_none_of_the_above__c, _c5_source, label_for_add_l_comments__c, question_type__c, question_text__c, next_question__c, isdeleted, parent_question__c, lastmodifieddate, name, id, dms_survey__c, max_goal_score__c, goal_type__c, max_score__c, include_photos__c, goal_start_date__c, is_goal__c, goal_name__c, goal_end_date__c, isactive__c) VALUES ('005J0000001q3z6IAA', '005J0000001q3z6IAA', NULL, 'a2gJ0000000aRjkIAE', '[{"value":"Yes","score":"0","goalScore":"0"},{"value":"No","score":"0","goalScore":"0"}]', '2014-07-01 10:39:34', 'No', '2014-07-01 10:39:45', NULL, NULL, false, NULL, NULL, 'Select', 'What is question two NO ?', NULL, false, 'a2gJ0000000aRjaIAE', '2014-07-01 10:39:45', 'Q-1537', 24, 'a2iJ0000000O1VPIA0', NULL, NULL, 0, false, NULL, false, NULL, NULL, true);

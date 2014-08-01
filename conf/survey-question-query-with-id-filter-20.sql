@@ -33,6 +33,6 @@ FROM
     dms_question__c q
     INNER JOIN dms_survey__c s ON s.sfid =  q.dms_survey__c 
 WHERE 
-    q.sfid in ({0})
+    q.sfid in ({0}) and IsActive__c = true
 ORDER BY
 	q.sfid;
