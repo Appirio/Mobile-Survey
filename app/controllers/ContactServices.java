@@ -6,7 +6,6 @@ import play.mvc.Result;
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.ContactDBManager;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ContactServices extends Controller {
 
@@ -18,10 +17,10 @@ public class ContactServices extends Controller {
 				if(body.has("email") && body.has("authorizationCode")) {
 					ContactDBManager manager = new ContactDBManager();
 					try {
-						String userId = manager.approveContact(body.get("email").asText(), Long.parseLong(body.get("authorizationCode").asText()));
+						JsonNode user = manager.approveContact(body.get("email").asText(), Long.parseLong(body.get("authorizationCode").asText()));
 						
-						if(userId != null) {
-							return ok(new ObjectMapper().readTree("{\"contact\": {\"id\": \"" + userId + "\"}}"));
+						if(user != null) {
+							return ok(user);
 						} else {
 							return badRequest(ControllerUtils.messageToJson("Invalid code, code already used, or contact not authorized"));
 						}

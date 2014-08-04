@@ -1,10 +1,10 @@
 package com.appirio.diageo.db.manager;
 
+import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-
-import com.appirio.diageo.db.DiageoServicesException;
 
 public class ContactDBManager extends DBManager {
 
@@ -21,20 +21,27 @@ public class ContactDBManager extends DBManager {
 	}
 
 
-	public String approveContact(String email, Long authorizationCode) throws DiageoServicesException {
+	public JsonNode approveContact(String email, Long authorizationCode) throws DiageoServicesException, Exception {
 		// TODO remove this, temporary for testing
-		if(DEFAULT_CONTACT_REG != null && !DEFAULT_CONTACT_REG.equals("FALSE") && authorizationCode.longValue() == 12345) {
-			return DEFAULT_CONTACT_REG;
-		}
+		//if(DEFAULT_CONTACT_REG != null && !DEFAULT_CONTACT_REG.equals("FALSE") && authorizationCode.longValue() == 12345) {
+		//	return DEFAULT_CONTACT_REG;
+		//}
 		
-		JsonNode users = queryToJson("select sfid from Contact where direct_dial_activation_code__c = " + authorizationCode + " and Direct_Dial_Mobile_User__c and Email = '" + email + "';");
+		JsonNode users = queryToJson("select sfid, assigned_goal_count__c from Contact where direct_dial_activation_code__c = " + authorizationCode + " and Direct_Dial_Mobile_User__c and Email = '" + email + "';");
 		
 		if(users.size() > 0) {
 			ObjectNode user = (ObjectNode) users.get(0);
 			
 			saveApprovedContact(user.get("sfid").asText());
 			
-			return user.get("sfid").asText();
+			Integer goalCount = user.get("assigned_goal_count__c").asInt(0);
+			Boolean showDashboard = false;
+			
+			if(goalCount > 0){
+				showDashboard = true;
+			}
+			
+			return new ObjectMapper().readTree("{\"contact\": {\"id\": \"" + user.get("sfid").asText() + "\", \"showDashboard\": \"" + showDashboard  + "\"}}") ;
 		} else {
 			return null;
 		}

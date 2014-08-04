@@ -24,8 +24,8 @@ SELECT
 FROM 
     dms_question__c q
     INNER JOIN dms_survey__c s ON s.sfid = q.dms_survey__c
-    LEFT OUTER JOIN dd_assigned_goal__c ag on (ag.dd_survey_question__c = q.sfid and ag.contact__c = ''{1}'') 
+    LEFT OUTER JOIN dd_assigned_goal__c ag on (ag.dd_survey_question__c = q.sfid and ag.contact__c = ''{0}'') 
 WHERE 
-    q.dms_survey__c in ( {0} ) and IsActive__c = true
+    q.dms_survey__c in ( {1} ) and IsActive__c = true
 ORDER BY
     q.dms_survey__c

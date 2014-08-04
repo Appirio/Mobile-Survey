@@ -82,7 +82,7 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 			separator = ",";
 		}
 		
-		String questionQuery = MessageFormat.format(getSQLStatement("question-query-with-filter-20"), surveyIds.toString(), contactId);
+		String questionQuery = MessageFormat.format(getSQLStatement("question-query-with-filter-20"), contactId, surveyIds.toString());
 		
 		ArrayNode questions = queryToJson(questionQuery);
 		
