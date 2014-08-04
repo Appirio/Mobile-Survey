@@ -27,7 +27,7 @@ public class ContactDBManager extends DBManager {
 		//	return DEFAULT_CONTACT_REG;
 		//}
 		
-		JsonNode users = queryToJson("select sfid, assigned_goal_count__c from Contact where direct_dial_activation_code__c = " + authorizationCode + " and Direct_Dial_Mobile_User__c and Email = '" + email + "';");
+		JsonNode users = queryToJson("select sfid, Name, Email, MobilePhone, Department, assigned_goal_count__c from Contact where direct_dial_activation_code__c = " + authorizationCode + " and Direct_Dial_Mobile_User__c and Email = '" + email + "';");
 		
 		if(users.size() > 0) {
 			ObjectNode user = (ObjectNode) users.get(0);
@@ -41,7 +41,7 @@ public class ContactDBManager extends DBManager {
 				showDashboard = true;
 			}
 			
-			return new ObjectMapper().readTree("{\"contact\": {\"id\": \"" + user.get("sfid").asText() + "\", \"showDashboard\": \"" + showDashboard  + "\"}}") ;
+			return new ObjectMapper().readTree("{\"contact\": {\"id\": \"" + user.get("sfid").asText() + "\", \"name\": \"" + user.get("name").asText()  + "\", \"email\": \"" + user.get("email").asText()   + "\", \"mobilePhone\": \"" + user.get("mobilephone").asText()   + "\", \"department\": \"" + user.get("department").asText()  + "\", \"showDashboard\": \"" + showDashboard  + "\"}}") ;
 		} else {
 			return null;
 		}
