@@ -29,7 +29,7 @@ SELECT
 	q.Question_Type__c Question_Type__c,
 	q.SystemModstamp SystemModstamp,
 	s.sector__c sector__c,
-	s.name Survey_Name__c
+	s.name survey_name__c
 FROM 
     ˙dms_question__c q
     INNER JOIN dms_survey__c s ON s.sfid =  q.dms_survey__c 
