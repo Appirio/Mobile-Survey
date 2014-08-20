@@ -3,10 +3,10 @@ SELECT
 	q.goal_type__c goal_type__c,
 	q.goal_name__c goal_name__c,
 	q.is_goal__c is_goal__c,
-	q.goal_start_date__c goal_start_date__c,
+	s.start_date__c goal_start_date__c,
 	q.max_score__c max_score__c,
 	s.sector__c sector,
-	q.end_date__c goal_end_date__c,
+	s.end_date__c goal_end_date__c,
 	
 FROM
 	dd_assigned_goal__c ag

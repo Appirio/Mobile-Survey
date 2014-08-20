@@ -13,10 +13,8 @@ INSERT INTO dms_question__c (
     dms_survey__c,
     max_goal_score__c,
     goal_type__c,
-    goal_end_date__c,
     goal_name__c,
     is_goal__c,
-    goal_start_date__c,
     max_score__c
 ) VALUES (
     '1',
@@ -27,10 +25,8 @@ INSERT INTO dms_question__c (
     '1',
     10,
     'type',
-    '2014-06-25',
     'the goal name',
     true,
-    '2014-05-25',
     200
 );
 INSERT INTO dd_assigned_goal__c (
@@ -104,8 +100,6 @@ INSERT INTO dms_question__c (
     question_type__c, 
     dms_survey__c,
     Goal_Name__c,
-    Goal_Start_Date__c,
-    Goal_End_Date__c,
     Goal_Type__c,
     Is_Goal__c
 ) VALUES (
@@ -116,8 +110,6 @@ INSERT INTO dms_question__c (
     'Count',
     '100',
     'GOAL NAME 102',
-    to_date('2014-11-15', 'YYYY-MM-DD'),
-    to_date('2014-11-30', 'YYYY-MM-DD'),
     'Distribution',
     true
 );
@@ -130,8 +122,6 @@ INSERT INTO dms_question__c (
     question_type__c, 
     dms_survey__c,
     Goal_Name__c,
-    Goal_Start_Date__c,
-    Goal_End_Date__c,
     Goal_Type__c,
     Is_Goal__c
 ) VALUES (
@@ -142,8 +132,6 @@ INSERT INTO dms_question__c (
     'Count',
     '100',
     'GOAL NAME 103',
-    to_date('2014-12-15', 'YYYY-MM-DD'),
-    to_date('2014-12-30', 'YYYY-MM-DD'),
     'Distribution',
     true
 );
