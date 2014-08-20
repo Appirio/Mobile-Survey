@@ -48,7 +48,7 @@ public class ContactServices extends Controller {
 	}
 	
 	@With(SecureAction.class)
-	public static Result getUser() {
+	public static Result getContact() {
 		try {
 			ContactDBManager manager = new ContactDBManager();
 		
