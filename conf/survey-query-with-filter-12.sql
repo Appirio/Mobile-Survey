@@ -10,6 +10,8 @@ where
 	and	(Active__c is null or Active__c = true) 
 	and (IsParent__c is null or IsParent__c = false) 
 	and	parent_survey__c is null 
+	and start_date__c <= current_date 
+    and current_date <= end_date__c
 	and	(
 		universal_survey__c 
 		or (

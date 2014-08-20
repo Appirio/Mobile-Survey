@@ -11,7 +11,9 @@ SELECT
 FROM
     dms_survey__c s
 WHERE  
-    (Active__c is null or Active__c = true) 
+    (Active__c is null or Active__c = true)
+    and start_date__c <= current_date 
+    and current_date <= end_date__c 
     and (
     	universal_survey__c
     	or (

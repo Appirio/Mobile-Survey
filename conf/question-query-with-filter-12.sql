@@ -10,6 +10,6 @@ select
 from 
 	dms_question__c 
 where 
-	dms_survey__c in ({0}) and IsActive__c = true
+	dms_survey__c in ({0})
 order by 
 	dms_survey__c

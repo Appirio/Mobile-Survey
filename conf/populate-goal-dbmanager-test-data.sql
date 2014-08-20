@@ -17,8 +17,7 @@ INSERT INTO dms_question__c (
     goal_name__c,
     is_goal__c,
     goal_start_date__c,
-    max_score__c,
-    isActive__c
+    max_score__c
 ) VALUES (
     '1',
     'the question text',
@@ -32,8 +31,7 @@ INSERT INTO dms_question__c (
     'the goal name',
     true,
     '2014-05-25',
-    200,
-    true
+    200
 );
 INSERT INTO dd_assigned_goal__c (
     contact__c, 
@@ -71,16 +69,14 @@ INSERT INTO dms_question__c (
     parent_question__c, 
     name, 
     question_type__c, 
-    dms_survey__c,
-    IsActive__c
+    dms_survey__c
 ) VALUES (
     '100',
     'the GoalAchievement100',
     null,
     'question 100',
     'Count',
-    '100',
-    true
+    '100'
 );
 
 INSERT INTO dms_question__c (
@@ -89,16 +85,14 @@ INSERT INTO dms_question__c (
     parent_question__c, 
     name, 
     question_type__c, 
-    dms_survey__c,
-    IsActive__c
+    dms_survey__c
 ) VALUES (
     '101',
     'the GoalAchievement101',
     null,
     'question 101',
     'Count',
-    '100',
-    true
+    '100'
 );
 
 
@@ -109,7 +103,6 @@ INSERT INTO dms_question__c (
     name, 
     question_type__c, 
     dms_survey__c,
-    IsActive__c,
     Goal_Name__c,
     Goal_Start_Date__c,
     Goal_End_Date__c,
@@ -122,7 +115,6 @@ INSERT INTO dms_question__c (
     'question 102',
     'Count',
     '100',
-    true,
     'GOAL NAME 102',
     to_date('2014-11-15', 'YYYY-MM-DD'),
     to_date('2014-11-30', 'YYYY-MM-DD'),
@@ -137,7 +129,6 @@ INSERT INTO dms_question__c (
     name, 
     question_type__c, 
     dms_survey__c,
-    IsActive__c,
     Goal_Name__c,
     Goal_Start_Date__c,
     Goal_End_Date__c,
@@ -150,7 +141,6 @@ INSERT INTO dms_question__c (
     'question 103',
     'Count',
     '100',
-    true,
     'GOAL NAME 103',
     to_date('2014-12-15', 'YYYY-MM-DD'),
     to_date('2014-12-30', 'YYYY-MM-DD'),

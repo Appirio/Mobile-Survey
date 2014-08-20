@@ -1,12 +1,12 @@
 SELECT
 	q.max_goal_score__c max_goal_score__c,
 	q.goal_type__c goal_type__c,
-	q.goal_end_date__c goal_end_date__c,
 	q.goal_name__c goal_name__c,
 	q.is_goal__c is_goal__c,
 	q.goal_start_date__c goal_start_date__c,
 	q.max_score__c max_score__c,
-	s.sector__c sector
+	s.sector__c sector,
+	q.end_date__c goal_end_date__c,
 	
 FROM
 	dd_assigned_goal__c ag
@@ -17,8 +17,8 @@ WHERE
 	ag.contact__c = ''{0}'' and
 	(
 		(
-			q.goal_start_date__c <= ''{2}''
+			s.start_date__c <= ''{2}''
 		) or (
-			q.goal_end_date__c >= ''{1}''
+			s.end_date__c >= ''{1}''
 		) 
 	)

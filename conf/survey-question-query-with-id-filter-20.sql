@@ -14,7 +14,6 @@ SELECT
 	q.Include_None_of_the_Above__c Include_None_of_the_Above__c,
 	q.Include_Photos__c Include_Photos__c,
 	q.Is_Goal__c Is_Goal__c,
-	q.IsActive__c IsActive__c,
 	q.IsDeleted IsDeleted,
 	q.Label_for_Add_l_Comments__c Label_for_Add_l_Comments__c,
 	q.LastModifiedById LastModifiedById,
@@ -34,6 +33,6 @@ FROM
     dms_question__c q
     INNER JOIN dms_survey__c s ON s.sfid =  q.dms_survey__c 
 WHERE 
-    q.sfid in ({0}) and IsActive__c = true
+    q.sfid in ({0})
 ORDER BY
 	q.sfid;
