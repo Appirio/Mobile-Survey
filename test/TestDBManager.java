@@ -36,4 +36,8 @@ public class TestDBManager extends DBManager {
 	public void populateTestSurveyWithAnswerBrandsData() throws DiageoServicesException {
 		executeStatement(getSQLStatement("populate-test-surveys-with-answer-brand-data"));
 	}
+
+	public void populateContacts() throws DiageoServicesException {
+		executeStatement(getSQLStatement("populate-contacts"));
+	}
 }

@@ -1,5 +1,7 @@
 package com.appirio.diageo.db.manager;
 
+import java.text.MessageFormat;
+
 import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +21,6 @@ public class ContactDBManager extends DBManager {
 		
 		return users.size() > 0;
 	}
-
 
 	public JsonNode approveContact(String email, Long authorizationCode) throws DiageoServicesException, Exception {
 		// TODO remove this, temporary for testing
@@ -61,5 +62,15 @@ public class ContactDBManager extends DBManager {
 		}
 		
 		return null;
+	}
+	
+	public ObjectNode getContact(String sfid) throws DiageoServicesException {
+		ObjectNode result = queryToJsonObject(MessageFormat.format(getSQLStatement("contact-query"), sfid));
+		
+		if(result != null) {
+			result.put("showDashboard", result.has("assigned_goal_count__c") && result.get("assigned_goal_count__c").asInt() > 0);
+		}
+		
+		return result;
 	}
 }

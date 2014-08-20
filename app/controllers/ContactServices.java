@@ -2,10 +2,12 @@ package controllers;
 
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.With;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.ContactDBManager;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class ContactServices extends Controller {
 
@@ -42,6 +44,25 @@ public class ContactServices extends Controller {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
+    	}
+	}
+	
+	@With(SecureAction.class)
+	public static Result getUser() {
+		try {
+			ContactDBManager manager = new ContactDBManager();
+		
+			try {
+				ObjectNode user = manager.getContact(request().getHeader("uid"));
+				
+				return ok(user);
+			} finally {
+				manager.close();
+			}
+    	} catch (DiageoServicesException e) {
+    		e.printStackTrace();
+    		
+    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
     	}
 	}
 }
