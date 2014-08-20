@@ -6,7 +6,7 @@ SELECT
 	q.CreatedById CreatedById,
 	q.CreatedDate CreatedDate,
 	q.DMS_Survey__c DMS_Survey__c,
-	s.End_Date__c Goal_End_Date__c,
+	s.Start_Date__c Goal_End_Date__c,
 	q.Goal_Name__c Goal_Name__c,
 	s.Start_Date__c Goal_Start_Date__c,
 	q.Goal_Type__c Goal_Type__c,
