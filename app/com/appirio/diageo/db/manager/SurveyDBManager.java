@@ -97,7 +97,8 @@ public class SurveyDBManager extends DBManager {
 			"SCORE_ROLLUP__C",
 			"SCORE_ROLLUP_TOTAL_POSSIBLE__C",
 			"GOAL_ACHIEVEMENT__C",
-			"RESULT_EXT_ID__C"
+			"RESULT_EXT_ID__C",
+			"RESULT_BRAND_EXT_ID__C"
 			);
 	
 	public SurveyDBManager(String contactId) throws DiageoServicesException {
@@ -329,7 +330,7 @@ public class SurveyDBManager extends DBManager {
 				    int scoredSurveyResult = 0;
 				    
 				    String resultBrandExternalId = UUID.randomUUID().toString();
-					newSurvey.put("Result_Brand_Ext_ID__c", resultBrandExternalId);
+					newSurvey.put("result_brand_ext_id__c", resultBrandExternalId);
 					
 				    for(int i=0;i < answerOptions.size();i++) {
 				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
@@ -474,7 +475,7 @@ public class SurveyDBManager extends DBManager {
 
     private ObjectNode createSurveyResultBrand(String externalId, String brandId ) {
     	ObjectNode newResultBrand = mapper.createObjectNode();
-	    newResultBrand.put("DMS_Survey_Result__c__Result_Brand_Ext_ID__c", externalId);
+	    newResultBrand.put("dms_survey_result__c__result_brand_ext_id__c", externalId);
 	    newResultBrand.put("Brand__c", brandId);
 		return newResultBrand;
 	}
@@ -488,13 +489,13 @@ public class SurveyDBManager extends DBManager {
 	
     private void insertSurveyResultsBrands(List<ObjectNode> surveyResultsBrandList) throws DiageoServicesException {
     	for (ObjectNode srBrand : surveyResultsBrandList) {
-    		insert(srBrand, "DD_Survey_Result_Brands__c");
+    		insert(srBrand, "dd_survey_result_brands__c");
     	}
     }
 	
     private void insertSurveyResultsPhotos(List<ObjectNode> photosList) throws DiageoServicesException {
     	for (ObjectNode photoR : photosList) {
-    		insert(photoR, "DD_Survey_Result_Photos__c");
+    		insert(photoR, "dd_survey_result_photos__c");
     	}
     }
     
