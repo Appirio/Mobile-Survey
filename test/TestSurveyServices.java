@@ -571,7 +571,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getSurveys(account);
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(10, result.size());
+			Assert.assertEquals(9, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;

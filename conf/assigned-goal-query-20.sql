@@ -12,8 +12,12 @@ SELECT
 	ag.Target__c Target__c
 FROM
     DD_Assigned_Goal__c ag
+    INNER JOIN dms_question__c q ON ag.dd_survey_question__c = q.sfid 
+    INNER JOIN dms_survey__c s ON s.sfid = q.dms_survey__c
 WHERE 
-    Contact__c=''{0}''
+	s.active__c = true 
+	and (s.parent_survey__c = null || (select count(*) from dms_survey__c where p.Active__c = true and p.sfid = s.parent_survey__c)  > 0)
+	and Contact__c=''{0}''
     AND 
 	(
 		(

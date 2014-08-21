@@ -13,6 +13,7 @@ where
     	and survey_type__c != ''Non Product''
     	and (start_date__c is null OR start_date__c <= current_date)
     	and (end_date__c is null OR current_date <= end_date__c) 
+    	and (select count(*) from dms_question__c q where q.DMS_Survey__c=s.sfid)>0 
     ) and universal_survey__c
     or (
         sfid in (

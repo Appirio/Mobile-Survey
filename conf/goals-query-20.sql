@@ -6,7 +6,7 @@ SELECT
 	s.start_date__c goal_start_date__c,
 	q.max_score__c max_score__c,
 	s.sector__c sector,
-	s.end_date__c goal_end_date__c,
+	s.end_date__c goal_end_date__c
 	
 FROM
 	dd_assigned_goal__c ag
