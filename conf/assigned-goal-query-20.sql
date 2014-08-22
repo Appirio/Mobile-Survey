@@ -16,15 +16,16 @@ FROM
     INNER JOIN dms_survey__c s ON s.sfid = q.dms_survey__c
 WHERE 
 	s.active__c = true 
-	and (s.parent_survey__c = null || (select count(*) from dms_survey__c where p.Active__c = true and p.sfid = s.parent_survey__c)  > 0)
+	and (s.parent_survey__c = '''' or s.parent_survey__c = null or (select count(*) from dms_survey__c p where p.Active__c = true and p.sfid = s.parent_survey__c) >0 )
 	and Contact__c=''{0}''
     AND 
 	(
-		(
-			start_date__c <= ''{2}''
-		) and (
-			end_date__c >= ''{1}''
-		) 
+		(ag.start_date__c is null OR ag.start_date__c <= ''{2}'')
+		and
+		(ag.end_date__c is null OR ag.end_date__c >=  ''{1}'')
 	)
 ORDER BY 
 	ag.DD_Survey_Question__c;
+	
+	
+	

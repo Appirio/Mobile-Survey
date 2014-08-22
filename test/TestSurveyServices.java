@@ -884,7 +884,7 @@ public class TestSurveyServices {
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
-
+			
 			for(JsonNode survey : result) {
 				Assert.assertTrue(survey.has("questions") && survey.get("questions").size() > 0);
 				

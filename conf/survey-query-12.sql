@@ -11,7 +11,11 @@ WHERE
     	and (IsParent__c is null or IsParent__c = false) 
     	and parent_survey__c is null
     	and (start_date__c is null OR start_date__c <= current_date)
-    	and (end_date__c is null OR current_date <= end_date__c) 
+    	and (end_date__c is null OR current_date <= end_date__c)
+    	and (
+    		(select count(*) from dms_question__c q where q.DMS_Survey__c=s.sfid)>0 
+    		or (select count(*) from dms_survey__c sr where sr.Active__c = true and sr.Parent_Survey__c=s.sfid)>0
+		)  
     ) and universal_survey__c
     or (
         sfid in (

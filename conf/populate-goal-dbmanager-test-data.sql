@@ -49,14 +49,16 @@ INSERT INTO dms_survey__c (
     total_possible_score__c,
     universal_survey__c,
     survey_type__c,
-    Active__c
+    Active__c,
+    parent_survey__c
 ) VALUES (
     'test GoalAchievement100',
     '100',
     '1010',
     't',
     'Product',
-    null
+    true,
+    ''
 );
 
 INSERT INTO dms_question__c (
