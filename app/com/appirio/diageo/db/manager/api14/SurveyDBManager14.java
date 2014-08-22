@@ -27,10 +27,18 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 			surveyIds.append("'");
 			separator = ",";
 		}
-
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-universal-query-14"), surveyIds.toString()));
-
-		return processSurveys(surveys, questions, false);
+		
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-universal-query-14"), surveyIds.toString()));
+			result = processSurveys(surveys, questions, false);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
+		}
+		
+		return result;
 	}
 
 	public ArrayNode getSurveys(ObjectNode account) throws DiageoServicesException {
@@ -79,10 +87,16 @@ public class SurveyDBManager14 extends SurveyDBManager13 {
 			separator = ",";
 		}
 		
-		String questionQuery = MessageFormat.format(getSQLStatement("question-query-with-filter-14"), surveyIds.toString());
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-14"), surveyIds.toString()));
+			result = processSurveys(surveys, questions, false);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
+		}
 		
-		ArrayNode questions = queryToJson(questionQuery);
-		
-		return processSurveys(surveys, questions, false);
+		return result;
 	}	
 }

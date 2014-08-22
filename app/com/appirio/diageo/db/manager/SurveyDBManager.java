@@ -108,44 +108,50 @@ public class SurveyDBManager extends DBManager {
 	}
 	
 	public ArrayNode getSurveys(String accountId) throws DiageoServicesException {
-		ArrayNode result = mapper.createArrayNode();
 		
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query"), this.contactId));
 
-		StringBuilder inStatement = new StringBuilder();
+		StringBuilder surveyIds = new StringBuilder();
 		String separator = "";
 		
 		for(JsonNode survey : surveys) {
-			inStatement.append(separator);
-			inStatement.append("'");
-			inStatement.append(survey.get("sfid").asText());
-			inStatement.append("'");
+			surveyIds.append(separator);
+			surveyIds.append("'");
+			surveyIds.append(survey.get("sfid").asText());
+			surveyIds.append("'");
 			
 			separator = ",";
 		}
 		
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query"), inStatement.toString()));
-		
-		int questionCt = 0; 
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query"), surveyIds.toString()));
+			
+			int questionCt = 0; 
 
-		for(int surveyCt = 0 ; surveyCt < surveys.size(); surveyCt ++) {
-			ObjectNode survey = (ObjectNode) surveys.get(surveyCt);
-			ArrayNode surveyQuestions = mapper.createArrayNode();
-			
-			if (survey.get("grading_scale__c") == null) {
-			    continue;
-			}
-			
-			while(questionCt < questions.size() && (questions.get(questionCt).get("dms_survey__c").asText().equals(survey.get("sfid").asText()))) {
-				surveyQuestions.add(questions.get(questionCt));
+			for(int surveyCt = 0 ; surveyCt < surveys.size(); surveyCt ++) {
+				ObjectNode survey = (ObjectNode) surveys.get(surveyCt);
+				ArrayNode surveyQuestions = mapper.createArrayNode();
 				
-				questionCt++;
+				if (survey.get("grading_scale__c") == null) {
+				    continue;
+				}
+				
+				while(questionCt < questions.size() && (questions.get(questionCt).get("dms_survey__c").asText().equals(survey.get("sfid").asText()))) {
+					surveyQuestions.add(questions.get(questionCt));
+					
+					questionCt++;
+				}
+				
+				survey.put("questions", surveyQuestions);
+				survey.put("account__c", accountId);
+				
+				result.add(survey);
 			}
-			
-			survey.put("questions", surveyQuestions);
-			survey.put("account__c", accountId);
-			
-			result.add(survey);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
 		}
 		
 		return sortSurveysByName(result);
@@ -504,45 +510,50 @@ public class SurveyDBManager extends DBManager {
     }
     
 	public ArrayNode getSurveys() throws DiageoServicesException {
-		ArrayNode result = mapper.createArrayNode();
 		
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-universal"), this.contactId));
 
-		StringBuilder inStatement = new StringBuilder();
+		StringBuilder surveyIds = new StringBuilder();
 		String separator = "";
 		
 		for(JsonNode survey : surveys) {
-			inStatement.append(separator);
-			inStatement.append("'");
-			inStatement.append(survey.get("sfid").asText());
-			inStatement.append("'");
+			surveyIds.append(separator);
+			surveyIds.append("'");
+			surveyIds.append(survey.get("sfid").asText());
+			surveyIds.append("'");
 			
 			separator = ",";
 		}
 		
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-universal"), inStatement.toString()));
-		
-		int questionCt = 0; 
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-universal"), surveyIds.toString()));
+			int questionCt = 0; 
 
-		for(int surveyCt = 0 ; surveyCt < surveys.size(); surveyCt ++) {
-			ObjectNode survey = (ObjectNode) surveys.get(surveyCt);
-			ArrayNode surveyQuestions = mapper.createArrayNode();
-			
-			if (survey.get("grading_scale__c") == null) {
-			    continue;
-			}
-			
-			while(questionCt < questions.size() && (questions.get(questionCt).get("dms_survey__c").asText().equals(survey.get("sfid").asText()))) {
-			    surveyQuestions.add(questions.get(questionCt));
+			for(int surveyCt = 0 ; surveyCt < surveys.size(); surveyCt ++) {
+				ObjectNode survey = (ObjectNode) surveys.get(surveyCt);
+				ArrayNode surveyQuestions = mapper.createArrayNode();
 				
-				questionCt++;
+				if (survey.get("grading_scale__c") == null) {
+				    continue;
+				}
+				
+				while(questionCt < questions.size() && (questions.get(questionCt).get("dms_survey__c").asText().equals(survey.get("sfid").asText()))) {
+				    surveyQuestions.add(questions.get(questionCt));
+					
+					questionCt++;
+				}
+				
+				survey.put("questions", surveyQuestions);
+				
+				result.add(survey);
 			}
 			
-			survey.put("questions", surveyQuestions);
-			
-			result.add(survey);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
 		}
-		
 		return sortSurveysByName(result);
 	}
 	

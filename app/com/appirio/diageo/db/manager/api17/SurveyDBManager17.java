@@ -29,9 +29,16 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 			separator = ",";
 		}
 		
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-17"), surveyIds.toString()));
-
-		return processSurveys(surveys, questions, true, true);
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-17"), surveyIds.toString()));
+			result = processSurveys(surveys, questions, true, true);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
+		}
+		return result;
 	}
 
 	@Override
@@ -82,11 +89,16 @@ public class SurveyDBManager17 extends SurveyDBManager15 {
 			separator = ",";
 		}
 		
-		String questionQuery = MessageFormat.format(getSQLStatement("question-query-with-filter-17"), surveyIds.toString());
-		
-		ArrayNode questions = queryToJson(questionQuery);
-		
-		return processSurveys(surveys, questions, true, true);	
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-17"), surveyIds.toString()));
+			result = processSurveys(surveys, questions, true, true);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
+		}
+		return result;
 	}
 
 }

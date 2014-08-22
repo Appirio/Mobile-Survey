@@ -28,9 +28,17 @@ public class SurveyDBManager12 extends SurveyDBManager {
 			separator = ",";
 		}
 		
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-12"), surveyIds.toString()));
-
-		return processSurveys(surveys, questions, false);
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-12"), surveyIds.toString()));
+			result = processSurveys(surveys, questions, false);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
+		}
+		
+		return result;
 	}
 	
 	public ArrayNode getSurveys(ObjectNode account) throws DiageoServicesException {
@@ -77,9 +85,18 @@ public class SurveyDBManager12 extends SurveyDBManager {
 			separator = ",";
 		}
 		
-		ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-12"), surveyIds.toString()));
+		ArrayNode result = mapper.createArrayNode(); 
+		if(surveyIds.toString()!=""){
+			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-12"), surveyIds.toString()));
+			result = processSurveys(surveys, questions, false);
+		}else{
+			ObjectNode error = mapper.createObjectNode();
+			error.put("error", "Survey not found.");
+			result.add(error);
+		}
 		
-		return processSurveys(surveys, questions, false);
+		return result;
+
 	}
 	
 }
