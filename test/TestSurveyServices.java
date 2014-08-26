@@ -526,7 +526,7 @@ public class TestSurveyServices {
 			JsonNode result = manager.getUniversalSurveys();
 
 			Assert.assertTrue(result.isArray());
-			Assert.assertEquals(7, result.size());
+			Assert.assertEquals(11, result.size());
 			Assert.assertTrue(isAlphabeticalOrder(result));
 
 			boolean containsG1 = false, containsG2 = false, containsG3 = false, containsG4 = false, containsG5 = false;
@@ -823,8 +823,12 @@ public class TestSurveyServices {
 				accountManager = new AccountDBManager20();
 				ObjectNode account3 = accountManager.getAccount("3");
 				JsonNode result3 = manager.getSurveys(account3);
-	
-				Assert.fail("Should thorw exception");
+				
+				ObjectMapper mapper = new ObjectMapper();
+				ObjectNode retVal = mapper.createObjectNode();
+				retVal.put("error", "Survey not found.");
+				
+				Assert.assertTrue(result3.get(0).equals(retVal));
 			} catch (Exception ex) {
 				Assert.assertTrue("Usecase3: if category defined and do not match with account then exception occure.",true);
 			}
@@ -836,7 +840,11 @@ public class TestSurveyServices {
 				ObjectNode account4 = accountManager.getAccount("4");
 				JsonNode result4 = manager.getSurveys(account4);
 	
-				Assert.fail("Should thorw exception");
+				ObjectMapper mapper = new ObjectMapper();
+				ObjectNode retVal = mapper.createObjectNode();
+				retVal.put("error", "Survey not found.");
+				
+				Assert.assertTrue(result4.get(0).equals(retVal));
 			}  catch (Exception ex) {
 				Assert.assertTrue("Usecase4: if category defined and do not match with account then exception occure.",true);
 			}

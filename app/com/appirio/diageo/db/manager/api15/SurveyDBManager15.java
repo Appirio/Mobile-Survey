@@ -2,6 +2,8 @@ package com.appirio.diageo.db.manager.api15;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -29,7 +31,7 @@ public class SurveyDBManager15 extends SurveyDBManager14 {
 		}
 		
 		ArrayNode result = mapper.createArrayNode(); 
-		if(surveyIds.toString()!=""){
+		if(StringUtils.isNotBlank(surveyIds)){
 			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-universal-query-15"), surveyIds.toString()));
 			result = processSurveys(surveys, questions, true);
 		}else{
@@ -87,7 +89,7 @@ public class SurveyDBManager15 extends SurveyDBManager14 {
 		}
 		
 		ArrayNode result = mapper.createArrayNode(); 
-		if(surveyIds.toString()!=""){
+		if(StringUtils.isNotBlank(surveyIds)){
 			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-15"), surveyIds.toString()));
 			result = processSurveys(surveys, questions, true);
 		}else{

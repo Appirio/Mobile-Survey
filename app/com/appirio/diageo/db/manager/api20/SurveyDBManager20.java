@@ -2,6 +2,8 @@ package com.appirio.diageo.db.manager.api20;
 
 import java.text.MessageFormat;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -30,7 +32,7 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		}
 
 		ArrayNode result = mapper.createArrayNode(); 
-		if(surveyIds.toString()!=""){
+		if(StringUtils.isNotBlank(surveyIds)){
 			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-20"), this.contactId, surveyIds.toString()));
 			result = processSurveys(surveys, questions, true, true);
 		}else{
@@ -63,6 +65,7 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 				}
 			}
 		}
+		// test
 		String surveyQuery = MessageFormat.format(getSQLStatement("survey-query-with-filter-20"),
 				account.get("tdlinx_sector__c").asText(),
 				account.get("tdlinx_trade_channel__c").asText(),
@@ -90,7 +93,7 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		}
 		
 		ArrayNode result = mapper.createArrayNode(); 
-		if(surveyIds.toString()!=""){
+		if(StringUtils.isNotBlank(surveyIds)){
 			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-with-filter-20"), contactId, surveyIds.toString()));
 			result = processSurveys(surveys, questions, true, true);
 		}else{

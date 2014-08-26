@@ -121,6 +121,21 @@ INSERT INTO dms_survey__c (
 	'Value1'
 );
 
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'11',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g1'
+);
 
 INSERT INTO dms_survey__c (
 	name, 
@@ -134,6 +149,22 @@ INSERT INTO dms_survey__c (
 	'10',
 	'Product',
 	'Value1;Value2'
+);
+
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'12',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g2'
 );
 
 INSERT INTO dms_survey__c (
@@ -150,6 +181,22 @@ INSERT INTO dms_survey__c (
 	'Value1;Value2;Value3'
 );
 
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'13',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g3'
+);
+
 INSERT INTO dms_survey__c (
 	name, 
 	sfid,
@@ -162,6 +209,23 @@ INSERT INTO dms_survey__c (
 	'10',
 	'Product',
 	'DifferentValue'
+);
+
+
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'14',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g4'
 );
 
 INSERT INTO dms_survey__c (
@@ -178,6 +242,23 @@ INSERT INTO dms_survey__c (
 	'DifferentValue;Value1'
 );
 
+
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'15',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g5'
+);
+
 INSERT INTO dms_survey__c (
 	name, 
 	sfid,
@@ -190,6 +271,22 @@ INSERT INTO dms_survey__c (
 	'10',
 	'Product',
 	''
+);
+
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'16',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g6'
 );
 
 INSERT INTO dms_survey__c (
@@ -206,6 +303,22 @@ INSERT INTO dms_survey__c (
 	null
 );
 
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'17',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g7'
+);
+
 INSERT INTO dms_survey__c (
 	name, 
 	sfid,
@@ -218,6 +331,22 @@ INSERT INTO dms_survey__c (
 	'10',
 	'Product',
 	'Value1'
+);
+
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'18',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g8'
 );
 
 INSERT INTO dms_survey__c (
@@ -234,6 +363,22 @@ INSERT INTO dms_survey__c (
 	'Value3'
 );
 
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'19',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g9'
+);
+
 INSERT INTO dms_survey__c (
 	name, 
 	sfid,
@@ -247,6 +392,23 @@ INSERT INTO dms_survey__c (
 	'Product',
 	''
 );
+
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'20',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g10'
+);
+
 
 INSERT INTO dms_survey__c (
 	name, 
@@ -262,6 +424,21 @@ INSERT INTO dms_survey__c (
 	null
 );
 
+INSERT INTO dms_question__c (
+	sfid, 
+	question_text__c, 
+	parent_question__c, 
+	name, 
+	question_type__c, 
+	dms_survey__c
+) VALUES (
+	'21',
+	'the question text',
+	null,
+	'question 2',
+	'Count',
+	'g11'
+);
 
 INSERT INTO dd_survey_group__c (
 	name, 

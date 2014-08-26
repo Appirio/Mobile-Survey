@@ -13,6 +13,8 @@ import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api15.AnswerOptions;
 import com.appirio.diageo.db.manager.goals.GoalCalculator;
@@ -124,7 +126,7 @@ public class SurveyDBManager extends DBManager {
 		}
 		
 		ArrayNode result = mapper.createArrayNode(); 
-		if(surveyIds.toString()!=""){
+		if(StringUtils.isNotBlank(surveyIds)){
 			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query"), surveyIds.toString()));
 			
 			int questionCt = 0; 
@@ -526,7 +528,7 @@ public class SurveyDBManager extends DBManager {
 		}
 		
 		ArrayNode result = mapper.createArrayNode(); 
-		if(surveyIds.toString()!=""){
+		if(StringUtils.isNotBlank(surveyIds)){
 			ArrayNode questions = queryToJson(MessageFormat.format(getSQLStatement("question-query-universal"), surveyIds.toString()));
 			int questionCt = 0; 
 

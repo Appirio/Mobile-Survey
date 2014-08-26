@@ -22,7 +22,8 @@ WHERE
     		or (select count(*) from dms_survey__c sr where sr.Active__c = true and sr.Parent_Survey__c=s.sfid)>0
 		) 
     ) and universal_survey__c
-        or sfid in (
+     or (
+     	 sfid in (
             SELECT
                 DISTINCT dd_survey__c
             FROM
