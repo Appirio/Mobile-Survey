@@ -16,7 +16,7 @@ FROM
     INNER JOIN dms_survey__c s ON s.sfid = q.dms_survey__c
 WHERE 
 	s.active__c = true 
-	and (s.parent_survey__c = '''' or s.parent_survey__c = null or (select count(*) from dms_survey__c p where p.Active__c = true and p.sfid = s.parent_survey__c) >0 )
+	and (s.parent_survey__c = '''' or s.parent_survey__c is null or (select count(*) from dms_survey__c p where p.Active__c = true and p.sfid = s.parent_survey__c) >0 )
 	and Contact__c=''{0}''
     AND 
 	(
