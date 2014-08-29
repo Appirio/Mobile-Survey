@@ -50,7 +50,9 @@ INSERT INTO dms_survey__c (
     universal_survey__c,
     survey_type__c,
     Active__c,
-    parent_survey__c
+    parent_survey__c,
+    Start_Date__c,
+    End_Date__c
 ) VALUES (
     'test GoalAchievement100',
     '100',
@@ -58,7 +60,9 @@ INSERT INTO dms_survey__c (
     't',
     'Product',
     true,
-    ''
+    '',
+    to_date('2014-11-15', 'YYYY-MM-DD'),
+    to_date('2014-11-30', 'YYYY-MM-DD')
 );
 
 INSERT INTO dms_question__c (
@@ -77,6 +81,27 @@ INSERT INTO dms_question__c (
     '100'
 );
 
+INSERT INTO dms_survey__c (
+    name, 
+    sfid, 
+    total_possible_score__c,
+    universal_survey__c,
+    survey_type__c,
+    Active__c,
+    parent_survey__c,
+    Start_Date__c,
+    End_Date__c
+) VALUES (
+    'test GoalAchievement100',
+    '101',
+    '1010',
+    't',
+    'Product',
+    true,
+    '',
+    to_date('2014-12-15', 'YYYY-MM-DD'),
+    to_date('2014-12-30', 'YYYY-MM-DD')
+);
 INSERT INTO dms_question__c (
     sfid, 
     question_text__c, 
@@ -90,9 +115,30 @@ INSERT INTO dms_question__c (
     null,
     'question 101',
     'Count',
-    '100'
+    '101'
 );
 
+INSERT INTO dms_survey__c (
+    name, 
+    sfid, 
+    total_possible_score__c,
+    universal_survey__c,
+    survey_type__c,
+    Active__c,
+    parent_survey__c,
+    Start_Date__c,
+    End_Date__c
+) VALUES (
+    'test GoalAchievement100',
+    '102',
+    '1010',
+    't',
+    'Product',
+    true,
+    '',
+    to_date('2014-12-15', 'YYYY-MM-DD'),
+    to_date('2014-12-30', 'YYYY-MM-DD')
+);
 
 INSERT INTO dms_question__c (
     sfid, 
@@ -110,12 +156,33 @@ INSERT INTO dms_question__c (
     null,
     'question 102',
     'Count',
-    '100',
+    '102',
     'GOAL NAME 102',
     'Distribution',
     true
 );
 
+INSERT INTO dms_survey__c (
+    name, 
+    sfid, 
+    total_possible_score__c,
+    universal_survey__c,
+    survey_type__c,
+    Active__c,
+    parent_survey__c,
+    Start_Date__c,
+    End_Date__c
+) VALUES (
+    'test GoalAchievement100',
+    '103',
+    '1010',
+    't',
+    'Product',
+    true,
+    '',
+    to_date('2014-12-15', 'YYYY-MM-DD'),
+    to_date('2014-12-30', 'YYYY-MM-DD')
+);
 INSERT INTO dms_question__c (
     sfid, 
     question_text__c, 
@@ -132,7 +199,7 @@ INSERT INTO dms_question__c (
     null,
     'question 103',
     'Count',
-    '100',
+    '103',
     'GOAL NAME 103',
     'Distribution',
     true
@@ -144,8 +211,6 @@ INSERT INTO DD_Assigned_Goal__c (
     Contact_Email__c,
     DD_Survey_Question__c,
     Goal_Name__c,
-    Start_Date__c,
-    End_Date__c,
     Target__c
 ) VALUES (
     '10',
@@ -153,8 +218,6 @@ INSERT INTO DD_Assigned_Goal__c (
     'test@test.com',
     '100',
     'GOAL NAME 102',
-    to_date('2014-11-15', 'YYYY-MM-DD'),
-    to_date('2014-11-30', 'YYYY-MM-DD'),
     100
 );
 
@@ -165,8 +228,6 @@ INSERT INTO DD_Assigned_Goal__c (
     Contact_Email__c,
     DD_Survey_Question__c,
     Goal_Name__c,
-    Start_Date__c,
-    End_Date__c,
     Target__c
 ) VALUES (
     '11',
@@ -174,8 +235,6 @@ INSERT INTO DD_Assigned_Goal__c (
     'test@test.com',
     '101',
     'GOAL NAME 103',
-    to_date('2014-12-15', 'YYYY-MM-DD'),
-    to_date('2014-12-30', 'YYYY-MM-DD'),
     50
 );
 
@@ -185,8 +244,6 @@ INSERT INTO DD_Assigned_Goal__c (
     Contact_Email__c,
     DD_Survey_Question__c,
     Goal_Name__c,
-    Start_Date__c,
-    End_Date__c,
     Target__c
 ) VALUES (
     '12',
@@ -194,8 +251,6 @@ INSERT INTO DD_Assigned_Goal__c (
     'test@test.com',
     '102',
     'GOAL NAME 103',
-    to_date('2014-12-15', 'YYYY-MM-DD'),
-    to_date('2014-12-30', 'YYYY-MM-DD'),
     50
 );
 
@@ -205,8 +260,6 @@ INSERT INTO DD_Assigned_Goal__c (
     Contact_Email__c,
     DD_Survey_Question__c,
     Goal_Name__c,
-    Start_Date__c,
-    End_Date__c,
     Target__c
 ) VALUES (
     '13',
@@ -214,8 +267,6 @@ INSERT INTO DD_Assigned_Goal__c (
     'test@test.com',
     '103',
     'GOAL NAME 103',
-    to_date('2014-12-15', 'YYYY-MM-DD'),
-    to_date('2014-12-30', 'YYYY-MM-DD'),
     50
 );
 
@@ -266,7 +317,7 @@ INSERT INTO DMS_Survey_Result__c(
 ) VALUES (
     '1001',
     '2',
-    '100',
+    '101',
     '101',
     'Question_Text',
     'Question_Type',
@@ -295,7 +346,7 @@ INSERT INTO DMS_Survey_Result__c(
 ) VALUES (
     '1002',
     '2',
-    '100',
+    '102',
     '102',
     'Question_Text',
     'Question_Type',
@@ -324,7 +375,7 @@ INSERT INTO DMS_Survey_Result__c(
 ) VALUES (
     '1003',
     '2',
-    '100',
+    '103',
     '103',
     'Question_Text',
     'Question_Type',
@@ -352,7 +403,7 @@ INSERT INTO DMS_Survey_Result__c(
 ) VALUES (
     '1004',
     '2',
-    '100',
+    '103',
     '103',
     'Question_Text',
     'Question_Type',
@@ -380,7 +431,7 @@ INSERT INTO DMS_Survey_Result__c(
 ) VALUES (
     '1005',
     '2',
-    '100',
+    '103',
     '103',
     'Question_Text',
     'Question_Type',

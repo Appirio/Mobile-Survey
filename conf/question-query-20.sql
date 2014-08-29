@@ -17,8 +17,6 @@ SELECT
     q.Is_Goal__c Is_Goal__c,
     ag.target__c target__c,
     ag.achieved__c achieved__c,
-    ag.start_date__c assigned_start_date__c,
-    ag.end_date__c assigned_end_date__c,
     ag.goal_name__c goal_name__c,
     ag.sfid assigned_goal__c,
     s.sector__c
