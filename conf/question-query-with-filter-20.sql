@@ -15,6 +15,7 @@ SELECT
     s.start_date__c start_date__c,
     s.end_date__c end_date__c,
     q.Is_Goal__c Is_Goal__c,
+    q.Goal_Brand__c Goal_Brand__c,
     ag.target__c target__c,
     ag.achieved__c achieved__c,
     ag.goal_name__c goal_name__c,

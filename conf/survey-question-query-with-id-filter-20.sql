@@ -14,6 +14,7 @@ SELECT
 	q.Include_None_of_the_Above__c Include_None_of_the_Above__c,
 	q.Include_Photos__c Include_Photos__c,
 	q.Is_Goal__c Is_Goal__c,
+	q.Goal_Brand__c Goal_Brand__c,
 	q.IsDeleted IsDeleted,
 	q.Label_for_Add_l_Comments__c Label_for_Add_l_Comments__c,
 	q.LastModifiedById LastModifiedById,
