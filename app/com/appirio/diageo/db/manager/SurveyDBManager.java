@@ -285,32 +285,72 @@ public class SurveyDBManager extends DBManager {
 			}
 			
 			for(JsonNode question : questions) {
-				ObjectNode newSurvey = mapper.createObjectNode();
+				ObjectNode newSurveyResult = mapper.createObjectNode();
 				ObjectNode questionObj = (ObjectNode) question;
+				
+				
+				boolean isGoal = false;
+				if(questionObj.has("is_goal__c")) {
+					String isGoalValue = questionObj.get("is_goal__c").asText();
+					if (isGoalValue!=null && isGoalValue.equals("t")) {
+						isGoal = true;
+					}
+				}
+				
+				String goalBrand = "";
+				if(questionObj.has("goal_brand__c")) {
+					JsonNode jsonNode = questionObj.get("goal_brand__c");
+					goalBrand = jsonNode.asText() != null ? jsonNode.asText() : "";
+				}
+				
+				// fetching parent goal and parent goal brand values.
+				boolean isParentGoal = false;
+				String parentGoalBrand = "";
+				
+				String parentQuestionId = questionObj.get("parent_question__c") != null ?  questionObj.get("parent_question__c").asText() : "";
+				
+				if(!parentQuestionId.isEmpty()) {
+					for (JsonNode qust : questions) {
+						if(parentQuestionId.equals(qust.get("question__c") != null ?  qust.get("question__c").asText() : "")){
+							if(qust.has("is_goal__c")) {
+								String isGoalValue = qust.get("is_goal__c").asText();
+								if (isGoalValue!=null && isGoalValue.equals("t")) {
+									isParentGoal = true;
+								}
+							}
+							if(qust.has("goal_brand__c")) {
+								JsonNode jsonNode = qust.get("goal_brand__c");
+								parentGoalBrand = jsonNode.asText() != null ? jsonNode.asText() : "";
+							}
+							// if parent found then further loop is not required.
+							break;
+						}
+					}
+				}
+				
 				
 				if(questionObj.has("sfid")) {
 					questionObj.put("question__c", questionObj.get("sfid").asText());
 					questionObj.remove("sfid");
 				}
-				
 				if(questionObj.has("parent_question__c")) {
 					questionObj.remove("parent_question__c");
 				}
 				
-				newSurvey.putAll((ObjectNode)survey);
+				newSurveyResult.putAll((ObjectNode)survey);
 				
-				if(newSurvey.has("sfid")) {
-					newSurvey.remove("sfid"); 
+				if(newSurveyResult.has("sfid")) {
+					newSurveyResult.remove("sfid"); 
 				}
 				
-				newSurvey.remove("questions");
+				newSurveyResult.remove("questions");
 				
-				newSurvey.putAll(questionObj);
+				newSurveyResult.putAll(questionObj);
 				
 				// Get Answer Options
 				String answerOptionsText = "";
 				try {
-				    answerOptionsText = newSurvey.get("original_answer_options__c").asText();
+				    answerOptionsText = newSurveyResult.get("original_answer_options__c").asText();
 				}
 				catch(Exception e) {
 				    System.out.println("WARN: No original_answer_options__c: "+ e);
@@ -322,10 +362,10 @@ public class SurveyDBManager extends DBManager {
 				    // Bool to see if answer needs to match
 				    boolean needMatch = false;
 				    // Get answer Value
-				    String answerValue = newSurvey.get("answer_value__c").asText();
+				    String answerValue = newSurveyResult.get("answer_value__c").asText();
 				    // Check for answerText value if answer_value is null
 				    if (answerValue.equals("null")) {
-				        answerValue = newSurvey.get("answer_text__c").asText();
+				        answerValue = newSurveyResult.get("answer_text__c").asText();
 				        needMatch = true;
 				    }
 				    if (answerValue.equals("null")) {
@@ -338,7 +378,7 @@ public class SurveyDBManager extends DBManager {
 				    int scoredSurveyResult = 0;
 				    
 				    String resultBrandExternalId = UUID.randomUUID().toString();
-					newSurvey.put("result_brand_ext_id__c", resultBrandExternalId);
+					newSurveyResult.put("result_brand_ext_id__c", resultBrandExternalId);
 					
 				    for(int i=0;i < answerOptions.size();i++) {
 				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
@@ -346,7 +386,7 @@ public class SurveyDBManager extends DBManager {
 				        String valueBrandId = answerOptions.get(i).valueBrandId;
 				        // Potential Score:
 					    // 1. Add up all scores for one that has Multi-Select
-					    if (newSurvey.get("question_type__c").asText().equals("Multi-Select")) {
+					    if (newSurveyResult.get("question_type__c").asText().equals("Multi-Select")) {
 					        StringTokenizer multiSelectValues = new StringTokenizer(answerValue, ";");
 					        while(multiSelectValues.hasMoreTokens()) {
         						String msv = multiSelectValues.nextToken();
@@ -355,8 +395,12 @@ public class SurveyDBManager extends DBManager {
         						    scoreTot += answerOptionScore;
         						    scoredSurveyResult += answerOptionScore;
         						    if(valueBrandId!=null && valueBrandId!=""){
-        						    	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
-        						    }
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
+    					            } else if(isGoal && !goalBrand.equals("")){
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, goalBrand));
+    					            } else if(isParentGoal && !parentGoalBrand.equals("")){
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, parentGoalBrand));
+    					            }
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
@@ -364,13 +408,16 @@ public class SurveyDBManager extends DBManager {
 					    // 2. For others, take the highest/only score
 					    else {
 					    	
-					    	
 					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
 					            // Total score: Total only scores where value matches
 					            scoreTot += answerOptionScore;
 					            scoredSurveyResult += answerOptionScore;
 					            if(valueBrandId!=null && valueBrandId!=""){
 					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
+					            } else if(isGoal && !goalBrand.equals("")){
+					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, goalBrand));
+					            } else if(isParentGoal && !parentGoalBrand.equals("")){
+					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, parentGoalBrand));
 					            }
 					        }
 					        // Text/Price/QTY as long as there is some value to this, you get the full score
@@ -389,36 +436,36 @@ public class SurveyDBManager extends DBManager {
 			            scorePotential += tempHigh;
 			        }
 				    
-				    newSurvey.put("score__c", Integer.toString(scoredSurveyResult));
+				    newSurveyResult.put("score__c", Integer.toString(scoredSurveyResult));
 				}
 				
-				newSurvey.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
+				newSurveyResult.put("survey_date__c", dateToPostgresString(new Date(System.currentTimeMillis()), false));
 				
-				if(newSurvey.has("id")) {
-					newSurvey.remove("id");
+				if(newSurveyResult.has("id")) {
+					newSurveyResult.remove("id");
 				}
 			
-				if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("answer_text__c") && newSurvey.get("answer_text__c").asText().length() > 0) {
-					if(newSurvey.get("answer_text__c").asText().equals("None of the Above")) {
-						newSurvey.put("selected_answers__c", 0);
+				if(newSurveyResult.has("question_type__c") && newSurveyResult.get("question_type__c").asText().equals("Multi-Select") && newSurveyResult.has("answer_text__c") && newSurveyResult.get("answer_text__c").asText().length() > 0) {
+					if(newSurveyResult.get("answer_text__c").asText().equals("None of the Above")) {
+						newSurveyResult.put("selected_answers__c", 0);
 					} else {
-						newSurvey.put("selected_answers__c", newSurvey.get("answer_text__c").asText().replaceAll("[^;]","").length() + 1);
+						newSurveyResult.put("selected_answers__c", newSurveyResult.get("answer_text__c").asText().replaceAll("[^;]","").length() + 1);
 					}
 				}
 				
-				if(newSurvey.has("question_type__c") && newSurvey.get("question_type__c").asText().equals("Multi-Select") && newSurvey.has("delimitedAnswerOptions") && newSurvey.get("delimitedAnswerOptions").asText().length() > 0) {
-					newSurvey.put("possible_answers__c", newSurvey.get("delimitedAnswerOptions").asText().replaceAll("[^,]","").length() + 1);
+				if(newSurveyResult.has("question_type__c") && newSurveyResult.get("question_type__c").asText().equals("Multi-Select") && newSurveyResult.has("delimitedAnswerOptions") && newSurveyResult.get("delimitedAnswerOptions").asText().length() > 0) {
+					newSurveyResult.put("possible_answers__c", newSurveyResult.get("delimitedAnswerOptions").asText().replaceAll("[^,]","").length() + 1);
 				}
 				
 				// Some kind of increment?
 				//newSurvey.put("question_number__c", );
 				// Survey Submission sfid
-				newSurvey.put("DD_Survey_Submission__c__External_Id__c", externalId);
+				newSurveyResult.put("DD_Survey_Submission__c__External_Id__c", externalId);
 				
 				// creating photo records 
 				if(question.has("photos")){
 					String photoExternalId = UUID.randomUUID().toString();
-					newSurvey.put("Result_Ext_ID__c", photoExternalId);
+					newSurveyResult.put("Result_Ext_ID__c", photoExternalId);
 
 					ArrayNode questionPhotos= (ArrayNode) question.get("photos");
 					for (JsonNode jsonNode : questionPhotos) {
@@ -430,9 +477,9 @@ public class SurveyDBManager extends DBManager {
 				}
 				
 				
-				clearTransientFields(newSurvey, surveyResultFields);
+				clearTransientFields(newSurveyResult, surveyResultFields);
 				// Add it to an arrayList
-				surveyResultsList.add((ObjectNode)newSurvey);
+				surveyResultsList.add((ObjectNode)newSurveyResult);
 			}
 			
 			// Survey Submissions DB

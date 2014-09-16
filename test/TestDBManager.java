@@ -40,4 +40,8 @@ public class TestDBManager extends DBManager {
 	public void populateContacts() throws DiageoServicesException {
 		executeStatement(getSQLStatement("populate-contacts"));
 	}
+
+	public void populateTestSurveyWithoutAnswerBrandsData() throws DiageoServicesException {
+		executeStatement(getSQLStatement("populate-test-surveys-without-answer-brand-data"));
+	}
 }
