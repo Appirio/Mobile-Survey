@@ -836,7 +836,7 @@ public class SurveyDBManager extends DBManager {
 					
 					// Run update statements to update the flags in the brands
 					for(Integer brandId: brandsToProcess.keySet()) {
-						executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), brandsToProcess.get(brandId), brandId));
+						executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), String.valueOf(brandsToProcess.get(brandId)), String.valueOf(brandId)));
 					}
 					
 				}
