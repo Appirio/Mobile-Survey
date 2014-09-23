@@ -821,8 +821,8 @@ public class SurveyDBManager extends DBManager {
 					// Update survey results
 					for(Integer id : surveyResultAchievemetns.keySet()) {
 						// Get list of ids that is the parameter for the query
-						inStatement.append(id);
 						inStatement.append(separator);
+						inStatement.append(id);
 						separator=",";
 
 						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement-on-survey-result"), String.valueOf(surveyResultAchievemetns.get(id)), String.valueOf(id)));
