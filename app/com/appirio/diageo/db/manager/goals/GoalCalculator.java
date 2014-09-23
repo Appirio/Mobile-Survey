@@ -33,4 +33,6 @@ public interface GoalCalculator {
 		Integer goalAchievement;
 	}
 	
+	Map<Integer, Boolean> processBrands(ArrayNode brands);
+	
 }

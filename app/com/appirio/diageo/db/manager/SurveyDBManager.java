@@ -816,10 +816,29 @@ public class SurveyDBManager extends DBManager {
 						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), calc.calculateGoalAchievement(questionGroup, surveyResultAchievemetns), firstQuestion.get("assigned_goal__c").asText()));
 					}
 
+					StringBuilder inStatement = new StringBuilder();
+					String separator = "";
 					// Update survey results
 					for(Integer id : surveyResultAchievemetns.keySet()) {
+						// Get list of ids that is the parameter for the query
+						inStatement.append(id);
+						inStatement.append(separator);
+						separator=",";
+
 						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement-on-survey-result"), String.valueOf(surveyResultAchievemetns.get(id)), String.valueOf(id)));
 					}
+					
+					// Get brands for processing
+					ArrayNode brands = queryToJson(MessageFormat.format(getSQLStatement("query-brand-results-for-goal-processing"), inStatement));
+					
+					// Process the brands using the goal calculator
+					Map<Integer, Boolean> brandsToProcess = calc.processBrands(brands);
+					
+					// Run update statements to update the flags in the brands
+					for(Integer brandId: brandsToProcess.keySet()) {
+						executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), brandsToProcess.get(brandId), brandId));
+					}
+					
 				}
 			}
 		}
