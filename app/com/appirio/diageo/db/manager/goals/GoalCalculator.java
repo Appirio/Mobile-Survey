@@ -4,6 +4,7 @@ import java.util.Map;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public interface GoalCalculator {
 	
@@ -33,6 +34,6 @@ public interface GoalCalculator {
 		Integer goalAchievement;
 	}
 	
-	Map<Integer, Boolean> processBrands(ArrayNode brands);
+	Boolean processBrands(ObjectNode brand);
 	
 }

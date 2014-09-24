@@ -9,6 +9,7 @@ import com.appirio.diageo.db.DiageoServicesException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SingleSelectGoalCalculator implements GoalCalculator {
 
@@ -61,17 +62,10 @@ public class SingleSelectGoalCalculator implements GoalCalculator {
 	}
 
 	@Override
-	public Map<Integer, Boolean> processBrands(ArrayNode brands) {
-		Map<Integer, Boolean> result = new HashMap<Integer, Boolean>();
-		
-		for(JsonNode brand : brands) {
-			result.put(brand.get("id").asInt(), 
-					(brand.has("is_goal__c") && brand.get("is_goal__c").asText().equals("t")) && 
+	public Boolean processBrands(ObjectNode brand) {
+		return (brand.has("is_goal__c") && brand.get("is_goal__c").asText().equals("t")) && 
 					(brand.has("goal_achievement__c") && brand.get("goal_achievement__c").asInt() > 0) && 
-					(brand.has("answer_text__c") && brand.has("answer__c") && brand.get("answer_text__c").asText().indexOf(brand.get("answer__c").asText()) > 0));
-		}
-		
-		return result;
+					(brand.has("answer_text__c") && brand.has("answer__c") && brand.get("answer_text__c").asText().indexOf(brand.get("answer__c").asText()) > 0);
 	}
 
 }

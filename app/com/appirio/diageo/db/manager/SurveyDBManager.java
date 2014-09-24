@@ -801,6 +801,7 @@ public class SurveyDBManager extends DBManager {
 			
 			System.out.println(groupedQuestions);
 			
+			StringBuilder inStatement = new StringBuilder();
 			// For each question instantiate the appropriate goal calculator depending on the question type
 			for(int i = 0; i < groupedQuestions.size(); i++) {
 				ArrayNode questionGroup = (ArrayNode) groupedQuestions.get(i);
@@ -816,7 +817,6 @@ public class SurveyDBManager extends DBManager {
 						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement"), calc.calculateGoalAchievement(questionGroup, surveyResultAchievemetns), firstQuestion.get("assigned_goal__c").asText()));
 					}
 
-					StringBuilder inStatement = new StringBuilder();
 					String separator = "";
 					// Update survey results
 					for(Integer id : surveyResultAchievemetns.keySet()) {
@@ -827,19 +827,17 @@ public class SurveyDBManager extends DBManager {
 
 						executeStatement(MessageFormat.format(getSQLStatement("update-goal-achievement-on-survey-result"), String.valueOf(surveyResultAchievemetns.get(id)), String.valueOf(id)));
 					}
-					
-					// Get brands for processing
-					ArrayNode brands = queryToJson(MessageFormat.format(getSQLStatement("query-brand-results-for-goal-processing"), inStatement));
-					
-					// Process the brands using the goal calculator
-					Map<Integer, Boolean> brandsToProcess = calc.processBrands(brands);
-					
-					// Run update statements to update the flags in the brands
-					for(Integer brandId: brandsToProcess.keySet()) {
-						executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), String.valueOf(brandsToProcess.get(brandId)), String.valueOf(brandId)));
-					}
-					
 				}
+			}
+			
+			// Get brands for processing
+			ArrayNode brands = queryToJson(MessageFormat.format(getSQLStatement("query-brand-results-for-goal-processing"), inStatement));
+			
+			for(JsonNode brand : brands) {
+				// Process the brands using the goal calculator
+				GoalCalculator calc = GoalCalculatorFactory.getInstance().getGoalCalculator((ObjectNode)brand);
+
+				executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), String.valueOf(brand.get("id").asText()), calc.processBrands((ObjectNode)brand)));
 			}
 		}
 	}

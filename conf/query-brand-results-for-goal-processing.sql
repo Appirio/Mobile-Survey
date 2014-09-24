@@ -3,7 +3,9 @@ SELECT
 	r.goal_achievement__c,
 	q.is_goal__c,
 	r.answer_text__c,
-	b.answer__c
+	b.answer__c,
+	q.question_type__c,
+	q.goal_type__c
 FROM
 	dd_survey_result_brands__c b
 	INNER JOIN dms_survey_result__c r ON  r.result_brand_ext_id__c = b.dms_survey_result__c__result_brand_ext_id__c
