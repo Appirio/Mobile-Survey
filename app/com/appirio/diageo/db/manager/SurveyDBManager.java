@@ -837,7 +837,7 @@ public class SurveyDBManager extends DBManager {
 				// Process the brands using the goal calculator
 				GoalCalculator calc = GoalCalculatorFactory.getInstance().getGoalCalculator((ObjectNode)brand);
 
-				executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), String.valueOf(brand.get("id").asText()), String.valueOf(calc.processBrands((ObjectNode)brand).booleanValue())));
+				executeStatement(MessageFormat.format(getSQLStatement("update-flag-on-survey-result-brands"), String.valueOf(brand.get("id").asText()), calc.processBrands((ObjectNode)brand).booleanValue() ? "t" : "f"));
 			}
 		}
 	}
