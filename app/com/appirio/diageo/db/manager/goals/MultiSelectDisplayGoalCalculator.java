@@ -54,9 +54,11 @@ public class MultiSelectDisplayGoalCalculator implements GoalCalculator {
 							surveyResultAchievement.put(question.get("id").asInt(), 1);
 
 							result += 1;
-						} else {
-							surveyResultAchievement.put(question.get("id").asInt(), 0);
-						}
+						} 
+					}
+					
+					if(!surveyResultAchievement.keySet().contains(question.get("id").asInt())) {
+						surveyResultAchievement.put(question.get("id").asInt(), 0);
 					}
 				}
 			}
