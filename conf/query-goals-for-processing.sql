@@ -17,4 +17,4 @@ WHERE
     q.sfid IN (SELECT question__c from dms_survey_result__c where dd_survey_submission__c__external_id__c = ''{0}'') AND
     r.contact__c = ''{1}''
 ORDER BY
-	q.sfid;
+	q.sfid, r.id;
