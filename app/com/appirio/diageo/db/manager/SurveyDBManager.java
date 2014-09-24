@@ -535,11 +535,12 @@ public class SurveyDBManager extends DBManager {
 	private void addSurveyResultBrandsToList(List<ObjectNode> surveyResultBrandList, boolean isGoal, String goalBrand,
 			boolean isParentGoal, String parentGoalBrand, String conditionalAnswerBrandId, String answerValue,
 			String resultBrandExternalId, String valueBrandId) {
+		
 		if(valueBrandId!=null && valueBrandId!="" && valueBrandId!="null"){
 			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, valueBrandId));
 		} else if(isGoal && goalBrand!="" && goalBrand!="null"){
 			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, goalBrand));
-		} else if(isParentGoal && conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
+		} else if(conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
 			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, conditionalAnswerBrandId));
 		} else if(isParentGoal && parentGoalBrand!="" && parentGoalBrand!="null"){
 			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, parentGoalBrand));
