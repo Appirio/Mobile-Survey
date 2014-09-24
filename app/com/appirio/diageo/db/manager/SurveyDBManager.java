@@ -251,6 +251,8 @@ public class SurveyDBManager extends DBManager {
 	    	}
 	    }
 	    
+	    
+	    
 	    if(data.get("brands").size() > 0) {
 	    	for(List<ObjectNode> results : data.get("brands")) {
 	    		insertSurveyResultsBrands(results);
@@ -397,15 +399,10 @@ public class SurveyDBManager extends DBManager {
         						    scoreTot += answerOptionScore;
         						    scoredSurveyResult += answerOptionScore;
         						    
-        						    if(valueBrandId!=null && valueBrandId!="" && valueBrandId!="null"){ // if answer options have value brands 
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, valueBrandId));
-    					            } else if(isGoal && goalBrand!="" && goalBrand!="null"){
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, goalBrand));
-    					            } else if(isParentGoal && conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, conditionalAnswerBrandId));
-    					            } else if(isParentGoal && parentGoalBrand!="" && parentGoalBrand!="null"){
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, parentGoalBrand));
-    					            } 
+        						    // Adding survey result for all selected answers associated with brand(directly or by conditional answer brand or by parent goal brand).
+        						    addSurveyResultBrandsToList(surveyResultBrandList, isGoal, goalBrand, isParentGoal,
+											parentGoalBrand, conditionalAnswerBrandId, msv, resultBrandExternalId,
+											valueBrandId); 
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
@@ -413,29 +410,29 @@ public class SurveyDBManager extends DBManager {
 					    // 2. For others, take the highest/only score
 					    else {
 					    	
-					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
-					            // Total score: Total only scores where value matches
-					        	scoreTot += answerOptionScore;
-					    		scoredSurveyResult += answerOptionScore;
-					    		if(valueBrandId!=null && valueBrandId!="" && valueBrandId!="null"){
-					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, valueBrandId));
-					    		} else if(isGoal && goalBrand!="" && goalBrand!="null"){
-					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, goalBrand));
-					    		} else if(isParentGoal && conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
-					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, conditionalAnswerBrandId));
-					    		} else if(isParentGoal && parentGoalBrand!="" && parentGoalBrand!="null"){
-					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, parentGoalBrand));
-					    		}
-					        }
-					        // Text/Price/QTY as long as there is some value to this, you get the full score
-					        else if (!needMatch && !answerValue.equals("null")) {
-					            scoreTot += answerOptionScore;
-					            scoredSurveyResult += answerOptionScore;
-					        }
-					        
-					        if (answerOptionScore > tempHigh) {
-					            tempHigh = answerOptionScore;
-					        }
+					    	// Adding survey result for all single select answers associated with brand(directly or by conditional answer brand or by parent goal brand).
+					    	// Text/Price/QTY directly save into question field not in answer options so exit after first iteration. 
+					    	if(i<1){
+						    	addSurveyResultBrandsToList(surveyResultBrandList, isGoal, goalBrand, isParentGoal,
+						    			parentGoalBrand, conditionalAnswerBrandId, answerValue, resultBrandExternalId,
+						    			valueBrandId);
+						    	
+						    	if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
+						    		// Total score: Total only scores where value matches
+						    		scoreTot += answerOptionScore;
+						    		scoredSurveyResult += answerOptionScore;
+						    	}
+						    	// Text/Price/QTY as long as there is some value to this, you get the full score
+						    	else if (!needMatch && !answerValue.equals("null")) {
+						    		scoreTot += answerOptionScore;
+						    		scoredSurveyResult += answerOptionScore;
+						    	}
+						    	
+						    	if (answerOptionScore > tempHigh) {
+						    		tempHigh = answerOptionScore;
+						    	}
+					    	}
+					    	
 					    }
 			        }
 				    
@@ -533,6 +530,20 @@ public class SurveyDBManager extends DBManager {
 		}
 		
 		return surveySubmission;
+	}
+
+	private void addSurveyResultBrandsToList(List<ObjectNode> surveyResultBrandList, boolean isGoal, String goalBrand,
+			boolean isParentGoal, String parentGoalBrand, String conditionalAnswerBrandId, String answerValue,
+			String resultBrandExternalId, String valueBrandId) {
+		if(valueBrandId!=null && valueBrandId!="" && valueBrandId!="null"){
+			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, valueBrandId));
+		} else if(isGoal && goalBrand!="" && goalBrand!="null"){
+			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, goalBrand));
+		} else if(isParentGoal && conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
+			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, conditionalAnswerBrandId));
+		} else if(isParentGoal && parentGoalBrand!="" && parentGoalBrand!="null"){
+			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, parentGoalBrand));
+		}
 	} 
 
     private ObjectNode createSurveyResultBrand(String externalId, String answer , String brandId ) {
