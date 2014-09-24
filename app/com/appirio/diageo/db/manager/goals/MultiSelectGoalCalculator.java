@@ -91,8 +91,9 @@ public class MultiSelectGoalCalculator implements GoalCalculator {
 		
 		for(JsonNode brand : brands) {
 			result.put(brand.get("id").asInt(), 
+					(brand.has("is_goal__c") && brand.get("is_goal__c").asBoolean()) && 
 					(brand.has("goal_achievement__c") && brand.get("goal_achievement__c").asInt() > 0) && 
-					(brand.has("is_goal__c") && brand.get("is_goal__c").asBoolean()));
+					(brand.has("answer_text__c") && brand.has("answer__c") && brand.get("answer_text__c").asText().indexOf(brand.get("answer__c").asText()) > 0));
 		}
 		
 		return result;
