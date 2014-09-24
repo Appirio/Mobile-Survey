@@ -309,9 +309,11 @@ public class SurveyDBManager extends DBManager {
 				
 				String parentQuestionId = questionObj.get("parent_question__c") != null ?  questionObj.get("parent_question__c").asText() : "";
 				
+				String conditionalAnswerBrandId = questionObj.get("conditional_answer_brand__c") != null ?  questionObj.get("conditional_answer_brand__c").asText() : "";
+				
 				if(!parentQuestionId.isEmpty()) {
 					for (JsonNode qust : questions) {
-						if(parentQuestionId.equals(qust.get("question__c") != null ?  qust.get("question__c").asText() : "")){
+						if(parentQuestionId!="null" && parentQuestionId.equals(qust.get("question__c") != null ?  qust.get("question__c").asText() : "")){
 							if(qust.has("is_goal__c")) {
 								String isGoalValue = qust.get("is_goal__c").asText();
 								if (isGoalValue!=null && isGoalValue.equals("t")) {
@@ -383,7 +385,7 @@ public class SurveyDBManager extends DBManager {
 				    for(int i=0;i < answerOptions.size();i++) {
 				        int answerOptionScore = Integer.parseInt(answerOptions.get(i).score);
 				        int answerGoalScore = Integer.parseInt(answerOptions.get(i).goalScore);
-				        String valueBrandId = answerOptions.get(i).valueBrandId;
+				        String valueBrandId = answerOptions.get(i).valueBrandId != null ? answerOptions.get(i).valueBrandId : "";
 				        // Potential Score:
 					    // 1. Add up all scores for one that has Multi-Select
 					    if (newSurveyResult.get("question_type__c").asText().equals("Multi-Select")) {
@@ -394,13 +396,16 @@ public class SurveyDBManager extends DBManager {
         						    // Total score: Total only scores where value matches
         						    scoreTot += answerOptionScore;
         						    scoredSurveyResult += answerOptionScore;
-        						    if(valueBrandId!=null && valueBrandId!=""){
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
-    					            } else if(isGoal && !goalBrand.equals("")){
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, goalBrand));
-    					            } else if(isParentGoal && !parentGoalBrand.equals("")){
-    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, parentGoalBrand));
-    					            }
+        						    
+        						    if(valueBrandId!=null && valueBrandId!="" && valueBrandId!="null"){ // if answer options have value brands 
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, valueBrandId));
+    					            } else if(isGoal && goalBrand!="" && goalBrand!="null"){
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, goalBrand));
+    					            } else if(isParentGoal && conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, conditionalAnswerBrandId));
+    					            } else if(isParentGoal && parentGoalBrand!="" && parentGoalBrand!="null"){
+    					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, msv, parentGoalBrand));
+    					            } 
         						}
         					}
 					        scorePotential += Integer.parseInt(answerOptions.get(i).score);
@@ -410,15 +415,17 @@ public class SurveyDBManager extends DBManager {
 					    	
 					        if (needMatch && answerValue.equals(answerOptions.get(i).value)) {
 					            // Total score: Total only scores where value matches
-					            scoreTot += answerOptionScore;
-					            scoredSurveyResult += answerOptionScore;
-					            if(valueBrandId!=null && valueBrandId!=""){
-					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, valueBrandId));
-					            } else if(isGoal && !goalBrand.equals("")){
-					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, goalBrand));
-					            } else if(isParentGoal && !parentGoalBrand.equals("")){
-					            	surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, parentGoalBrand));
-					            }
+					        	scoreTot += answerOptionScore;
+					    		scoredSurveyResult += answerOptionScore;
+					    		if(valueBrandId!=null && valueBrandId!="" && valueBrandId!="null"){
+					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, valueBrandId));
+					    		} else if(isGoal && goalBrand!="" && goalBrand!="null"){
+					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId,answerValue, goalBrand));
+					    		} else if(isParentGoal && conditionalAnswerBrandId!="" && conditionalAnswerBrandId!="null"){
+					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, conditionalAnswerBrandId));
+					    		} else if(isParentGoal && parentGoalBrand!="" && parentGoalBrand!="null"){
+					    			surveyResultBrandList.add(createSurveyResultBrand(resultBrandExternalId, answerValue, parentGoalBrand));
+					    		}
 					        }
 					        // Text/Price/QTY as long as there is some value to this, you get the full score
 					        else if (!needMatch && !answerValue.equals("null")) {
@@ -528,10 +535,11 @@ public class SurveyDBManager extends DBManager {
 		return surveySubmission;
 	} 
 
-    private ObjectNode createSurveyResultBrand(String externalId, String brandId ) {
+    private ObjectNode createSurveyResultBrand(String externalId, String answer , String brandId ) {
     	ObjectNode newResultBrand = mapper.createObjectNode();
 	    newResultBrand.put("dms_survey_result__c__result_brand_ext_id__c", externalId);
 	    newResultBrand.put("Brand__c", brandId);
+	    newResultBrand.put("answer__c", answer);
 		return newResultBrand;
 	}
 
