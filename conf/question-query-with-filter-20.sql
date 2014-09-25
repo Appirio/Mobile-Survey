@@ -1,5 +1,6 @@
 SELECT
     q.include_none_of_the_above__c include_none_of_the_above__c,
+    q.conditional_answer_brand__c conditional_answer_brand__c,
     q.conditional_answer__c conditional_answer__c,
     q.next_question__c next_question__c,
     q.label_for_add_l_comments__c label_for_add_l_comments__c,

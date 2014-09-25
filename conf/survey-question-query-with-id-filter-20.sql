@@ -1,5 +1,6 @@
 SELECT 
     q.Answer_Options__c Answer_Options__c,
+    q.conditional_answer_brand__c conditional_answer_brand__c,
 	q.Conditional_Answer__c Conditional_Answer__c,
 	q.ConnectionReceivedId ConnectionReceivedId,
 	q.ConnectionSentId ConnectionSentId,
