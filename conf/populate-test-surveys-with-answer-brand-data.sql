@@ -21,7 +21,7 @@ INSERT INTO dms_survey__c (
 	'Survey 1',
 	'a2iJ0000000AAlYIAW',
 	'10',
-	'Product',
+	'Scan',
 	'Value1'
 );
 

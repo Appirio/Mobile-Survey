@@ -98,7 +98,7 @@ INSERT INTO dms_survey__c (
 	'test survey US1612',
 	'a2iJ0000000AAlYIAW',
 	'0',
-	'Non Product',
+	'Non Scan',
 	'Value1',
 	to_date('2014-07-29', 'YYYY-MM-DD'),
 	to_date('2014-11-29', 'YYYY-MM-DD'),
