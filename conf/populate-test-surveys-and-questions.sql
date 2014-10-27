@@ -50,7 +50,7 @@ INSERT INTO dms_survey__c (
 	'1',
 	'10',
 	't',
-	'Scan',
+	'Product',
 	true
 );
 INSERT INTO dms_survey__c (
@@ -64,7 +64,7 @@ INSERT INTO dms_survey__c (
 	'2',
 	'1',
 	'10',
-	'Scan'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -79,7 +79,7 @@ INSERT INTO dms_survey__c (
 	'1',
 	'10',
 	'ON PREMISE',
-	'Scan'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -92,7 +92,7 @@ INSERT INTO dms_survey__c (
 	'4',
 	'10',
 	't',
-	'Scan'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -104,7 +104,7 @@ INSERT INTO dms_survey__c (
 	'parent survey',
 	'5',
 	'10',
-	'Scan',
+	'Product',
 	't'
 );
 INSERT INTO dms_survey__c (
@@ -118,7 +118,7 @@ INSERT INTO dms_survey__c (
 	'child survey 2',
 	'6',
 	'10',
-	'Scan',
+	'Product',
 	'f',
 	'5'	 
 );
@@ -133,7 +133,7 @@ INSERT INTO dms_survey__c (
 	'child survey 1',
 	'7',
 	'10',
-	'Scan',
+	'Product',
 	'f',
 	'5'	 
 );
@@ -146,7 +146,7 @@ INSERT INTO dms_survey__c (
 	'UGI',
 	'g1',
 	'10',
-	'Scan'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -157,7 +157,7 @@ INSERT INTO dms_survey__c (
 	'UGI NUGI',
 	'g2',
 	'10',
-	'Scan'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -168,7 +168,7 @@ INSERT INTO dms_survey__c (
 	'NUGI',
 	'g3',
 	'10',
-	'Scan'
+	'Product'
 );
 INSERT INTO dms_survey__c (
 	name, 
@@ -180,7 +180,7 @@ INSERT INTO dms_survey__c (
 	'UGI Universal',
 	'g4',
 	'10',
-	'Scan',
+	'Product',
 	true
 );
 INSERT INTO dms_survey__c (
@@ -193,7 +193,7 @@ INSERT INTO dms_survey__c (
 	'NUGI Universal',
 	'g5',
 	'10',
-	'Scan',
+	'Product',
 	true
 );
 INSERT INTO dms_survey__c (
@@ -208,7 +208,7 @@ INSERT INTO dms_survey__c (
 	'10',
 	'10',
 	't',
-	'Scan',
+	'Product',
 	false
 );
 
@@ -225,7 +225,7 @@ INSERT INTO dms_survey__c (
 	'a2iJ0000000NyZ6IAK',
 	'10',
 	't',
-	'Scan',
+	'Product',
 	'a30J00000008MoeIAE',
 	true
 );

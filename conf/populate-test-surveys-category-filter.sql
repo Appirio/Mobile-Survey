@@ -117,7 +117,7 @@ INSERT INTO dms_survey__c (
 	'Survey 1',
 	'g1',
 	'10',
-	'Scan',
+	'Product',
 	'Value1'
 );
 
@@ -147,7 +147,7 @@ INSERT INTO dms_survey__c (
 	'Survey 2',
 	'g2',
 	'10',
-	'Scan',
+	'Product',
 	'Value1;Value2'
 );
 
@@ -177,7 +177,7 @@ INSERT INTO dms_survey__c (
 	'Survey 3',
 	'g3',
 	'10',
-	'Scan',
+	'Product',
 	'Value1;Value2;Value3'
 );
 
@@ -207,7 +207,7 @@ INSERT INTO dms_survey__c (
 	'Survey 4',
 	'g4',
 	'10',
-	'Scan',
+	'Product',
 	'DifferentValue'
 );
 
@@ -238,7 +238,7 @@ INSERT INTO dms_survey__c (
 	'Survey 5',
 	'g5',
 	'10',
-	'Scan',
+	'Product',
 	'DifferentValue;Value1'
 );
 
@@ -269,7 +269,7 @@ INSERT INTO dms_survey__c (
 	'Survey 5',
 	'g6',
 	'10',
-	'Scan',
+	'Product',
 	''
 );
 
@@ -299,7 +299,7 @@ INSERT INTO dms_survey__c (
 	'Survey 7',
 	'g7',
 	'10',
-	'Scan',
+	'Product',
 	null
 );
 
@@ -329,7 +329,7 @@ INSERT INTO dms_survey__c (
 	'Survey 8',
 	'g8',
 	'10',
-	'Scan',
+	'Product',
 	'Value1'
 );
 
@@ -359,7 +359,7 @@ INSERT INTO dms_survey__c (
 	'Survey 9',
 	'g9',
 	'10',
-	'Scan',
+	'Product',
 	'Value3'
 );
 
@@ -389,7 +389,7 @@ INSERT INTO dms_survey__c (
 	'Survey 10',
 	'g10',
 	'10',
-	'Scan',
+	'Product',
 	''
 );
 
@@ -420,7 +420,7 @@ INSERT INTO dms_survey__c (
 	'Survey 11',
 	'g11',
 	'10',
-	'Scan',
+	'Product',
 	null
 );
 

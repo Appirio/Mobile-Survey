@@ -6,7 +6,7 @@ select
 from
 	dms_survey__c s
 where
-	survey_type__c != ''Non Scan'' 
+	survey_type__c != ''Non Product'' 
 	and	(Active__c is null or Active__c = true) 
 	and (IsParent__c is null or IsParent__c = false) 
 	and	parent_survey__c is null 

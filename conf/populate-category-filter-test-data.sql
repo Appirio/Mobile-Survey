@@ -46,6 +46,6 @@ INSERT INTO dms_survey__c (
 	'Survey 1',
 	'g1',
 	'10',
-	'Scan',
+	'Product',
 	'CAT1'
 );
