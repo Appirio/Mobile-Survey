@@ -719,7 +719,7 @@ public class TestSurveyServices {
 			// contact id here, also need to check for goal related fields to be
 			// returned
 			SurveyDBManager20 manager = new SurveyDBManager20("1");
-			AccountDBManager20 accountManager = new AccountDBManager20();
+			AccountDBManager20 accountManager = new AccountDBManager20("1");
 
 			ObjectNode account = accountManager.getAccount("1");
 
@@ -787,7 +787,7 @@ public class TestSurveyServices {
 			try {
 				// Usecase 1 : Account and survey category is null or blank and other criteria matches  
 				manager = new SurveyDBManager20("1");
-				accountManager = new AccountDBManager20();
+				accountManager = new AccountDBManager20("1");
 				ObjectNode account = accountManager.getAccount("1");
 				JsonNode result = manager.getSurveys(account);
 	
@@ -805,7 +805,7 @@ public class TestSurveyServices {
 			try {	
 				// USecase 2 Account and Survey have same category combination and other criteria dont match
 				manager = new SurveyDBManager20("2");
-				accountManager = new AccountDBManager20();
+				accountManager = new AccountDBManager20("1");
 				ObjectNode account1 = accountManager.getAccount("2");
 				JsonNode result1 = manager.getSurveys(account1);
 	
@@ -822,7 +822,7 @@ public class TestSurveyServices {
 			try {
 				// USecase 3 Account and Survey have different(non matching) category combination and other criteria dont match
 				manager = new SurveyDBManager20("3");
-				accountManager = new AccountDBManager20();
+				accountManager = new AccountDBManager20("1");
 				ObjectNode account3 = accountManager.getAccount("3");
 				JsonNode result3 = manager.getSurveys(account3);
 				
@@ -838,7 +838,7 @@ public class TestSurveyServices {
 			try {	
 				// USecase 4 Account and Survey have different(non matching) category combination and other criteria matches
 				manager = new SurveyDBManager20("4");
-				accountManager = new AccountDBManager20();
+				accountManager = new AccountDBManager20("1");
 				ObjectNode account4 = accountManager.getAccount("4");
 				JsonNode result4 = manager.getSurveys(account4);
 	
@@ -854,7 +854,7 @@ public class TestSurveyServices {
 			try {	
 				// USecase 5 category is null in account and other criteria match
 				manager = new SurveyDBManager20("5");
-				accountManager = new AccountDBManager20();
+				accountManager = new AccountDBManager20("1");
 				ObjectNode account5 = accountManager.getAccount("5");
 				JsonNode result5 = manager.getSurveys(account5);
 	
