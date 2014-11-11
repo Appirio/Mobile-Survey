@@ -168,6 +168,7 @@ GET		/2.0/product/:id				controllers.ProductServices.getProduct(id)
 GET		/2.0/products					controllers.ProductServices.getProducts()
 
 # Accounts
+
 GET		/2.0/account/:lat/:long/:radius				controllers.AccountServices.getAccounts17(lat, long, radius)
 GET		/2.0/account/:lat/:long/:radius/:limit		controllers.AccountServices.getAccountsLimited17(lat, long, radius, limit)
 GET		/2.0/account-survey/:surveyId/:lat/:long/:radius	controllers.AccountServices.getAccounts20(surveyId, lat, long, radius)
