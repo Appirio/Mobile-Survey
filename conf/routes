@@ -172,7 +172,6 @@ GET		/2.0/account/:lat/:long/:radius				controllers.AccountServices.getAccounts1
 GET		/2.0/account/:lat/:long/:radius/:limit		controllers.AccountServices.getAccountsLimited17(lat, long, radius, limit)
 GET		/2.0/account-survey/:surveyId/:lat/:long/:radius	controllers.AccountServices.getAccounts20(surveyId, lat, long, radius)
 
-
 # Surveys
 
 GET		/2.0/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount20(accountId)
