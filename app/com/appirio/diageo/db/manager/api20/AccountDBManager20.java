@@ -1,9 +1,6 @@
 package com.appirio.diageo.db.manager.api20;
 
 import java.text.MessageFormat;
-import java.util.StringTokenizer;
-
-import sun.util.locale.StringTokenIterator;
 
 import com.appirio.diageo.db.DiageoServicesException;
 import com.appirio.diageo.db.manager.api17.AccountDBManager17;
@@ -202,7 +199,6 @@ public class AccountDBManager20 extends AccountDBManager17 {
 		
 		String sep = "";
 		StringBuilder result = new StringBuilder();
-		StringTokenizer st = new StringTokenizer(input, separator);
 		
 		for(String token : input.split(";")) {
 			result.append(sep);
