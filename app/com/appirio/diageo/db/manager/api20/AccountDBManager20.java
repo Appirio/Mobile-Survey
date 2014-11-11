@@ -190,7 +190,8 @@ public class AccountDBManager20 extends AccountDBManager17 {
 					levelEAll,
 					levelEFilter,
 					categoryFilter,
-					ACCOUNT_LOCATION_LIMIT));
+					ACCOUNT_LOCATION_LIMIT,
+					this.contactId));
 		}		
 	}
 	
