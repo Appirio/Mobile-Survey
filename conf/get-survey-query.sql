@@ -22,4 +22,4 @@ SELECT
 FROM
     dms_survey__c s
 WHERE
-	sfid = {0}
+	sfid = ''{0}''
