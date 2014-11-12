@@ -28,6 +28,7 @@ WHERE
 			dd_my_accounts__c
 		WHERE
 			contact__c = ''{26}''
+  	)
   )
   AND active__c = ''Yes''
   AND (
