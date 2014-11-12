@@ -193,7 +193,10 @@ public class AccountDBManager20 extends AccountDBManager17 {
 					ACCOUNT_LOCATION_LIMIT,
 					this.contactId)));
 			
-			return result;
+			ArrayNode wrappedResult = mapper.createArrayNode();
+			wrappedResult.add(result);
+			
+			return wrappedResult;
 		}		
 	}
 	
