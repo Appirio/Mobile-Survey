@@ -75,7 +75,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String levelEFilter = "";
 			String levelEAll = "";
 			
-			if(!survey.has("tdlinx_account_level_e__c") || survey.get("tdlinx_account_level_e__c").asText().length() == 0) {
+			if(!survey.has("tdlinx_account_level_e__c") || survey.get("tdlinx_account_level_e__c").asText().length() == 0 || survey.get("tdlinx_account_level_e__c").asText().equals("null")) {
 				levelEAll = "ALL";
 			} else { 
 				levelEFilter = survey.get("tdlinx_account_level_e__c").asText();
@@ -84,7 +84,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String mktGroupFilter = "";
 			String mktGroupAll = "";
 			
-			if(!survey.has("marketing_group__c") || survey.get("marketing_group__c").asText().length() == 0) {
+			if(!survey.has("marketing_group__c") || survey.get("marketing_group__c").asText().length() == 0 || survey.get("marketing_group__c").asText().equals("null")) {
 				mktGroupAll = "ALL";
 			} else { 
 				mktGroupFilter = survey.get("marketing_group__c").asText();
@@ -93,7 +93,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String accGroupFilter = "";
 			String accGroupAll = "";
 
-			if(!survey.has("national_account__c") || survey.get("national_account__c").asText().length() == 0) {
+			if(!survey.has("national_account__c") || survey.get("national_account__c").asText().length() == 0 || survey.get("national_account__c").asText().equals("null")) {
 				accGroupAll = "ALL";
 			} else { 
 				accGroupFilter = survey.get("national_account__c").asText();
@@ -102,7 +102,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String zipFilter = "";
 			String zipAll = "";
 			
-			if(!survey.has("zip_codes__c") || survey.get("zip_codes__c").asText().length() == 0) {
+			if(!survey.has("zip_codes__c") || survey.get("zip_codes__c").asText().length() == 0 || survey.get("zip_codes__c").asText().equals("null")) {
 				zipAll = "ALL";
 			} else { 
 				zipFilter = survey.get("zip_codes__c").asText();
@@ -111,7 +111,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String segFilter = "";
 			String segAll = "";
 			
-			if(!survey.has("account_segmentation__c") || survey.get("account_segmentation__c").asText().length() == 0) {
+			if(!survey.has("account_segmentation__c") || survey.get("account_segmentation__c").asText().length() == 0 || survey.get("account_segmentation__c").asText().equals("null")) {
 				segAll = "ALL";
 			} else { 
 				segFilter = survey.get("account_segmentation__c").asText();
@@ -120,7 +120,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String stateFilter = "''";
 			String stateAll = "";
 
-			if(!survey.has("state__c") || survey.get("state__c").asText().length() == 0 || survey.get("state__c").asText().equals("ALL")) {
+			if(!survey.has("state__c") || survey.get("state__c").asText().length() == 0 || survey.get("state__c").asText().equals("ALL") || survey.get("state__c").asText().equals("null")) {
 				stateAll = "ALL";
 			} else { 
 				stateFilter = stringToInClause(survey.get("state__c").asText(), ";");
@@ -129,7 +129,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String subChannelFilter = "''";
 			String subChannelAll = "";
 			
-			if(!survey.has("sub_channel__c") || survey.get("sub_channel__c").asText().length() == 0 || survey.get("sub_channel__c").asText().equals("ALL")) {
+			if(!survey.has("sub_channel__c") || survey.get("sub_channel__c").asText().length() == 0 || survey.get("sub_channel__c").asText().equals("ALL") || survey.get("sub_channel__c").asText().equals("null")) {
 				subChannelAll = "ALL";
 			} else { 
 				subChannelFilter = stringToInClause(survey.get("sub_channel__c").asText(), ";");
@@ -138,7 +138,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String channelFilter = "''";
 			String channelAll = "";
 			
-			if(!survey.has("trade_channel__c") || survey.get("trade_channel__c").asText().length() == 0 || survey.get("trade_channel__c").asText().equals("ALL")) {
+			if(!survey.has("trade_channel__c") || survey.get("trade_channel__c").asText().length() == 0 || survey.get("trade_channel__c").asText().equals("ALL") || survey.get("trade_channel__c").asText().equals("null")) {
 				channelAll = "ALL";
 			} else { 
 				channelFilter = stringToInClause(survey.get("trade_channel__c").asText(), ";");
@@ -147,7 +147,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String sectorFilter = "''";
 			String sectorAll = "";
 			
-			if(!survey.has("sector__c") || survey.get("sector__c").asText().length() == 0 || survey.get("sector__c").asText().equals("ALL")) {
+			if(!survey.has("sector__c") || survey.get("sector__c").asText().length() == 0 || survey.get("sector__c").asText().equals("ALL") || survey.get("sector__c").asText().equals("null")) {
 				sectorAll = "ALL";
 			} else { 
 				sectorFilter = stringToInClause(survey.get("sector__c").asText(), ";");
@@ -155,7 +155,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			
 			String categoryFilter = "'ALL' = 'ALL'";
 			
-			if(survey.has("category__c") && survey.get("category__c").asText().length() != 0 && !survey.get("category__c").asText().equals("ALL")) {
+			if(survey.has("category__c") && survey.get("category__c").asText().length() != 0 && !survey.get("category__c").asText().equals("ALL") || survey.get("category__c").asText().equals("null")) {
 				for(String category : survey.get("category__c").asText().split(";")) {
 					categoryFilter += " OR category__c like '%" + category + "%'";
 				}
