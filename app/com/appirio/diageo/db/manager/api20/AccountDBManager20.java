@@ -161,7 +161,10 @@ public class AccountDBManager20 extends AccountDBManager17 {
 				}
 			} 
 			
-			return queryToJson(MessageFormat.format(getSQLStatement("accounts-available-survey"),
+			ObjectNode result = mapper.createObjectNode();
+			
+			result.put("myAccounts", mapper.createArrayNode());
+			result.put("proximityAccounts", queryToJson(MessageFormat.format(getSQLStatement("accounts-available-survey"),
 					latitude, 
 					longitude, 
 					latitude - degrees, 
@@ -188,7 +191,9 @@ public class AccountDBManager20 extends AccountDBManager17 {
 					levelEFilter,
 					categoryFilter,
 					ACCOUNT_LOCATION_LIMIT,
-					this.contactId));
+					this.contactId)));
+			
+			return result;
 		}		
 	}
 	
