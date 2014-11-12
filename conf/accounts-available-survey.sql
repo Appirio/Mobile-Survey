@@ -29,17 +29,17 @@ WHERE
 		WHERE
 			contact__c = ''{26}''
   )
-  AND active__c = 'Yes'
+  AND active__c = ''Yes''
   AND (
-  	('ALL' = ''{6}'' OR tdlinx_sector__c in ({7})) 
-  	AND ('ALL' = ''{8}'' OR tdlinx_trade_channel__c in ({9})) 
-  	AND ('ALL' = ''{10}'' OR tdlinx_sub_channel__c in ({11})) 
-  	AND ('ALL' = ''{12}'' OR tdlinx_outlet_state__c in ({13}))
-  	AND ('ALL' = ''{14}'' OR account_segmentatiobn__c = ''{15}'')
-  	AND ('ALL' = ''{16}'' OR tdlinx_outlet_zip_code__c = ''{17}'')
-  	AND ('ALL' = ''{18}'' OR national_account_group__c = ''{19}'')
-	AND ('ALL' = ''{20}'' OR marketing_group__c = ''{21}'')
-	AND ('ALL' = ''{22}'' OR tdlinx_account_level_e__c = ''{23}'')
+  	(''ALL'' = ''{6}'' OR tdlinx_sector__c in ({7})) 
+  	AND (''ALL'' = ''{8}'' OR tdlinx_trade_channel__c in ({9})) 
+  	AND (''ALL'' = ''{10}'' OR tdlinx_sub_channel__c in ({11})) 
+  	AND (''ALL'' = ''{12}'' OR tdlinx_outlet_state__c in ({13}))
+  	AND (''ALL'' = ''{14}'' OR account_segmentatiobn__c = ''{15}'')
+  	AND (''ALL'' = ''{16}'' OR tdlinx_outlet_zip_code__c = ''{17}'')
+  	AND (''ALL'' = ''{18}'' OR national_account_group__c = ''{19}'')
+	AND (''ALL'' = ''{20}'' OR marketing_group__c = ''{21}'')
+	AND (''ALL'' = ''{22}'' OR tdlinx_account_level_e__c = ''{23}'')
 	AND ({24})
   )
 ORDER BY
