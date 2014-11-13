@@ -163,8 +163,36 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			
 			ObjectNode result = mapper.createObjectNode();
 			
-			result.put("myAccounts", mapper.createArrayNode());
-			result.put("proximityAccounts", queryToJson(MessageFormat.format(getSQLStatement("accounts-available-survey"),
+			result.put("myAccounts", queryToJson(MessageFormat.format(getSQLStatement("accounts-available-survey"),
+					latitude, 
+					longitude, 
+					latitude - degrees, 
+					latitude + degrees, 
+					longitude - degrees, 
+					longitude + degrees,
+					sectorAll,
+					sectorFilter,
+					channelAll,
+					channelFilter,
+					subChannelAll,
+					subChannelFilter,
+					stateAll,
+					stateFilter,
+					segAll,
+					segFilter,
+					zipAll,
+					zipFilter,
+					accGroupAll,
+					accGroupFilter,
+					mktGroupAll,
+					mktGroupFilter,
+					levelEAll,
+					levelEFilter,
+					categoryFilter,
+					ACCOUNT_LOCATION_LIMIT,
+					this.contactId)));
+			
+			result.put("proximityAccounts", queryToJson(MessageFormat.format(getSQLStatement("proximity-accounts-available-survey"),
 					latitude, 
 					longitude, 
 					latitude - degrees, 
@@ -194,6 +222,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 					this.contactId)));
 			
 			ArrayNode wrappedResult = mapper.createArrayNode();
+			
 			wrappedResult.add(result);
 			
 			return wrappedResult;

@@ -19,16 +19,7 @@ SELECT
 FROM
   account
 WHERE
-  (
-  	sfid in (
-		SELECT
-			account__c
-		FROM
-			dd_my_accounts__c
-		WHERE
-			contact__c = ''{26}''
-  	)
-  )
+  (Latitude__c between {2} and {3} and Longitude__c between {4} and {5})
   AND active__c = ''Yes''
   AND (
   	(''ALL'' = ''{6}'' OR tdlinx_sector__c in ({7})) 
