@@ -82,7 +82,7 @@ public class TestGoalDBManager {
 				JsonNode surveyResults = surveyQuestionNode.get("surveyResults");
 				Assert.assertNull(surveyResults);// includeDetail is false so this should be null
 			}
-						
+			manager.close();			
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());

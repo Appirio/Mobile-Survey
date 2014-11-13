@@ -524,68 +524,56 @@ INSERT INTO dd_group_member__c (
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c,
-	exclude__c
+	dd_survey__c
 ) VALUES (
 	'1',
 	'UGI',
-	'g1',
-	false
+	'g1'
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c,
-	exclude__c
+	dd_survey__c
 ) VALUES (
 	'2',
 	'UGI',
-	'g2',
-	false
+	'g2'
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c,
-	exclude__c
+	dd_survey__c
 ) VALUES (
 	'3',
 	'NUGI',
-	'g2',
-	true
+	'g2'
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c,
-	exclude__c
+	dd_survey__c
 ) VALUES (
 	'4',
 	'NUGI',
-	'g3',
-	false
+	'g3'
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c,
-	exclude__c
+	dd_survey__c
 ) VALUES (
 	'5',
 	'UGI',
-	'g4',
-	false
+	'g4'
 );
 INSERT INTO dd_survey_member__c (
 	sfid,
 	dd_survey_group__c,
-	dd_survey__c,
-	exclude__c
+	dd_survey__c
 ) VALUES (
 	'6',
 	'NUGI',
-	'g5',
-	false
+	'g5'
 );
 INSERT INTO dd_assigned_goal__c (
 	sfid,

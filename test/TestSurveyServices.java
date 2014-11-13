@@ -639,6 +639,7 @@ public class TestSurveyServices {
 			ArrayNode submissions = manager.getSurveySubmissions(externalId);
 
 			Assert.assertEquals(1, submissions.size());
+			manager.close();
 		} catch (Exception e) {
 			Assert.fail(e.getMessage());
 			e.printStackTrace();
@@ -672,6 +673,7 @@ public class TestSurveyServices {
 			Assert.assertEquals("F", submission.get("grade__c").asText());
 			Assert.assertEquals("003K000000hWUvGIAW",
 					submission.get("contact__c").asText());
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -705,6 +707,7 @@ public class TestSurveyServices {
 			Assert.assertEquals("F", submission.get("grade__c").asText());
 			Assert.assertEquals("003K000000hWUvGIAW",
 					submission.get("contact__c").asText());
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -955,6 +958,7 @@ public class TestSurveyServices {
 			ArrayNode surveyResults = manager.getSurveyResults(externalId);
 
 			System.out.println(surveyResults);
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -974,6 +978,7 @@ public class TestSurveyServices {
 			ArrayNode photos = manager.getPhotosByExternalId(externalId);
 			
 			Assert.assertEquals(3, photos.size());
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -990,7 +995,8 @@ public class TestSurveyServices {
 
 			SurveyDBManager20 manager = new SurveyDBManager20("1");
 			manager.createSurvey(body, externalId);
-			// TODO add assert condition to check survey result answer brand values. 
+			// TODO add assert condition to check survey result answer brand values.
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -1043,7 +1049,8 @@ public class TestSurveyServices {
 			}
 			
 			System.out.println(achievements);
-			
+			manager.close();
+			goalManager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
@@ -1062,7 +1069,8 @@ public class TestSurveyServices {
 	
 			manager.createSurvey(body, UUID.randomUUID().toString());
 		
-			// TODO add assert condition to check survey result answer brand values. 
+			// TODO add assert condition to check survey result answer brand values.
+			manager.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			Assert.fail(e.getMessage());
