@@ -107,4 +107,8 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 	public ArrayNode getPhotosByExternalId(String surveySubmissionExternalId) throws DiageoServicesException {
 		return queryToJson(MessageFormat.format(getSQLStatement("query-survey-photos-by-ext-id"), surveySubmissionExternalId));
 	}
+	
+	public ArrayNode getSurvey(String surveyId) throws DiageoServicesException {
+		return queryToJson(MessageFormat.format(getSQLStatement("get-survey-query"), surveyId));
+	}
 }
