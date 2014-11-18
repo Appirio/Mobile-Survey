@@ -43,8 +43,7 @@ WHERE
 	AND ({24})
   )
   AND 
-  	( universal_survey__c  
-          OR sfid in (SELECT DISTINCT dd_survey__c FROM dd_survey_member__c WHERE dd_survey_group__c IN 
+  	( sfid in (SELECT DISTINCT dd_survey__c FROM dd_survey_member__c WHERE dd_survey_group__c IN 
                                     (SELECT sm.dd_survey_group__c 
                                      FROM dd_group_member__c gm 
                                      INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c 
