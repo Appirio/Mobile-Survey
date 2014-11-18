@@ -18,6 +18,7 @@ SELECT
     sub_channel__c,
     state__c,
     sector__c,
+    zip_codes__c,
     category__c
 FROM
     dms_survey__c s
