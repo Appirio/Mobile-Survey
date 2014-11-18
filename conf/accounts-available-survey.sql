@@ -42,17 +42,6 @@ WHERE
 	AND (''ALL'' = ''{22}'' OR tdlinx_account_level_e__c = ''{23}'')
 	AND ({24})
   )
-  AND 
-  	( sfid in (SELECT DISTINCT dd_survey__c FROM dd_survey_member__c WHERE dd_survey_group__c IN 
-                                    (SELECT sm.dd_survey_group__c 
-                                     FROM dd_group_member__c gm 
-                                     INNER JOIN dd_survey_member__c sm ON sm.dd_survey_group__c = gm.dd_survey_group__c 
-                                     WHERE gm.contact__c = ''{26}''
-                                    )
-                     ) 
-          OR (SELECT count(*) FROM dd_survey_member__c WHERE dd_survey__c = s.sfid) = 0
-    )
-    
 ORDER BY
   distance 
 LIMIT
