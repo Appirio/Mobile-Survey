@@ -26,7 +26,7 @@ WHERE
 		FROM
 			dd_my_accounts__c
 		WHERE
-			contact__c = ''{26}''
+			contact__c = ''{25}''
   	)
   )
   AND active__c = ''Yes''
@@ -45,4 +45,4 @@ WHERE
 ORDER BY
   distance 
 LIMIT
- {25};
+ {24};
