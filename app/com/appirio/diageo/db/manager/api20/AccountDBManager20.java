@@ -75,10 +75,10 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			String levelEFilter = "";
 			String levelEAll = "";
 			
-			if(!survey.has("tdlinx_account_level_e__c") || survey.get("tdlinx_account_level_e__c").asText().length() == 0 || survey.get("tdlinx_account_level_e__c").asText().equals("null")) {
+			if(!survey.has("tdlinx_acct_level_e__c") || survey.get("tdlinx_acct_level_e__c").asText().length() == 0 || survey.get("tdlinx_acct_level_e__c").asText().equals("null")) {
 				levelEAll = "ALL";
 			} else { 
-				levelEFilter = survey.get("tdlinx_account_level_e__c").asText();
+				levelEFilter = survey.get("tdlinx_acct_level_e__c").asText();
 			}
 
 			String mktGroupFilter = "";
@@ -100,12 +100,13 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			}
 			
 			String zipFilter = "";
-			String zipAll = "";
-			
-			if(!survey.has("zip_codes__c") || survey.get("zip_codes__c").asText().length() == 0 || survey.get("zip_codes__c").asText().equals("null")) {
-				zipAll = "ALL";
-			} else { 
-				zipFilter = survey.get("zip_codes__c").asText();
+			if(survey.has("zip_codes__c") && survey.get("zip_codes__c").asText().length() != 0 || survey.get("zip_codes__c").asText().equals("null")) {
+				zipFilter += "'ALL' = ''";
+				for(String zip : survey.get("zip_codes__c").asText().split("[\\p{Space},]")) {
+					zipFilter += " OR tdlinx_outlet_zip_code__c like '" + zip + "%'";
+				}
+			}else{
+				zipFilter += "'ALL' = 'ALL'";
 			}
 			
 			String segFilter = "";
@@ -153,13 +154,16 @@ public class AccountDBManager20 extends AccountDBManager17 {
 				sectorFilter = stringToInClause(survey.get("sector__c").asText(), ";");
 			}
 			
-			String categoryFilter = "'ALL' = 'ALL'";
+			String categoryFilter = "";
 			
 			if(survey.has("category__c") && survey.get("category__c").asText().length() != 0 && !survey.get("category__c").asText().equals("ALL") || survey.get("category__c").asText().equals("null")) {
+				categoryFilter += "'ALL' = ''";
 				for(String category : survey.get("category__c").asText().split(";")) {
 					categoryFilter += " OR category__c like '%" + category + "%'";
 				}
-			} 
+			}else{
+				categoryFilter += "'ALL' = 'ALL'";
+			}
 			
 			ObjectNode result = mapper.createObjectNode();
 			
@@ -180,14 +184,13 @@ public class AccountDBManager20 extends AccountDBManager17 {
 					stateFilter,
 					segAll,
 					segFilter,
-					zipAll,
-					zipFilter,
 					accGroupAll,
 					accGroupFilter,
 					mktGroupAll,
 					mktGroupFilter,
 					levelEAll,
 					levelEFilter,
+					zipFilter,
 					categoryFilter,
 					ACCOUNT_LOCATION_LIMIT,
 					this.contactId)));
@@ -209,14 +212,13 @@ public class AccountDBManager20 extends AccountDBManager17 {
 					stateFilter,
 					segAll,
 					segFilter,
-					zipAll,
-					zipFilter,
 					accGroupAll,
 					accGroupFilter,
 					mktGroupAll,
 					mktGroupFilter,
 					levelEAll,
 					levelEFilter,
+					zipFilter,
 					categoryFilter,
 					ACCOUNT_LOCATION_LIMIT,
 					this.contactId)));

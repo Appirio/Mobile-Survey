@@ -36,11 +36,11 @@ WHERE
   	AND (''ALL'' = ''{10}'' OR tdlinx_sub_channel__c in ({11})) 
   	AND (''ALL'' = ''{12}'' OR tdlinx_outlet_state__c in ({13}))
   	AND (''ALL'' = ''{14}'' OR account_segmentatiobn__c = ''{15}'')
-  	AND (''ALL'' = ''{16}'' OR tdlinx_outlet_zip_code__c = ''{17}'')
-  	AND (''ALL'' = ''{18}'' OR national_account_group__c = ''{19}'')
-	AND (''ALL'' = ''{20}'' OR marketing_group__c = ''{21}'')
-	AND (''ALL'' = ''{22}'' OR tdlinx_account_level_e__c = ''{23}'')
-	AND ({24})
+  	AND (''ALL'' = ''{16}'' OR national_account_group__c = ''{17}'')
+	AND (''ALL'' = ''{18}'' OR marketing_group__c = ''{19}'')
+	AND (''ALL'' = ''{20}'' OR tdlinx_account_level_e__c = ''{21}'')
+	AND ({22})
+	AND ({23})
   )
 ORDER BY
   distance 
