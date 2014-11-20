@@ -100,7 +100,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			}
 			
 			String zipFilter = "";
-			if(survey.has("zip_codes__c") && survey.get("zip_codes__c").asText().length() != 0 || survey.get("zip_codes__c").asText().equals("null")) {
+			if(survey.has("zip_codes__c") && survey.get("zip_codes__c").asText().length() != 0 && !survey.get("zip_codes__c").asText().equals("null")) {
 				zipFilter += "'ALL' = ''";
 				for(String zip : survey.get("zip_codes__c").asText().split("[\\p{Space},]")) {
 					zipFilter += " OR tdlinx_outlet_zip_code__c like '" + zip + "%'";
@@ -156,7 +156,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			
 			String categoryFilter = "";
 			
-			if(survey.has("category__c") && survey.get("category__c").asText().length() != 0 && !survey.get("category__c").asText().equals("ALL") || survey.get("category__c").asText().equals("null")) {
+			if(survey.has("category__c") && survey.get("category__c").asText().length() != 0 && !survey.get("category__c").asText().equals("ALL") && !survey.get("category__c").asText().equals("null")) {
 				categoryFilter += "'ALL' = ''";
 				for(String category : survey.get("category__c").asText().split(";")) {
 					categoryFilter += " OR category__c like '%" + category + "%'";
