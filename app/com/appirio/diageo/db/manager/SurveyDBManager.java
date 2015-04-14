@@ -359,7 +359,12 @@ public class SurveyDBManager extends DBManager {
 				catch(Exception e) {
 				    System.out.println("WARN: No original_answer_options__c: "+ e);
 				}
-				
+				// START | DE-2099 | JGUPTA | Mar 31,2015 | Default answer option value for question type Count
+				String quesType = newSurveyResult.get("question_type__c").asText();
+				if(quesType.equalsIgnoreCase("Count")) {
+					answerOptionsText = "[{\"value\":\"Yes\",\"score\":\"0\",\"goalScore\":\"0\"},{\"value\":\"No\",\"score\":\"0\",\"goalScore\":\"0\"}]" ;
+				} 
+				System.out.println("=====answerOptionsText :: "+answerOptionsText);
 				// Grading Survey Evals
 				if (answerOptionsText.matches("\\[\\{(.*)")) {
 				    grading = true;
