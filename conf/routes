@@ -175,7 +175,7 @@ GET		/2.0/account-survey/:surveyId/:lat/:long/:radius	controllers.AccountService
 
 # Surveys
 
-GET		/2.0/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount20(accountId)
+#GET		/2.0/survey/byaccount/:accountId	controllers.SurveyServices.getSurveysByAccount20(accountId)
 POST	/2.0/survey							controllers.SurveyServices.saveSurvey()
 GET		/2.0/survey/universal				controllers.SurveyServices.getUniversalSurveys20()
 

@@ -215,40 +215,6 @@ public class SurveyServices extends Controller {
     		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
     	}
 	}
-
-	@With(SecureAction.class)
-	public static Result getSurveysByAccount20(String accountId) {
-		try {
-			SurveyDBManager20 manager = new SurveyDBManager20(request().getHeader("uid"));
-			AccountDBManager accountManager = new AccountDBManager();
-			Result result = null;
-			
-			try {
-				ObjectNode account = accountManager.getAccount(accountId);
-				
-				if(account != null) {
-					ArrayNode surveys = manager.getSurveys(account);
-					result = ok(surveys);
-				} else {
-					result = badRequest(ControllerUtils.messageToJson("Invalid account ID"));
-				}
-				
-			} finally {
-				manager.close();
-				accountManager.close();
-			}
-			
-			return result;
-    	} catch (DiageoServicesException e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
-    	}
-	}
 	
 	@With(SecureAction.class)
 	public static Result getUniversalSurveys() {
