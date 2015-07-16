@@ -257,7 +257,7 @@ public class SurveyDBManager extends DBManager {
 	    	}
 	    }
 	    
-	    calculateGoals(externalId);
+	    //calculateGoals(externalId);
 	}
 	
 	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission, Map<String, List<List<ObjectNode>>> data) throws DiageoServicesException {
