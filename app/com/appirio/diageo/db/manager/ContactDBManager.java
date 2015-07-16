@@ -63,14 +63,4 @@ public class ContactDBManager extends DBManager {
 		
 		return null;
 	}
-	
-	public ObjectNode getContact(String sfid) throws DiageoServicesException {
-		ObjectNode result = queryToJsonObject(MessageFormat.format(getSQLStatement("contact-query"), sfid));
-		
-		if(result != null) {
-			result.put("showDashboard", result.has("assigned_goal_count__c") && result.get("assigned_goal_count__c").asInt() > 0);
-		}
-		
-		return result;
-	}
 }

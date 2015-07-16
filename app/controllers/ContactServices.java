@@ -46,23 +46,4 @@ public class ContactServices extends Controller {
     		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
     	}
 	}
-	
-	@With(SecureAction.class)
-	public static Result getContact() {
-		try {
-			ContactDBManager manager = new ContactDBManager();
-		
-			try {
-				ObjectNode user = manager.getContact(request().getHeader("uid"));
-				
-				return ok(user);
-			} finally {
-				manager.close();
-			}
-    	} catch (DiageoServicesException e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
-    	}
-	}
 }
