@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class GoalServices extends Controller {
 
-	@With(SecureAction.class)
+	/*@With(SecureAction.class)
 	public static Result getGoalAchievements(String startDate, String endDate, String includeDetails) {
 		
 		String contactId = request().getHeader("uid");
@@ -35,5 +35,5 @@ public class GoalServices extends Controller {
 	    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
 	    	}
 		
-	}
+	}*/
 }
