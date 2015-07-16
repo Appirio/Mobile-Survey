@@ -27,7 +27,7 @@ public class SecureAction extends Simple {
 			return delegate.call(ctx);
 		}
 		
-		String salt = ctx.request().getHeader("Salt");
+		/*String salt = ctx.request().getHeader("Salt");
 		String signature = ctx.request().getHeader("Signature");
 		String userId = ctx.request().getHeader("uid");
 
@@ -49,7 +49,7 @@ public class SecureAction extends Simple {
 			System.out
 					.println("Authentication failure: missing required headers: " + missingHeaders);
 			return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Missing required headers")));
-		} else {
+		} else {*/
 			ContactDBManager contactManager = new ContactDBManager();
 			SecurityDBManager manager = new SecurityDBManager();
 
@@ -86,7 +86,8 @@ public class SecureAction extends Simple {
 				} else {
 					return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Authentication failure: Signatures don't match")));
 				}
-			} finally {
+			//} 
+			finally {
 				manager.close();
 				contactManager.close();
 			}
