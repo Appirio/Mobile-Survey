@@ -92,7 +92,6 @@ public class SecureAction extends Simple {
 			}
 
 		}
-		return delegate.call(ctx);
 	}
 
 	public static String generateHmacSHA256Signature(String data, String key)
