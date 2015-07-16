@@ -185,4 +185,4 @@ POST	/2.0/contact/authorize				controllers.ContactServices.authorizeUser()
 GET		/2.0/contact						controllers.ContactServices.getContact()
 
 # Goal Achievements
-GET     /2.0/goal/achievements/:startdate/:enddate/:includeDetails              controllers.GoalServices.getGoalAchievements(startdate, enddate, includeDetails)
+#GET     /2.0/goal/achievements/:startdate/:enddate/:includeDetails              controllers.GoalServices.getGoalAchievements(startdate, enddate, includeDetails)
