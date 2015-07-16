@@ -164,8 +164,8 @@ POST	/1.7/contact/authorize				controllers.ContactServices.authorizeUser()
 GET     /2.0/assets/*file               controllers.Assets.at(path="/public", file)
 
 # Products
-GET		/2.0/product/:id				controllers.ProductServices.getProduct(id)
-GET		/2.0/products					controllers.ProductServices.getProducts()
+#GET		/2.0/product/:id				controllers.ProductServices.getProduct(id)
+#GET		/2.0/products					controllers.ProductServices.getProducts()
 
 # Accounts
 
