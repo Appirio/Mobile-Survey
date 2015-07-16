@@ -28,7 +28,7 @@ public class ContactDBManager extends DBManager {
 		//	return DEFAULT_CONTACT_REG;
 		//}
 		
-		JsonNode users = queryToJson("select sfid, Name, Email, MobilePhone, assigned_goal_count__c from Contact where direct_dial_activation_code__c = " + authorizationCode + " and Direct_Dial_Mobile_User__c and Email = '" + email + "';");
+		JsonNode users = queryToJson("select sfid, Name, Email, MobilePhone, assigned_goal_count__c from Contact where Email = '" + email + "';");
 		
 		if(users.size() > 0) {
 			ObjectNode user = (ObjectNode) users.get(0);

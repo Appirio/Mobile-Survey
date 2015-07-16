@@ -23,7 +23,7 @@ public class SecureAction extends Simple {
 
 	@Override
 	public Promise<SimpleResult> call(Context ctx) throws Throwable {
-		/*if(!SECURITY_ENABLED) {
+		if(!SECURITY_ENABLED) {
 			return delegate.call(ctx);
 		}
 		
@@ -91,7 +91,7 @@ public class SecureAction extends Simple {
 				contactManager.close();
 			}
 
-		}*/
+		}
 		return delegate.call(ctx);
 	}
 
