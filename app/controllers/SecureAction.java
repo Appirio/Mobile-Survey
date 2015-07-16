@@ -27,52 +27,72 @@ public class SecureAction extends Simple {
 			return delegate.call(ctx);
 		}
 		
-		String salt = ctx.request().getHeader("Salt");
+		/*String salt = ctx.request().getHeader("Salt");
 		String signature = ctx.request().getHeader("Signature");
 		String userId = ctx.request().getHeader("uid");
 
-		ContactDBManager contactManager = new ContactDBManager();
-		SecurityDBManager manager = new SecurityDBManager();
-
-		try {
-
-			String email = contactManager.getEmail(userId);
-
-			if (email == null) {
-				System.out
-						.println("Authentication failure: email not found in the database with required flags: " + userId);
-				return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("User not authorized")));
+		if (salt == null || signature == null || userId == null) {
+			String missingHeaders = "";
+			
+			if(salt == null) {
+				missingHeaders += "1";
+			}
+			
+			if(signature == null) {
+				missingHeaders += "2";
 			}
 
-			String generatedSignature = generateHmacSHA256Signature(salt
-					+ email, SIGNATURE_KEY);
+			if(userId == null) {
+				missingHeaders += "3";
+			}
+			
+			System.out
+					.println("Authentication failure: missing required headers: " + missingHeaders);
+			return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Missing required headers")));
+		} else {
+			ContactDBManager contactManager = new ContactDBManager();
+			SecurityDBManager manager = new SecurityDBManager();
 
-			if (generatedSignature.equals(signature)) {
+			try {
 
-				if (contactManager.isApprovedContact(userId)) {
-					try {
-						manager.saveSignature(signature);
+				String email = contactManager.getEmail(userId);
 
-						return delegate.call(ctx);
-					} catch (Exception e) {
-						e.printStackTrace();
-						
-						System.out.println("Authentication failure: Signature already used: " + signature); 
-						return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Signature already used")));
+				if (email == null) {
+					System.out
+							.println("Authentication failure: email not found in the database with required flags: " + userId);
+					return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("User not authorized")));
+				}
+
+				String generatedSignature = generateHmacSHA256Signature(salt
+						+ email, SIGNATURE_KEY);
+
+				if (generatedSignature.equals(signature)) {
+
+					if (contactManager.isApprovedContact(userId)) {
+						try {
+							manager.saveSignature(signature);
+
+							return delegate.call(ctx);
+						} catch (Exception e) {
+							e.printStackTrace();
+							
+							System.out.println("Authentication failure: Signature already used: " + signature); 
+							return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Signature already used")));
+						}
+					} else {
+						System.out.println("Authentication failure: Contact not approved to use the app: " + userId);
+						return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Contact not approved")));
 					}
 				} else {
-					System.out.println("Authentication failure: Contact not approved to use the app: " + userId);
-					return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Contact not approved")));
+					return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Authentication failure: Signatures don't match")));
 				}
-			} else {
-				return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Authentication failure: Signatures don't match")));
+			} finally {
+				manager.close();
+				contactManager.close();
 			}
-		} finally {
-			manager.close();
-			contactManager.close();
-		}
 
-		
+		}*/
+		return delegate.call(ctx);
 	}
 
 	public static String generateHmacSHA256Signature(String data, String key)
