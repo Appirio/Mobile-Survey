@@ -90,30 +90,4 @@ public class AccountServices extends Controller {
     	}
     }
 	
-	@With(SecureAction.class)
-    public static Result getAccountsLimited17(String latitude, String longitude, String radius, String limit) {
-    	try {
-    		String userId = request().getHeader("uid");
-    		
-    		AccountDBManager17 manager = new AccountDBManager17(userId);
-    		JsonNode result = null;
-    		
-    		try {
-    			result = manager.findAccounts(Double.parseDouble(latitude), Double.parseDouble(longitude), Double.parseDouble(radius), Long.parseLong(limit));
-    		} finally {
-    			manager.close();
-    		}
-    		
-    		return ok(result);
-    		
-    	} catch (DiageoServicesException e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
-    	} catch (Exception e) {
-    		e.printStackTrace();
-    		
-    		return internalServerError(ControllerUtils.messageToJson("An unexpected error occurred!"));
-    	}
-    }	
 }
