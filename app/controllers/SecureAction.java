@@ -27,30 +27,7 @@ public class SecureAction extends Simple {
 			return delegate.call(ctx);
 		}
 		
-		/*String salt = ctx.request().getHeader("Salt");
-		String signature = ctx.request().getHeader("Signature");
-		String userId = ctx.request().getHeader("uid");
-
-		if (salt == null || signature == null || userId == null) {
-			String missingHeaders = "";
-			
-			if(salt == null) {
-				missingHeaders += "1";
-			}
-			
-			if(signature == null) {
-				missingHeaders += "2";
-			}
-
-			if(userId == null) {
-				missingHeaders += "3";
-			}
-			
-			System.out
-					.println("Authentication failure: missing required headers: " + missingHeaders);
-			return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Missing required headers")));
-		} else {*/
-			ContactDBManager contactManager = new ContactDBManager();
+		ContactDBManager contactManager = new ContactDBManager();
 			SecurityDBManager manager = new SecurityDBManager();
 
 			try {
@@ -86,13 +63,10 @@ public class SecureAction extends Simple {
 				} else {
 					return Promise.pure((SimpleResult)unauthorized(ControllerUtils.messageToJson("Authentication failure: Signatures don't match")));
 				}
-			//} 
-			finally {
+			} finally {
 				manager.close();
 				contactManager.close();
 			}
-
-		}
 	}
 
 	public static String generateHmacSHA256Signature(String data, String key)
