@@ -28,19 +28,20 @@ public class ContactDBManager extends DBManager {
 		//	return DEFAULT_CONTACT_REG;
 		//}
 		
-		JsonNode users = queryToJson("select sfid, Name, Email, MobilePhone, assigned_goal_count__c from Contact where Email = '" + email + "';");
+		JsonNode users = queryToJson("select sfid, Name, Email, MobilePhone from Contact where Email = '" + email + "';");
 		
 		if(users.size() > 0) {
 			ObjectNode user = (ObjectNode) users.get(0);
 			
 			saveApprovedContact(user.get("sfid").asText());
 			
-			Integer goalCount = user.get("assigned_goal_count__c").asInt(0);
+			//Integer goalCount = user.get("assigned_goal_count__c").asInt(0);
 			Boolean showDashboard = false;
 			
-			if(goalCount > 0){
+			/*if(goalCount > 0){
 				showDashboard = true;
-			}
+			}*/
+			
 			
 			return new ObjectMapper().readTree("{\"contact\": {\"id\": \"" + user.get("sfid").asText() + "\", \"name\": \"" + user.get("name").asText()  + "\", \"email\": \"" + user.get("email").asText()   + "\", \"mobilePhone\": \"" + user.get("mobilephone").asText()   + "\", \"showDashboard\": \"" + showDashboard  + "\"}}") ;
 		} else {
