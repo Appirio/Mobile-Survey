@@ -50,7 +50,7 @@ public class ContactDBManager extends DBManager {
 	}
 	
 	private void saveApprovedContact(String sfid) throws DiageoServicesException {
-		executeStatement("update contact set Direct_Dial_Activation_Code__c = null, Direct_Dial_Activation_Code_Time_Set__c = null, Activation_Notification_sent__c = null, Direct_Dial_Activated__c = true where sfid = '"+ sfid +"';");		
+		executeStatement("update contact set Direct_Dial_Activation_Code__c = null, Direct_Dial_Activation_Code_Time_Set__c = null, Direct_Dial_Activated__c = true where sfid = '"+ sfid +"';");		
 	}
 	
 	public String getEmail(String contactId) throws DiageoServicesException {
