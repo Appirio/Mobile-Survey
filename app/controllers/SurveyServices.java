@@ -411,7 +411,7 @@ public class SurveyServices extends Controller {
 				
 				try {
 					manager.createSurvey(body, externalId);
-				    String query = "select grade__c, score__c, message__c from survey_submission__c where external_id__c='"+ externalId +"'";
+				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
 				    ArrayNode ss = manager.getSS(query);
 				    
 				    grade = ss.get(0).get("grade__c").asText();
@@ -460,7 +460,7 @@ public class SurveyServices extends Controller {
 				
 				try {
 					manager.createSurvey(body, externalId);
-				    String query = "select grade__c, score__c, message__c from survey_submission__c where external_id__c='"+ externalId +"'";
+				    String query = "select grade__c, score__c, message__c from dd_survey_submission__c where external_id__c='"+ externalId +"'";
 				    ArrayNode ss = manager.getSS(query);
 				    
 				    grade = ss.get(0).get("grade__c").asText();
