@@ -93,7 +93,7 @@ public class SurveyDBManager extends DBManager {
 			"QUESTION_NUMBER__C",
 			"SCORE__C",
 			"SURVEY_SUBMISSION__C",
-			"DD_SURVEY_SUBMISSION__C__EXTERNAL_ID__C",
+			"SURVEY_SUBMISSION__C__EXTERNAL_ID__C",
 			"SCORE_ROLLUP__C",
 			"SCORE_ROLLUP_TOTAL_POSSIBLE__C",
 			"GOAL_ACHIEVEMENT__C",
@@ -467,7 +467,7 @@ public class SurveyDBManager extends DBManager {
 				// Some kind of increment?
 				//newSurvey.put("question_number__c", );
 				// Survey Submission sfid
-				newSurveyResult.put("DD_Survey_Submission__c__External_Id__c", externalId);
+				newSurveyResult.put("Survey_Submission__c__External_Id__c", externalId);
 				
 				// creating photo records 
 				if(question.has("photos")){
