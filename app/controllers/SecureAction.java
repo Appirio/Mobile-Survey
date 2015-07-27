@@ -27,7 +27,7 @@ public class SecureAction extends Simple {
 			return delegate.call(ctx);
 		}
 		
-		/*String salt = ctx.request().getHeader("Salt");
+		String salt = ctx.request().getHeader("Salt");
 		String signature = ctx.request().getHeader("Signature");
 		String userId = ctx.request().getHeader("uid");
 
@@ -91,8 +91,8 @@ public class SecureAction extends Simple {
 				contactManager.close();
 			}
 
-		}*/
-		return delegate.call(ctx);
+		}
+		//return delegate.call(ctx);
 	}
 
 	public static String generateHmacSHA256Signature(String data, String key)
