@@ -681,7 +681,7 @@ select {
     color: #fff;
 }
 .question-desc {
-    color: #B3cc00;
+    color: #999999;
     font-size: 17px;
     padding: 15px 4.6875% 10px 0;
     line-height: 22px;
@@ -808,7 +808,7 @@ select {
 .review-product-title {
     padding: 5px 4.6875% 10px;
 
-    background: #B3cc00;
+    background: #999999;
     color: #000;
     /*padding-left: 4.6875%;*/
     line-height: 42px;
@@ -818,7 +818,7 @@ select {
     overflow: hidden;
 }
 .review-product-footer {
-    background: #B3cc00;
+    background: #999999;
     /*padding-left: 4.6875%;*/
     line-height: 2px;
     margin-top: 8px;
@@ -830,7 +830,7 @@ select {
     padding: 5px 4.6875% 10px 0;
 }
 .review-product-answer-desc {
-    color: #B3cc00;
+    color: #999999;
 }
 .review-product-answer {
     padding-top: 5px;
