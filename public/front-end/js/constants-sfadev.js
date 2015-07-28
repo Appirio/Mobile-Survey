@@ -8,7 +8,7 @@ var ACTIVE_ENV = "SFADEV";
 
 //var BASE_PATH = 'http://localhost:9000';
 //var BASE_PATH = 'http://diageo-survey-services-dd3qa.herokuapp.com';  //'https://shielded-river-6617.herokuapp.com';	//This points to dd3qa org
-var BASE_PATH = 'http://heroku-cx-survey-dev.herokuapp.com'; //this points to sfadev
+var BASE_PATH = 'https://heroku-cx-survey-dev.herokuapp.com'; //this points to sfadev
 //var BASE_PATH = 'https://diageo-survey-services-sk2.herokuapp.com';	//This points to sk2 org
 //var BASE_PATH = 'https://diageo-survey-services.herokuapp.com'; //This points to production org
 

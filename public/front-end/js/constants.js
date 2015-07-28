@@ -11,7 +11,7 @@ var ACTIVE_ENV = "PRODUCTION";
 //var BASE_PATH = 'https://diageo-survey-services-sk2.herokuapp.com';	//This points to sk2 org
 //var BASE_PATH = 'http://heroku-cx-survey-dev.herokuapp.com'; //This points to production org
 
-var BASE_PATH ="http://heroku-cx-survey-dev-services.herokuapp.com"
+var BASE_PATH ="https://heroku-cx-survey-dev-services.herokuapp.com"
 
 var AUTHORIZE_PATH = BASE_PATH + SERVICE_BUILD_NUMBER + '/contact/authorize';
 var ACCOUNT_GEOLOCATION_PATH = BASE_PATH + SERVICE_BUILD_NUMBER + '/account/:latitudeCoord/:longitudeCoord/:miles';
