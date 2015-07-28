@@ -5,7 +5,7 @@ var con = {
 	        //$scope.build = BUILD_NUMBER;
         	$scope.version = VERSION_NUMBER;
         $scope.accessCode = '791157';
-        $scope.email = 'sandeep.kumard@appirio.com';
+        $scope.email = 'sandeep.kumar@appirio.com';
 		$scope.appPath = '/Surveys';
 		$scope.pathName = 'Surveys ';
 
