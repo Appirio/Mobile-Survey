@@ -1,0 +1,12 @@
+<div class="modal-alert" style="display: none" modal-prompt ng-controller="con.modalPrompt">
+    <a class="modal-alert-close" close-invalid-login-popup>
+        <div class="modal-info">
+            <span class="icon modal-alert-icon icon-alert-big"></span>
+                <span class="modal-alert-desc">
+                    {{displayMessage}}
+                    <br/><br/>
+                <span class="prompt-button l-button" ng-click="negative()">{{negativeButtonText}}</span><span class="prompt-button r-button" ng-click="affirmative()">{{affirmativeButtonText}}</span>
+            </span>
+        </div>
+    </a>
+</div>

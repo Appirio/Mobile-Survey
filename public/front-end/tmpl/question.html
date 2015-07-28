@@ -1,0 +1,128 @@
+<div class="layout-container" ng-show="true" style="display: none">
+
+    <div class="layout-slide slide-question-1">
+        <header>
+            <a ng-hide="isEdit" ng-click="goBack()" class="header-link-left header-link-back" data-popview=".slide-product-scan">Back</a>
+            <div class="header-title has-back">
+                <div class="text" ng-bind="wholeSurvey.name"></div>
+            </div>
+        </header>
+
+        <article>
+            <div class="question">
+                <div class="question-title">
+                    <div ng-switch="wholeSurvey.survey_type__c != 'Non Product'">
+                        <span ng-switch-when="true" ng-switch="wholeSurvey.product.length > 0">
+                            <span ng-switch-when="true">{{wholeSurvey.product[0].nielsen_brand__c}}</span>
+                            <span ng-switch-default>{{wholeSurvey.manually_entered_upc_description__c}}</span>
+                        </span>
+                        <span ng-switch-default>
+                            <span>{{accountName}}</span>
+                        </span>
+                    </div>
+                    <!-- {{productName}} -->
+                    <div class="question-number">
+                        <div class="question-number-text">Question</div>
+                        <span class="question-number-count">
+                            <span class="question-number-current">{{counter+1}}</span>/{{totalCount}}
+                        </span>
+                    </div>
+                </div>
+                <div ng-show="wholeSurvey.survey_type__c != 'Non Product'" class="question-sub-title">Location: {{accountName}}</div>
+                <p class="question-desc">
+                    {{question.question_text__c}}
+                </p>
+                <div ng-switch on="question.question_type__c" style="padding-right:4.6875%;">
+                    <!-- type count -->
+                    <div ng-switch-when="Count">
+                        <input type="tel" class="question-input numeric" ng-model="question.answer_value__c" />
+                    </div>
+
+                    <!-- type price -->
+                    <div ng-switch-when="Price">
+                        <span class="dollar-sign">$</span>
+                        <input type="text" class="question-input currency" ng-model="question.answer_value__c" />
+                    </div>
+
+                    <!-- type picklist -->
+                    <div ng-switch-when="Select" class="form">
+                        <div ng-repeat="option in question.answer_options__c" class="question-check-line" ng-click="option.checked = !option.checked; updateSelection(option)">
+                            <input type="checkbox" class="question-check-line-input" ng-model="option.checked" ng-click="$event.stopPropagation();" ng-change="updateSelection(option)" />
+                            <div class="question-input-desc">{{option.text}}</div>
+                            <div style="clear:both;"></div>
+                        </div>
+                    </div>
+
+                    <!-- type multi-select -->
+                    <div ng-switch-when="Multi-Select">
+                        <div ng-repeat="option in question.answer_options__c" class="question-check-line" ng-click="option.checked = !option.checked; updateSelection(option)">
+                            <input type="checkbox" class="question-check-line-input" ng-model="option.checked" ng-click="$event.stopPropagation();" ng-change="updateSelection(option)" />
+                            <div class="question-input-desc">{{option.text}}</div>
+		                        <div style="clear:both;"></div>
+                        </div>
+                        <div class="question-input-select-all" ng-click="selectAll()">Select {{allSelectText}}</div>
+
+                    </div>
+
+                    <!-- default/text -->
+                    <div ng-switch-default>
+                        <input type="text" class="question-input" ng-model="question.answer_text__c" />
+                    </div>
+                </div>
+
+
+                <div ng-switch on="question.label_for_add_l_comments__c">
+                    <div ng-switch-when="null"></div>
+                    <div ng-switch-default>
+                        <p class="paragraph">
+                            {{question.label_for_add_l_comments__c}}
+                        </p>
+                        <textarea ng-model="question.note__c" class="question-notes-textarea limited-length" ng-maxlength="255" length-limit="255"></textarea>
+                    </div>
+                </div>
+                <div class="question-desc">{{errorMessage}}</div>
+            </div>
+            <!-- This absolutely refused to work with an ng-if  -->
+            <!--Photo section remove as per Erica notes -->
+            <!--<div ng-switch="question.include_photos__c">-->
+                <!--<div ng-switch-when="t">-->
+                    <!--<br/>-->
+                    <!--<div photo-upload></div>-->
+                    <!--<br/>-->
+                <!--</div>-->
+            <!--</div>-->
+            <div class="button-wrapper question-button-wrapper" ng-switch="counter > 0">
+                <span ng-switch-when="true">
+                    <a ng-click="previous()" class="bottom-left-link button is-button" data-popview=".slide-question-1">Previous</a>
+                    <a ng-click="saveAnswer(answer)" class="bottom-right-link button is-button" data-pushview=".slide-question-another-display">Next</a>
+                </span>
+                <span ng-switch-default>
+                    <a ng-click="saveAnswer(answer)" class="bottom-right-link is-full button is-button" data-pushview=".slide-question-another-display">Next</a>
+                </span>
+            </div>
+
+
+            <!--
+			<div class="question-desc">
+				IncludeNone: {{question.include_none_of_the_above__c}}<br/>
+				Question: {{question}}<br/>
+			</div>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+			<br/>
+				Whole: {{wholeSurvey | json}}<br/>
+				Count: {{counter}}<br/>
+				Q Type: {{question.question_type__c}}<br/>
+				Value: {{question.answer_value__c}}<br/>
+				Text: {{question.answer_text__c}}<br/>
+				Id: {{wholeSurvey.survey_id}}<br/>
+				Whole: {{wholeSurvey.product | json}}<br/>
+				{{wholeSurvey.manually_entered_upc_description__c}}
+				{{wholeSurvey.upc__c}}
+				{{isEdit}}
+			-->
+        </article>
+    </div>
+</div>

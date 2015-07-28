@@ -1,0 +1,81 @@
+<div class="layout-container" ng-show="true" style="display: none">
+
+    <div class="layout-slide slide-review">
+
+        <header>
+            <div class="header-title">
+                <!-- {{surveys[0].name}} -->
+                <div class="text">Review Answers</div>  
+            </div>
+        </header>
+        <article class="article-review">
+            <div class="review-title">
+                <!-- Review Answers: -->
+                {{surveys[0].name}}
+                <!-- <span ng-switch="typeof(surveys[0].location.name) == 'undefined'"> -->
+                <div ng-switch="typeof(surveys[0].location.name) == 'undefined'">
+                    <span ng-switch-when="true">{{surveys[0].manually_entered_store_name__c}}</span>
+                    <span ng-switch-default ng-bind="surveys[0].location.name"></span>
+                </div>
+            </div>
+
+            <div class="review-product" ng-repeat="survey in surveys">
+                <!--commented  to make servey Non product-->
+                <!--<div class="review-product-title" ng-show="isProductSurvey">-->
+                    <!--Product:-->
+                    <!--<span ng-switch="survey.product.length > 0">-->
+                        <!--<span ng-switch-default>{{survey.manually_entered_upc_description__c}}</span>-->
+                        <!--<span ng-switch-when="true">{{survey.product[0].nielsen_brand__c}}</span>-->
+                    <!--</span>-->
+                <!--</div>-->
+
+
+
+
+
+                <!--
+								<p class="review-product-answer-desc">{{survey.nielson_product__c}}</p>
+								<p class="review-product-answer-desc">{{survey.product[0] | json}}</p>
+								<p class="review-product-answer-desc">Name: {{survey.manually_entered_store_name__c}}</p>
+								<p class="review-product-answer-desc">City: {{survey.manually_entered_city__c}}</p>
+								<p class="review-product-answer-desc">{{survey.location | json}}</p>
+								-->
+
+                <div class="review-product-item" ng-repeat="question in survey.questions">
+                    <p class="review-product-answer-desc">{{question.question_text__c}}</p>
+                    <div class="review-product-answer" ng-switch="question.question_type__c">
+                        <div ng-switch-when="Price">${{question.answer_value__c}}</div>
+                        <div ng-switch-when="Count">{{question.answer_value__c}}</div>
+                        <div ng-switch-default>
+                        	<div>
+	                        	<div ng-repeat="opt in question.answer_text__c.split(';')"  ng-bind="opt">
+	                        	</div>
+                        	</div> 
+                        </div>
+                    </div>
+                    <div class="review-product-answer-notes">{{question.note__c}}</div>
+                    <!-- <p class="review-product-answer-desc">{{question | json}}</p> -->
+                </div>
+                <!--
+								<div class="review-product-answer-notes">{{surveys}}</div>
+								-->
+                <div ng-switch="survey.enable_edit_on_review_screen__c == 'f'">
+                    <div class="button-wrapper" ng-switch-when="false" style="padding:0;margin-right:2px;">
+                        <a href="javascript:;" class="review-product-edit-link button" data-pushview=".slide-review-product-edit" ng-click="getQuestion(survey.survey_id)">Edit</a>
+                    </div>
+                </div>
+            </div>
+
+            <!--Code commented because its for Product Survey>
+            <!--<div class="button-wrapper" ng-show="isProductSurvey">-->
+                <!--<a class="button is-stack" data-pushview=".slide-review-notes" ng-click="continueWorking()">Continue Working</a>-->
+                <!--<br/>-->
+            <!--</div>-->
+            <br/>
+            <div class="button-wrapper">
+                <a ng-click="cancel()" class="bottom-left-link button is-button" data-popview=".slide-question-1">Cancel</a>
+                <a class="bottom-right-link button is-button" data-pushview=".slide-review-notes" ng-click="finish()">Finish</a>
+            </div>
+        </article>
+    </div>
+</div>

@@ -5,6 +5,8 @@
 ############# API Version 1.0 ############# 
 
 # Map static resources from the /public folder to the /assets URL path
+GET      /                      controllers.Application.index()
+
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 
 # Products

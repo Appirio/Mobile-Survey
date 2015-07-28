@@ -1,0 +1,22 @@
+[
+	{
+		"id": "0001", 
+		"product": "Baileys", 
+		"location": "Bobs Liquor",
+		"name": "Display Survey (Price)",
+		"questions": [
+			{"id": "1", "question": "Does the display look nice?", "answer": "yes"},
+			{"id": "2", "question": "What is the price?", "answer": "yes"}
+		]
+	},
+	{
+		"id": "0002", 
+		"product": "Captain Morgan", 
+		"location": "Bobs Liquor",
+		"name": "Cold Box Survey",
+		"questions": [
+			{"id": "1", "question": "Does the display look nice?", "answer": "yes"},
+			{"id": "2", "question": "What is the price?", "answer": "yes"}
+		]
+	}
+]

@@ -1,0 +1,41 @@
+<div class="modal-alert" style="display: none" modal-window ng-controller="con.modal">
+	<a ng-click="close()" class="modal-alert-close" close-invalid-login-popup>
+		<div ng-switch on="type">
+
+			<div ng-switch-when="grade" class="modal-grade">
+				<span class="icon modal-alert-icon icon-success"></span>
+				<span class="modal-alert-desc">
+					<span ng-switch on="scorePercentage">
+						<span ng-switch-when="undefined"></span>
+						<span ng-switch-default>
+							<span class="grade-label">Survey Score:</span><br/>
+							<span class="grade-value">{{scorePercentage}}%</span><br/>
+						</span>
+					</span>
+					<br/>
+					<span ng-switch on="scoreGrade">
+						<span ng-switch-when="undefined"></span>
+						<span ng-switch-default>
+							<span class="grade-label">Grade:</span><br/>
+							<span class="grade-value">{{scoreGrade}}</span>
+						</span>
+					</span>
+					<br/><br/>
+					{{displayMessage}}
+					<br/><br/>
+					<span class="button">{{buttonText}}</span>
+				</span>
+			</div>
+
+			<div ng-switch-default class="modal-info"> 
+				<span class="icon modal-alert-icon icon-alert-big"></span>
+					<span class="modal-alert-desc">
+						{{displayMessage}}
+						<br/><br/>
+					<span class="button">{{buttonText}}</span>
+				</span>
+			</div>
+
+		</div>
+	</a>
+</div>

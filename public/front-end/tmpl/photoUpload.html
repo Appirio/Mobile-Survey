@@ -1,0 +1,18 @@
+<div class="photo-container">
+<h5>Photos</h5>
+	<div data-ng-repeat="photo in photos">
+		<div data-ng-switch="hasData($index)">
+			<div data-ng-switch-when="hasData">
+				<span class="photo-span photo-filled" ng-style="{ 'background-image': 'url(' + photo.localPath + ')'}">
+					<!--<img class="photo" ng-src="{{photo.localPath}}"/>-->
+					<span class="photo-circle photo-delete" ng-click="deletePhoto($index)">&nbsp;</span>
+				</span>
+			</div>
+			<div data-ng-switch-when="noData">
+				<span class="photo-span photo-empty" ng-click="addPhoto()">
+					<span class="photo-circle photo-add" ng-click="deletePhoto($index)">&nbsp;</span>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>

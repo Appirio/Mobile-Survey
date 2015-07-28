@@ -1,0 +1,32 @@
+<div class="layout-container has-bg" ng-show="true" style="display: none">
+    <header>
+        <a ng-click="goBack()" class="header-link-left header-link-back" data-popview=".slide-product-scan">Back</a>
+        <span class="header-title has-back">
+            {{parentName}}
+        </span>
+    </header>
+
+    <article ng-class="articleClass">
+        <div class="form">
+            <!--<div class="form-title">
+                Choose Chapter Survey
+            </div>-->
+			<div ng-repeat="survey in displaySurveys" ng-switch on="survey.first_question__c">
+				<span ng-switch-when="null"></span>
+				<a href="" ng-click="saveSurvey(survey)" ng-switch-default>
+                    <div class="form-line">
+                        <span class="form-line-image"><!--<img src="i/survey.png"></img>-->&nbsp;</span>
+                        <label class="form-line-label is-survey-line">{{survey.name}}</label>
+                        <span class="form-line-select-text is-filled form-line-select is-shorter">
+                            <!--{{survey.questions.length}}-->
+                        </span>
+                    </div>
+				</a>
+			</div>
+
+        </div>
+    </article>
+    <footer ng-show="showDashboard != 'false'" class="dashboard-footer" ng-click="openDashboard()">
+        <span>View Goals</span>
+    </footer>
+</div>
