@@ -4,8 +4,8 @@ var con = {
 		$scope.hasAccess = User.hasAccess;
 	        //$scope.build = BUILD_NUMBER;
         	$scope.version = VERSION_NUMBER;
-        $scope.accessCode = '791157';
-        $scope.email = 'sandeep.kumar@appirio.com';
+        $scope.accessCode = '';
+        $scope.email = '';
 		$scope.appPath = '/Surveys';
 		$scope.pathName = 'Surveys ';
 
