@@ -22,7 +22,7 @@ public class ContactDBManager extends DBManager {
 		return users.size() > 0;
 	}
 
-	public JsonNode approveContact(String email, Long authorizationCode) throws DiageoServicesException, Exception {
+	public JsonNode approveContact(String email /*Long authorizationCode*/) throws DiageoServicesException, Exception {
 		// TODO remove this, temporary for testing
 		//if(DEFAULT_CONTACT_REG != null && !DEFAULT_CONTACT_REG.equals("FALSE") && authorizationCode.longValue() == 12345) {
 		//	return DEFAULT_CONTACT_REG;
