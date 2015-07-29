@@ -1,12 +1,12 @@
 <div id="deviceready" class="login-wrapper" ng-show="true" style="display: none">
-	<img src="assets/front-end/i/survey-logo.png" class="logo-big">
+	<img src="i/survey-logo.png" class="logo-big">
 	<div ng-switch="hasAccess">
 		<div id="deviceready" ng-switch-when="true" class="terms">
 			<br/><br/><br/>
 			<a ng-click="progress()" class="button">{{pathName}}</a>			
 		</div>
 		<div id="deviceready" ng-switch-default  class="login input-group">
-		    <p class="login-desc">
+		    <p class="login-desc login-mid">
 		    Please enter your email and access code. If you have problems, please contact your line manager.
 		    </p>
 		    <form class="login-input-wrapper">
@@ -17,8 +17,10 @@
 			<a href="javascript:;" class="icon icon-close login-input-email-clear is-hidden"></a>
 			<a href="javascript:;" class="icon icon-close login-input-password-clear is-hidden"></a>
 		    </form>
-		    <a ng-click="submitCredentials(email, accessCode)" class="button login-button">Enter</a>
-		</div>
+			<div class="login-mid" >
+		    <a ng-click="submitCredentials(email, accessCode)" class="button login-button login-mid">Enter</a>
+			</div>
+			</div>
     </div>
         <div class="footer">
             <p class="footer-terms"><a ng-click="termsAndConditions()">Read Terms and Conditions</a></p>
