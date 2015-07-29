@@ -241,6 +241,9 @@ select {
     width: 100%;
     height: 100%;
     min-height: 480px;
+
+
+
     background: #000 url(../i/login-bg.png) bottom center no-repeat;
     background-size: 320px 568px;
 }
@@ -252,6 +255,7 @@ select {
 .logo-big {
     display: block;
     width: 80%;
+    max-width: 470px;
     margin: 5px auto 0 auto;
 }
 @media (max-height: 420px) {
@@ -269,6 +273,8 @@ select {
 .login {
     margin: 52px auto 0 auto;
     width: 81.5625%;
+
+
 }
 @media (max-height: 420px) {
     .login {
@@ -280,6 +286,7 @@ select {
     font-size: 16px;
     text-align: center;
     line-height: 23px;
+    max-width: 600px;
     margin: 0 0 23px 0;
 }
 @media (max-height: 420px) {
@@ -291,7 +298,19 @@ select {
     border: 1px solid #666;
     border-radius: 12px;
     position: relative;
+    max-width: 600px;
+    margin-left: auto ;
+    margin-right: auto ;
     background-color: rgba(0, 0, 0, 0.6);
+}
+
+.login-mid {
+
+    position: relative;
+    max-width: 600px;
+    margin-left: auto ;
+    margin-right: auto ;
+
 }
 .login-input {
     /*line-height: 38px;*/
@@ -350,6 +369,9 @@ select {
 }
 .login-button {
     margin-top: 38px;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 600px;
 }
 .header-title {
     display: block;
@@ -429,7 +451,7 @@ select {
     background-size: 208px 82px;
 }
 .form {
-    margin: 0 0 0 4.6875%;
+    margin: 0 0 0 0;
 }
 .form-title {
     line-height: 55px;
@@ -562,7 +584,7 @@ select {
     border-top: 1px solid #ddd;
 }
 .button-wrapper.is-content-scrollable {
-    border-top: 3px solid #B3cc00;
+    border-top: 3px solid #999999;
     padding-top: 8px;
 }
 .button-wrapper.is-content-scrollable:before {
@@ -681,7 +703,7 @@ select {
     color: #fff;
 }
 .question-desc {
-    color: #999999;
+    color: #999;
     font-size: 17px;
     padding: 15px 4.6875% 10px 0;
     line-height: 22px;
