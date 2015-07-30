@@ -255,7 +255,7 @@ select {
 .logo-big {
     display: block;
     width: 80%;
-    max-width: 470px;
+    max-width: 600px;
     margin: 5px auto 0 auto;
 }
 @media (max-height: 420px) {
