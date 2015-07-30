@@ -16,10 +16,10 @@ public class ContactServices extends Controller {
 			JsonNode body = request().body().asJson();
 			
 			if(body != null) {
-				if(body.has("email") && body.has("authorizationCode")) {
+				if(body.has("email") /*&& body.has("authorizationCode")*/) {
 					ContactDBManager manager = new ContactDBManager();
 					try {
-						JsonNode user = manager.approveContact(body.get("email").asText(), Long.parseLong(body.get("authorizationCode").asText()));
+						JsonNode user = manager.approveContact(body.get("email").asText() /*,Long.parseLong(body.get("authorizationCode").asText())*/);
 						
 						if(user != null) {
 							return ok(user);
