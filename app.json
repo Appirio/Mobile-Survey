@@ -1,15 +1,20 @@
 {
-  "name": "WebApp Survey",
-  "description": "This app allows for sample surveys",
+  "name": "Heroku Cx Survey Dev Services",
+  "description": "TODO: Add a short description about Heroku Cx Survey Dev Services",
   "keywords": [
-    "Heroku",
-    "Javascript",
-    "Java"
+    "small",
+    "sharp",
+    "tool"
   ],
-  "repository": "https://github.com/rainman24rdp/WebAppSurvey",
   "addons": [
     "heroku-postgresql:hobby-dev",
     "herokuconnect:danketsu",
     "papertrail:choklad"
-  ]
+  ],
+  "env": {
+    "JAVA_OPTS": "-Xss512k -XX:+UseCompressedOops",
+    "CC_DB_URL": "jdbc:postgresql://ec2-54-83-36-176.compute-1.amazonaws.com:5432/ddhpnmqhjuuu24?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory",
+    "CC_DB_PW": "tT37akMrpiMTv-HXM6HcixRMrw",
+    "CC_DB_USER": "eiojahuukvomfn"
+  }
 }
