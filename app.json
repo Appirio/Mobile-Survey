@@ -1,0 +1,15 @@
+{
+  "name": "WebApp Survey",
+  "description": "This app allows for sample surveys",
+  "keywords": [
+    "Heroku",
+    "Javascript",
+    "Java"
+  ],
+  "repository": "https://github.com/rainman24rdp/WebAppSurvey",
+  "addons": [
+    "heroku-postgresql:hobby-dev",
+    "herokuconnect:danketsu",
+    "papertrail:choklad"
+  ]
+}
