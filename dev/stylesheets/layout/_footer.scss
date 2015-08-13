@@ -2,24 +2,19 @@ footer {
 	border-top:1px solid $footer-border;
 	margin-top:$footer-top-margin;
 	background:$footer-bg;
-	color:$text-color;
+	color:rgba(white,0.6);
 	padding: 0;
-	@media (min-width: $screen-sm){
-		height:$footer-height + $footer-vert-padding + $footer-vert-padding;
-		padding:$footer-vert-padding 0;
-		position:absolute;
-		left:0;
-		bottom:0;
-		width:100%;
-	}
-	@media (max-width:$screen-sm){
-		padding:3rem 0;
-	}
-	.logo-footer {
-		height:30px;
-		@media (min-width:$screen-sm) {
-			float:right;
-		}
+	height:$footer-height + $footer-vert-padding + $footer-vert-padding;
+	padding:$footer-vert-padding 0;
+	position:absolute;
+	left:0;
+	bottom:0;
+	width:100%;
+	font-size:13px;
+	text-align:right;
+	a {
+		@include font-bold;
+		color:white;
 	}
 	.company {margin-left:5px}
 	.copyright {

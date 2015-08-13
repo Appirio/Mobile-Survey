@@ -26,7 +26,7 @@ body {
   font-smooth: always; }
   @media (min-width: 768px) {
     body {
-      margin: 0 0 60px; } }
+      margin: 0 0 36px; } }
 
 a {
   cursor: pointer;
@@ -208,74 +208,26 @@ hr {
 header {
   position: relative;
   background: #f4f4f4; }
-  header .container-bs {
-    display: -webkit-box;
-    display: -moz-box;
-    display: box;
-    display: -webkit-flex;
-    display: -moz-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-    box-orient: horizontal;
-    -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-    box-direction: normal;
-    -webkit-flex-direction: row;
-    -moz-flex-direction: row;
-    flex-direction: row;
-    -ms-flex-direction: row;
-    -webkit-box-lines: multiple;
-    -moz-box-lines: multiple;
-    box-lines: multiple;
-    -webkit-flex-wrap: wrap;
-    -moz-flex-wrap: wrap;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap; }
-    header .container-bs a {
-      color: #555;
-      font-size: 16px; }
-    header .container-bs .active > a {
-      color: #59498a;
-      font-weight: 500; }
+  header .container-bs a {
+    color: #555;
+    font-size: 16px; }
+  header .container-bs .active > a {
+    color: #59498a;
+    font-weight: 500; }
   header .gh {
-    padding: 15px 0 15px 40px;
     position: relative; }
     @media (min-width: 768px) {
       header .gh {
-        margin-left: auto; } }
-    header .gh img {
+        padding-left: 50px !important; } }
+    header .gh img, header .gh svg {
       position: absolute;
       top: 12px;
-      left: 0;
+      left: 1rem;
       margin-right: 1rem;
       width: 28px;
       height: 28px; }
-
-.main-nav {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-lines: multiple;
-  -moz-box-lines: multiple;
-  box-lines: multiple;
-  -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap; }
-  .main-nav > li:first-of-type > a {
-    padding-left: 0; }
-  .main-nav a {
-    display: block;
-    padding: 15px; }
+    header .gh:hover svg path {
+      fill: white; }
 
 @media (min-width: 768px) and (max-width: 992px) {
   .container {
@@ -292,6 +244,9 @@ header {
 .page-header h2 {
   margin-top: 0;
   font-size: 20px; }
+
+.main {
+  padding-bottom: 4rem; }
 
 .steps {
   list-style: none;
@@ -325,25 +280,21 @@ ul.roman {
 footer {
   border-top: 1px solid transparent;
   margin-top: 0;
-  background: #DDD;
-  color: #555;
-  padding: 0; }
-  @media (min-width: 768px) {
-    footer {
-      height: 60px;
-      padding: 20px 0;
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%; } }
-  @media (max-width: 768px) {
-    footer {
-      padding: 3rem 0; } }
-  footer .logo-footer {
-    height: 30px; }
-    @media (min-width: 768px) {
-      footer .logo-footer {
-        float: right; } }
+  background: #333;
+  color: rgba(255, 255, 255, 0.6);
+  padding: 0;
+  height: 36px;
+  padding: 8px 0;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  font-size: 13px;
+  text-align: right; }
+  footer a {
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    color: white; }
   footer .company {
     margin-left: 5px; }
   footer .copyright {
@@ -512,36 +463,14 @@ footer {
 @media (max-width: 480px) {
   .navbar-default {
     padding: 0 0 1rem; } }
-.navbar-default .navbar-toggle {
-  border-color: transparent;
-  float: left; }
-  .navbar-default .navbar-toggle:after {
-    content: "Menu";
-    position: absolute;
-    color: white;
-    left: 4.5rem;
-    top: 0.7rem;
-    font-size: 12px;
-    text-transform: uppercase;
-    font-family: "Roboto", sans-serif;
-    font-weight: 700; }
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-  border-color: transparent; }
-.navbar-default .navbar-form, .navbar-default.navbar {
-  z-index: 10; }
-@media (max-width: 480px) {
-  .navbar-default .navbar-nav {
-    margin-left: 0;
-    margin-right: 0; } }
-@media (max-width: 992px) {
-  .navbar-default .navbar-nav > li > a {
-    font-size: 15px;
-    padding: 10px !important; } }
 .navbar-default .divider {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   margin-top: 1rem;
   margin-bottom: 1rem; }
+
+.navbar-toggle {
+  margin-right: 0; }
 
 @media (min-width: 768px) and (max-width: 1200px) {
   .navbar-left {
@@ -552,26 +481,28 @@ footer {
     float: right; } }
 
 .main-nav {
-  position: relative;
-  z-index: 10; }
-  .main-nav .navbar-right {
-    margin-right: 0; }
-  @media (min-width: 768px) and (max-width: 1200px) {
-    .main-nav .navbar-form.navbar-right {
-      display: block;
-      float: none !important;
-      position: absolute;
-      width: 100%;
-      top: 4.25rem; }
-    .main-nav .form-group.search {
-      display: block;
-      left: -10px; }
-      .main-nav .form-group.search > .form-control {
-        display: block;
-        width: 100%;
-        height: inherit; }
-      .main-nav .form-group.search .btn-search span {
-        text-transform: uppercase; } }
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap; }
+  .main-nav > li:first-of-type > a {
+    padding-left: 0; }
+  .main-nav a {
+    display: block;
+    padding: 15px; }
 
 .btn-bs {
   border-radius: 0;
@@ -983,32 +914,17 @@ button.btn-bs.block {
   color: #999;
   display: block; }
 
-.dropdown-menu .dropdown-header:not(:first-of-type) {
-  margin-top: 1rem; }
-.dropdown-menu > li.dropdown-header {
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  background: #eee; }
-.dropdown-menu > li > a {
-  font-size: 13px; }
-  .dropdown-menu > li > a:hover {
-    background: #59498a;
-    color: white; }
-
-.popover {
-  padding: 1rem; }
-
-.popover-title {
-  font-family: "Roboto", sans-serif;
-  font-family: "Roboto", sans-serif;
-  font-weight: 700;
-  background: white;
-  border-bottom: 0;
-  padding-top: 0.5rem; }
-
-.nav-tabs {
-  border-bottom: 0; }
+.navbar {
+  margin-bottom: 0; }
+  .navbar.navbar-default {
+    border: 0;
+    padding-bottom: 0; }
+  .navbar .navbar-brand {
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    color: #59498a;
+    font-size: 18px;
+    line-height: 18px; }
 
 @-webkit-keyframes ripple {
   100% {

@@ -12,17 +12,34 @@
 
 		<header>
 			<div class="container-bs">
-				<ul class="main-nav">
-					<li class="active"><a href="index.html">Mobile-Survey</a></li>
-					<li><a href="architecture.html">Architecture</a></li>
-					<li><a href="setup.html">Setup</a></li>
-					<li><a href="walkthrough.html">Walkthrough</a></li>
-				</ul><!-- /.main-nav -->
-				<a class="gh" href="https://github.com/Appirio/Mobile-Survey"><img src="images/ic_github.svg" alt="Github Project" class="img-inline" />GitHub Project</a>
+				<nav class="navbar navbar-default">
+					<div class="container-fluid">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav" aria-expanded="false">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" href="index.html">Mobile-Survey</a>
+						</div>
+						<div class="collapse navbar-collapse" id="main-nav">
+							<ul class="nav navbar-nav">
+								<li><a href="architecture.html">Architecture</a></li>
+								<li><a href="setup.html">Setup</a></li>
+								<li><a href="walkthrough.html">Walkthrough</a></li>
+							</ul>
+							<ul class="nav navbar-nav navbar-right">
+								<li role="separator" class="divider"></li>
+								<li><a class="gh" href="https://github.com/Appirio/Mobile-Survey"><img src="images/ic_github.svg" alt="Github Project" class="img-inline hidden-xs" />View the GitHub Project</a></li>
+							</ul>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
 			</div><!-- /.container-bs -->
 		</header>
 
-		<div class="hero">
+		<div class="hero" style="min-height:295px">
 			<div class="container-bs">
 
 			</div>
@@ -40,24 +57,18 @@
 
 				<div class="page-content">
 					<p class="lead">Appirio built a Mobile-Survey tool to demonstrate how easy it is to deploy a full web-app using the Heroku platform.</p>
-
 					<p>Mobile-Survey allows users to login and take surveys from mobile devices as well as from desktop browsers.</p>
-
 					<p>The web-app has 3 major components:</p>
 					<ol>
 						<li>Heroku services (including Postgres, Heroku Connect, and Papertrail addons)</li>
 						<li>Frontend web app</li>
 						<li>Salesforce backend</li>
 					</ol>
-
 					<p>Surveys are built in Salesforce.  Salesforce data is synchronized bi-directionally with Postgres DB using Heroku Connect.  Restful web services transmit survey data between Postgres and the web-app. </p>
-
 					<p>Deploy the full web-app here: </p>
-
 					<a target="_blank" href="https://heroku.com/deploy?template=https://github.com/Appirio/Mobile-Survey/tree/master">
 						<img src="https://www.herokucdn.com/deploy/button.png" alt="image deploy button">
 					</a>
-
 					<p>Detailed Setup and Walkthrough instructions are here:</p>
 				</div><!-- /.page-content -->
 
@@ -69,6 +80,11 @@
 				<a href="https://github.com/Appirio/Mobile-Survey">Mobile-survey</a> is maintained by <a href="https://github.com/Appirio">Appirio</a>.
 			</div><!-- /.container-bs -->
 		</footer>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+		<script src="javascripts/main.js"></script>
+		<script src="javascripts/svg4everybody.ie8.min.js"></script>
 
 	</body>
 </html>

@@ -38,11 +38,11 @@ $gap-lg: 4rem;
 
 
 //--- Footer Styles
-$footer-bg:                             #DDD;
+$footer-bg:                             #333;
 $footer-color:                          rgba(white,0.6);
 $footer-border:                         transparent;
 $footer-top-margin:                     0;
-$footer-vert-padding:                   20px;
+$footer-vert-padding:                   8px;
 $footer-height:                         20px;
 
 
@@ -52,25 +52,25 @@ $icon-font-path:                        "../fonts/";
 
 $grid-gutter-width:                     20px;
 
-$navbar-height:                         40px;
+$navbar-height:                         50px;
 $navbar-link-pad-side:                  26px;
 
-$navbar-default-color:                  white;
-$navbar-default-bg:                     $blue;
-$navbar-default-border:                 $blue;
-$navbar-default-link-color:             white;
+$navbar-default-color:                  $text-color;
+$navbar-default-bg:                     transparent;
+$navbar-default-border:                 transparent;
+$navbar-default-link-color:             $text-color;
 $navbar-default-link-hover-color:       white;
-$navbar-default-link-hover-bg:          darken($blue,5%);
+$navbar-default-link-hover-bg:          darken($brand-primary,10%);
 $navbar-default-link-active-color:      white;
-$navbar-default-link-active-bg:         darken($blue,5%);
-$navbar-default-link-disabled-color:    rgba(white,0.4);
+$navbar-default-link-active-bg:         darken($brand-primary,5%);
+$navbar-default-link-disabled-color:    rgba($text-color,0.4);
 $navbar-default-link-disabled-bg:       transparent;
-$navbar-default-brand-color:            white;
-$navbar-default-brand-hover-color:      white;
+$navbar-default-brand-color:            $text-color;
+$navbar-default-brand-hover-color:      $brand-primary;
 $navbar-default-brand-hover-bg:         transparent;
 $navbar-default-toggle-hover-bg:        transparent;
-$navbar-default-toggle-icon-bar-bg:     white;
-$navbar-default-toggle-border-color:    white;
+$navbar-default-toggle-icon-bar-bg:     #333;
+$navbar-default-toggle-border-color:    #ddd;
 
 $nav-link-font-size:                    15px;
 $nav-link-padding:                      10px 15px;
