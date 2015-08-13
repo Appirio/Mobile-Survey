@@ -1,0 +1,9 @@
+.card {
+	display:block;
+	@include transition(all 250ms);
+	@include shadow(1);
+	&:hover {
+		@include shadow(3);
+		@include transform(translateY(-5px));
+	}
+}

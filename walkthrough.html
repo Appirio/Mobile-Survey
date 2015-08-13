@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="UTF-8">
+		<title>Mobile-survey by Appirio</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="stylesheets/custom-bootstrap.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="stylesheets/main.css" media="screen">
+	</head>
+
+	<body>
+
+		<header>
+			<div class="container-bs">
+				<ul class="main-nav">
+					<li><a href="index.html">Mobile-Survey</a></li>
+					<li><a href="architecture.html">Architecture</a></li>
+					<li><a href="setup.html">Setup</a></li>
+					<li class="active"><a href="walkthrough.html">Walkthrough</a></li>
+				</ul><!-- /.main-nav -->
+				<a class="gh" href="https://github.com/Appirio/Mobile-Survey"><img src="images/ic_github.svg" alt="Github Project" class="img-inline" />GitHub Project</a>
+			</div><!-- /.container-bs -->
+		</header>
+
+		<section class="main">
+			<div class="container-bs">
+
+				<div class="page-header  margin-b md">
+					<h1 class="project-name">Walkthrough</h1>
+					<h2>In your SFDC org:</h2>
+				</div><!-- /.page-header -->
+
+				<div class="page-content">
+					<ul class="steps">
+						<li>
+							<p class="lead">Contact/Login access</p>
+							<p>All mobile-survey users need a contact record in Salesforce.  Login to the Salesforce org and create the user’s Contact record (or edit an existing one).  Be sure to fill in the “Email Address” field.  This is only used to do basic authentication to provide the user access to the mobile-survey app.  Also check the box labeled DD Survey Mobile User.</p>
+							<img src="http://placehold.it/640x400" class="img-responsive margin-b md" />
+						</li>
+						<li>
+							<p class="lead">Create new survey: </p>
+							<p>Select the DD Survey tab and then the New button.</p>
+							<img src="http://placehold.it/640x300" class="img-responsive margin-b md" />
+							<p>Enter a survey name (as it is to appear in the app), make sure the following are also entered:</p>
+							<ul>
+								<li>Universal survey flag is selected</li>
+								<li>Survey Type is set “Non Scan”</li>
+								<li>Active flag is selected</li>
+							</ul>
+							<p>Select “Save” to save this new survey.</p>
+							<p>On the new survey details view, select the “Manage Questions” button to now start adding questions to the survey.</p>
+							<p>From here, the Survey Editor UI will guide you quickly through adding and editing questions, and creating conditional relationships.  Inside the question editor, you can add new questions, delete existing questions, and reorder questions.  All question editing will automatically link the questions logically and hierarchically.</p>
+							<p>Select the “Add First Question” Link.</p>
+							<p>Add a question like “Is this question visible?” Just to get started using the tool.</p>
+							<p class="uline">Adding/Deleting new questions</p>
+							<p>As you hover the mouse over existing questions, the green and red edit buttons will activate for each question while in hover. To add a question, select the green “+” button.</p>
+							<p>To Delete a question, use the red “X” button.  This will delete a question and all related child questions.</p>
+							<p>The green “+” button (ADD) will add a sibling question, even for nested questions. Example:</p>
+							<ul>
+								<li>For question 1, ADD creates a new question 2</li>
+								<li>Previously existing question 2, and all subsequent questions are incremented.</li>
+							</ul>
+							<p>And:</p>
+							<ul>
+								<li>
+									<p>Selecting ADD on any child question will create a new sibling question for that child (Q1.3, select add, creates Q1.4)</p>
+									<img src="http://placehold.it/640x300" class="img-responsive margin-b md" />
+								</li>
+							</ul>
+							<p>Once the new question template is added in the correct location, type the question text in the input test field and chose the question type from the drop down to the right of the question text:</p>
+							<ul>
+								<li>Select where you see “Yes, No” in the image above</li>
+								<li>Then select one of the answer types from the Type: picklist</li>
+							</ul>
+							<p>Possible answer types are:</p>
+							<ul>
+								<li>Number</li>
+								<li>Price</li>
+								<li>Select (one)</li>
+								<li>Select (Multiple)</li>
+								<li>Text</li>
+								<li>“Select” options will enable the Answers field.  Type in any answer values here, separated by a comma. </li>
+							</ul>
+							<p>Typing text into the “Label for Additional Comments” field will create an Additional comments input box for the question, and the description text will be added to the label.  Make sure to set the question type as Text.</p>
+							<p class="uline">Adding conditional child questions</p>
+							<p>For any question, selecting the green “return arrow” button (NEXT) will create a conditional child question of the parent’s question type.</p>
+							<p>For Select () type questions, new child questions will be created relative to the answers provided in the comma separated field in the answer type drop down.  Additional questions added beyond the specified values will be created with the conditional field blank.  Add the conditional into the text field for the question to be evaluated.</p>
+							<p>If the parent question type is changed, this change is NOT currently propagated to the child, which can create a case where certain child questions will not be displayed since they are considered not relevant.  For example, a Yes/No parent with  a child question will be YES/NO question as well.  Changing the parent to a “Price” type will NOT change the child questions to Price type. Therefore, answers Y/N are not relevant and will not be displayed.  It is always good practice to review the survey after edits to make sure question & answer logic is correct.</p>
+							<p class="uline">Moving questions</p>
+							<p>On the left side of the question is the question number.  Hovering over the question number will show a blue box with options for moving the question.  Left, right, Up and down are all possible move directions, but only the possible actions will be selectable.  (For example, You cannot move a question up if it is Q1)</p>
+							<p>Known issues ( quotation marks, ‘, special chars, etc in questions)</p>
+						</li>
+						<li>
+							<p class="lead">Wait for Synchronization<p>
+							<p>Heroku Connect can take as much as 20 minutes to synchronize between Salesforce & Postgres and the app.  To see your synchronization settings:</p>
+							<ul>
+								<li>Login to Heroku</li>
+								<li>Select Heroku Connect</li>
+								<li>On the Overview, select any of the mapped objects.</li>
+								<li>In the Mappings: <Object_name> view, the Salesforce->Database pane shows the frequency of synchronizations.  This can be modified by selecting the “Edit” on this view and changing the Poll slider at the top.</li>
+							</ul>
+						</li>
+						<li>
+							<p class="lead">Login to site</p>
+							<p>Once data has synchronized, login to the site.  The site URL is the URL from the Setup Step #1 when Heroku was deployed.</p>
+							<p>Hint: It is probably something like - https://your-deployed-app-name.herokuapp.com/#/login</p>
+							<p>Login with the email address you added to the Contact record in Salesforce (Step #1 above)</p>
+							<p>Leave the password field blank.</p>
+							<p>//Add note about what this does in full implementation.</p>
+						</li>
+						<li>
+							<p class="lead">Take survey</p>
+							<p>If you added surveys in Salesforce from the previous steps and waited for Salesforce/Postgres to synchronize, you should see them listed on the Surveys View now.  Select one and start answering! </p>
+							<p>At the end of the survey you will see your answers in summary view in the Review Answers page.  From here you can submit them to Salesforce by selecting “Finish”, or you can edit your answers by selecting “Edit” and then changing any/all of your answers.  Answers are not stored in Postgres for synchronization to back to Salesforce until the “Finish” button is selected.</p>
+						</li>
+						<li>
+							<p class="lead">Finish / Submit</p>
+							<ul class="alpha">
+								<li>Wait for HC-> SFDC sync</li>
+								<li>Login to SFDC org</li>
+								<li>
+									Select the DD_Survey_Results tab
+									<ul class="roman">
+										<li>Each question/answer</li>
+									</ul><!-- /.roman -->
+								</li>
+							</ul>
+						</li>
+					</ul><!-- /.steps -->
+				</div><!-- /.page-content -->
+
+			</div><!-- /.container-bs -->
+		</section><!-- /.main -->
+
+		<footer>
+			<div class="container-bs">
+				<a href="https://github.com/Appirio/Mobile-Survey">Mobile-survey</a> is maintained by <a href="https://github.com/Appirio">Appirio</a>.
+			</div><!-- /.container-bs -->
+		</footer>
+
+	</body>
+</html>

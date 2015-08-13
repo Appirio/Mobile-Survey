@@ -1,0 +1,16 @@
+//-- Device targeting is awful. With that said, here are some helpers
+
+// iPhone < 5:
+@media screen and (device-aspect-ratio: 2/3) {}
+
+// iPhone 5:
+@media screen and (device-aspect-ratio: 40/71) {}
+
+// iPhone 6:
+@media screen and (device-aspect-ratio: 667/375) {}
+
+// iPhone 6 Plus:
+@media screen and (device-aspect-ratio: 16/9) {}
+
+// iPad:
+@media screen and (device-aspect-ratio: 3/4) {}

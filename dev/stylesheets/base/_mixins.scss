@@ -1,0 +1,70 @@
+@mixin word-wrap {
+			word-break:  break-word;
+	-webkit-hyphens: auto;
+		 -moz-hyphens: auto;
+					hyphens: auto;
+}
+
+@mixin font-smoothing {
+	-webkit-font-smoothing:antialiased;
+					font-smoothing:antialiased;
+						 font-smooth:always;
+}
+
+@mixin box($box-sizing) {
+	-webkit-box-sizing:$box-sizing;
+		 -moz-box-sizing:$box-sizing;
+					box-sizing:$box-sizing;
+}
+
+// Better than box-shadow for shadowing non-square shapes.
+@mixin drop-shadow($dropshadow) {
+	-webkit-filter:drop-shadow($dropshadow);
+		 -moz-filter:drop-shadow($dropshadow);
+			-ms-filter:drop-shadow($dropshadow);
+			 -o-filter:drop-shadow($dropshadow);
+					filter:drop-shadow($dropshadow);
+}
+
+@mixin ul-reset {
+	list-style:none;
+	margin:0;
+	padding:0;
+}
+
+@mixin vertical-align($position) {
+	position:$position;
+	top: 50%;
+	@include transform(translateY(-50%));
+}
+
+
+@mixin aspect-ratio($width, $height) {
+	position: relative;
+	&:before{
+		display: block;
+		content: " ";
+		width: 100%;
+		padding-top: ($height / $width) * 100%;
+	}
+	> .content {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+	}
+}
+
+
+
+
+// Material-like shadowing
+@mixin shadow($level: 1) {
+	@if $level == 1 {box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);}
+	@else if $level == 2 {box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);}
+	@else if $level == 3 {box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);}
+	@else if $level == 4 {box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+	@else if $level == 5 {box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);}
+}
+

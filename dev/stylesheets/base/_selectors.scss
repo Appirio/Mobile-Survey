@@ -1,0 +1,39 @@
+html {
+	position:relative;
+	min-height:100%;
+}
+body {
+	background:$page-bg;
+	@include font-smoothing;
+	@media (min-width:$screen-sm) {
+		margin:0 0 $footer-height + $footer-vert-padding + $footer-vert-padding;
+	}
+}
+
+a {
+	// because, why not?
+	cursor:pointer;
+	@include transition(all 0.15s ease);
+	&:hover {}
+	&:active {}
+}
+
+label {
+	@include font-medium;
+	color:#555;
+}
+
+h1,h2,h3,h4,h5 {
+	color:#555;
+}
+
+hr {
+	border:0;
+	height:1px;
+	background:$border-default;
+	margin:2rem 0;
+	&.light {
+		background:lighten($border-default,12.5%);
+	}
+	&.blank {background:none}
+}

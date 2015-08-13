@@ -1,0 +1,35 @@
+$btn-primary:#00657c;
+$icon-size: 26px;
+
+.btn-bs {
+	border-radius:0;
+	@include font-medium;
+	font-size:14px;
+}
+
+.min-100 {min-width:100px}
+
+.btn-xl {
+	padding:($gap-xs + $gap-sm) $gap-lg;
+}
+
+button.btn-bs.block {
+	min-width:100%;
+}
+
+.btn-default {
+	&:hover,&:focus,&:active {
+		background:$brand-primary;
+		color:white;
+		border-color:$brand-primary;
+	}
+}
+
+.btn-more {
+	margin-left:$gap-lg;
+	@media (max-width:($screen-sm - 1px)) {
+		min-width:50%;
+		max-width:300px;
+		margin:$gap auto;
+	}
+}

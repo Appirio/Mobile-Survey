@@ -1,0 +1,32 @@
+.dropdown-menu {
+	.dropdown-header:not(:first-of-type){
+		margin-top:$gap-sm
+	}
+	> li {
+		&.dropdown-header {
+			@include font-bold;
+			text-transform:uppercase;
+			background:#eee;
+		}
+		> a {
+			font-size:13px;
+			&:hover {
+				background:$link-color;
+				color:white;
+			}
+		}
+	}
+}
+
+.popover {
+	padding:$gap-sm;
+}
+.popover-title {
+	font-family:$font-regular;
+	@include font-bold;
+	background:white;
+	border-bottom:0;
+	padding-top:$gap-xs;
+}
+
+.nav-tabs {border-bottom:0}

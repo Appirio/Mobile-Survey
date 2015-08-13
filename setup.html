@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+		<meta charset="UTF-8">
+		<title>Mobile-survey by Appirio</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="stylesheets/custom-bootstrap.css" media="screen">
+		<link rel="stylesheet" type="text/css" href="stylesheets/main.css" media="screen">
+	</head>
+
+	<body>
+
+		<header>
+			<div class="container-bs">
+				<ul class="main-nav">
+					<li><a href="index.html">Mobile-Survey</a></li>
+					<li><a href="architecture.html">Architecture</a></li>
+					<li class="active"><a href="setup.html">Setup</a></li>
+					<li><a href="walkthrough.html">Walkthrough</a></li>
+				</ul><!-- /.main-nav -->
+				<a class="gh" href="https://github.com/Appirio/Mobile-Survey"><img src="images/ic_github.svg" alt="Github Project" class="img-inline" />GitHub Project</a>
+			</div><!-- /.container-bs -->
+		</header>
+
+		<section class="main">
+			<div class="container-bs">
+
+				<div class="page-header">
+					<h1 class="project-name margin-b md">Deploy / Setup</h1>
+				</div><!-- /.page-header -->
+
+				<div class="page-content">
+					<ul class="steps">
+						<li>
+							<p class="lead">Deploy to Heroku using the Heroku 1-button deployment:</p>
+							<a class="block" href="http://appirio.github.io/Mobile-Survey/">http://appirio.github.io/Mobile-Survey/</a>
+						</li>
+						<li>
+							<p class="lead">Heroku will ask for the name of the app.  Name it Mobile-Survey.</p>
+							<p>After deployment completes, you will be given the option to view your deployed site.  Select this link to launch the site.  It may take a few minutes to load the first time.  SAVE this URL to your new site.  You will come back to it after completing the Walkthrough where we will build surveys in Salesforce and setup users to access them.</p>
+						</li>
+						<li>
+							<p class="lead">Deploy SFDC (deploy unmanaged package):<p>
+							<p>[IN WORK - finishing test classes]</p>
+						</li>
+						<li>
+							<p class="lead">Configure Heroku Connect using the HC setup instructions to connect to your SFDC org and Postgres DB. (Find Link)</p>
+						</li>
+						<li>
+							<p class="lead">Import Configuration JSON file with SFDC object mappings</p>
+							<p class="bold">In your Mobile-Survey Heroku app:</p>
+							<ul>
+								<li>
+									<p>Select Heroku Connect from the dashboard</p>
+									<img src="http://placehold.it/640x400" class="img-responsive margin-b md" />
+								</li>
+								<li>
+									<p>Then select Settings->Import/Export Configuration and import <a href="https://drive.google.com/file/d/0B5eb1d8xjolETjE5akRlSDJJRGM/view?usp=sharing">the configuration file.</a></p>
+									<img src="http://placehold.it/640x300" class="img-responsive margin-b md" />
+								</li>
+							</ul>
+						</li>
+						<li>
+							<p class="lead">Restart Heroku Connect:</p>
+							<ul>
+								<li>Settings->Manage Connection:</li>
+								<li>
+									<p>Restart</p>
+									<img src="http://placehold.it/640x300" class="img-responsive margin-b md" />
+								</li>
+							</ul>
+						</li>
+					</ul><!-- /.steps -->
+				</div><!-- /.page-content -->
+
+			</div><!-- /.container-bs -->
+		</section><!-- /.main -->
+
+		<footer>
+			<div class="container-bs">
+				<a href="https://github.com/Appirio/Mobile-Survey">Mobile-survey</a> is maintained by <a href="https://github.com/Appirio">Appirio</a>.
+			</div><!-- /.container-bs -->
+		</footer>
+
+	</body>
+</html>

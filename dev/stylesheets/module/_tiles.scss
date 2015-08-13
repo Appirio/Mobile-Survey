@@ -1,0 +1,12 @@
+.tiles {
+	> li {
+		position:relative;
+		text-align:center;
+		> a {
+			display:block;
+			width:100%;
+			min-height:162px;
+			position:relative;
+		}
+	}
+}

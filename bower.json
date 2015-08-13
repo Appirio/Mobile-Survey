@@ -1,0 +1,12 @@
+{
+  "name": "smacss",
+  "version": "0.2.0",
+  "author": "Tony Montemorano <tmontemorano@appirio.com> (http://appirio.com)",
+  "dependencies": {
+    "twbs-bootstrap-sass": "3.3.3",
+    "bourbon": "latest",
+    "neat": "latest",
+    "svg4everybody": "latest"
+  },
+  "private": true
+}

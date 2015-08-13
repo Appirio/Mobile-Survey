@@ -1,0 +1,32 @@
+footer {
+	border-top:1px solid $footer-border;
+	margin-top:$footer-top-margin;
+	background:$footer-bg;
+	color:$text-color;
+	padding: 0;
+	@media (min-width: $screen-sm){
+		height:$footer-height + $footer-vert-padding + $footer-vert-padding;
+		padding:$footer-vert-padding 0;
+		position:absolute;
+		left:0;
+		bottom:0;
+		width:100%;
+	}
+	@media (max-width:$screen-sm){
+		padding:3rem 0;
+	}
+	.logo-footer {
+		height:30px;
+		@media (min-width:$screen-sm) {
+			float:right;
+		}
+	}
+	.company {margin-left:5px}
+	.copyright {
+		margin:$gap-sm 0 0;
+		font-size:13px;
+		@media (max-width:$screen-sm) {
+			text-align:center
+		}
+	}
+}

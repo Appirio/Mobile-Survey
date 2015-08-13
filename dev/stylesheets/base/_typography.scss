@@ -1,0 +1,38 @@
+@mixin font-smoothing {
+	-webkit-font-smoothing:antialiased;
+					font-smoothing:antialiased;
+						 font-smooth:always;
+}
+
+$font-regular: "Roboto", sans-serif;
+
+@mixin font-regular {
+	font-family:$font-regular;
+	font-weight:400;
+}
+@mixin font-light {
+	font-family:$font-regular;
+	font-weight:300;
+}
+@mixin font-medium {
+	font-family:$font-regular;
+	font-weight:500;
+}
+@mixin font-bold {
+	font-family:$font-regular;
+	font-weight:700;
+}
+
+h1,h2,h3,h4 {
+	font-weight:400;
+	&.regular {
+		@include font-regular;
+	}
+	&.has-secondary {
+		margin-bottom:5px !important;
+	}
+}
+
+.lead {
+	font-size:18px;
+}

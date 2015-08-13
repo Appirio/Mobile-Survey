@@ -1,0 +1,81 @@
+$blue-lt:                               #C6D4E1;
+$blue:                                  #44749D;
+
+$blue-dk:                               #00677B;
+$tan:                                   #EBE7E0;
+$tan-dk:                                #BDB8AD;
+
+$heading-color:                         #58441A;
+$brown:                                 #574319;
+$brown-link:                            #d3a02a;
+$lightest-gray:                         #f2f2f2;
+
+//--- Brand Colors
+$brand-primary:                         #59498a;
+
+$text-color:                            #555;
+$text-medium:                           #333;
+$text-light:                            #ccc;
+
+$page-bg:                               white;
+
+$border-default:                        #ccc;
+$border-light:                          #ddd;
+
+$border-radius-lg:                      8px;
+$border-radius-md:                      6px;
+$border-radius-sm:                      4px;
+
+$link-color:                            $brand-primary;
+$link-hover-color:                      darken($brand-primary,10%);
+
+//--- Spacing
+$gap-xs: 0.5rem;
+$gap-sm: 1rem;
+$gap:    2rem;
+$gap-md: 3rem;
+$gap-lg: 4rem;
+
+
+//--- Footer Styles
+$footer-bg:                             #DDD;
+$footer-color:                          rgba(white,0.6);
+$footer-border:                         transparent;
+$footer-top-margin:                     0;
+$footer-vert-padding:                   20px;
+$footer-height:                         20px;
+
+
+//--- Bootstrap variables
+$font-family-sans-serif:                $font-regular !default;
+$icon-font-path:                        "../fonts/";
+
+$grid-gutter-width:                     20px;
+
+$navbar-height:                         40px;
+$navbar-link-pad-side:                  26px;
+
+$navbar-default-color:                  white;
+$navbar-default-bg:                     $blue;
+$navbar-default-border:                 $blue;
+$navbar-default-link-color:             white;
+$navbar-default-link-hover-color:       white;
+$navbar-default-link-hover-bg:          darken($blue,5%);
+$navbar-default-link-active-color:      white;
+$navbar-default-link-active-bg:         darken($blue,5%);
+$navbar-default-link-disabled-color:    rgba(white,0.4);
+$navbar-default-link-disabled-bg:       transparent;
+$navbar-default-brand-color:            white;
+$navbar-default-brand-hover-color:      white;
+$navbar-default-brand-hover-bg:         transparent;
+$navbar-default-toggle-hover-bg:        transparent;
+$navbar-default-toggle-icon-bar-bg:     white;
+$navbar-default-toggle-border-color:    white;
+
+$nav-link-font-size:                    15px;
+$nav-link-padding:                      10px 15px;
+$nav-link-hover-bg:                     transparent;
+
+$btn-primary-color:                     white;
+$btn-primary-bg:                        $blue-dk;
+$btn-primary-border:                    darken($blue-dk,5%);

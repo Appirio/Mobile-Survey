@@ -1,0 +1,125 @@
+@include keyframes(success) {
+	0% {
+		border-color:#ccc;
+		box-shadow:none;
+	}
+	50% {
+		border-color:$brand-success;
+		box-shadow:0 0 0 1px $brand-success,0 0 8px $brand-success;
+	}
+	100% {
+		border-color:#ccc;
+		box-shadow:none;
+		border-left:4px solid $brand-success;
+	}
+}
+
+@include keyframes(error) {
+	0% {
+		border-color:#ccc;
+		box-shadow:none;
+	}
+	50% {
+		border-color:$brand-danger;
+		box-shadow:0 0 0 1px $brand-danger,0 0 8px $brand-danger;
+	}
+	100% {
+		border-color:$brand-danger;
+		box-shadow:none;
+		border-left:4px solid $brand-danger;
+	}
+}
+
+.create-account {
+	@media (max-width:($screen-sm - 1px)) {
+		margin:0 $gap;
+	}
+}
+
+.form-controls {
+	@media (min-width:$screen-sm) {
+		padding:0 $gap-md;
+	}
+	.list.spaced {
+		margin-bottom:$gap;
+		> li {
+			@media (max-width:($screen-sm - 1px)) {
+				min-width:50%;
+				padding:0 1rem;
+				margin-right:0;
+			}
+		}
+		@media (max-width:$screen-sm) {
+			&.pull-right {
+				float:none !important
+			}
+		}
+
+	}
+}
+
+.form-group {
+	.error-msg {
+		display:none;
+	}
+	.result {
+		font-size:18px;
+		color:$link-color;
+		min-height:34px;
+	}
+	.radio-inline,.checkbox-inline {
+		margin:5px 15px 5px 0;
+		> label {margin-bottom:0}
+	}
+	&.required {
+		label:after {
+			content:"*";
+			color:red;
+			font-size:20px;
+			position:absolute;
+			margin:-2px 0 0 5px;
+		}
+		.radio-inline label:after {display:none}
+		&.error {
+			label {color:$brand-danger}
+			.error-msg {
+				p {
+					@media (min-width:$screen-sm) {
+						position:absolute;
+						margin:$gap 0 0;
+					}
+				}
+				display:block;
+				font-size:11px;
+				color:$brand-danger;
+			}
+			.form-control {
+				border-color:$brand-danger;
+				@include animation(error 1s forwards);
+			}
+		}
+		&.success {
+			//label {color:$brand-success}
+			.form-control {
+				@include animation(success 1s forwards);
+			}
+		}
+		&.warning {
+			//label {color:$brand-warning}
+			.form-control {
+				border-color:$brand-warning;
+				box-shadow:0 0 0 1px $brand-warning;
+			}
+		}
+	}
+}
+
+//.view-mode {
+//	.form-group {margin-bottom:$gap-md}
+//}
+
+.radio-inline,.checkbox-inline {
+	label {
+		@include font-regular;
+	}
+}

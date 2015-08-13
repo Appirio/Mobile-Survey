@@ -1,0 +1,19 @@
+@include keyframes(ripple) {
+	100% {
+		opacity: 0;
+		@include transform(scale(2.5));
+	}
+}
+
+
+// Animation
+.display-animation > * {
+  @include transform(scale(0));
+}
+.display-animation > .animated {
+  @include transform(scale(1));
+  @include transition(all .4s cubic-bezier(.55,0,.1,1));
+}
+.no-js .display-animation > * {
+  @include transform(scale(1));
+}

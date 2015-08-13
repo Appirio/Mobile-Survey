@@ -1,0 +1,12 @@
+.icon-white {
+	fill:#ffffff;
+	g,path {fill:#ffffff}
+}
+
+.box-icon {max-height:80px}
+
+// IE11 doesnt play well with SVG dimensions
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	.box-icon {width:100%}
+}
+

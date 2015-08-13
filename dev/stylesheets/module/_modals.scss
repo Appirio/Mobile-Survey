@@ -1,0 +1,76 @@
+.modal {
+	.modal-header,.modal-body,.modal-footer {
+		padding:$gap $gap 0;
+	}
+	.modal-header {
+		border-bottom:0;
+	}
+	.modal-title {
+		font-size:20px;
+		//padding:$gap-sm $gap-sm 0;
+		padding:0 30px 0 10px;
+	}
+	.modal-footer {
+		border-top:0;
+		padding:$gap-sm $gap-md $gap;
+	}
+	.modal-body {
+		padding:$gap-sm $gap-md 0;
+		@include clearfix;
+	}
+	.vertical-alignment-helper {
+		display:table;
+		height: 100%;
+		width: 100%;
+		pointer-events:none;
+	}
+	.vertical-align-center {
+		// To center vertically
+		display: table-cell;
+		vertical-align: middle;
+		pointer-events:none;
+	}
+	//&.in .modal-dialog {
+	//	@include transform(translate(0, -15%));
+	//}
+	.modal-content {
+		// Bootstrap sets the size of the modal in the modal-dialog class, we need to inherit it
+		width:inherit;
+		height:inherit;
+		// To center horizontally
+		margin: 0 auto;
+		pointer-events:all;
+	}
+	.btn-blank:hover {
+		background:$blue-dk;
+		&:focus,&:active {
+			background:darken($blue-dk,10%);
+		}
+	}
+	h5 {
+		font-size: 16px;
+		margin: 1rem 0 0;
+		+ p {margin-top:$gap-xs}
+	}
+	.label {
+		margin-bottom:$gap-sm;
+	}
+	.address {
+		margin-top:0;
+		@include font-medium;
+		color:#555;
+		margin-bottom:$gap;
+		> span {
+			display:block;
+		}
+	}
+	.documents {
+		a {
+			display:block;
+			@include clearfix;
+			img {top:0}
+		}
+
+		.name {margin-top:$gap-xs}
+	}
+}
