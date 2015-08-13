@@ -37,6 +37,9 @@
 		&:nth-of-type(odd) {
 			background:#f6f6f6;
 		}
+		img {
+			@include shadow(1);
+		}
 		&:before {
 			position: absolute;
 			top: 2rem;

@@ -4754,6 +4754,61 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/images\/setup_step-04-001.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 322596,
+		"inputAbbreviatedPath": "\/images\/setup_step-04-001.jpg",
+		"outputAbbreviatedPath": "\/images\/setup_step-04-001.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/setup_step-04-002.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 228263,
+		"inputAbbreviatedPath": "\/images\/setup_step-04-002.jpg",
+		"outputAbbreviatedPath": "\/images\/setup_step-04-002.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/setup_step-05-001.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 155675,
+		"inputAbbreviatedPath": "\/images\/setup_step-05-001.jpg",
+		"outputAbbreviatedPath": "\/images\/setup_step-05-001.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/walkthrough_step-01-001.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 510114,
+		"inputAbbreviatedPath": "\/images\/walkthrough_step-01-001.jpg",
+		"outputAbbreviatedPath": "\/images\/walkthrough_step-01-001.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/images\/walkthrough_step-02-001.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 265407,
+		"inputAbbreviatedPath": "\/images\/walkthrough_step-02-001.jpg",
+		"outputAbbreviatedPath": "\/images\/walkthrough_step-02-001.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/index.html": {
 		"fileType": 8192,
 		"ignore": 0,
