@@ -52,16 +52,20 @@
 					<ul class="steps">
 						<li>
 							<p class="lead">Deploy to Heroku using the Heroku 1-button deployment:</p>
-							<a class="block" href="http://appirio.github.io/Mobile-Survey/">http://appirio.github.io/Mobile-Survey/</a>
+							<a target="_blank" href="https://heroku.com/deploy?template=https://github.com/Appirio/Mobile-Survey/tree/master">
+								<img src="https://www.herokucdn.com/deploy/button.png" alt="image deploy button"></a>
+                          <p> For Salesforce and Heroku deployments you will need Admin access to both systems. </p>
 							<p class="margin-t md">Heroku will ask for the name of the app.  Name it Mobile-Survey.</p>
 							<p>After deployment completes, you will be given the option to view your deployed site.  Select this link to launch the site.  It may take a few minutes to load the first time.  SAVE this URL to your new site.  You will come back to it after completing the Walkthrough where we will build surveys in Salesforce and setup users to access them.</p>
 						</li>
 						<li>
-							<p class="lead">Deploy SFDC (deploy unmanaged package):<p>
-							<p>[IN WORK - finishing test classes]</p>
+						<p class="lead">Deploy <a href="https://test.salesforce.com/packaging/installPackage.apexp?p0=04t37000000Ihpk"> unmanaged package</a> to your SFDC sandbox.</p>							
+
+							
+
 						</li>
 						<li>
-							<p class="lead">Configure Heroku Connect using the HC setup instructions to connect to your SFDC org and Postgres DB. (Find Link)</p>
+							<p class="lead">Configure Heroku Connect using the <a href="https://devcenter.heroku.com/articles/herokuconnect"> HC setup instructions</a> to connect to your SFDC org and Postgres DB. Be sure to follow steps 1-4 and specify the schema as documented in these steps.</p>
 						</li>
 						<li>
 							<p class="lead">Import Configuration JSON file with SFDC object mappings</p>
