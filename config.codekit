@@ -4809,6 +4809,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/images\/walkthrough_step-02-002.jpg": {
+		"fileType": 16384,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 235765,
+		"inputAbbreviatedPath": "\/images\/walkthrough_step-02-002.jpg",
+		"outputAbbreviatedPath": "\/images\/walkthrough_step-02-002.jpg",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/index.html": {
 		"fileType": 8192,
 		"ignore": 0,

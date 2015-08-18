@@ -533,6 +533,25 @@ button.btn-bs.block {
       max-width: 300px;
       margin: 2rem auto; } }
 
+.download-card {
+  text-align: center;
+  border: 1px solid #eee;
+  background: #f6f6f6;
+  margin: 0 4rem;
+  padding: 3rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24); }
+  .download-card .download-icon {
+    width: 100px;
+    height: 100px;
+    display: block;
+    margin: 0 auto 3rem; }
+  .download-card > .btn-bs {
+    display: block;
+    max-width: 180px;
+    margin: 1rem auto; }
+    .download-card > .btn-bs:last-of-type {
+      margin-bottom: 0; }
+
 @-webkit-keyframes success {
   0% {
     border-color: #ccc;
