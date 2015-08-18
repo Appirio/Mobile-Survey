@@ -4743,6 +4743,17 @@
 		"shouldRunBless": 0,
 		"useLibsass": 0
 		},
+	"\/images\/architecture-001.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 107856,
+		"inputAbbreviatedPath": "\/images\/architecture-001.png",
+		"outputAbbreviatedPath": "\/images\/architecture-001.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/images\/checker.png": {
 		"fileType": 32768,
 		"ignore": 0,
