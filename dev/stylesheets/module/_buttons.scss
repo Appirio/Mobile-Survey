@@ -33,3 +33,25 @@ button.btn-bs.block {
 		margin:$gap auto;
 	}
 }
+
+.download-card {
+	text-align:center;
+	border:1px solid #eee;
+	background:#f6f6f6;
+	margin:0 4rem;
+	padding:$gap-md;
+	@include shadow(1);
+	.download-icon {
+		width:100px;
+		height:100px;
+		display:block;
+		margin:0 auto $gap-md;
+	}
+	> .btn-bs {
+		display:block;
+		max-width:180px;
+		margin:$gap-sm auto;
+		&:last-of-type {margin-bottom:0}
+	}
+}
+

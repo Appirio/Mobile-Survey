@@ -48,7 +48,12 @@
 				</div><!-- /.page-header -->
 
 				<div class="page-content">
-					<p></p>
+					<p class="lead">Mobile-Survey is a Hybrid Mobile Application developed using the Cordova hybrid framework with HTML/CSS/Angular js displaying &amp; controlling the UI, and Heroku, a platform as a service supporting the services.</p>
+					<p>In Heroku, we have added a the Heroku Connect component which allows us to share &amp; synchronize data with Salesforce and a Postgres database for intermediate storage.</p>
+					<p>Heroku Connect continuously synchronizes data in the Postgres database with the contacts records and survey custom object records in Salesforce.</p>
+					<p>When the app needs data it runs complex queries via RESTful web service calls to Heroku to retrieve the enabled Contacts and surveys from Postgres for the app to consume and display.</p>
+					<p>This architecture allows the app to load and display quickly.  Also, since Heroku Connect is the the only user accessing Salesforce, the Mobile-Survey App users are not required to be licensed users of Salesforce.</p>
+					<img src="images/architecture-001.png" class="img-responsive margin-t md" />
 				</div><!-- /.page-content -->
 
 			</div><!-- /.container-bs -->
