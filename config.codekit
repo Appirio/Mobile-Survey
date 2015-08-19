@@ -4765,6 +4765,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/images\/hero.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 46495,
+		"inputAbbreviatedPath": "\/images\/hero.png",
+		"outputAbbreviatedPath": "\/images\/hero.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/images\/setup_step-04-001.jpg": {
 		"fileType": 16384,
 		"ignore": 0,

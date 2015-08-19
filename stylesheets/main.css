@@ -176,7 +176,7 @@ hr {
   margin: 0; }
 
 .brand {
-  color: #59498a; }
+  color: #7ea0c3; }
 
 .block {
   display: block; }
@@ -212,7 +212,7 @@ header {
     color: #555;
     font-size: 16px; }
   header .container-bs .active > a {
-    color: #59498a;
+    color: #7ea0c3;
     font-weight: 500; }
   header .gh {
     position: relative; }
@@ -234,7 +234,7 @@ header {
     width: 100%; } }
 
 .hero {
-  background: #59498a;
+  background: #333E48;
   color: white; }
 
 .page-header h1 {
@@ -246,6 +246,46 @@ header {
 
 .main {
   padding-bottom: 4rem; }
+
+hr {
+  opacity: 0.5;
+  margin: 3rem 0; }
+
+.downloads {
+  text-align: center;
+  padding: 4rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  background: #f9f9f9; }
+  @media (max-width: 767px) {
+    .downloads {
+      margin-top: 4rem;
+      padding: 4rem 0 0;
+      background: none;
+      box-shadow: none;
+      border-top: 1px solid #eee; } }
+  .downloads h4 {
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    margin: 0 0 2rem; }
+  @media (min-width: 992px) {
+    .downloads {
+      margin-left: 4rem; } }
+  .downloads svg {
+    display: block;
+    width: 140px;
+    height: 140px;
+    margin: 0 auto; }
+    .downloads svg path {
+      fill: #333E48; }
+  .downloads .btn-bs {
+    display: block;
+    max-width: 160px;
+    margin: 0 auto; }
+    .downloads .btn-bs:first-of-type {
+      margin-top: 2rem; }
+    .downloads .btn-bs:not(:last-of-type) {
+      margin-bottom: 1rem; }
 
 .steps {
   list-style: none;
@@ -281,7 +321,7 @@ ul.roman {
 footer {
   border-top: 1px solid transparent;
   margin-top: 0;
-  background: #333;
+  background: #333E48;
   color: rgba(255, 255, 255, 0.6);
   padding: 0;
   height: 36px;
@@ -361,7 +401,7 @@ footer {
         content: "\00b7";
         font-size: 30px;
         line-height: 20px;
-        color: rgba(211, 160, 42, 0.3);
+        color: rgba(85, 85, 85, 0.3);
         margin: 0 10px; }
     .list.horizontal.spaced > li:not(:last-of-type) {
       margin-right: 1rem; }
@@ -433,7 +473,7 @@ footer {
   .list-collapse > li .due-date {
     font-size: 13px; }
 .list-collapse a.panel-title {
-  color: #59498a; }
+  color: #7ea0c3; }
 .list-collapse .panel-title {
   display: block;
   font-size: 13px;
@@ -521,9 +561,9 @@ button.btn-bs.block {
   min-width: 100%; }
 
 .btn-default:hover, .btn-default:focus, .btn-default:active {
-  background: #59498a;
+  background: #7ea0c3;
   color: white;
-  border-color: #59498a; }
+  border-color: #7ea0c3; }
 
 .btn-more {
   margin-left: 4rem; }
@@ -640,7 +680,7 @@ button.btn-bs.block {
   display: none; }
 .form-group .result {
   font-size: 18px;
-  color: #59498a;
+  color: #7ea0c3;
   min-height: 34px; }
 .form-group .radio-inline, .form-group .checkbox-inline {
   margin: 5px 15px 5px 0; }
@@ -713,9 +753,9 @@ button.btn-bs.block {
   margin: 0 auto;
   pointer-events: all; }
 .modal .btn-blank:hover {
-  background: #00677B; }
+  background: #7ea0c3; }
   .modal .btn-blank:hover:focus, .modal .btn-blank:hover:active {
-    background: #003c48; }
+    background: #5b86b3; }
 .modal h5 {
   font-size: 16px;
   margin: 1rem 0 0; }
@@ -845,7 +885,7 @@ button.btn-bs.block {
     width: 26px;
     height: 26px; }
     .table-documents .info svg * {
-      stroke: #59498a; }
+      stroke: #7ea0c3; }
 .table-documents .verified {
   color: #5cb85c; }
   .table-documents .verified svg {
@@ -942,7 +982,6 @@ button.btn-bs.block {
   .navbar .navbar-brand {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
-    color: #59498a;
     font-size: 18px;
     line-height: 18px; }
 

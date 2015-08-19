@@ -42,9 +42,9 @@
 		pointer-events:all;
 	}
 	.btn-blank:hover {
-		background:$blue-dk;
+		background:$brand-primary;
 		&:focus,&:active {
-			background:darken($blue-dk,10%);
+			background:darken($brand-primary,10%);
 		}
 	}
 	h5 {

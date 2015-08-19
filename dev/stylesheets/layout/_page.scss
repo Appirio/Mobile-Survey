@@ -5,7 +5,7 @@
 }
 
 .hero {
-	background:$brand-primary;
+	background:$brand-secondary;
 	color:white;
 
 }
@@ -23,6 +23,48 @@
 
 .main {
 	padding-bottom:$gap-lg;
+}
+
+hr {
+	opacity:0.5;
+	margin:$gap-md 0;
+}
+
+.downloads {
+	text-align:center;
+	padding:$gap-lg;
+	@include shadow(1);
+	background:#f9f9f9;
+	@media (max-width:($screen-sm - 1px)) {
+		margin-top:$gap-lg;
+		padding:$gap-lg 0 0;
+		background:none;
+		box-shadow:none;
+		border-top:1px solid #eee;
+
+	}
+	h4 {
+		font-size:18px;
+		@include font-medium;
+		margin:0 0 $gap;
+	}
+	@media (min-width:$screen-md) {
+		margin-left:$gap-lg;
+	}
+	svg {
+		display:block;
+		width:140px;
+		height:140px;
+		margin:0 auto;
+		path {fill:$brand-secondary;}
+	}
+	.btn-bs {
+		display:block;
+		max-width:160px;
+		margin:0 auto;
+		&:first-of-type {margin-top:$gap;}
+		&:not(:last-of-type) {margin-bottom:$gap-sm}
+	}
 }
 
 .steps {

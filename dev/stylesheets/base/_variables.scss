@@ -1,17 +1,6 @@
-$blue-lt:                               #C6D4E1;
-$blue:                                  #44749D;
-
-$blue-dk:                               #00677B;
-$tan:                                   #EBE7E0;
-$tan-dk:                                #BDB8AD;
-
-$heading-color:                         #58441A;
-$brown:                                 #574319;
-$brown-link:                            #d3a02a;
-$lightest-gray:                         #f2f2f2;
-
 //--- Brand Colors
-$brand-primary:                         #59498a;
+$brand-primary:                         #7ea0c3;
+$brand-secondary:                        #333E48;
 
 $text-color:                            #555;
 $text-medium:                           #333;
@@ -38,7 +27,7 @@ $gap-lg: 4rem;
 
 
 //--- Footer Styles
-$footer-bg:                             #333;
+$footer-bg:                             $brand-secondary;
 $footer-color:                          rgba(white,0.6);
 $footer-border:                         transparent;
 $footer-top-margin:                     0;
@@ -56,17 +45,17 @@ $navbar-height:                         50px;
 $navbar-link-pad-side:                  26px;
 
 $navbar-default-color:                  $text-color;
-$navbar-default-bg:                     transparent;
+$navbar-default-bg:                     $brand-primary;
 $navbar-default-border:                 transparent;
-$navbar-default-link-color:             $text-color;
+$navbar-default-link-color:             rgba(white,0.8);
 $navbar-default-link-hover-color:       white;
 $navbar-default-link-hover-bg:          darken($brand-primary,10%);
 $navbar-default-link-active-color:      white;
-$navbar-default-link-active-bg:         darken($brand-primary,5%);
+$navbar-default-link-active-bg:         darken($brand-primary,15%);
 $navbar-default-link-disabled-color:    rgba($text-color,0.4);
 $navbar-default-link-disabled-bg:       transparent;
-$navbar-default-brand-color:            $text-color;
-$navbar-default-brand-hover-color:      $brand-primary;
+$navbar-default-brand-color:            white;
+$navbar-default-brand-hover-color:      white;
 $navbar-default-brand-hover-bg:         transparent;
 $navbar-default-toggle-hover-bg:        transparent;
 $navbar-default-toggle-icon-bar-bg:     #333;
@@ -77,5 +66,5 @@ $nav-link-padding:                      10px 15px;
 $nav-link-hover-bg:                     transparent;
 
 $btn-primary-color:                     white;
-$btn-primary-bg:                        $blue-dk;
-$btn-primary-border:                    darken($blue-dk,5%);
+$btn-primary-bg:                        $brand-primary;
+$btn-primary-border:                    darken($brand-primary,5%);
