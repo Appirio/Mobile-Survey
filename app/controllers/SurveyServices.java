@@ -6,15 +6,15 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.AccountDBManager;
-import com.appirio.diageo.db.manager.SurveyDBManager;
-import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
-import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
-import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
-import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
-import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
-import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.AccountDBManager;
+import com.appirio.mobilesurvey.db.manager.SurveyDBManager;
+import com.appirio.mobilesurvey.db.manager.api12.SurveyDBManager12;
+import com.appirio.mobilesurvey.db.manager.api13.SurveyDBManager13;
+import com.appirio.mobilesurvey.db.manager.api14.SurveyDBManager14;
+import com.appirio.mobilesurvey.db.manager.api15.SurveyDBManager15;
+import com.appirio.mobilesurvey.db.manager.api17.SurveyDBManager17;
+import com.appirio.mobilesurvey.db.manager.api20.SurveyDBManager20;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -35,7 +35,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -69,7 +69,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return result;
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -103,7 +103,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return result;
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -137,7 +137,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return result;
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -171,7 +171,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return result;
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -205,7 +205,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return result;
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -230,7 +230,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -255,7 +255,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -280,7 +280,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -305,7 +305,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -330,7 +330,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -355,7 +355,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -380,7 +380,7 @@ public class SurveyServices extends Controller {
 			}
 			
 			return ok(result);
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -429,7 +429,7 @@ public class SurveyServices extends Controller {
 			} else {
 				return badRequest(ControllerUtils.messageToJson("json body expected"));
 			}
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(e.getMessage());
@@ -478,7 +478,7 @@ public class SurveyServices extends Controller {
 			} else {
 				return badRequest(ControllerUtils.messageToJson("json body expected"));
 			}
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(e.getMessage());
