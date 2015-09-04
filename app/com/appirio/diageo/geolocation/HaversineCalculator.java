@@ -1,4 +1,4 @@
-package com.appirio.diageo.geolocation;
+package com.appirio.mobilesurvey.geolocation;
 
 public class HaversineCalculator {
 
