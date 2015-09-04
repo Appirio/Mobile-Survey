@@ -1,4 +1,4 @@
-/* Constants.js for Diageo Mobile Survey App*/
+/* Constants.js for Mobile Survey App*/
 
 //var BUILD_NUMBER = '0.0.1';
 var VERSION_NUMBER = '2.0.2';
