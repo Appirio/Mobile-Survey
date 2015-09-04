@@ -1,47 +1,47 @@
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.DBManager;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.DBManager;
 
 
 public class TestDBManager extends DBManager {
 
-	public TestDBManager() throws DiageoServicesException {
+	public TestDBManager() throws MSServicesException {
 		super();
 		
 		if(!DBManager.IS_TEST) {
-			throw new DiageoServicesException("This manager can only be used when running tests!!!");
+			throw new MSServicesException("This manager can only be used when running tests!!!");
 		}
 	}
 	
-	public void clearDB() throws DiageoServicesException {
+	public void clearDB() throws MSServicesException {
 		executeStatement(getSQLStatement("clear-test-db"));
 	}
 
-	public void populateTestAccounts() throws DiageoServicesException {
+	public void populateTestAccounts() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-test-accounts"));
 	}
 
-	public void populateTestSurveys() throws DiageoServicesException {
+	public void populateTestSurveys() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-test-surveys-and-questions"));
 	}
 	
-	public void populateTestSurveysCategoryFilterData() throws DiageoServicesException {
+	public void populateTestSurveysCategoryFilterData() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-test-surveys-category-filter"));
 	}
 	
 
-	public void populateGoalDbManagerTestData() throws DiageoServicesException {
+	public void populateGoalDbManagerTestData() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-goal-dbmanager-test-data"));
 	}
 
-	public void populateTestSurveyWithAnswerBrandsData() throws DiageoServicesException {
+	public void populateTestSurveyWithAnswerBrandsData() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-test-surveys-with-answer-brand-data"));
 	}
 
-	public void populateContacts() throws DiageoServicesException {
+	public void populateContacts() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-contacts"));
 	}
 
-	public void populateTestSurveyWithoutAnswerBrandsData() throws DiageoServicesException {
+	public void populateTestSurveyWithoutAnswerBrandsData() throws MSServicesException {
 		executeStatement(getSQLStatement("populate-test-surveys-without-answer-brand-data"));
 	}
 }
