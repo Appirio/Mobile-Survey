@@ -9,17 +9,17 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.AccountDBManager;
-import com.appirio.diageo.db.manager.SurveyDBManager;
-import com.appirio.diageo.db.manager.api12.SurveyDBManager12;
-import com.appirio.diageo.db.manager.api13.SurveyDBManager13;
-import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
-import com.appirio.diageo.db.manager.api15.SurveyDBManager15;
-import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
-import com.appirio.diageo.db.manager.api20.AccountDBManager20;
-import com.appirio.diageo.db.manager.api20.GoalDBManager;
-import com.appirio.diageo.db.manager.api20.SurveyDBManager20;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.AccountDBManager;
+import com.appirio.mobilesurvey.db.manager.SurveyDBManager;
+import com.appirio.mobilesurvey.db.manager.api12.SurveyDBManager12;
+import com.appirio.mobilesurvey.db.manager.api13.SurveyDBManager13;
+import com.appirio.mobilesurvey.db.manager.api14.SurveyDBManager14;
+import com.appirio.mobilesurvey.db.manager.api15.SurveyDBManager15;
+import com.appirio.mobilesurvey.db.manager.api17.SurveyDBManager17;
+import com.appirio.mobilesurvey.db.manager.api20.AccountDBManager20;
+import com.appirio.mobilesurvey.db.manager.api20.GoalDBManager;
+import com.appirio.mobilesurvey.db.manager.api20.SurveyDBManager20;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -48,7 +48,7 @@ public class TestSurveyServices {
 				testDBManager.populateTestSurveys();
 			}
 			// create test data
-		} catch (DiageoServicesException e) {
+		} catch (MSServicesException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -61,7 +61,7 @@ public class TestSurveyServices {
 			testDBManager.clearDB();
 
 			testDBManager.close();
-		} catch (DiageoServicesException e) {
+		} catch (MSServicesException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
