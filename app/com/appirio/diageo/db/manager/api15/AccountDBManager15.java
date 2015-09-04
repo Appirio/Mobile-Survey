@@ -2,8 +2,8 @@ package com.appirio.mobilesurvey.db.manager.api15;
 
 import java.text.MessageFormat;
 
-import com.appirio.diageo.db.MSServicesException;
-import com.appirio.diageo.db.manager.api14.AccountDBManager14;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.api14.AccountDBManager14;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
