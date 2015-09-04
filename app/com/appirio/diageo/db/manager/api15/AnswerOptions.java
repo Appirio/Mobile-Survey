@@ -1,4 +1,4 @@
-package com.appirio.diageo.db.manager.api15;
+package com.appirio.mobilesurvey.db.manager.api15;
 
 public class AnswerOptions {
     public String value;
