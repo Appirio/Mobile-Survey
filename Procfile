@@ -1,1 +1,1 @@
-web: target/universal/stage/bin/diageo-services -Dhttp.port=${PORT} -DapplyEvolutions.default=true
+web: target/universal/stage/bin/survey-services -Dhttp.port=${PORT} -DapplyEvolutions.default=true

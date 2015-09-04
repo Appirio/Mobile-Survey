@@ -1,4 +1,4 @@
-name := "diageo-services"
+name := "survey-services"
 
 version := "1.0-SNAPSHOT"
 
