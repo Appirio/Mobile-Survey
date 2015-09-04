@@ -1,9 +1,9 @@
-package com.appirio.diageo.db.manager;
+package com.appirio.mobilesurvey.db.manager;
 
 import java.text.MessageFormat;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.geolocation.HaversineCalculator;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.geolocation.HaversineCalculator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -12,11 +12,11 @@ public class AccountDBManager extends DBManager {
 
 	private static final int ACCOUNT_LOCATION_LIMIT = Integer.parseInt(System.getenv("ACCOUNT_LOCATION_LIMIT"));
 	
-	public AccountDBManager() throws DiageoServicesException {
+	public AccountDBManager() throws MSServicesException {
 		super();
 	}
 
-	public JsonNode findAccounts(Double latitude, Double longitude, Double radius) throws DiageoServicesException {
+	public JsonNode findAccounts(Double latitude, Double longitude, Double radius) throws MSServicesException {
 		double degrees = radius / 50;
 		
 		ArrayNode result = queryToJson(MessageFormat.format(getSQLStatement("accounts-query"), latitude, longitude, latitude - degrees, latitude + degrees, longitude - degrees, longitude + degrees, ACCOUNT_LOCATION_LIMIT));
@@ -24,7 +24,7 @@ public class AccountDBManager extends DBManager {
 		return processAccounts(result, latitude, longitude);
 	}
 	
-	public ObjectNode getAccount(String id) throws DiageoServicesException {
+	public ObjectNode getAccount(String id) throws MSServicesException {
 		return queryToJsonObject(MessageFormat.format(getSQLStatement("account-query"), id));
 	}
 	
