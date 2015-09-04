@@ -1,4 +1,4 @@
-package com.appirio.diageo.db.manager;
+package com.appirio.mobilesurvey.db.manager;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 import play.db.DB;
 
-import com.appirio.diageo.db.DiageoServicesException;
+import com.appirio.mobilesurvey.db.MSServicesException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -37,7 +37,7 @@ public class DBManager {
 	
 	private static Map<String, String> sqlMap = new HashMap<String, String>();
 	
-	public DBManager() throws DiageoServicesException {
+	public DBManager() throws MSServicesException {
 		try {
 			if(IS_TEST) {
 				Class.forName("org.postgresql.Driver");
@@ -52,11 +52,11 @@ public class DBManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			throw new DiageoServicesException();
+			throw new MSServicesException();
 		}
 	}
 	
-	private void loadSQLStatement(String name) throws DiageoServicesException {
+	private void loadSQLStatement(String name) throws MSServicesException {
 		try {
 			InputStream in = AccountDBManager.class.getClassLoader()
 			        .getResourceAsStream(name + ".sql");
@@ -73,11 +73,11 @@ public class DBManager {
 			
 			DBManager.sqlMap.put(name, result.toString()); 
 		} catch (IOException e) {
-			throw new DiageoServicesException(e);
+			throw new MSServicesException(e);
 		}
 	}
 	
-	public String getSQLStatement(String name) throws DiageoServicesException {
+	public String getSQLStatement(String name) throws MSServicesException {
 		if(DBManager.sqlMap.get(name) == null) {
 			loadSQLStatement(name);
 		}
@@ -85,17 +85,17 @@ public class DBManager {
 		return DBManager.sqlMap.get(name);
 	}
 	
-	public void close() throws DiageoServicesException {
+	public void close() throws MSServicesException {
 		try {
 			db.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
-			throw new DiageoServicesException(e);
+			throw new MSServicesException(e);
 		}
 	}
 	
-	protected ArrayNode queryToJson(String query) throws DiageoServicesException {
+	protected ArrayNode queryToJson(String query) throws MSServicesException {
 		try {
 			Statement s = db.createStatement();
 			
@@ -105,11 +105,11 @@ public class DBManager {
 		} catch (Exception e) {
 			e.printStackTrace();
 			
-			throw new DiageoServicesException(e);
+			throw new MSServicesException(e);
 		}
 	}
 	
-	protected ArrayNode resultSetToJson(ResultSet rs) throws DiageoServicesException {
+	protected ArrayNode resultSetToJson(ResultSet rs) throws MSServicesException {
 		try {
 			ArrayNode result = mapper.createArrayNode();
 
@@ -128,11 +128,11 @@ public class DBManager {
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new DiageoServicesException(e);
+			throw new MSServicesException(e);
 		}
 	}
 	
-	protected boolean executeStatement(String statement) throws DiageoServicesException {
+	protected boolean executeStatement(String statement) throws MSServicesException {
 		try {
 			Statement s = db.createStatement();
 			
@@ -142,11 +142,11 @@ public class DBManager {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			
-			throw new DiageoServicesException(e);
+			throw new MSServicesException(e);
 		}
 	}
 	
-	protected void insert(ObjectNode data, String table) throws DiageoServicesException {
+	protected void insert(ObjectNode data, String table) throws MSServicesException {
 		StringBuilder insertStatement = new StringBuilder("insert into ");
 		StringBuilder valuesClause = new StringBuilder();
 		
@@ -213,7 +213,7 @@ public class DBManager {
 		}
 	}
 	
-	protected ObjectNode queryToJsonObject(String string) throws DiageoServicesException {
+	protected ObjectNode queryToJsonObject(String string) throws MSServicesException {
 		JsonNode result = queryToJson(string);
 		
 		if(result.size() > 0) {
