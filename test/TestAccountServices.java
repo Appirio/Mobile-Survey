@@ -3,11 +3,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.AccountDBManager;
-import com.appirio.diageo.db.manager.api14.AccountDBManager14;
-import com.appirio.diageo.db.manager.api15.AccountDBManager15;
-import com.appirio.diageo.db.manager.api17.AccountDBManager17;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.AccountDBManager;
+import com.appirio.mobilesurvey.db.manager.api14.AccountDBManager14;
+import com.appirio.mobilesurvey.db.manager.api15.AccountDBManager15;
+import com.appirio.mobilesurvey.db.manager.api17.AccountDBManager17;
 import com.fasterxml.jackson.databind.JsonNode;
 
 
@@ -26,7 +26,7 @@ public class TestAccountServices {
 			testDBManager.populateTestAccounts();
 			
 			// create test data
-		} catch (DiageoServicesException e) {
+		} catch (MSServicesException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -39,7 +39,7 @@ public class TestAccountServices {
 			testDBManager.clearDB();
 			
 			testDBManager.close();
-		} catch (DiageoServicesException e) {
+		} catch (MSServicesException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
