@@ -4,11 +4,11 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.AccountDBManager;
-import com.appirio.diageo.db.manager.api14.AccountDBManager14;
-import com.appirio.diageo.db.manager.api17.AccountDBManager17;
-import com.appirio.diageo.db.manager.api20.AccountDBManager20;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.AccountDBManager;
+import com.appirio.mobilesurvey.db.manager.api14.AccountDBManager14;
+import com.appirio.mobilesurvey.db.manager.api17.AccountDBManager17;
+import com.appirio.mobilesurvey.db.manager.api20.AccountDBManager20;
 import com.fasterxml.jackson.databind.JsonNode;
 
 public class AccountServices extends Controller {
@@ -27,7 +27,7 @@ public class AccountServices extends Controller {
     		
     		return ok(result);
     		
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
@@ -52,7 +52,7 @@ public class AccountServices extends Controller {
     		
     		return ok(result);
     		
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
