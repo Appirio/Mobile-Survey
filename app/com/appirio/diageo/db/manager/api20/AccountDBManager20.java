@@ -1,10 +1,10 @@
-package com.appirio.diageo.db.manager.api20;
+package com.appirio.mobilesurvey.db.manager.api20;
 
 import java.text.MessageFormat;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.api17.AccountDBManager17;
-import com.appirio.diageo.geolocation.HaversineCalculator;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.api17.AccountDBManager17;
+import com.appirio.mobilesurvey.geolocation.HaversineCalculator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -14,13 +14,13 @@ public class AccountDBManager20 extends AccountDBManager17 {
 	private static final int ACCOUNT_LOCATION_LIMIT = Integer.parseInt(System.getenv("ACCOUNT_LOCATION_LIMIT"));
 	protected String contactId;
 	
-	public AccountDBManager20(String contactId) throws DiageoServicesException {
+	public AccountDBManager20(String contactId) throws MSServicesException {
 		super();
 		
 		this.contactId = contactId;
 	}
 
-	public JsonNode findAccounts(Double latitude, Double longitude, Double radius) throws DiageoServicesException {
+	public JsonNode findAccounts(Double latitude, Double longitude, Double radius) throws MSServicesException {
 		double degrees = radius / 50;
 		
 		ArrayNode result = queryToJson(MessageFormat.format(getSQLStatement("accounts-query-20"), latitude, longitude, latitude - degrees, latitude + degrees, longitude - degrees, longitude + degrees, ACCOUNT_LOCATION_LIMIT));
@@ -28,7 +28,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 		return processAccounts(result, latitude, longitude);
 	}
 	
-	public ObjectNode getAccount(String id) throws DiageoServicesException {
+	public ObjectNode getAccount(String id) throws MSServicesException {
 		return queryToJsonObject(MessageFormat.format(getSQLStatement("account-query-20"), id));
 	}
 	
@@ -47,7 +47,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 		return result;
 	}
 	
-	public JsonNode findAccounts(String surveyId, Double latitude, Double longitude, Double radius) throws DiageoServicesException {
+	public JsonNode findAccounts(String surveyId, Double latitude, Double longitude, Double radius) throws MSServicesException {
 		double degrees = radius / 50;
 		ObjectNode survey = null;
 		ArrayNode surveys = null;
@@ -59,7 +59,7 @@ public class AccountDBManager20 extends AccountDBManager17 {
 			surveys = surveyDBManager.getSurvey(surveyId);
 			
 			if(surveys.size() == 0) {
-				throw new DiageoServicesException("Invalid survey ID: " + surveyId);
+				throw new MSServicesException("Invalid survey ID: " + surveyId);
 			} else {
 				survey = (ObjectNode) surveys.get(0);
 			}
