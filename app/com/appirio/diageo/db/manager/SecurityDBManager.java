@@ -1,6 +1,6 @@
 package com.appirio.mobilesurvey.db.manager;
 
-import com.appirio.diageo.db.MSServicesException;
+import com.appirio.mobilesurvey.db.MSServicesException;
 
 public class SecurityDBManager extends DBManager {
 
