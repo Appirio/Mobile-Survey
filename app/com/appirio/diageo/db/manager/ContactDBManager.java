@@ -1,8 +1,8 @@
-package com.appirio.diageo.db.manager;
+package com.appirio.mobilesurvey.db.manager;
 
 import java.text.MessageFormat;
 
-import com.appirio.diageo.db.DiageoServicesException;
+import com.appirio.mobilesurvey.db.MSServicesException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -12,17 +12,17 @@ public class ContactDBManager extends DBManager {
 
 	private static String DEFAULT_CONTACT_REG = System.getenv("DEFAULT_CONTACT_REG");
 	
-	public ContactDBManager() throws DiageoServicesException {
+	public ContactDBManager() throws MSServicesException {
 		super();
 	}
 
-	public boolean isApprovedContact(String userId) throws DiageoServicesException {
+	public boolean isApprovedContact(String userId) throws MSServicesException {
 		JsonNode users = queryToJson("select id from Contact where sfid = '" + userId + "' and Direct_Dial_Activated__c and Direct_Dial_Mobile_User__c;");
 		
 		return users.size() > 0;
 	}
 
-	public JsonNode approveContact(String email /*Long authorizationCode*/) throws DiageoServicesException, Exception {
+	public JsonNode approveContact(String email /*Long authorizationCode*/) throws MSServicesException, Exception {
 		// TODO remove this, temporary for testing
 		//if(DEFAULT_CONTACT_REG != null && !DEFAULT_CONTACT_REG.equals("FALSE") && authorizationCode.longValue() == 12345) {
 		//	return DEFAULT_CONTACT_REG;
@@ -49,11 +49,11 @@ public class ContactDBManager extends DBManager {
 		}
 	}
 	
-	private void saveApprovedContact(String sfid) throws DiageoServicesException {
+	private void saveApprovedContact(String sfid) throws MSServicesException {
 		executeStatement("update contact set Direct_Dial_Activation_Code__c = null, Direct_Dial_Activation_Code_Time_Set__c = null, Direct_Dial_Activated__c = true where sfid = '"+ sfid +"';");		
 	}
 	
-	public String getEmail(String contactId) throws DiageoServicesException {
+	public String getEmail(String contactId) throws MSServicesException {
 		ArrayNode result = queryToJson("select email from Contact where sfid = '" + contactId + "'");
 		
 		if(result.size() > 0) {
