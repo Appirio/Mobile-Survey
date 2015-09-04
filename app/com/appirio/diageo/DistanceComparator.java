@@ -1,4 +1,4 @@
-package com.appirio.diageo;
+package com.appirio.mobilesurvey;
 
 import java.util.Comparator;
 
