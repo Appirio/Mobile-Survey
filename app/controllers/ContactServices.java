@@ -4,8 +4,8 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.With;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.ContactDBManager;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.ContactDBManager;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -36,7 +36,7 @@ public class ContactServices extends Controller {
 			} else {
 				return badRequest(ControllerUtils.messageToJson("Json Body expected"));
 			}
-    	} catch (DiageoServicesException e) {
+    	} catch (MSServicesException e) {
     		e.printStackTrace();
     		
     		return internalServerError(ControllerUtils.messageToJson(e.getMessage()));
