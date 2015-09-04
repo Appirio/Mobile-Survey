@@ -1,22 +1,22 @@
-package com.appirio.diageo.db.manager.api15;
+package com.appirio.mobilesurvey.db.manager.api15;
 
 import java.text.MessageFormat;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.api14.SurveyDBManager14;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.api14.SurveyDBManager14;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SurveyDBManager15 extends SurveyDBManager14 {
 
-	public SurveyDBManager15(String contactId) throws DiageoServicesException {
+	public SurveyDBManager15(String contactId) throws MSServicesException {
 		super(contactId);
 	}
 
-	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
+	public ArrayNode getUniversalSurveys() throws MSServicesException {
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-universal-query-15"), this.contactId));
 		
 		StringBuilder surveyIds = new StringBuilder();
@@ -42,7 +42,7 @@ public class SurveyDBManager15 extends SurveyDBManager14 {
 		return result;
 	}
 
-	public ArrayNode getSurveys(ObjectNode account) throws DiageoServicesException {
+	public ArrayNode getSurveys(ObjectNode account) throws MSServicesException {
 		String zip = account.get("tdlinx_outlet_zip_code__c").asText();
 		
 		if(zip.length() > 5) {
