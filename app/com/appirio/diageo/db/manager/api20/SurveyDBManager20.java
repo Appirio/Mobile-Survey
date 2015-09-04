@@ -1,23 +1,23 @@
-package com.appirio.diageo.db.manager.api20;
+package com.appirio.mobilesurvey.db.manager.api20;
 
 import java.text.MessageFormat;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.api17.SurveyDBManager17;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.api17.SurveyDBManager17;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class SurveyDBManager20 extends SurveyDBManager17 {
 
-	public SurveyDBManager20(String contactId) throws DiageoServicesException {
+	public SurveyDBManager20(String contactId) throws MSServicesException {
 		super(contactId);
 	}
 	
 	@Override
-	public ArrayNode getUniversalSurveys() throws DiageoServicesException {
+	public ArrayNode getUniversalSurveys() throws MSServicesException {
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-20"), this.contactId));
 		
 		StringBuilder surveyIds = new StringBuilder();
@@ -45,7 +45,7 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 	
 	@Override
 	public ArrayNode getSurveys(ObjectNode account)
-			throws DiageoServicesException {
+			throws MSServicesException {
 		String zip = account.get("tdlinx_outlet_zip_code__c").asText();
 		
 		if(zip.length() > 5) {
@@ -104,11 +104,11 @@ public class SurveyDBManager20 extends SurveyDBManager17 {
 		return result;
 	}
 	
-	public ArrayNode getPhotosByExternalId(String surveySubmissionExternalId) throws DiageoServicesException {
+	public ArrayNode getPhotosByExternalId(String surveySubmissionExternalId) throws MSServicesException {
 		return queryToJson(MessageFormat.format(getSQLStatement("query-survey-photos-by-ext-id"), surveySubmissionExternalId));
 	}
 	
-	public ArrayNode getSurvey(String surveyId) throws DiageoServicesException {
+	public ArrayNode getSurvey(String surveyId) throws MSServicesException {
 		return queryToJson(MessageFormat.format(getSQLStatement("get-survey-query"), surveyId));
 	}
 }
