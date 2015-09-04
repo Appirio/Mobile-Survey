@@ -13,8 +13,8 @@ import play.mvc.Http.Context;
 import play.mvc.SimpleResult;
 import sun.misc.BASE64Encoder;
 
-import com.appirio.diageo.db.manager.ContactDBManager;
-import com.appirio.diageo.db.manager.SecurityDBManager;
+import com.appirio.mobilesurvey.db.manager.ContactDBManager;
+import com.appirio.mobilesurvey.db.manager.SecurityDBManager;
 
 public class SecureAction extends Simple {
 
