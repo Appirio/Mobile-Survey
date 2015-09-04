@@ -1,4 +1,4 @@
-package com.appirio.diageo.db.manager;
+package com.appirio.mobilesurvey.db.manager;
 
 import java.io.IOException;
 import java.text.MessageFormat;
@@ -15,8 +15,8 @@ import java.util.UUID;
 
 import org.apache.commons.lang3.StringUtils;
 
-import com.appirio.diageo.db.DiageoServicesException;
-import com.appirio.diageo.db.manager.api15.AnswerOptions;
+import com.appirio.mobilesurvey.db.MSServicesException;
+import com.appirio.mobilesurvey.db.manager.api15.AnswerOptions;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -101,13 +101,13 @@ public class SurveyDBManager extends DBManager {
 			"RESULT_BRAND_EXT_ID__C"
 			);
 	
-	public SurveyDBManager(String contactId) throws DiageoServicesException {
+	public SurveyDBManager(String contactId) throws MSServicesException {
 		super();
 		
 		this.contactId = contactId;
 	}
 	
-	public ArrayNode getSurveys(String accountId) throws DiageoServicesException {
+	public ArrayNode getSurveys(String accountId) throws MSServicesException {
 		
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query"), this.contactId));
 
@@ -192,13 +192,13 @@ public class SurveyDBManager extends DBManager {
 		return result;
 	}
 	
-	public ArrayNode getSurveySubmissions(String externalId) throws DiageoServicesException {
+	public ArrayNode getSurveySubmissions(String externalId) throws MSServicesException {
 		String query = MessageFormat.format(getSQLStatement("survey-submission-by-external-id-query"), externalId);
 		
 		return queryToJson(query);
 	}
 	
-	public ArrayNode getSurveyResults(String submissionExternalId) throws DiageoServicesException {
+	public ArrayNode getSurveyResults(String submissionExternalId) throws MSServicesException {
 		String query = MessageFormat.format(getSQLStatement("survey-results-by-external-id-query"), submissionExternalId);
 		
 		return queryToJson(query);
@@ -207,7 +207,7 @@ public class SurveyDBManager extends DBManager {
 	// TODO: Offline - The existing Heroku "saveResult()" service assumes that ONE logical survey is submitted.  The JSON data structure actually looks like multiple surveys if a 
 	//       PRODUCT survey includes multiple scans/products, but we ASSUME that a single submission to saveResult() is a single dd_survey_submission__c record with many related dms_survey_result 
 	//       records.  This logic will need to be updated if/when we can submit results from multiple surveys in the same saveResult() invocation.  
-	public void createSurvey(JsonNode survey, String externalId) throws DiageoServicesException {
+	public void createSurvey(JsonNode survey, String externalId) throws MSServicesException {
 		ObjectNode surveySubmission = null;
 		
 		Map<String, List<List<ObjectNode>>> data = new HashMap<String, List<List<ObjectNode>>>();
@@ -227,7 +227,7 @@ public class SurveyDBManager extends DBManager {
 		    surveySubmission = createSurvey(survey, externalId, surveySubmission, data);
 		}
 		else {
-			throw new DiageoServicesException("Json object or array expected");
+			throw new MSServicesException("Json object or array expected");
 		}
 	    
 	    if(surveySubmission != null) {
@@ -260,7 +260,7 @@ public class SurveyDBManager extends DBManager {
 	    //calculateGoals(externalId);
 	}
 	
-	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission, Map<String, List<List<ObjectNode>>> data) throws DiageoServicesException {
+	public ObjectNode createSurvey(JsonNode survey, String externalId, ObjectNode surveySubmission, Map<String, List<List<ObjectNode>>> data) throws MSServicesException {
 		Boolean grading = false;
 		int scoreTot = 0;
 		int scorePotential = 0;
@@ -529,7 +529,7 @@ public class SurveyDBManager extends DBManager {
 			}
 			
 		} else {
-			throw new DiageoServicesException("questions field is required to save survey");
+			throw new MSServicesException("questions field is required to save survey");
 		}
 		
 		return surveySubmission;
@@ -558,30 +558,30 @@ public class SurveyDBManager extends DBManager {
 		return newResultBrand;
 	}
 
-    private void insertSurveyResults(List<ObjectNode> surveyResults) throws DiageoServicesException {
+    private void insertSurveyResults(List<ObjectNode> surveyResults) throws MSServicesException {
     	// TODO: clear the name field that is being copied from question
         for (ObjectNode surveyR : surveyResults) {
             insert(surveyR, "dms_survey_result__c");
         }
     }
 	
-    private void insertSurveyResultsBrands(List<ObjectNode> surveyResultsBrandList) throws DiageoServicesException {
+    private void insertSurveyResultsBrands(List<ObjectNode> surveyResultsBrandList) throws MSServicesException {
     	for (ObjectNode srBrand : surveyResultsBrandList) {
     		insert(srBrand, "dd_survey_result_brands__c");
     	}
     }
 	
-    private void insertSurveyResultsPhotos(List<ObjectNode> photosList) throws DiageoServicesException {
+    private void insertSurveyResultsPhotos(List<ObjectNode> photosList) throws MSServicesException {
     	for (ObjectNode photoR : photosList) {
     		insert(photoR, "dd_survey_result_photos__c");
     	}
     }
     
-    public ArrayNode getSS(String query) throws DiageoServicesException {
+    public ArrayNode getSS(String query) throws MSServicesException {
         return queryToJson(query);
     }
     
-	public ArrayNode getSurveys() throws DiageoServicesException {
+	public ArrayNode getSurveys() throws MSServicesException {
 		
 		ArrayNode surveys = queryToJson(MessageFormat.format(getSQLStatement("survey-query-universal"), this.contactId));
 
