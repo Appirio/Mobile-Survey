@@ -66,6 +66,7 @@
 							<p class="lead">Configure Heroku Connect using the <a href="https://devcenter.heroku.com/articles/herokuconnect"> HC setup instructions</a> to connect to your SFDC org and Postgres DB. Be sure to follow steps 1-4 and specify the schema as documented in these steps.</p>
 						</li>
 						<li>
+							<p class="bold">*** IMPORTANT *** the first step of the Heroku Connect setup process will ask you for a schema name (and will default the name to ‘salesforce’).  You MUST specify  "public" as the schema name or the app will not work.</p>
 							<p class="lead">Import Configuration JSON file with SFDC object mappings</p>
 							<p class="bold">In your Mobile-Survey Heroku app:</p>
 							<ul>
@@ -76,6 +77,7 @@
 								<li>
 									<p>Then select Settings->Import/Export Configuration and import <a href="https://drive.google.com/file/d/0B5eb1d8xjolETjE5akRlSDJJRGM/view?usp=sharing">the configuration file.</a></p>
 									<a data-lightbox="step-4" data-title="Step 4 - 002" href="images/setup_step-04-002.jpg"><img src="images/setup_step-04-002.jpg" class="img-responsive margin-b md" /></a>
+								  <p>Update your Heroku configuration variables to use your Postgres database.</p>
 								</li>
 							</ul>
 						</li>
