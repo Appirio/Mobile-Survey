@@ -58,14 +58,14 @@
 						</li>
 						<li>
 						<p class="lead">Deploy <a href="https://login.salesforce.com/packaging/installPackage.apexp?p0=04t370000005x7I"> unmanaged package</a> to your SFDC sandbox.</p>
-                          <p class="bold">**Note If your target Salesforce org is not a Developer Edition, you will have to manually add a custom field to the Accounts object with the API name "Active__c".  If you are deploying to a Developer Edition Salesforce org this field is already added. <i>This field is required for the app to work.</i>  Verify that in your target Salesforce org now.
+                          <p class="bold">*** IMPORTANT ***  If your target Salesforce org is not a Developer Edition, you will have to manually add a custom field to the Accounts object with the API name "Active__c".  If you are deploying to a Developer Edition Salesforce org this field is already added. <i>This field is required for the app to work.</i>  Verify that in your target Salesforce org now.
 
 
 
 						</li>
 						<li>
 							<p class="lead">Configure Heroku Connect using the <a href="https://devcenter.heroku.com/articles/herokuconnect"> HC setup instructions</a> to connect to your SFDC org and Postgres DB. Be sure to follow steps 1-4 and specify the schema as documented in these steps.</p>
-							<p class="bold">*** IMPORTANT *** the first step of the Heroku Connect setup process will ask you for a schema name (and will default the name to ‘salesforce’).  You MUST specify  "public" as the schema name or the app will not work.</p>
+							<p class="bold">*** IMPORTANT *** The first step of the Heroku Connect setup process will ask you for a schema name (and will default the name to ‘salesforce’).  You MUST specify  "public" as the schema name or the app will not work.</p>
 
 						</li>
 						<li>
@@ -95,7 +95,7 @@
                             <ul>CC_DB_URL</ul>
                            <ul>CC_DB_USER</ul>
                           </br></ul>
-                          <p class="bold">***IMPORTANT*** - the CC_DB_URL must follow this format exactly - you need to populate 3 values - Host, Port, and Database.  Make sure that you have NO SPACES.</p>
+                          <p class="bold">*** IMPORTANT *** The CC_DB_URL must follow this format exactly - you need to populate 3 values - Host, Port, and Database.  Make sure that you have NO SPACES.</p>
                           <ul>
                             <p>EXAMPLE CC_DB_URL value:</br/> jdbc:postgresql://Host:Port/Database?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
 </p>
