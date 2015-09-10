@@ -83,30 +83,19 @@
 							</ul>
 						</li>
 						<li>
-							<p class="lead">Restart Heroku Connect:</p>
-							<ul>
-								<li>Settings->Manage Connection:</li>
-								<li>
-									<p>Restart</p>
-									<a data-lightbox="step-5" data-title="Step 5 - 001" href="images/setup_step-05-001.jpg"><img src="images/setup_step-05-001.jpg" class="img-responsive margin-b md" /></a>
-								</li>
-							</ul>
-						</li>
-						<li>
                           <p class="lead">Update Configuration variables for Postgres DB</p>
                           <p>From your Heroku Dashboard - click into your postgres DB to view the Connection Settings </p>
                           <p>In another tab, go to your Heroku Dashboard and select Settings</p>
                           <ul>Click the "Reveal Config Vars" button</ul>
                           <ul>Click the "Edit" button</ul>
-                          <ul>Change the following 3 config variables to match your DB settings:
-</ul>
+                          <ul>Change the following 3 config variables to match your DB settings:</ul>
                           <ul><ul>CC_DB_PW</ul>
                             <ul>CC_DB_URL</ul>
                            <ul>CC_DB_USER</ul></ul>
                           <p class="bold">***IMPORTANT*** - the CC_DB_URL must follow this format exactly - you need to populate 3 values - Host, Port, and Database.  Make sure that you have NO SPACES.</p>
-                          <li><ul>format for CC_DB_URL value:</br/> jdbc:postgresql://Host:Port/Database?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
-</ul>
-                          <ul>example CC_DB_URL value: </br>jdbc:postgresql://ec2-54-163-228-0.compute-1.amazonaws.com:5432/d8vq61oi2hlfbd?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory</ul></li>
+                          <p>format for CC_DB_URL value:</br/> jdbc:postgresql://Host:Port/Database?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+</p>
+                          <p>example CC_DB_URL value: </br>jdbc:postgresql://ec2-54-163-228-0.compute-1.amazonaws.com:5432/d8vq61oi2hlfbd?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory</p>
                       <p>Select the “Save” button to save your new configuration parameters.</p>
 							
 							
