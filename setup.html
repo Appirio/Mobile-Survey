@@ -86,23 +86,25 @@
                           <p class="lead">Update Configuration variables for Postgres DB</p>
                           <p>From your Heroku Dashboard - click into your postgres DB to view the Connection Settings </p>
                           <p>In another tab, go to your Heroku Dashboard and select Settings</p>
-                          <ul><li>Click the "Reveal Config Vars" button</li>
-                          <li><p>Click the "Edit" button</p></li>
-                          <li><p>Change the following 3 config variables to match your DB settings:</p></li>
+                          <ul>
+                            <li>Click the "Reveal Config Vars" button</li>
+                            <li><p>Click the "Edit" button</p></li>
+                            <li><p>Change the following 3 config variables to match your DB Connection Settings:</p></li>
                           <ul>CC_DB_PW</ul>
                             <ul>CC_DB_URL</ul>
                            <ul>CC_DB_USER</ul>
-                           </br>
+                          </br></ul>
                           <p class="bold">***IMPORTANT*** - the CC_DB_URL must follow this format exactly - you need to populate 3 values - Host, Port, and Database.  Make sure that you have NO SPACES.</p>
-                          <ul><li><p>EXAMPLE CC_DB_URL value:</br/> jdbc:postgresql://Host:Port/Database?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
-</p></li>
-                          <li><p>EXAMPLE CC_DB_URL value: </br>jdbc:postgresql://ec2-54-163-228-0.compute-1.amazonaws.com:5432/d8vq61oi2hlfbd?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory</p>
-                      <p></li>Select the “Save” button to save your new configuration parameters.</p></li>
+                          <ul>
+                            <p>EXAMPLE CC_DB_URL value:</br/> jdbc:postgresql://Host:Port/Database?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+</p>
+                            <p>EXAMPLE CC_DB_URL value: </br>jdbc:postgresql://ec2-54-163-228-0.compute-1.amazonaws.com:5432/d8vq61oi2hlfbd?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory</p>
+                              <li><p>Select the “Save” button to save your new configuration parameters.</li></p>
 							</ul>
 							
 							
 							</li>
-													<li>
+						<li>
 							<p class="lead">Restart Heroku Connect:</p>
 							<ul>
 								<li>Settings->Manage Connection:</li>
@@ -134,4 +136,3 @@
 	</body>
 </html>
 
-  
